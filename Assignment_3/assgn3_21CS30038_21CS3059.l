@@ -12,7 +12,7 @@ digit_sequence  {digit}+
 fractional_constant {digit_sequence}?\.{digit_sequence}|{digit_sequence}\.
 exponent_part   [eE][+-]?{digit_sequence}
 floating_constant   {fractional_constant}{exponent_part}?|{digit_sequence}{exponent_part}
-enumeration_constant    {identifier}
+enumeration_constant    {alpha}({alpha}|{digit})*
 escape_sequence \\[abfnrtv\\?'"]
 c_char  [^'\\\n]|{escape_sequence}
 c_char_sequence {c_char}+
@@ -24,12 +24,18 @@ punctuator  "["|"]"|"("|")"|"{"|"}"|"."|"->"|"++"|"--"|"&"|"*"|"+"|"-"|"~"|"!"|"
 spaces [ \t\n]
 single_line_comment "//"[^\n]*\n
 multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
+%s enumerator
 %%
+"enum"  {BEGIN(enumerator);printf("keyword: %s\n", yytext);}
+[\n]   ;
 {keywords}  {printf("keyword: %s\n", yytext);}
+<enumerator>{enumeration_constant}  {printf("enumeration constant: %s\n", yytext);}
 {identifier}    {printf("identifier: %s\n", yytext);}
-{integer_constant}  {printf("integer constant: %s\n", yytext);}
+<enumerator,INITIAL>{integer_constant}  {printf("integer constant: %s\n", yytext);}
 {floating_constant} {printf("floating constant: %s\n", yytext);}
-{enumeration_constant}  {printf("enumeration constant: %s\n", yytext);}
+<enumerator>"{" {printf("punctuator: %s\n", yytext);}
+<enumerator>"}" {printf("punctuator: %s\n", yytext);BEGIN(INITIAL);}
+<enumerator>"," {printf("punctuator: %s\n", yytext);}
 {character_constant}    {printf("character constant: %s\n", yytext);}
 {string_literal}    {printf("string literal: %s\n", yytext);}
 {punctuator}    {printf("punctuator: %s\n", yytext);}

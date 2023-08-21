@@ -1,5 +1,5 @@
 auto
-enum
+enum week{sun,mon,tues};
 _adef134qwd
 321340231
 8392.432
