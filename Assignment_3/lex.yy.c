@@ -404,7 +404,7 @@ static const flex_int16_t yy_accept[338] =
 static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    2,    4,    5,    6,    1,    7,    8,    9,   10,
        11,   12,   13,   14,   15,   16,   17,   18,   19,   19,
@@ -1055,7 +1055,7 @@ printf("multi line comment: %s\n", yytext);
 case 17:
 YY_RULE_SETUP
 #line 45 "assgn3_21CS30038_21CS3059.l"
-{printf("invalid token: %s\n", yytext);}
+{printf("invalid token: %d\n", yytext[0]);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP

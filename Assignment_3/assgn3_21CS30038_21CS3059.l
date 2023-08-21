@@ -21,13 +21,12 @@ s_char  [^"\\\n]|{escape_sequence}
 s_char_sequence {s_char}+
 string_literal  \"{s_char_sequence}?\"
 punctuator  "["|"]"|"("|")"|"{"|"}"|"."|"->"|"++"|"--"|"&"|"*"|"+"|"-"|"~"|"!"|"/"|"%"|"<<"|">>"|"<"|">"|"<="|">="|"=="|"!="|"^"|"|"|"&&"|"||"|"?"|":"|";"|"..."|"="|"*="|"/="|"%="|"+="|"-="|"<<="|">>="|"&="|"^="|"|="|","|"#"
-spaces [ \t\n]
+spaces [ \t\n\r]
 single_line_comment "//"[^\n]*\n
 multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %s enumerator
 %%
 "enum"  {BEGIN(enumerator);printf("keyword: %s\n", yytext);}
-[\n]   ;
 {keywords}  {printf("keyword: %s\n", yytext);}
 <enumerator>{enumeration_constant}  {printf("enumeration constant: %s\n", yytext);}
 {identifier}    {printf("identifier: %s\n", yytext);}
@@ -42,7 +41,7 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {spaces}    ;
 {single_line_comment}   printf("single line comment: %s\n", yytext);
 {multi_line_comment}    printf("multi line comment: %s\n", yytext);
-. {printf("invalid token: %s\n", yytext);}
+. {printf("invalid token: %d\n", yytext[0]);}
 %%
 int main()
 {
