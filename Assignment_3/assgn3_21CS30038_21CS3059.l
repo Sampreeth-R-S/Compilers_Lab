@@ -13,13 +13,13 @@ fractional_constant {digit_sequence}?\.{digit_sequence}|{digit_sequence}\.
 exponent_part   [eE][+-]?{digit_sequence}
 floating_constant   {fractional_constant}{exponent_part}?|{digit_sequence}{exponent_part}
 enumeration_constant    {identifier}
-escape_sequence "\"[abfnrtv\\?'"]
+escape_sequence \\[abfnrtv\\?'"]
 c_char  [^'\\\n]|{escape_sequence}
 c_char_sequence {c_char}+
-character_constant  '{c_char_sequence}'
+character_constant  "'"{c_char_sequence}"'"
 s_char  [^"\\\n]|{escape_sequence}
 s_char_sequence {s_char}+
-string_literal  "{s_char_sequence}?"
+string_literal  \"{s_char_sequence}?\"
 punctuator  "["|"]"|"("|")"|"{"|"}"|"."|"->"|"++"|"--"|"&"|"*"|"+"|"-"|"~"|"!"|"/"|"%"|"<<"|">>"|"<"|">"|"<="|">="|"=="|"!="|"^"|"|"|"&&"|"||"|"?"|":"|";"|"..."|"="|"*="|"/="|"%="|"+="|"-="|"<<="|">>="|"&="|"^="|"|="|","|"#"
 spaces [ \t\n]
 single_line_comment "//"[^\n]*\n
@@ -36,6 +36,7 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {spaces}    ;
 {single_line_comment}   printf("single line comment: %s\n", yytext);
 {multi_line_comment}    printf("multi line comment: %s\n", yytext);
+. {printf("invalid token: %s\n", yytext);}
 %%
 int main()
 {
