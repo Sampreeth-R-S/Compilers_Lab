@@ -9,7 +9,7 @@ digit   [0-9]
 nonzero_digit   [1-9]
 integer_constant    {nonzero_digit}{digit}*
 digit_sequence  {digit}+
-fractional_constant {digit_sequence}?\\.{digit_sequence}|{digit_sequence}\\.
+fractional_constant {digit_sequence}?\.{digit_sequence}|{digit_sequence}\.
 exponent_part   [eE][+-]?{digit_sequence}
 floating_constant   {fractional_constant}{exponent_part}?|{digit_sequence}{exponent_part}
 enumeration_constant    {identifier}
@@ -25,3 +25,24 @@ spaces [ \t\n]
 single_line_comment "//"[^\n]*\n
 multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %%
+{keywords}  {printf("keyword: %s\n", yytext);}
+{identifier}    {printf("identifier: %s\n", yytext);}
+{integer_constant}  {printf("integer constant: %s\n", yytext);}
+{floating_constant} {printf("floating constant: %s\n", yytext);}
+{enumeration_constant}  {printf("enumeration constant: %s\n", yytext);}
+{character_constant}    {printf("character constant: %s\n", yytext);}
+{string_literal}    {printf("string literal: %s\n", yytext);}
+{punctuator}    {printf("punctuator: %s\n", yytext);}
+{spaces}    ;
+{single_line_comment}   printf("single line comment: %s\n", yytext);
+{multi_line_comment}    printf("multi line comment: %s\n", yytext);
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+int yywrap()
+{
+    return 1;
+}
