@@ -1,8 +1,9 @@
 %{
     #include <stdio.h>
+    #include <lexer.h>
 %}
 
-keywords    "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"enum"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
+keywords    "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
 alpha   [_A-Za-z]
 identifier  {alpha}({alpha}|[0-9])*
 digit   [0-9]
@@ -26,22 +27,22 @@ single_line_comment "//"[^\n]*\n
 multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %s enumerator
 %%
-"enum"  {BEGIN(enumerator);printf("keyword: %s\n", yytext);}
-{keywords}  {printf("keyword: %s\n", yytext);}
-<enumerator>{enumeration_constant}  {printf("enumeration constant: %s\n", yytext);}
-{identifier}    {printf("identifier: %s\n", yytext);}
+"enum"  {BEGIN(enumerator);return KEYWORD;}
+{keywords}  {return KEYWORD;}
+<enumerator>{enumeration_constant}  {return ENUMERATION_CONST;}
+{identifier}    {return IDENTIFIER}
 <enumerator,INITIAL>{integer_constant}  {printf("integer constant: %s\n", yytext);}
-{floating_constant} {printf("floating constant: %s\n", yytext);}
-<enumerator>"{" {printf("punctuator: %s\n", yytext);}
-<enumerator>"}" {printf("punctuator: %s\n", yytext);BEGIN(INITIAL);}
-<enumerator>"," {printf("punctuator: %s\n", yytext);}
-{character_constant}    {printf("character constant: %s\n", yytext);}
-{string_literal}    {printf("string literal: %s\n", yytext);}
-{punctuator}    {printf("punctuator: %s\n", yytext);}
+{floating_constant} {return FLOAT;}
+<enumerator>"{" {return PUNCTUATOR;}
+<enumerator>"}" {return PUNCTUATOR;BEGIN(INITIAL);}
+<enumerator>"," {return PUNCTUATOR;}
+{character_constant}    {return CHARACTER_CONSTANT;}
+{string_literal}    {return STRING_LITERAL;}
+{punctuator}    {return PUCTUATOR;}
 {spaces}    ;
-{single_line_comment}   printf("single line comment: %s\n", yytext);
-{multi_line_comment}    printf("multi line comment: %s\n", yytext);
-. {printf("invalid token: %d\n", yytext[0]);}
+{single_line_comment}   {return SINGLE_LINE_COMMENT;}
+{multi_line_comment}    {return MULTI_LINE_COMMENT;}
+. {return ERROR;}
 %%
 int main()
 {
