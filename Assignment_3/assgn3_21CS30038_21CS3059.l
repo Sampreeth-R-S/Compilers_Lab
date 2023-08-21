@@ -44,12 +44,4 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {multi_line_comment}    {return MULTI_LINE_COMMENT;}
 . {return ERROR;}
 %%
-int main()
-{
-    yylex();
-    return 0;
-}
-int yywrap()
-{
-    return 1;
-}
+
