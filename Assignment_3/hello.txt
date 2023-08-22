@@ -1,38 +1,16 @@
-keyword: auto
-invalid token: 13
-keyword: enum
-enumeration constant: week
-punctuator: {
-enumeration constant: sun
-punctuator: ,
-enumeration constant: mon
-punctuator: ,
-enumeration constant: tues
-punctuator: }
-punctuator: ;
-invalid token: 13
-identifier: _adef134qwd
-invalid token: 13
-integer constant: 321340231
-invalid token: 13
-floating constant: 8392.432
-invalid token: 13
-floating constant: 423.64e421
-invalid token: 13
-character constant: '\?'
-invalid token: 13
-string literal: ""
-invalid token: 13
-string literal: "\'\n\f\?rffqf4124"
-invalid token: 13
-punctuator: [
-invalid token: 13
-punctuator: ]
-invalid token: 13
-single line comment: //fwqefwrf
-
-single line comment: //efef\//
-
-multi line comment: /*wfj
+auto
+enum week{mon,tues,wed};
+ _adef134qwd
+321340231
+8392.432
+423.64e421
+'\?'
+""
+"\'\n\f\?rffqf4124"
+[
+]
+//fwqefwrf
+//efef\//
+/*wfj
 fqregf
 wrgg*/
