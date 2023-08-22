@@ -31,10 +31,10 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {keywords}  {return KEYWORD;}
 <enumerator>{enumeration_constant}  {return ENUMERATION_CONST;}
 {identifier}    {return IDENTIFIER;}
-<enumerator,INITIAL>{integer_constant}  {printf("integer constant: %s\n", yytext);}
+<enumerator,INITIAL>{integer_constant}  {return INTEGER;}
 {floating_constant} {return FLOAT;}
 <enumerator>"{" {return PUNCTUATOR;}
-<enumerator>"}" {return PUNCTUATOR;BEGIN(INITIAL);}
+<enumerator>"}" {BEGIN(INITIAL);return PUNCTUATOR;}
 <enumerator>"," {return PUNCTUATOR;}
 {character_constant}    {return CHARACTER_CONSTANT;}
 {string_literal}    {return STRING_LITERAL;}

@@ -13,37 +13,37 @@ int main()
         switch(token)
         {
             case KEYWORD:
-                printf("<KEYWORD, %s>\n",yytext);
+                printf("<KEYWORD: %s>\n",yytext);
                 break;
             case IDENTIFIER:
-                printf("<IDENTIFIER, %s>\n",yytext);
+                printf("<IDENTIFIER: %s>\n",yytext);
                 break;
             case INTEGER:
-                printf("<INTEGER_CONSTANT, %s>\n",yytext);
+                printf("<INTEGER_CONSTANT: %s>\n",yytext);
                 break;
             case FLOAT:
-                printf("<FLOAT_CONSTANT, %s>\n",yytext);
+                printf("<FLOAT_CONSTANT: %s>\n",yytext);
                 break;
             case ENUMERATION_CONST:
-                printf("<ENUMERATION_CONSTANT, %s>\n",yytext);
+                printf("<ENUMERATION_CONSTANT: %s>\n",yytext);
                 break;
             case PUNCTUATOR:
-                printf("<PUNCTUATOR, %s>\n",yytext);
+                printf("<PUNCTUATOR: %s>\n",yytext);
                 break;
             case STRING_LITERAL:
-                printf("<STRING_LITERAL, %s>\n",yytext);
+                printf("<STRING_LITERAL: %s>\n",yytext);
                 break;
             case CHARACTER_CONSTANT:
-                printf("<CHARACTER_CONSTANT, %s>\n",yytext);
+                printf("<CHARACTER_CONSTANT: %s>\n",yytext);
                 break;
             case SINGLE_LINE_COMMENT:
-                printf("<SINGLE_LINE_COMMENT, %s>\n",yytext);
+                printf("<SINGLE_LINE_COMMENT: %s>\n",yytext);
                 break;
             case MULTI_LINE_COMMENT:
-                printf("<MULTI_LINE_COMMENT, %s>\n",yytext);
+                printf("<MULTI_LINE_COMMENT: %s>\n",yytext);
                 break;
             case ERROR:
-                printf("<INVALID TOKEN, %s>\n",yytext);
+                printf("<INVALID TOKEN: %s>\n",yytext);
                 break;
         }
     }

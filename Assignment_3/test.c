@@ -5,6 +5,7 @@ int main() {
     int x = -42;
     float y = 3.14;  //Floating point number
     char c = 'a';  
+    enum week{Mon, Tue, Wed, Thur, Fri, Sat, Sun}; //Enumeration
     char s[20]="Team 23"; //String     
     while(y<10) {
         y = y + 1;
