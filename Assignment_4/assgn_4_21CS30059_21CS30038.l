@@ -34,6 +34,41 @@ single_line_comment "//"[^\n]*\n
 multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %s enumerator
 %%
+"++"    {return INCREMENT;}
+"--"    {return DECREMENT;}
+"&" {return AND;}
+"*" {return STAR;}
+"+" {return PLUS;}
+"-" {return MINUS;}
+"~" {return TILDE;}
+"!" {return NOT;}
+"/" {return DIV;}
+"%" {return MOD;}
+"<<"    {return LEFT_SHIFT;}
+">>"    {return RIGHT_SHIFT;}
+"<" {return LESS_THAN;}
+">" {return GREATER_THAN;}
+"<="    {return LESS_THAN_EQUAL;}
+">="    {return GREATER_THAN_EQUAL;}
+"=="    {return EQUAL_TO;}
+"!="    {return NOT_EQUAL_TO;}
+"^" {return XOR;}
+"|" {return OR;}
+"&&"    {return AND_AND;}
+"||"    {return OR_OR;}
+"?" {return QUESTION;}
+":" {return COLON;}
+";" {return SEMICOLON;}
+"," {return COMMA;}
+"["    {return LEFT_SQUARE_BRACKET;}
+"]"    {return RIGHT_SQUARE_BRACKET;}
+"(" {return LEFT_PARENTHESIS;}
+")" {return RIGHT_PARENTHESIS;}
+"." {return DOT;}
+"..."  {return ELLIPSIS;}
+"{" {return LEFT_CURLY_BRACE;}
+"}" {return RIGHT_CURLY_BRACE;}
+"->"   {return ARROW;}
 {enum_specifier_token}  {BEGIN(enumerator);return ENUM;}
 {type_specifier_token} {return TYPE_SPECIFIER_TOKEN;}
 {storage_class_specifier}   {return STORAGE_CLASS_SPECIFIER;}
