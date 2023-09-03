@@ -1,0 +1,74 @@
+%{
+    #include <stdio.h>
+    #include "y.tab.h"
+    int yylineno = 1;
+%}
+
+keywords    "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
+type_qualifier "const"|"restrict"|"volatile"
+storage_class_specifier   "auto"|"register"|"static"|"extern"
+function_specifier  "inline"
+type_specifier_token "void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"unsigned"|"_Bool"|"_Complex"|"_Imaginary"
+enum_specifier_token "enum"
+alpha   [_A-Za-z]
+identifier  {alpha}({alpha}|[0-9])*
+digit   [0-9]
+nonzero_digit   [1-9]
+integer_constant    {nonzero_digit}{digit}*
+digit_sequence  {digit}+
+fractional_constant {digit_sequence}?\.{digit_sequence}|{digit_sequence}\.
+exponent_part   [eE][+-]?{digit_sequence}
+floating_constant   {fractional_constant}{exponent_part}?|{digit_sequence}{exponent_part}
+enumeration_constant    {alpha}({alpha}|{digit})*
+escape_sequence \\[abfnrtv\\?'"]
+c_char  [^'\\\n]|{escape_sequence}
+c_char_sequence {c_char}+
+character_constant  "'"{c_char_sequence}"'"
+s_char  [^"\\\n]|{escape_sequence}
+s_char_sequence {s_char}+
+string_literal  \"{s_char_sequence}?\"
+assignment_operator "="|"*="|"/="|"%="|"+="|"-="|"<<="|">>="|"&="|"^="|"|="
+punctuator  "["|"]"|"("|")"|"{"|"}"|"."|"->"|"++"|"--"|"&"|"*"|"+"|"-"|"~"|"!"|"/"|"%"|"<<"|">>"|"<"|">"|"<="|">="|"=="|"!="|"^"|"|"|"&&"|"||"|"?"|":"|";"|"..."|"="|"*="|"/="|"%="|"+="|"-="|"<<="|">>="|"&="|"^="|"|="|","|"#"
+spaces [ \t\n\r]
+single_line_comment "//"[^\n]*\n
+multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
+%s enumerator
+%%
+{enum_specifier_token}  {BEGIN(enumerator);return ENUM;}
+{type_specifier_token} {return TYPE_SPECIFIER_TOKEN;}
+{storage_class_specifier}   {return STORAGE_CLASS_SPECIFIER;}
+"static"    {return STATIC_TOKEN;}
+{function_specifier}    {return FUNCTION_SPECIFIER;}
+"case"  {return CASE;}
+"default"   {return DEFAULT;}
+"sizeof"    {return SIZEOF;}
+"if"    {return IF;}
+"else"  {return ELSE;}
+"switch"    {return SWITCH;}
+"while" {return WHILE;}
+"do"    {return DO;}
+"for"   {return FOR;}
+"goto"  {return GOTO;}
+"continue"  {return CONTINUE;}
+"break" {return BREAK;}
+"return"    {return RETURN;}
+{type_qualifier}   {return TYPE_QUALIFIER;}
+{keywords}  {return KEYWORD;}
+<enumerator>{enumeration_constant}  {return ENUMERATION_CONST;}
+{identifier}    {return IDENTIFIER;}
+<enumerator,INITIAL>{integer_constant}  {return INTEGER;}
+{floating_constant} {return FLOAT;}
+<enumerator>"{" {return PUNCTUATOR;}
+<enumerator>"}" {BEGIN(INITIAL);return PUNCTUATOR;}
+<enumerator>"," {return PUNCTUATOR;}
+{character_constant}    {return CHARACTER_CONSTANT;}
+{string_literal}    {return STRING_LITERAL;}
+{assignment_operator}   {return ASSIGNMENT_OPERATOR;}
+{punctuator}    {return PUNCTUATOR;}
+\n  {yylineno++;}
+{spaces}    ;
+{single_line_comment}   {return SINGLE_LINE_COMMENT;}
+{multi_line_comment}    {return MULTI_LINE_COMMENT;}
+. {return ERROR;}
+%%
+
