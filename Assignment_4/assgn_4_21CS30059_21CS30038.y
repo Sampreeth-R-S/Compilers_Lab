@@ -10,9 +10,11 @@
 %union{
     int value;
 }
-%token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF OF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER KEYWORD ENUMERATION_CONST IDENTIFIER INTEGER FLOAT PUNCTUATOR CHARACTER_CONSTANT STRING_LITERAL ASSIGNMENT_OPERATOR PUNCTUATOR SINGLE_LINE_COMMENT MULTI_LINE_COMMENT ERROR
+%token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF OF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER KEYWORD ENUMERATION_CONST IDENTIFIER INTEGER FLOAT PUNCTUATOR CHARACTER_CONSTANT STRING_LITERAL ASSIGNMENT_OPERATOR SINGLE_LINE_COMMENT MULTI_LINE_COMMENT ERROR
 %token IF EQUALS INCREMENT DECREMENT AND STAR PLUS MINUS TILDE NOT DIV MOD LEFT_SHIFT RIGHT_SHIFT LESS_THAN GREATER_THAN LESS_THAN_EQUAL GREATER_THAN_EQUAL EQUAL_TO NOT_EQUAL_TO XOR OR AND_AND OR_OR QUESTION COLON SEMICOLON COMMA LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_PARENTHESIS RIGHT_PARENTHESIS DOT ELLIPSIS ARROW
-%start translation_unit
+%start translation-unit
+%precedence LOWER_THAN_ELSE
+%precedence ELSE
 %%
     primary-expression:
         IDENTIFIER  {printf("primary-expression-> IDENTIFIER\n");}
@@ -128,6 +130,10 @@
     declaration:
         declaration-specifiers init-declarator-listopt SEMICOLON  {printf("declaration-> declaration-specifiers init-declarator-listopt ;\n");}
         ;
+    init-declarator-listopt:
+        init-declarator-list  {printf("init-declarator-listopt-> init-declarator-list\n");}
+        | {printf("init-declarator-listopt-> \n");}
+        ;
     declaration-specifiers:
         storage-class-specifier declaration-specifiers  {printf("declaration-specifiers-> storage-class-specifier declaration-specifiers\n");}
         | storage-class-specifier  {printf("declaration-specifiers-> storage-class-specifier\n");}
@@ -137,6 +143,9 @@
         | type-qualifier  {printf("declaration-specifiers-> type-qualifier\n");}
         | function-specifier declaration-specifiers  {printf("declaration-specifiers-> function-specifier declaration-specifiers\n");}
         | function-specifier  {printf("declaration-specifiers-> function-specifier\n");}
+        ;
+    type-qualifier:
+        TYPE_QUALIFIER  {printf("type-qualifier-> type-qualifier-token\n");}
         ;
     init-declarator-list:
         declarator {printf("init-declarator-list-> declarator\n");}
@@ -286,7 +295,8 @@
         | {printf("expressionopt-> \n");}
         ;
     selection-statement:
-        IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("selection-statement-> IF (expression) statement\n");}
+        IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement %prec LOWER_THAN_ELSE
+        {printf("selection-statement-> IF (expression) statement\n");}
         | IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement ELSE statement {printf("selection-statement-> IF (expression) statement ELSE statement\n");}
         | SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("selection-statement-> SWITCH (expression) statement\n");}
         ;
@@ -322,3 +332,10 @@
         | declaration-list declaration {printf("declaration-list-> declaration-list declaration\n");}
         ;
 %%
+
+
+int main()
+{
+    yyparse();
+    return 0;
+}

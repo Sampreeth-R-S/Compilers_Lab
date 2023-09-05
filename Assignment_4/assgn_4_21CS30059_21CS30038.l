@@ -34,10 +34,10 @@ single_line_comment "//"[^\n]*\n
 multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %s enumerator
 %%
+"static"    {return STATIC_TOKEN;}
 "++"    {return INCREMENT;}
 "--"    {return DECREMENT;}
 "="     {return EQUALS;}
-"static"    {return STATIC_TOKEN;}
 "&" {return AND;}
 "*" {return STAR;}
 "+" {return PLUS;}
@@ -74,7 +74,6 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {enum_specifier_token}  {BEGIN(enumerator);return ENUM;}
 {type_specifier_token} {return TYPE_SPECIFIER_TOKEN;}
 {storage_class_specifier}   {return STORAGE_CLASS_SPECIFIER;}
-"static"    {return STATIC_TOKEN;}
 {function_specifier}    {return FUNCTION_SPECIFIER;}
 "case"  {return CASE;}
 "default"   {return DEFAULT;}
