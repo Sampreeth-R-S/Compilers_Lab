@@ -1,7 +1,7 @@
 %{
     #include <stdio.h>
     #include "y.tab.h"
-    int yylineno = 1;
+    int lineno=1;
 %}
 
 keywords    "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
@@ -35,6 +35,8 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %s enumerator
 %%
 "static"    {return STATIC_TOKEN;}
+"0"     {return INTEGER;}
+<enumerator>"}" {BEGIN(INITIAL);return LEFT_CURLY_BRACKET;}
 "++"    {return INCREMENT;}
 "--"    {return DECREMENT;}
 "="     {return EQUALS;}
@@ -68,8 +70,8 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 ")" {return RIGHT_PARENTHESIS;}
 "." {return DOT;}
 "..."  {return ELLIPSIS;}
-"{" {return LEFT_CURLY_BRACE;}
-"}" {return RIGHT_CURLY_BRACE;}
+"{" {return LEFT_CURLY_BRACKET;}
+"}" {return RIGHT_CURLY_BRACKET;}
 "->"   {return ARROW;}
 {enum_specifier_token}  {BEGIN(enumerator);return ENUM;}
 {type_specifier_token} {return TYPE_SPECIFIER_TOKEN;}
@@ -101,10 +103,10 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {string_literal}    {return STRING_LITERAL;}
 {assignment_operator}   {return ASSIGNMENT_OPERATOR;}
 {punctuator}    {return PUNCTUATOR;}
-\n  {yylineno++;}
+\n  {lineno++;}
 {spaces}    ;
-{single_line_comment}   {return SINGLE_LINE_COMMENT;}
-{multi_line_comment}    {return MULTI_LINE_COMMENT;}
+{single_line_comment}   {/*Single Line Comment*/}
+{multi_line_comment}    {/*Multi line comment*/}
 . {return ERROR;}
 %%
 

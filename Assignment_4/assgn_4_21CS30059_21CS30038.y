@@ -1,9 +1,10 @@
 %{
     #include<stdio.h>
     extern int yylex();
-    extern int yylineno;
+    //extern int yylineno=1;
+    extern int lineno;
     void yyerror(char *s) {
-        printf("error: %s at line %d\n", s, yylineno);
+        printf("error: %s at line %d\n", s, lineno);
     }
 %}
 
@@ -119,6 +120,7 @@
     assignment-expression:
         conditional-expression  {printf("assignment-expression-> conditional-expression\n");}
         | unary-expression ASSIGNMENT_OPERATOR assignment-expression  {printf("assignment-expression-> unary-expression assignment-operator assignment-expression\n");}
+        | unary-expression EQUALS assignment-expression {printf("assignment-expression-> unary-expression assignment-operator assignment-expression\n");}
         ;
     expression:
         assignment-expression  {printf("expression-> assignment-expression\n");}
@@ -148,8 +150,12 @@
         TYPE_QUALIFIER  {printf("type-qualifier-> type-qualifier-token\n");}
         ;
     init-declarator-list:
-        declarator {printf("init-declarator-list-> declarator\n");}
-        | declarator EQUALS initializer {printf("init-declarator-list-> declarator = initializer\n");}
+        init-declarator  {printf("init-declarator-list-> init-declarator\n");}
+        | init-declarator-list COMMA init-declarator  {printf("init-declarator-list-> init-declarator-list , init-declarator\n");}
+        ;
+    init-declarator:
+        declarator  {printf("init-declarator-> declarator\n");}
+        | declarator EQUALS initializer  {printf("init-declarator-> declarator = initializer\n");}
         ;
     storage-class-specifier:
         STORAGE_CLASS_SPECIFIER {printf("storage-class-specifier-> storage_class_specifier_token\n");}
@@ -338,4 +344,9 @@ int main()
 {
     yyparse();
     return 0;
+}
+
+int yywrap()
+{
+    return 1;
 }

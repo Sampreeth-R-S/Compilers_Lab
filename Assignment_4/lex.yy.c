@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 73
-#define YY_END_OF_BUFFER 74
+#define YY_NUM_RULES 75
+#define YY_END_OF_BUFFER 76
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,49 +362,49 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[393] =
     {   0,
-        0,    0,    0,    0,   74,   72,   69,   68,   10,   72,
-       67,   12,    5,   72,   31,   32,    6,    7,   28,    8,
-       33,   11,   72,   59,   26,   27,   15,    4,   16,   25,
-       58,   29,   30,   21,   58,   58,   58,   58,   58,   58,
-       58,   58,   58,   58,   58,   58,   58,   58,   58,   58,
-       35,   22,   36,    9,   28,   57,   57,   57,   57,   57,
-       57,   57,   57,   57,   57,   57,   57,   57,   57,   57,
-       57,   57,   35,   36,   20,    0,   65,    0,   66,   23,
-        0,    0,    2,    3,   37,    0,   60,    0,    0,   60,
-        0,    0,   59,   13,   17,   19,   18,   14,   58,   58,
+        0,    0,    0,    0,   76,   74,   71,   70,   12,   74,
+       69,   14,    7,   74,   33,   34,    8,    9,   30,   10,
+       35,   13,    2,   61,   28,   29,   17,    6,   18,   27,
+       60,   31,   32,   23,   60,   60,   60,   60,   60,   60,
+       60,   60,   60,   60,   60,   60,   60,   60,   60,   60,
+       37,   24,   38,   11,   30,   59,   59,   59,   59,   59,
+       59,   59,   59,   59,   59,   59,   59,   59,   59,   59,
+       59,   59,   37,    3,   22,    0,   67,    0,   68,   25,
+        0,    0,    4,    5,   39,    0,   62,    0,    0,   62,
+        0,    0,   61,   15,   19,   21,   20,   16,   60,   60,
 
-       58,   58,   58,   58,   58,   58,   58,   58,   49,   58,
-       58,   58,   58,   58,   58,   45,   58,   58,   58,   58,
-       58,   58,   58,   58,   58,   58,   58,   24,   57,   57,
-       57,   57,   57,   57,   57,   57,   57,   57,   49,   57,
-       57,   57,   57,   57,   57,   45,   57,   57,   57,   57,
-       57,   57,   57,   57,   57,   57,   57,   64,   34,    0,
-        0,    0,    0,   70,    0,   60,   58,   58,   58,   58,
-       58,   58,   58,   58,   58,   58,   58,   58,   58,   58,
-       50,   58,   58,   39,   58,   58,   58,   58,   58,   58,
-       58,   58,   58,   58,   58,   58,   58,   58,   58,   58,
+       60,   60,   60,   60,   60,   60,   60,   60,   51,   60,
+       60,   60,   60,   60,   60,   47,   60,   60,   60,   60,
+       60,   60,   60,   60,   60,   60,   60,   26,   59,   59,
+       59,   59,   59,   59,   59,   59,   59,   59,   51,   59,
+       59,   59,   59,   59,   59,   47,   59,   59,   59,   59,
+       59,   59,   59,   59,   59,   59,   59,   66,   36,    0,
+        0,    0,    0,   72,    0,   62,   60,   60,   60,   60,
+       60,   60,   60,   60,   60,   60,   60,   60,   60,   60,
+       52,   60,   60,   41,   60,   60,   60,   60,   60,   60,
+       60,   60,   60,   60,   60,   60,   60,   60,   60,   60,
 
-       57,   57,   57,   57,   57,   57,   57,   57,   57,   57,
-       57,   57,   57,   57,   50,   57,   57,   39,   57,   57,
-       57,   57,   57,   57,   57,   57,   57,   57,   57,   57,
-       57,   57,   57,   57,    0,   60,   71,   58,   58,   58,
-       40,   58,   42,   58,   58,   58,   58,   46,   38,   58,
-       58,   51,   58,   58,   58,   58,   58,   58,   58,   58,
-       58,   58,   58,   58,   58,   58,   58,   57,   57,   57,
-       40,   57,   42,   57,   57,   57,   57,   46,   38,   57,
-       57,   51,   57,   57,   57,   57,   57,   57,   57,   57,
-       57,   57,   57,   57,   57,   57,   57,   58,   58,   53,
+       59,   59,   59,   59,   59,   59,   59,   59,   59,   59,
+       59,   59,   59,   59,   52,   59,   59,   41,   59,   59,
+       59,   59,   59,   59,   59,   59,   59,   59,   59,   59,
+       59,   59,   59,   59,    0,   62,   73,   60,   60,   60,
+       42,   60,   44,   60,   60,   60,   60,   48,   40,   60,
+       60,   53,   60,   60,   60,   60,   60,   60,   60,   60,
+       60,   60,   60,   60,   60,   60,   60,   59,   59,   59,
+       42,   59,   44,   59,   59,   59,   59,   48,   40,   59,
+       59,   53,   59,   59,   59,   59,   59,   59,   59,   59,
+       59,   59,   59,   59,   59,   59,   59,   60,   60,   55,
 
-       55,   58,   58,   58,   58,   58,   58,   58,   58,   58,
-       58,   58,   58,   58,   58,   56,   58,   58,   48,   57,
-       57,   53,   55,   57,   57,   57,   57,   57,   57,   57,
-       57,   57,   57,   57,   57,   57,   57,   56,   57,   57,
-       48,   58,   58,   58,   58,   41,   58,   58,   54,   44,
-        1,   47,   58,   58,   58,   57,   57,   57,   57,   41,
-       57,   57,   54,   44,    1,   47,   57,   57,   57,   58,
-       58,   58,   43,   58,   58,   58,   58,   57,   57,   57,
-       43,   57,   57,   57,   57,   58,   52,   57,   52,   58,
-       57,    0
+       57,   60,   60,   60,   60,   60,   60,   60,   60,   60,
+       60,   60,   60,   60,   60,   58,   60,   60,   50,   59,
+       59,   55,   57,   59,   59,   59,   59,   59,   59,   59,
+       59,   59,   59,   59,   59,   59,   59,   58,   59,   59,
+       50,   60,   60,   60,   60,   43,   60,   60,   56,   46,
+        1,   49,   60,   60,   60,   59,   59,   59,   59,   43,
+       59,   59,   56,   46,    1,   49,   59,   59,   59,   60,
+       60,   60,   45,   60,   60,   60,   60,   59,   59,   59,
+       45,   59,   59,   59,   59,   60,   54,   59,   54,   60,
+       59,    0
 
     } ;
 
@@ -709,7 +709,7 @@ char *yytext;
 #line 2 "assgn_4_21CS30059_21CS30038.l"
     #include <stdio.h>
     #include "y.tab.h"
-    int yylineno = 1;
+    int lineno=1;
 #line 714 "lex.yy.c"
 
 #line 716 "lex.yy.c"
@@ -997,307 +997,307 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 38 "assgn_4_21CS30059_21CS30038.l"
-{return INCREMENT;}
+{return INTEGER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 39 "assgn_4_21CS30059_21CS30038.l"
-{return DECREMENT;}
+{BEGIN(INITIAL);return LEFT_CURLY_BRACKET;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 40 "assgn_4_21CS30059_21CS30038.l"
-{return EQUALS;}
+{return INCREMENT;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 41 "assgn_4_21CS30059_21CS30038.l"
-{return AND;}
+{return DECREMENT;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 42 "assgn_4_21CS30059_21CS30038.l"
-{return STAR;}
+{return EQUALS;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 43 "assgn_4_21CS30059_21CS30038.l"
-{return PLUS;}
+{return AND;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 44 "assgn_4_21CS30059_21CS30038.l"
-{return MINUS;}
+{return STAR;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 45 "assgn_4_21CS30059_21CS30038.l"
-{return TILDE;}
+{return PLUS;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 46 "assgn_4_21CS30059_21CS30038.l"
-{return NOT;}
+{return MINUS;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 47 "assgn_4_21CS30059_21CS30038.l"
-{return DIV;}
+{return TILDE;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 48 "assgn_4_21CS30059_21CS30038.l"
-{return MOD;}
+{return NOT;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 49 "assgn_4_21CS30059_21CS30038.l"
-{return LEFT_SHIFT;}
+{return DIV;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 50 "assgn_4_21CS30059_21CS30038.l"
-{return RIGHT_SHIFT;}
+{return MOD;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 51 "assgn_4_21CS30059_21CS30038.l"
-{return LESS_THAN;}
+{return LEFT_SHIFT;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 52 "assgn_4_21CS30059_21CS30038.l"
-{return GREATER_THAN;}
+{return RIGHT_SHIFT;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 53 "assgn_4_21CS30059_21CS30038.l"
-{return LESS_THAN_EQUAL;}
+{return LESS_THAN;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 54 "assgn_4_21CS30059_21CS30038.l"
-{return GREATER_THAN_EQUAL;}
+{return GREATER_THAN;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 55 "assgn_4_21CS30059_21CS30038.l"
-{return EQUAL_TO;}
+{return LESS_THAN_EQUAL;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 56 "assgn_4_21CS30059_21CS30038.l"
-{return NOT_EQUAL_TO;}
+{return GREATER_THAN_EQUAL;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 57 "assgn_4_21CS30059_21CS30038.l"
-{return XOR;}
+{return EQUAL_TO;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 58 "assgn_4_21CS30059_21CS30038.l"
-{return OR;}
+{return NOT_EQUAL_TO;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 59 "assgn_4_21CS30059_21CS30038.l"
-{return AND_AND;}
+{return XOR;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 60 "assgn_4_21CS30059_21CS30038.l"
-{return OR_OR;}
+{return OR;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 61 "assgn_4_21CS30059_21CS30038.l"
-{return QUESTION;}
+{return AND_AND;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 62 "assgn_4_21CS30059_21CS30038.l"
-{return COLON;}
+{return OR_OR;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 63 "assgn_4_21CS30059_21CS30038.l"
-{return SEMICOLON;}
+{return QUESTION;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 64 "assgn_4_21CS30059_21CS30038.l"
-{return COMMA;}
+{return COLON;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 65 "assgn_4_21CS30059_21CS30038.l"
-{return LEFT_SQUARE_BRACKET;}
+{return SEMICOLON;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 66 "assgn_4_21CS30059_21CS30038.l"
-{return RIGHT_SQUARE_BRACKET;}
+{return COMMA;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 67 "assgn_4_21CS30059_21CS30038.l"
-{return LEFT_PARENTHESIS;}
+{return LEFT_SQUARE_BRACKET;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 68 "assgn_4_21CS30059_21CS30038.l"
-{return RIGHT_PARENTHESIS;}
+{return RIGHT_SQUARE_BRACKET;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 69 "assgn_4_21CS30059_21CS30038.l"
-{return DOT;}
+{return LEFT_PARENTHESIS;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 70 "assgn_4_21CS30059_21CS30038.l"
-{return ELLIPSIS;}
+{return RIGHT_PARENTHESIS;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 71 "assgn_4_21CS30059_21CS30038.l"
-{return LEFT_CURLY_BRACE;}
+{return DOT;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 72 "assgn_4_21CS30059_21CS30038.l"
-{return RIGHT_CURLY_BRACE;}
+{return ELLIPSIS;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 73 "assgn_4_21CS30059_21CS30038.l"
-{return ARROW;}
+{return LEFT_CURLY_BRACKET;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 74 "assgn_4_21CS30059_21CS30038.l"
-{BEGIN(enumerator);return ENUM;}
+{return RIGHT_CURLY_BRACKET;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 75 "assgn_4_21CS30059_21CS30038.l"
-{return TYPE_SPECIFIER_TOKEN;}
+{return ARROW;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 76 "assgn_4_21CS30059_21CS30038.l"
-{return STORAGE_CLASS_SPECIFIER;}
+{BEGIN(enumerator);return ENUM;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 77 "assgn_4_21CS30059_21CS30038.l"
-{return FUNCTION_SPECIFIER;}
+{return TYPE_SPECIFIER_TOKEN;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 78 "assgn_4_21CS30059_21CS30038.l"
-{return CASE;}
+{return STORAGE_CLASS_SPECIFIER;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 79 "assgn_4_21CS30059_21CS30038.l"
-{return DEFAULT;}
+{return FUNCTION_SPECIFIER;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 80 "assgn_4_21CS30059_21CS30038.l"
-{return SIZEOF;}
+{return CASE;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 81 "assgn_4_21CS30059_21CS30038.l"
-{return IF;}
+{return DEFAULT;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 82 "assgn_4_21CS30059_21CS30038.l"
-{return ELSE;}
+{return SIZEOF;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 83 "assgn_4_21CS30059_21CS30038.l"
-{return SWITCH;}
+{return IF;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 84 "assgn_4_21CS30059_21CS30038.l"
-{return WHILE;}
+{return ELSE;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 85 "assgn_4_21CS30059_21CS30038.l"
-{return DO;}
+{return SWITCH;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 86 "assgn_4_21CS30059_21CS30038.l"
-{return FOR;}
+{return WHILE;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 87 "assgn_4_21CS30059_21CS30038.l"
-{return GOTO;}
+{return DO;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 88 "assgn_4_21CS30059_21CS30038.l"
-{return CONTINUE;}
+{return FOR;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 89 "assgn_4_21CS30059_21CS30038.l"
-{return BREAK;}
+{return GOTO;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 90 "assgn_4_21CS30059_21CS30038.l"
-{return RETURN;}
+{return CONTINUE;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 91 "assgn_4_21CS30059_21CS30038.l"
-{return TYPE_QUALIFIER;}
+{return BREAK;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 92 "assgn_4_21CS30059_21CS30038.l"
-{return KEYWORD;}
+{return RETURN;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
 #line 93 "assgn_4_21CS30059_21CS30038.l"
-{return ENUMERATION_CONST;}
+{return TYPE_QUALIFIER;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 94 "assgn_4_21CS30059_21CS30038.l"
-{return IDENTIFIER;}
+{return KEYWORD;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
 #line 95 "assgn_4_21CS30059_21CS30038.l"
-{return INTEGER;}
+{return ENUMERATION_CONST;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
 #line 96 "assgn_4_21CS30059_21CS30038.l"
-{return FLOAT;}
+{return IDENTIFIER;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
 #line 97 "assgn_4_21CS30059_21CS30038.l"
-{return PUNCTUATOR;}
+{return INTEGER;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
 #line 98 "assgn_4_21CS30059_21CS30038.l"
-{BEGIN(INITIAL);return PUNCTUATOR;}
+{return FLOAT;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
@@ -1307,58 +1307,68 @@ YY_RULE_SETUP
 case 64:
 YY_RULE_SETUP
 #line 100 "assgn_4_21CS30059_21CS30038.l"
-{return CHARACTER_CONSTANT;}
+{BEGIN(INITIAL);return PUNCTUATOR;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
 #line 101 "assgn_4_21CS30059_21CS30038.l"
-{return STRING_LITERAL;}
+{return PUNCTUATOR;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
 #line 102 "assgn_4_21CS30059_21CS30038.l"
-{return ASSIGNMENT_OPERATOR;}
+{return CHARACTER_CONSTANT;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
 #line 103 "assgn_4_21CS30059_21CS30038.l"
-{return PUNCTUATOR;}
+{return STRING_LITERAL;}
 	YY_BREAK
 case 68:
-/* rule 68 can match eol */
 YY_RULE_SETUP
 #line 104 "assgn_4_21CS30059_21CS30038.l"
-{yylineno++;}
+{return ASSIGNMENT_OPERATOR;}
 	YY_BREAK
 case 69:
-/* rule 69 can match eol */
 YY_RULE_SETUP
 #line 105 "assgn_4_21CS30059_21CS30038.l"
-;
+{return PUNCTUATOR;}
 	YY_BREAK
 case 70:
 /* rule 70 can match eol */
 YY_RULE_SETUP
 #line 106 "assgn_4_21CS30059_21CS30038.l"
-{return SINGLE_LINE_COMMENT;}
+{lineno++;}
 	YY_BREAK
 case 71:
 /* rule 71 can match eol */
 YY_RULE_SETUP
 #line 107 "assgn_4_21CS30059_21CS30038.l"
-{return MULTI_LINE_COMMENT;}
+;
 	YY_BREAK
 case 72:
+/* rule 72 can match eol */
 YY_RULE_SETUP
 #line 108 "assgn_4_21CS30059_21CS30038.l"
-{return ERROR;}
+{/*Single Line Comment*/}
 	YY_BREAK
 case 73:
+/* rule 73 can match eol */
 YY_RULE_SETUP
 #line 109 "assgn_4_21CS30059_21CS30038.l"
+{/*Multi line comment*/}
+	YY_BREAK
+case 74:
+YY_RULE_SETUP
+#line 110 "assgn_4_21CS30059_21CS30038.l"
+{return ERROR;}
+	YY_BREAK
+case 75:
+YY_RULE_SETUP
+#line 111 "assgn_4_21CS30059_21CS30038.l"
 ECHO;
 	YY_BREAK
-#line 1362 "lex.yy.c"
+#line 1372 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(enumerator):
 	yyterminate();
@@ -2364,7 +2374,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 109 "assgn_4_21CS30059_21CS30038.l"
+#line 111 "assgn_4_21CS30059_21CS30038.l"
 
 
 

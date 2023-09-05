@@ -1,18 +1,10 @@
-/*
- Compilers Lab
- Autumn Semester 2022
- Assignment No. 4
- Vikas Vijaykumar Bastewad - 20CS10073
- Yashraj Singh - 20CS10079
-*/
-/*------------------- Test File -----------------------------*/
-
+//hELLO
+/*hELLO MY FRIENDS*/
 extern int value;
 static const double pi = 3.14;
 auto b = 5;
 volatile long y = 10;
 _Bool x = 1;
-enum week { Mon , Tue, Wed, Thur, Fri, Sat, Sun };
 
 inline char toUpper(char ch)
 {
@@ -23,17 +15,14 @@ inline char toUpper(char ch)
 
 int main()
 {
-    short signed int number0 = 40; 
-    enum week _day = Sun;        
+    short signed int number0 = 40;         
     float f2_ = 23.E-2;
     float f3_ = 23.56e+3;
     float f4_ = .56E2;
     float f5_ = 232e3;
     char _1 = 48;
-
     char s[2] = "";
     char str[] = "Testing a string\\\"\'\n";
-
     int a = 1, b = 1;
     a++;
     a--;
@@ -59,8 +48,8 @@ int main()
     a >>= b;
     a &= b;
     a ^= b;
-    a |= b, b = 0;
-
+    a |= b;
+    b = 0;
     switch (_day) {
         case 1:
             break;
