@@ -11,7 +11,7 @@
     int value;
 }
 %token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF OF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER KEYWORD ENUMERATION_CONST IDENTIFIER INTEGER FLOAT PUNCTUATOR CHARACTER_CONSTANT STRING_LITERAL ASSIGNMENT_OPERATOR PUNCTUATOR SINGLE_LINE_COMMENT MULTI_LINE_COMMENT ERROR
-%token STATIC_TOKEN EQUALS INCREMENT DECREMENT AND STAR PLUS MINUS TILDE NOT DIV MOD LEFT_SHIFT RIGHT_SHIFT LESS_THAN GREATER_THAN LESS_THAN_EQUAL GREATER_THAN_EQUAL EQUAL_TO NOT_EQUAL_TO XOR OR AND_AND OR_OR QUESTION COLON SEMICOLON COMMA LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_PARENTHESIS RIGHT_PARENTHESIS DOT ELLIPSIS ARROW
+%token IF EQUALS INCREMENT DECREMENT AND STAR PLUS MINUS TILDE NOT DIV MOD LEFT_SHIFT RIGHT_SHIFT LESS_THAN GREATER_THAN LESS_THAN_EQUAL GREATER_THAN_EQUAL EQUAL_TO NOT_EQUAL_TO XOR OR AND_AND OR_OR QUESTION COLON SEMICOLON COMMA LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_PARENTHESIS RIGHT_PARENTHESIS DOT ELLIPSIS ARROW
 %start translation_unit
 %%
     primary-expression:
@@ -233,7 +233,92 @@
         | LEFT_CURLY_BRACKET initializer-list COMMA RIGHT_CURLY_BRACKET {printf("initializer-> {initializer-list,}\n");}
         ;
     initializer-list:
-        designationopt initializer {printf("initializer-list-> initializer\n");}
-        | initializer-list COMMA designationopt initializer {printf("initializer-list-> initializer-list , initializer\n");}
+        designationopt initializer {printf("initializer-list-> designationopt initializer\n");}
+        | initializer-list COMMA designationopt initializer {printf("initializer-list-> initializer-list , designationopt initializer\n");}
+        ;
+    designationopt:
+        designation {printf("designationopt-> designation\n");}
+        | {printf("designationopt-> \n");}
+        ;
+    designation:
+        designator-list EQUALS {printf("designation-> designator-list =\n");}
+        ;
+    designator-list:
+        designator {printf("designator-list-> designator\n");}
+        | designator-list designator {printf("designator-list-> designation-list designator\n");}
+        ;
+    designator:
+        LEFT_SQUARE_BRACKET constant-expression RIGHT_SQUARE_BRACKET {printf("designator-> [constant-expression]\n");}
+        | DOT IDENTIFIER {printf("designator-> . IDENTIFIER\n");}
+        ;
+    statement:
+        labeled-statement {printf("statement-> labeled-statement\n");}
+        | compound-statement {printf("statement-> compound-statement\n");}
+        | expression-statement {printf("statement-> expression-statement\n");}
+        | selection-statement {printf("statement-> selection-statement\n");}
+        | iteration-statement {printf("statement-> iteration-statement\n");}
+        | jump-statement {printf("statement-> jump-statement\n");}
+    labeled-statement:
+        IDENTIFIER COLON statement {printf("labeled-statement-> IDENTIFIER : statement\n");}
+        | CASE constant-expression COLON statement {printf("labeled-statement-> CASE constant-expression : statement\n");}
+        | DEFAULT COLON statement {printf("labeled-statement-> DEFAULT : statement\n");}
+        ;
+    compound-statement:
+        LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET {printf("compound-statement-> {block-item-listopt}\n");}
+        ;
+    block-item-listopt:
+        block-item-list {printf("block-item-listopt-> block-item-list\n");}
+        | {printf("block-item-listopt-> \n");}
+        ;
+    block-item-list:
+        block-item {printf("block-item-list-> block-item\n");}
+        | block-item-list block-item {printf("block-item-list-> block-item-list block-item\n");}
+        ;
+    block-item:
+        declaration {printf("block-item-> declaration\n");}
+        | statement {printf("block-item-> statement\n");}
+        ;
+    expression-statement:
+        expressionopt SEMICOLON {printf("expression-statement-> expressionopt ;\n");}
+        ;
+    expressionopt:
+        expression {printf("expressionopt-> expression\n");}
+        | {printf("expressionopt-> \n");}
+        ;
+    selection-statement:
+        IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("selection-statement-> IF (expression) statement\n");}
+        | IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement ELSE statement {printf("selection-statement-> IF (expression) statement ELSE statement\n");}
+        | SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("selection-statement-> SWITCH (expression) statement\n");}
+        ;
+    iteration-statement:
+        WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("iteration-statement-> WHILE (expression) statement\n");}
+        | DO statement WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {printf("iteration-statement-> DO statement WHILE (expression) ;\n");}
+        | FOR LEFT_PARENTHESIS expressionopt SEMICOLON expressionopt SEMICOLON expressionopt RIGHT_PARENTHESIS statement {printf("iteration-statement-> FOR (expressionopt ; expressionopt ; expressionopt) statement\n");}
+        | FOR LEFT_PARENTHESIS declaration expressionopt SEMICOLON expressionopt RIGHT_PARENTHESIS statement {printf("iteration-statement-> FOR (declaration expressionopt ; expressionopt) statement\n");}
+        ;
+    jump-statement:
+        GOTO IDENTIFIER SEMICOLON {printf("jump-statement-> GOTO IDENTIFIER ;\n");}
+        | CONTINUE SEMICOLON {printf("jump-statement-> CONTINUE ;\n");}
+        | BREAK SEMICOLON {printf("jump-statement-> BREAK ;\n");}
+        | RETURN expressionopt SEMICOLON {printf("jump-statement-> RETURN expressionopt ;\n");}
+        ;
+    translation-unit:
+        external-declaration {printf("translation-unit-> external-declaration\n");}
+        | translation-unit external-declaration {printf("translation-unit-> translation-unit external-declaration\n");}
+        ;
+    external-declaration:
+        function-definition {printf("external-declaration-> function-definition\n");}
+        | declaration {printf("external-declaration-> declaration\n");}
+        ;
+    function-definition:
+        declaration-specifiers declarator declaration-listopt compound-statement {printf("function-definition-> declaration-specifiers declarator declaration-listopt compound-statement\n");}
+        ;
+    declaration-listopt:
+        declaration-list {printf("declaration-listopt-> declaration-list\n");}
+        | {printf("declaration-listopt-> \n");}
+        ;
+    declaration-list:
+        declaration {printf("declaration-list-> declaration\n");}
+        | declaration-list declaration {printf("declaration-list-> declaration-list declaration\n");}
         ;
 %%
