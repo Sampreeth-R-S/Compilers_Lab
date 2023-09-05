@@ -36,6 +36,8 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %%
 "++"    {return INCREMENT;}
 "--"    {return DECREMENT;}
+"="     {return EQUALS;}
+"static"    {return STATIC_TOKEN;}
 "&" {return AND;}
 "*" {return STAR;}
 "+" {return PLUS;}
