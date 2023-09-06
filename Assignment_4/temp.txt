@@ -1,0 +1,122 @@
+storage-class-specifier-> storage_class_specifier_token
+declaration-specifiers-> type-specifier
+declaration-specifiers-> storage-class-specifier declaration-specifiers
+direct-declarator-> IDENTIFIER
+declarator-> direct-declarator
+init-declarator-> declarator
+init-declarator-list-> init-declarator
+init-declarator-listopt-> init-declarator-list
+declaration-> declaration-specifiers init-declarator-listopt ;
+external-declaration-> declaration
+translation-unit-> external-declaration
+storage-class-specifier-> storage_class_specifier_token
+type-qualifier-> type-qualifier-token
+declaration-specifiers-> type-specifier
+declaration-specifiers-> type-qualifier declaration-specifiers
+declaration-specifiers-> storage-class-specifier declaration-specifiers
+direct-declarator-> IDENTIFIER
+declarator-> direct-declarator
+primary-expression-> FLOAT
+postfix-expression-> primary-expression
+unary-expression-> postfix-expression
+cast-expression-> unary-expression
+multiplicative-expression-> cast-expression
+additive-expression-> multiplicative-expression
+shift-expression-> additive-expression
+relational-expression-> shift-expression
+equality-expression-> relational-expression
+AND-expression-> equality-expression
+exclusive-OR-expression-> AND-expression
+inclusive-OR-expression-> exclusive-OR-expression
+logical-AND-expression-> inclusive-OR-expression
+logical-OR-expression-> logical-AND-expression
+conditional-expression-> logical-OR-expression
+assignment-expression-> conditional-expression
+initializer-> assignment-expression
+init-declarator-> declarator = initializer
+init-declarator-list-> init-declarator
+init-declarator-listopt-> init-declarator-list
+declaration-> declaration-specifiers init-declarator-listopt ;
+external-declaration-> declaration
+translation-unit-> translation-unit external-declaration
+storage-class-specifier-> storage_class_specifier_token
+declaration-specifiers-> storage-class-specifier
+direct-declarator-> IDENTIFIER
+declarator-> direct-declarator
+primary-expression-> INTEGER
+postfix-expression-> primary-expression
+unary-expression-> postfix-expression
+cast-expression-> unary-expression
+multiplicative-expression-> cast-expression
+additive-expression-> multiplicative-expression
+shift-expression-> additive-expression
+relational-expression-> shift-expression
+equality-expression-> relational-expression
+AND-expression-> equality-expression
+exclusive-OR-expression-> AND-expression
+inclusive-OR-expression-> exclusive-OR-expression
+logical-AND-expression-> inclusive-OR-expression
+logical-OR-expression-> logical-AND-expression
+conditional-expression-> logical-OR-expression
+assignment-expression-> conditional-expression
+initializer-> assignment-expression
+init-declarator-> declarator = initializer
+init-declarator-list-> init-declarator
+init-declarator-listopt-> init-declarator-list
+declaration-> declaration-specifiers init-declarator-listopt ;
+external-declaration-> declaration
+translation-unit-> translation-unit external-declaration
+type-qualifier-> type-qualifier-token
+declaration-specifiers-> type-specifier
+declaration-specifiers-> type-qualifier declaration-specifiers
+direct-declarator-> IDENTIFIER
+declarator-> direct-declarator
+primary-expression-> INTEGER
+postfix-expression-> primary-expression
+unary-expression-> postfix-expression
+cast-expression-> unary-expression
+multiplicative-expression-> cast-expression
+additive-expression-> multiplicative-expression
+shift-expression-> additive-expression
+relational-expression-> shift-expression
+equality-expression-> relational-expression
+AND-expression-> equality-expression
+exclusive-OR-expression-> AND-expression
+inclusive-OR-expression-> exclusive-OR-expression
+logical-AND-expression-> inclusive-OR-expression
+logical-OR-expression-> logical-AND-expression
+conditional-expression-> logical-OR-expression
+assignment-expression-> conditional-expression
+initializer-> assignment-expression
+init-declarator-> declarator = initializer
+init-declarator-list-> init-declarator
+init-declarator-listopt-> init-declarator-list
+declaration-> declaration-specifiers init-declarator-listopt ;
+external-declaration-> declaration
+translation-unit-> translation-unit external-declaration
+declaration-specifiers-> type-specifier
+direct-declarator-> IDENTIFIER
+declarator-> direct-declarator
+primary-expression-> INTEGER
+postfix-expression-> primary-expression
+unary-expression-> postfix-expression
+cast-expression-> unary-expression
+multiplicative-expression-> cast-expression
+additive-expression-> multiplicative-expression
+shift-expression-> additive-expression
+relational-expression-> shift-expression
+equality-expression-> relational-expression
+AND-expression-> equality-expression
+exclusive-OR-expression-> AND-expression
+inclusive-OR-expression-> exclusive-OR-expression
+logical-AND-expression-> inclusive-OR-expression
+logical-OR-expression-> logical-AND-expression
+conditional-expression-> logical-OR-expression
+assignment-expression-> conditional-expression
+initializer-> assignment-expression
+init-declarator-> declarator = initializer
+init-declarator-list-> init-declarator
+init-declarator-listopt-> init-declarator-list
+declaration-> declaration-specifiers init-declarator-listopt ;
+external-declaration-> declaration
+translation-unit-> translation-unit external-declaration

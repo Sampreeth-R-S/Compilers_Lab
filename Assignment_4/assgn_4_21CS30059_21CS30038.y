@@ -69,7 +69,7 @@
         cast-expression  {printf("multiplicative-expression-> cast-expression\n");}
         | multiplicative-expression STAR cast-expression  {printf("multiplicative-expression-> multiplicative-expression * cast-expression\n");}
         | multiplicative-expression DIV cast-expression  {printf("multiplicative-expression-> multiplicative-expression / cast-expression\n");}
-        | multiplicative-expression MOD cast-expression  {printf("multiplicative-expression-> multiplicative-expression % cast-expression\n");}
+        | multiplicative-expression MOD cast-expression  {printf("multiplicative-expression-> multiplicative-expression %% cast-expression\n");}
         ;
     additive-expression:
         multiplicative-expression  {printf("additive-expression-> multiplicative-expression\n");}
@@ -140,7 +140,9 @@
         storage-class-specifier declaration-specifiers  {printf("declaration-specifiers-> storage-class-specifier declaration-specifiers\n");}
         | storage-class-specifier  {printf("declaration-specifiers-> storage-class-specifier\n");}
         | TYPE_SPECIFIER_TOKEN declaration-specifiers  {printf("declaration-specifiers-> type-specifier declaration-specifiers\n");}
+        | enum-specifier declaration-specifiers  {printf("declaration-specifiers-> enum-specifier declaration-specifiers\n");}
         | TYPE_SPECIFIER_TOKEN  {printf("declaration-specifiers-> type-specifier\n");}
+        | enum-specifier  {printf("declaration-specifiers-> enum-specifier\n");}
         | type-qualifier declaration-specifiers  {printf("declaration-specifiers-> type-qualifier declaration-specifiers\n");}
         | type-qualifier  {printf("declaration-specifiers-> type-qualifier\n");}
         | function-specifier declaration-specifiers  {printf("declaration-specifiers-> function-specifier declaration-specifiers\n");}
@@ -163,6 +165,7 @@
         ;
     specifier-qualifier-list:
         TYPE_SPECIFIER_TOKEN specifier-qualifier-listopt {printf("specifier-qualifier-list-> type-specifier specifier-qualifier-listopt\n");}
+        | enum-specifier specifier-qualifier-listopt {printf("specifier-qualifier-list-> enum-specifier specifier-qualifier-listopt\n");}
         | TYPE_QUALIFIER specifier-qualifier-listopt {printf("specifier-qualifier-list-> type-qualifier specifier-qualifier-listopt\n");}
         ;
     specifier-qualifier-listopt:
@@ -183,8 +186,8 @@
         | enumerator-list COMMA enumerator {printf("enumerator-list-> enumerator-list , enumerator\n");}
         ;
     enumerator:
-        ENUMERATION_CONST {printf("enumerator-> enumeration-const\n");}
-        | ENUMERATION_CONST EQUALS constant-expression {printf("enumerator-> enumeration-const = constant-expression\n");}
+        IDENTIFIER {printf("enumerator-> enumeration-const\n");}
+        | IDENTIFIER EQUALS constant-expression {printf("enumerator-> enumeration-const = constant-expression\n");}
         ;
     function-specifier:
         FUNCTION_SPECIFIER {printf("function-specifier-> function-specifier-token\n");}

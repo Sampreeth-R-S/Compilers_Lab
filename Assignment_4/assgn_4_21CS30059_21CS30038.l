@@ -2,6 +2,7 @@
     #include <stdio.h>
     #include "y.tab.h"
     int lineno=1;
+
 %}
 
 keywords    "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
@@ -36,7 +37,9 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %%
 "static"    {return STATIC_TOKEN;}
 "0"     {return INTEGER;}
-<enumerator>"}" {BEGIN(INITIAL);return LEFT_CURLY_BRACKET;}
+"{" {return LEFT_CURLY_BRACKET;}
+"}" {return RIGHT_CURLY_BRACKET;}
+"," {return COMMA;}
 "++"    {return INCREMENT;}
 "--"    {return DECREMENT;}
 "="     {return EQUALS;}
@@ -73,7 +76,7 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 "{" {return LEFT_CURLY_BRACKET;}
 "}" {return RIGHT_CURLY_BRACKET;}
 "->"   {return ARROW;}
-{enum_specifier_token}  {BEGIN(enumerator);return ENUM;}
+{enum_specifier_token}  {/*BEGIN(enumerator);*/return ENUM;}
 {type_specifier_token} {return TYPE_SPECIFIER_TOKEN;}
 {storage_class_specifier}   {return STORAGE_CLASS_SPECIFIER;}
 {function_specifier}    {return FUNCTION_SPECIFIER;}
@@ -92,21 +95,20 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 "return"    {return RETURN;}
 {type_qualifier}   {return TYPE_QUALIFIER;}
 {keywords}  {return KEYWORD;}
-<enumerator>{enumeration_constant}  {return ENUMERATION_CONST;}
 {identifier}    {return IDENTIFIER;}
-<enumerator,INITIAL>{integer_constant}  {return INTEGER;}
+<enumerator>{enumeration_constant}  {return ENUMERATION_CONST;}
+
+{integer_constant}  {return INTEGER;}
 {floating_constant} {return FLOAT;}
-<enumerator>"{" {return PUNCTUATOR;}
-<enumerator>"}" {BEGIN(INITIAL);return PUNCTUATOR;}
-<enumerator>"," {return PUNCTUATOR;}
+
 {character_constant}    {return CHARACTER_CONSTANT;}
 {string_literal}    {return STRING_LITERAL;}
 {assignment_operator}   {return ASSIGNMENT_OPERATOR;}
 {punctuator}    {return PUNCTUATOR;}
 \n  {lineno++;}
 {spaces}    ;
-{single_line_comment}   {/*Single Line Comment*/}
-{multi_line_comment}    {/*Multi line comment*/}
+{single_line_comment}   {/*Single Line Comment*/lineno++;}
+{multi_line_comment}    {/*Multi line comment*/for(int i=0;i<yyleng;i++){if(yytext[i]=='\n')lineno++;}}
 . {return ERROR;}
 %%
 
