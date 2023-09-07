@@ -343,11 +343,6 @@
 %%
 
 
-int main()
-{
-    yyparse();
-    return 0;
-}
 
 int yywrap()
 {
