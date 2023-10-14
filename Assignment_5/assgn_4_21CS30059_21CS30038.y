@@ -1,5 +1,6 @@
 %{
     #include<stdio.h>
+    #include<translator.h>
     extern int yylex();
     //extern int yylineno=1;
     extern int lineno;
@@ -10,40 +11,124 @@
 
 %union{
     int value;
+    expression* exp;
+    int intval;
+    array* Array;
+    int numParams;
 }
 %token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF OF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER KEYWORD ENUMERATION_CONST IDENTIFIER INTEGER FLOAT PUNCTUATOR CHARACTER_CONSTANT STRING_LITERAL ASSIGNMENT_OPERATOR SINGLE_LINE_COMMENT MULTI_LINE_COMMENT ERROR
 %token IF EQUALS INCREMENT DECREMENT AND STAR PLUS MINUS TILDE NOT DIV MOD LEFT_SHIFT RIGHT_SHIFT LESS_THAN GREATER_THAN LESS_THAN_EQUAL GREATER_THAN_EQUAL EQUAL_TO NOT_EQUAL_TO XOR OR AND_AND OR_OR QUESTION COLON SEMICOLON COMMA LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_PARENTHESIS RIGHT_PARENTHESIS DOT ELLIPSIS ARROW
 %start translation-unit
 %precedence LOWER_THAN_ELSE
 %precedence ELSE
+%type<exp> primary-expression
+%type<Array> postfix-expression
+%type<numParams> argument-expression-listopt,argument-expression-list
 %%
     primary-expression:
-        IDENTIFIER  {printf("primary-expression-> IDENTIFIER\n");}
-        | INTEGER   {printf("primary-expression-> INTEGER\n");}
-        | FLOAT    {printf("primary-expression-> FLOAT\n");}
-        | CHARACTER_CONSTANT    {printf("primary-expression-> CHARACTER_CONSTANT\n");}
+        IDENTIFIER  {symbol* temp=currentST.lookup($1);if(temp==NULL){$$=NULL;yyerror("Undeclared variable");}else if(temp->type==FUNCTION){$$=NULL;yyerror("Function name used as variable");}/*printf("primary-expression-> IDENTIFIER\n");*/
+            else
+            {
+                $$ = new expression();
+                $$->loc=currentST.gentemp(temp->type);
+                quads.emit($$->loc->name,temp->name,"=");
+            }
+            
+            }//printf("primary-expression-> IDENTIFIER\n");}
+        | INTEGER   {
+            $$ = new expression();
+            $$->loc=currentST.gentemp("int",inttostring($1));
+            quads.emit($$->loc->name,$1,"=");
+            //printf("primary-expression-> INTEGER\n");}
+        }
+        | FLOAT    {
+            $$ = new expression();
+            $$->loc=currentST.gentemp("float",floattostring($1));
+            quads.emit($$->loc->name,$1,"=");
+            //printf("primary-expression-> FLOAT\n");}
+        }
+        | CHARACTER_CONSTANT    {
+            $$ = new expression();
+            $$->loc=currentST.gentemp("char",chartostring($1));
+            quads.emit($$->loc->name,$1,"=");
+            //printf("primary-expression-> CHARACTER_CONSTANT\n");}
+        }
         | ENUMERATION_CONST   {printf("primary-expression-> ENUMERATION_CONST\n");}
-        | STRING_LITERAL    {printf("primary-expression-> STRING_LITERAL\n");}
+        | STRING_LITERAL    {
+            $$ = new expression();
+            $$->loc=currentST.gentemp("ptr",$1);
+            quads.emit($$->loc->name,$1,"=");
+            $$->loc->type_info->arrtype = new type("char");
+        }
         | LEFT_PARENTHESIS expression RIGHT_PARENTHESIS  {printf("primary-expression-> (expression)\n");}
         ;
     postfix-expression:
-        primary-expression  {printf("postfix-expression-> primary-expression\n");}
-        | postfix-expression LEFT_SQUARE_BRACKET expression RIGHT_SQUARE_BRACKET  {printf("postfix-expression-> postfix-expression [expression]\n");}
-        | postfix-expression LEFT_PARENTHESIS argument-expression-listopt RIGHT_PARENTHESIS  {printf("postfix-expression-> postfix-expression (argument_list_optional)\n");}
+        primary-expression  {
+            $$ = new array();
+            $$->loc = $1->loc;
+            $$->array = $$->loc;
+            $$->type_info = $$->loc->type_info->arrtype;
+        }
+        | postfix-expression LEFT_SQUARE_BRACKET expression RIGHT_SQUARE_BRACKET  {
+            $$ = new array();
+            $$->loc = currentST.gentemp("int");
+            $$->type_info = $1->type_info->arrtype;
+            $$->array_type = "arr";
+            $$->array = $1->array;
+            if($1->array_type=="arr")
+            {
+                symbol*temp = currentST.gentemp("int");
+                int size = sizeoftype($$->type_info);
+                quads.emit(temp->name,$3->loc->name,"*",inttostring(size));
+                quads.emit($$->loc->name,temp->name,"+",$1->loc->name);
+            }
+            else
+            {
+                int size = sizeoftype($$->type_info);
+                quads.emit($$->loc->name,$3->loc->name,"*",inttostring(size));
+            }
+        }
+        | postfix-expression LEFT_PARENTHESIS argument-expression-listopt RIGHT_PARENTHESIS  {
+            $$ = new array();
+            $$->loc = currentST.gentemp($1->type_info);
+            $$->array_type = "func";
+            $$->array = $1->array;
+            $$->type_info = $1->type_info;
+            quads.emit($$->loc->name,$1->loc->name,"call",inttostring($3));
+            
+        }
         | postfix-expression DOT IDENTIFIER  {printf("postfix-expression-> postfix-expression . IDENTIFIER\n");}
         | postfix-expression ARROW IDENTIFIER  {printf("postfix-expression-> postfix-expression -> IDENTIFIER\n");}
-        | postfix-expression INCREMENT  {printf("postfix-expression-> postfix-expression ++\n");}
-        | postfix-expression DECREMENT  {printf("postfix-expression-> postfix-expression --\n");}
+        | postfix-expression INCREMENT  {
+            $$ = new array();
+            $$->Arrau = currentST.gentemp($1->type_info);
+            quads.emit($$->Array->name,$1->Array->name,"=",);
+            quads.emit($1->Array->name,$1->Array->name,"+","1");
+        }
+        | postfix-expression DECREMENT  {
+            $$ = new array();
+            $$->Arrau = currentST.gentemp($1->type_info);
+            quads.emit($$->Array->name,$1->Array->name,"=",);
+            quads.emit($1->Array->name,$1->Array->name,"-","1");
+        }
         | LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS LEFT_CURLY_BRACKET initializer-list RIGHT_CURLY_BRACKET  {printf("postfix-expression-> (type-name) {initializer-list}\n");}
         | LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS LEFT_CURLY_BRACKET initializer-list COMMA RIGHT_CURLY_BRACKET  {printf("postfix-expression-> (type-name) {initializer-list,}\n");}
         ;
     argument-expression-list:
-        assignment-expression  {printf("argument-expression-list-> assignment-expression\n");}
-        | argument-expression-list COMMA assignment-expression  {printf("argument-expression-list-> argument-expression-list , assignment-expression\n");}
+        assignment-expression  {
+            $$ = 1;
+            quads.emit("param",$1->loc->name);
+        }
+        | argument-expression-list COMMA assignment-expression  {
+            $$ = $1+1;
+            quads.emit("param",$3->loc->name);
+        }
         ;
     argument-expression-listopt:
-        argument-expression-list  {printf("argument-expression-listopt-> argument-expression-list\n");}
-        |  {printf("argument-expression-listopt-> \n");}
+        argument-expression-list  {
+            $$ = $1;
+        }
+        |  {$$ = 0;}
         ;
     unary-expression:
         postfix-expression  {printf("unary-expression-> postfix-expression\n");}

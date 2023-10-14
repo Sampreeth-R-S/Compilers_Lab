@@ -1,6 +1,7 @@
 %{
     #include <stdio.h>
     #include "y.tab.h"
+    #include "translator.h"
     int lineno=1;
 
 %}
@@ -95,14 +96,14 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 "return"    {return RETURN;}
 {type_qualifier}   {return TYPE_QUALIFIER;}
 {keywords}  {return KEYWORD;}
-{identifier}    {return IDENTIFIER;}
-<enumerator>{enumeration_constant}  {return ENUMERATION_CONST;}
+{identifier}    {yylval.sym_pointer=currentST.lookup(yytext);return IDENTIFIER;}
+<enumerator>{enumeration_constant}  {yylval.sym_pointer=currentST.lookup(yytext);return ENUMERATION_CONST;}
 
-{integer_constant}  {return INTEGER;}
-{floating_constant} {return FLOAT;}
+{integer_constant}  {yylval.intval=atoi(yytext);return INTEGER;}
+{floating_constant} {yylval.floatval=atof(yytext);return FLOAT;}
 
-{character_constant}    {return CHARACTER_CONSTANT;}
-{string_literal}    {return STRING_LITERAL;}
+{character_constant}    {yylval.charval=yytext;return CHARACTER_CONSTANT;}
+{string_literal}    {yylval.charval=yytext;return STRING_LITERAL;}
 {assignment_operator}   {return ASSIGNMENT_OPERATOR;}
 {punctuator}    {return PUNCTUATOR;}
 \n  {lineno++;}

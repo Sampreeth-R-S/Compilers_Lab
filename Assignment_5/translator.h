@@ -64,9 +64,9 @@ class quadArray{
 class array{
     public:
     string array_type;
-    symbol* start_index;
-    symbol* array;
-    type* type;
+    symbol* loc;
+    symbol* Array;
+    type* type_info;
 }
 list<int> makelist(int i);
 list<int> merge(list<int> &a, list<int> &b);
