@@ -78,7 +78,19 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 "}" {return RIGHT_CURLY_BRACKET;}
 "->"   {return ARROW;}
 {enum_specifier_token}  {/*BEGIN(enumerator);*/return ENUM;}
-{type_specifier_token} {return TYPE_SPECIFIER_TOKEN;}
+"void"  {return  VOID;}
+"char"  {return CHAR;}
+"short" {return SHORT;}
+"int"   {return INT;}
+"long"  {return LONG;}
+"float" {return FLOAT;}
+"double"    {return DOUBLE;}
+"signed"    {return SIGNED;}
+"unsigned"  {return UNSIGNED;}
+"_Bool" {return BOOL;}
+"_Complex"  {return COMPLEX;}
+"_Imaginary"    {return IMAGINARY;}
+{type_qualifier}   {return TYPE_QUALIFIER;}
 {storage_class_specifier}   {return STORAGE_CLASS_SPECIFIER;}
 {function_specifier}    {return FUNCTION_SPECIFIER;}
 "case"  {return CASE;}
@@ -96,7 +108,7 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 "return"    {return RETURN;}
 {type_qualifier}   {return TYPE_QUALIFIER;}
 {keywords}  {return KEYWORD;}
-{identifier}    {yylval.sym_pointer=currentST.lookup(yytext);return IDENTIFIER;}
+{identifier}    {yylval.pointer=currentST.lookup(yytext);return IDENTIFIER;}
 <enumerator>{enumeration_constant}  {yylval.sym_pointer=currentST.lookup(yytext);return ENUMERATION_CONST;}
 
 {integer_constant}  {yylval.intval=atoi(yytext);return INTEGER;}

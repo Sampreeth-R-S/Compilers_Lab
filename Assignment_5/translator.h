@@ -19,6 +19,7 @@ class symbol{
     string name;
     type* type_info;
     int size, offset;
+    string value;
     symbolTable* nested_table;
     symbol(string name, type* type_info, int size=0);
 }
