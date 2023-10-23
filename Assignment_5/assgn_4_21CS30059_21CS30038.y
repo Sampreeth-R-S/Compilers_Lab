@@ -1,12 +1,16 @@
 %{
-    #include<stdio.h>
-    #include<translator.h>
+    #include <iostream>
+    #include "translator.h"
+    using namespace std;
     extern int yylex();
     //extern int yylineno=1;
     extern int lineno;
-    string vartype;
+    extern string vartype;
+    extern char* yytext;
+    extern quadArray* quads;
     void yyerror(char *s) {
         printf("error: %s at line %d\n", s, lineno);
+        printf("Unable to parse: %s",yytext);
     }
 %}
 
@@ -14,117 +18,132 @@
     int value;
     expression* exp;
     int intval;
-    array* Array;
+    float floatval;
+    char* charval;
+    aarray* Array;
     int numParams;
-    char operator;
+    char op;
     symbol* pointer;
-    statement stmt;
+    statement* stmt;
+    ttype* ptr;
 }
 %token <pointer> IDENTIFIER
+%token <intval> INTEGER
+%token <floatval> FLOAT
+%token <charval> CHARACTER_CONSTANT STRING_LITERAL
 %token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF OF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER KEYWORD ENUMERATION_CONST IDENTIFIER INTEGER FLOAT PUNCTUATOR CHARACTER_CONSTANT STRING_LITERAL ASSIGNMENT_OPERATOR SINGLE_LINE_COMMENT MULTI_LINE_COMMENT ERROR
 %token VOID CHAR SHORT INT LONG DOUBLE SIGNED UNSIGNED BOOL COMPLEX IMAGINARY
 %token IF EQUALS INCREMENT DECREMENT AND STAR PLUS MINUS TILDE NOT DIV MOD LEFT_SHIFT RIGHT_SHIFT LESS_THAN GREATER_THAN LESS_THAN_EQUAL GREATER_THAN_EQUAL EQUAL_TO NOT_EQUAL_TO XOR OR AND_AND OR_OR QUESTION COLON SEMICOLON COMMA LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_PARENTHESIS RIGHT_PARENTHESIS DOT ELLIPSIS ARROW
 %start translation-unit
 %precedence LOWER_THAN_ELSE
 %precedence ELSE
-%type<exp> primary-expression, multiplicative-expression, additive-expression, shift-expression, relational-expression, equality-expression, AND-expression, exclusive-OR-expression, inclusive-OR-expression, logical-AND-expression, logical-OR-expression, conditional-expression, assignment-expression, expression, constant-expression
+%type<exp> primary-expression
+ multiplicative-expression
+ additive-expression
+ shift-expression
+ relational-expression
+ equality-expression
+ AND-expression
+ exclusive-OR-expression
+ inclusive-OR-expression
+ logical-AND-expression, logical-OR-expression, conditional-expression, assignment-expression, expression, constant-expression, expression-statement,expressionopt
 %type<Array> postfix-expression, unary-expression, cast-expression
-%type<numParams> argument-expression-listopt,argument-expression-list
-%type<operator> unary-operator
+%type<numParams> argument-expression-listopt,argument-expression-list, initializer
+%type<op> unary-operator
 %type<pointer> declarator init-declarator direct-declarator
+%type<ptr> pointer
 %type<intval> M
-%type<stmt> N
+%type<stmt> N, statement, loop-statement, jump-statement, selection-statement, iteration-statement, labeled-statement, compound-statement, block-item, block-item-list, block-item-listopt
 %%
     primary-expression:
-        IDENTIFIER  {symbol* temp=currentST.lookup($1);if(temp==NULL){$$=NULL;yyerror("Undeclared variable");}else if(temp->type==FUNCTION){$$=NULL;yyerror("Function name used as variable");}/*printf("primary-expression-> IDENTIFIER\n");*/
-            else
-            {
-                $$ = new expression();
-                $$->loc=currentST.gentemp(temp->type);
-                quads.emit($$->loc->name,temp->name,"=");
-            }
+        IDENTIFIER  {
+
+            $$ = new expression();
+            $$->loc = $1;
+            $$->type = "non_bool";
             
             }//printf("primary-expression-> IDENTIFIER\n");}
         | INTEGER   {
             $$ = new expression();
-            $$->loc=currentST.gentemp("int",inttostring($1));
-            quads.emit($$->loc->name,$1,"=");
+            $$->loc=symbolTable::gentemp("int",convertInttoString($1));
+            quads.emit("=",$$->name,$1);
             //printf("primary-expression-> INTEGER\n");}
         }
         | FLOAT    {
             $$ = new expression();
-            $$->loc=currentST.gentemp("float",floattostring($1));
-            quads.emit($$->loc->name,$1,"=");
+            $$->loc=symbolTable::gentemp("float",convertFloattoString($1));
+            quads.emit("=",$$->name,$1);
             //printf("primary-expression-> FLOAT\n");}
         }
         | CHARACTER_CONSTANT    {
             $$ = new expression();
-            $$->loc=currentST.gentemp("char",chartostring($1));
-            quads.emit($$->loc->name,$1,"=");
+            $$->loc=symbolTable::gentemp("char",string($1));
+            quads.emit("=",$$->name,string($1));
             //printf("primary-expression-> CHARACTER_CONSTANT\n");}
         }
         | ENUMERATION_CONST   {printf("primary-expression-> ENUMERATION_CONST\n");}
         | STRING_LITERAL    {
             $$ = new expression();
-            $$->loc=currentST.gentemp("ptr",$1);
-            quads.emit($$->loc->name,$1,"=");
-            $$->loc->type_info->arrtype = new type("char");
+            $$->loc=symbolTable::gentemp("ptr",$1);
+            //quads.emit($$->loc->name,$1,"=");
+            $$->loc->type->arrtype = new ttype("char");
         }
         | LEFT_PARENTHESIS expression RIGHT_PARENTHESIS  {printf("primary-expression-> (expression)\n");}
         ;
     postfix-expression:
         primary-expression  {
-            $$ = new array();
+            $$ = new aarray();
             $$->loc = $1->loc;
             $$->array = $$->loc;
-            $$->type_info = $$->loc->type_info->arrtype;
+            $$->type = $$->loc->type->arrtype;
         }
         | postfix-expression LEFT_SQUARE_BRACKET expression RIGHT_SQUARE_BRACKET  {
-            $$ = new array();
-            $$->loc = currentST.gentemp("int");
-            $$->type_info = $1->type_info->arrtype;
+            $$ = new aarray();
+            $$->loc = symbolTable::gentemp("int");
+            $$->type = $1->type->arrtype;
             $$->array_type = "arr";
             $$->array = $1->array;
             if($1->array_type=="arr")
             {
-                symbol*temp = currentST.gentemp("int");
-                int size = sizeoftype($$->type_info);
-                quads.emit(temp->name,$3->loc->name,"*",inttostring(size));
-                quads.emit($$->loc->name,temp->name,"+",$1->loc->name);
+                symbol*temp = symbolTable::gentemp("int");
+                int size = sizeoftype($$->type);
+                quads.emit("*",temp->name,$3->loc->name,convertInttoString(size));
+                quads.emit("+",$$->loc->name,$1->loc->name,temp->name);
             }
             else
             {
-                int size = sizeoftype($$->type_info);
-                quads.emit($$->loc->name,$3->loc->name,"*",inttostring(size));
+                int size = sizeoftype($$->type);
+                quads.emit("*",$$->loc->name,$3->loc->name,convertInttoString(size));
             }
         }
         | postfix-expression LEFT_PARENTHESIS argument-expression-listopt RIGHT_PARENTHESIS  {
-            $$ = new array();
-            $$->loc = currentST.gentemp($1->type_info);
-            $$->array_type = "func";
-            $$->Array = $1->Array;
-            $$->type_info = $1->type_info;
-            quads.emit($$->loc->name,$1->loc->name,"call",inttostring($3));
+            $$ = new aarray();
+            //$$->loc = symbolTable::gentemp($1->type);
+            //$$->array_type = "func";
+            //$$->Array = $1->Array;
+            //$$->type = $1->type;
+            $$->Array = symbolTable::gentemp($1->type);
+            quads.emit("call", $$->Array->name, $1->Array->name, convertIntToString($3));
             
         }
         | postfix-expression DOT IDENTIFIER  {printf("postfix-expression-> postfix-expression . IDENTIFIER\n");}
         | postfix-expression ARROW IDENTIFIER  {printf("postfix-expression-> postfix-expression -> IDENTIFIER\n");}
         | postfix-expression INCREMENT  {
-            $$ = new array();
-            $$->Array = currentST.gentemp($1->type_info);
-            quads.emit($$->Array->name,$1->Array->name,"=",);
-            quads.emit($1->Array->name,$1->Array->name,"+","1");
+            $$ = new aarray();
+            $$->Array = symbolTable::gentemp($1->Array->type);
+            quads.emit("=", $$->Array->name, $1->Array->name);
+            quads.emit("+", $1->Array->name, $1->Array->name, "1"); 
         }
         | postfix-expression DECREMENT  {
-            $$ = new array();
-            $$->Arrau = currentST.gentemp($1->type_info);
-            quads.emit($$->Array->name,$1->Array->name,"=",);
-            quads.emit($1->Array->name,$1->Array->name,"-","1");
+            $$ = new aarray();
+            $$->Array = symbolTable::gentemp($1->Array->type);
+            quads.emit("=", $$->Array->name, $1->Array->name); 
+            quads.emit("-", $1->Array->name, $1->Array->name, "1");
         }
         | LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS LEFT_CURLY_BRACKET initializer-list RIGHT_CURLY_BRACKET  {printf("postfix-expression-> (type-name) {initializer-list}\n");}
         | LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS LEFT_CURLY_BRACKET initializer-list COMMA RIGHT_CURLY_BRACKET  {printf("postfix-expression-> (type-name) {initializer-list,}\n");}
         ;
-    argument-expression-list:
+argument-expression-list:
         assignment-expression  {
             $$ = 1;
             quads.emit("param",$1->loc->name);
@@ -134,58 +153,58 @@
             quads.emit("param",$3->loc->name);
         }
         ;
-    argument-expression-listopt:
+argument-expression-listopt:
         argument-expression-list  {
             $$ = $1;
         }
         |  {$$ = 0;}
         ;
-    unary-expression:
+unary-expression:
         postfix-expression  {
             $$ = $1;
         }
         | INCREMENT unary-expression  {
-            quads.emit($2->loc->name,$2->loc->name,"+","1");
+            quads.emit("+", $2->Array->name, $2->Array->name, "1"); 
             $$ = $2;
         }
         | DECREMENT unary-expression  {
-            quads.emit($2->loc->name,$2->loc->name,"-","1");
+            quads. emit("-", $2->Array->name, $2->Array->name, "1");
             $$ = $2;
         }
         | unary-operator cast-expression  {
-            $$ = new array();
+            $$ = new aarray();
             switch($1):
                 case '&':
-                    $$->Array = currentST.gentemp("ptr");
-                    $$->Array->type_info->arrtype = $2->Array->type_info;
+                    $$->Array = symbolTable::gentemp(new ttype("ptr"));
+                    $$->Array->type->arrtype = $2->Array->type;
                     quads.emit($$->Array->name,$2->Array->name,"= &");
                     break;
                 case '*':
                     $$->Array = $2->Array;
-                    $$->loc = currentST.gentemp($2->Array->type_info->arrtype);
+                    $$->loc = symbolTable::gentemp($2->Array->type->arrtype);
                     $$->array_type = "ptr";
-                    quads.emit($$->loc->name,$2->Array->name,"= *");
+                    quads.emit("= *", $$->loc->name, $2->Array->name);  
                     break;
                 case '+':
                     $$ = $2;
                     break;
                 case '-':
-                    $$->Array = currentST.gentemp($2->Array->type_info->type);
-                    quads.emit($$->Array->name,$2->Array->name,"= -");
+                    $$->Array = symbolTable::gentemp($2->Array->type->type);
+                    quads.emit("= -", $$->Array->name, $2->Array->name);   
                     break;
                 case '~':
-                    $$->Array = currentST.gentemp($2->Array->type_info->type);
-                    quads.emit($$->Array->name,$2->Array->name,"= ~");
+                    $$->Array = symbolTable::gentemp($2->Array->type->type);
+                    quads.emit("= ~", $$->Array->name, $2->Array->name);
                     break;
                 case '!':
-                    $$->Array = currentST.gentemp($2->Array->type_info->type);
-                    quads.emit($$->Array->name,$2->Array->name,"= !");
+                    $$->Array = symbolTable::gentemp($2->Array->type->type);
+                    quads.emit("= !", $$->Array->name, $2->Array->name);
                     break;
         }
         | SIZEOF unary-expression  {printf("unary-expression-> SIZEOF unary-expression\n");}
         | SIZEOF LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS  {printf("unary-expression-> SIZEOF (type-name)\n");}
         ;
-    unary-operator:
+unary-operator:
         AND  {
             $$ = '&';
         }
@@ -210,17 +229,17 @@
             $$ = $1;
         }
         | LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS cast-expression  {
-            $$ = new array();
-            $$->Array = convertType($4->Array, $2);
+            $$ = new aarray();
+            $$->Array = convertType($4->Array, varType);
         }
         ;
-    multiplicative-expression:
+multiplicative-expression:
         cast-expression  {
             $$ = new expression();
             if($1->array_type=="arr")
             {
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->Array->name,"= []",$1->loc->name);
+                $$->loc = symbolTable::gentemp($1->loc->type);
+                quads. emit("=[]", $$->loc->name, $1->Array->name, $1->loc->name);
             }
             else if($1->array_type=="ptr")
             {
@@ -235,8 +254,8 @@
             if(typecheck($1->loc,$3->Array))
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,"*",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                quads.emit("*", $$->loc->name, $1->loc->name, $3->Array->name);    
             }
             else
             {
@@ -247,8 +266,8 @@
             if(typecheck($1->loc,$3->Array))
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,"/",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                quads.emit("/", $$->loc->name, $1->loc->name, $3->Array->name);
             }
             else
             {
@@ -259,12 +278,12 @@
             if(typecheck($1->loc,$3->array))
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,"%",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                quads.emit("%", $$->loc->name, $1->loc->name, $3->Array->name);   
             }
         }
         ;
-    additive-expression:
+additive-expression:
         multiplicative-expression  {
             $$ = $1;
         }
@@ -272,8 +291,8 @@
             if(typecheck($1->loc,$3->loc))
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,"+",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                quads.emit("+", $$->loc->name, $1->loc->name, $3->loc->name);    
             }
             else
             {
@@ -284,8 +303,8 @@
             if(typecheck($1->loc,$3->loc))
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,"-",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                quads.emit("-", $$->loc->name, $1->loc->name, $3->loc->name);           
             }
             else
             {
@@ -293,16 +312,16 @@
             }
         }
         ;
-    shift-expression:
+shift-expression:
         additive-expression  {
             $$ = $1;
         }
         | shift-expression LEFT_SHIFT additive-expression  {
-            if($3->loc->type_info->type=="int")
+            if($3->loc->type->type=="int")
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,"<<",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype("int"));
+                quads.emit("<<", $$->loc->name, $1->loc->name, $3->loc->name);  
             }
             else
             {
@@ -310,11 +329,11 @@
             }
         }
         | shift-expression RIGHT_SHIFT additive-expression  {
-            if($3->loc->type_info->type=="int")
+            if($3->loc->type->type=="int")
             {
                 $$ = new expression();
-                $$->loc = currentST.gentemp($1->loc->type_info);
-                quads.emit($$->loc->name,$1->loc->name,">>",$3->Array->name);
+                $$->loc = symbolTable::gentemp(new ttype("int"));
+                quads.emit(">>", $$->loc->name, $1->loc->name, $3->loc->name); 
             }
             else
             {
@@ -331,8 +350,8 @@
             {
                 $$ = new expression();
                 $$->type = "bool";
-                $$->true_list = makelist(nextinstr());
-                $$->false_list = makelist(nextinstr()+1);
+                $$->truelist = makelist(nextinstr());
+                $$->falselist = makelist(nextinstr()+1);
                 quads.emit("<","",$1->loc->name,$3->loc->name);
                 quads.emit("goto","_");
             }
@@ -346,8 +365,8 @@
             {
                 $$ = new expression();
                 $$->type = "bool";
-                $$->true_list = makelist(nextinstr());
-                $$->false_list = makelist(nextinstr()+1);
+                $$->truelist = makelist(nextinstr());
+                $$->falselist = makelist(nextinstr()+1);
                 quads.emit(">","",$1->loc->name,$3->loc->name);
                 quads.emit("goto","_");
             }
@@ -361,8 +380,8 @@
             {
                 $$ = new expression();
                 $$->type = "bool";
-                $$->true_list = makelist(nextinstr());
-                $$->false_list = makelist(nextinstr()+1);
+                $$->truelist = makelist(nextinstr());
+                $$->falselist = makelist(nextinstr()+1);
                 quads.emit("<=","",$1->loc->name,$3->loc->name);
                 quads.emit("goto","_");
             }
@@ -376,8 +395,8 @@
             {
                 $$ = new expression();
                 $$->type = "bool";
-                $$->true_list = makelist(nextinstr());
-                $$->false_list = makelist(nextinstr()+1);
+                $$->truelist = makelist(nextinstr());
+                $$->falselist = makelist(nextinstr()+1);
                 quads.emit(">=","",$1->loc->name,$3->loc->name);
                 quads.emit("goto","_");
             }
@@ -398,8 +417,8 @@
                 convertBooltoInt($1);
                 convertBooltoInt($3);
                 $$->type = "bool";
-                $$->true_list = makelist(nextinstr());
-                $$->false_list = makelist(nextinstr()+1);
+                $$->truelist = makelist(nextinstr());
+                $$->falselist = makelist(nextinstr()+1);
                 quads.emit("==","",$1->loc->name,$3->loc->name);
                 quads.emit("goto","_");
             }
@@ -415,8 +434,8 @@
                 convertBooltoInt($1);
                 convertBooltoInt($3);
                 $$->type = "bool";
-                $$->true_list = makelist(nextinstr());
-                $$->false_list = makelist(nextinstr()+1);
+                $$->truelist = makelist(nextinstr());
+                $$->falselist = makelist(nextinstr()+1);
                 quads.emit("!=","",$1->loc->name,$3->loc->name);
                 quads.emit("goto","_");
             }
@@ -437,8 +456,8 @@
                 convertBooltoInt($1);
                 convertBooltoInt($3);
                 $$->type = "notbool";
-                $$->loc = currentST.gentemp(new type("int"));
-                quads.emit($$->loc->name,$1->loc->name,"&",$3->loc->name);
+                $$->loc = symbolTable::gentemp(new ttype("int"));
+                quads.emit("&", $$->loc->name, $1->loc->name, $3->loc->name);  
             }
             else
             {
@@ -457,8 +476,8 @@
                 convertBooltoInt($1);
                 convertBooltoInt($3);
                 $$->type = "notbool";
-                $$->loc = currentST.gentemp(new type("int"));
-                quads.emit($$->loc->name,$1->loc->name,"^",$3->loc->name);
+                $$->loc = symbolTable::gentemp(new ttype("int"));
+                quads.emit("^", $$->loc->name, $1->loc->name, $3->loc->name);
             }
             else
             {
@@ -477,8 +496,8 @@
                 convertBooltoInt($1);
                 convertBooltoInt($3);
                 $$->type = "notbool";
-                $$->loc = currentST.gentemp(new type("int"));
-                quads.emit($$->loc->name,$1->loc->name,"|",$3->loc->name);
+                $$->loc = symbolTable::gentemp(new ttype("int"));
+                quads.emit("|", $$->loc->name, $1->loc->name, $3->loc->name); 
             }
             else
             {
@@ -491,19 +510,15 @@
             $$ = $1;
         }
         | logical-AND-expression AND_AND M inclusive-OR-expression  {
-            if(typecheck($1->loc,$3->loc))
+            
             {
                 $$ = new expression();
-                convertBooltoInt($1);
-                convertBooltoInt($4);
+                convertInttoBool($1);
+                convertInttoBool($4);
                 $$->type = "bool";
-                backpatch($1->true_list,$3);
-                $$->true_list = $4->true_list;
-                $$->false_list = merge($1->false_list,$4->false_list);
-            }
-            else
-            {
-                yyerror("Type mismatch");
+                backpatch($1->truelist,$3);
+                $$->truelist = $4->truelist;
+                $$->falselist = merge($1->falselist,$4->falselist);
             }
         }
         ;
@@ -512,19 +527,15 @@
             $$ = $1;
         }
         | logical-OR-expression OR_OR M logical-AND-expression  {
-            if(typecheck($1->loc,$3->loc))
+            
             {
                 $$ = new expression();
-                convertBooltoInt($1);
-                convertBooltoInt($4);
+                convertInttoBool($1);
+                convertIntoBool($4);
                 $$->type = "bool";
-                backpatch($1->false_list,$3);
-                $$->false_list = $4->false_list;
-                $$->true_list = merge($1->true_list,$4->true_list);
-            }
-            else
-            {
-                yyerror("Type mismatch");
+                backpatch($1->falselist,$3);
+                $$->falselist = $4->falselist;
+                $$->truelist = merge($1->truelist,$4->truelist);
             }
         }
         ;
@@ -534,16 +545,16 @@
         }
         | logical-OR-expression N QUESTION M expression N COLON M conditional-expression  {
             $$ = new expression;
-            $$->loc = currentST.gentemp($5->loc->type_info);
+            $$->loc = symbolTable::gentemp($5->loc->type);
             $$->loc->update($5->loc->type);
-            emit($$->loc->name,$9->loc->name,"=");
+            quads.emit("=", $$->loc->name, $9->loc->name); 
             list<int> l1 = makelist(nextinstr());
-            emit("goto", "");
+            quads.emit("goto", "");
             backpatch($6->nextlist,nextinstr());
-            emit($$->loc->name,$5->loc->name,"=");
+            quads.emit("=", $$->loc->name, $5->loc->name);
             list<int> l2 = makelist(nextinstr());
             l1=merge(l1,l2);
-            emit("goto","");
+            quads.emit("goto","");
             backpatch($2->nextlist, nextinstr());               // Backpatching
             convertIntToBool($1);                               // Convert expression to bool
             backpatch($1->truelist, $4);                        // When $1 is true, control goes to $4 (expression)
@@ -551,14 +562,18 @@
             backpatch(l1, nextinstr());
         }
         ;
-    M:  {
+    M:  %empty
+    {
         $$=nextinstr();
     }
-    N:  {
+    ;
+    N:  %empty
+    {
         $$ = new statement();
         $$->nextlist = makelist(nextinstr());
-        emit("goto","");
+        quads.emit("goto","");
     }
+    ;
     assignment-expression:
         conditional-expression  {
             $$ = $1;
@@ -566,21 +581,20 @@
         | unary-expression ASSIGNMENT_OPERATOR assignment-expression  {
             if($1->array_type=="arr")
             {
-                $3->loc=convertType($3->loc,$1->type_info->type);
-                quads.emit($1->Array->name,$1->loc->name,"[]=",$3->loc->name);
+                $3->loc=convertType($3->loc,$1->type->type);
+                quads.emit("[]=", $1->Array->name, $1->loc->name, $3->loc->name);
             }
             else if($1->array_type="ptr")
             {
-                quads.emit($1->Array->name,$3->loc->name,"*=");
+                quads.emit("*=", $1->Array->name, $3->loc->name);
             }
             else
             {
-                $3->loc=convertType($3->loc,$1->Array->type_info->type);
-                emit($1->Array->name,$3->loc,"=");
+                $3->loc=convertType($3->loc,$1->Array->type->type);
+                quads.emit("=", $1->Array->name, $3->loc->name);
             }
             $$ = $3;
         }
-        | unary-expression EQUALS assignment-expression {printf("assignment-expression-> unary-expression assignment-operator assignment-expression\n");}
         ;
     expression:
         assignment-expression  {
@@ -596,15 +610,13 @@
         ;
     init-declarator-listopt:
         init-declarator-list  {printf("init-declarator-listopt-> init-declarator-list\n");}
-        | {printf("init-declarator-listopt-> \n");}
+        | %empty {printf("init-declarator-listopt-> \n");}
         ;
     declaration-specifiers:
         storage-class-specifier declaration-specifiers  {printf("declaration-specifiers-> storage-class-specifier declaration-specifiers\n");}
         | storage-class-specifier  {printf("declaration-specifiers-> storage-class-specifier\n");}
         | TYPE_SPECIFIER_TOKEN declaration-specifiers  {printf("declaration-specifiers-> type-specifier declaration-specifiers\n");}
-        | enum-specifier declaration-specifiers  {printf("declaration-specifiers-> enum-specifier declaration-specifiers\n");}
         | TYPE_SPECIFIER_TOKEN  {printf("declaration-specifiers-> type-specifier\n");}
-        | enum-specifier  {printf("declaration-specifiers-> enum-specifier\n");}
         | type-qualifier declaration-specifiers  {printf("declaration-specifiers-> type-qualifier declaration-specifiers\n");}
         | type-qualifier  {printf("declaration-specifiers-> type-qualifier\n");}
         | function-specifier declaration-specifiers  {printf("declaration-specifiers-> function-specifier declaration-specifiers\n");}
@@ -622,7 +634,11 @@
             $$ = $1;
         }
         | declarator EQUALS initializer  {
-            quads.emit($1->name,$3->name,"=");
+            if($3->value !="")
+            {
+                $1->value = $3->value;
+            }
+            quads.emit("=", $1->name, $3->name);
         }
         ;
     type-specifier:
@@ -665,6 +681,7 @@
         | enum-specifier{
             printf("type-specifier-> enum-specifier\n");
         }
+        ;
     storage-class-specifier:
         STORAGE_CLASS_SPECIFIER {printf("storage-class-specifier-> storage_class_specifier_token\n");}
         | STATIC_TOKEN {printf("storage-class-specifier-> storage_class_specifier_token\n");}
@@ -676,7 +693,7 @@
         ;
     specifier-qualifier-listopt:
         specifier-qualifier-list {printf("specifier-qualifier-listopt-> specifier-qualifier-list\n");}
-        | {printf("specifier-qualifier-listopt-> \n");}
+        | %empty {printf("specifier-qualifier-listopt-> \n");}
         ;
     enum-specifier:
         ENUM identifieropt LEFT_CURLY_BRACKET enumerator-list RIGHT_CURLY_BRACKET {printf("enum-specifier-> enum IDENTIFIERopt {enumerator-list}\n");}
@@ -685,7 +702,7 @@
         ;
     identifieropt:
         IDENTIFIER {printf("identifieropt-> IDENTIFIER\n");}
-        | {printf("identifieropt-> \n");}
+        | %empty {printf("identifieropt-> \n");}
         ;
     enumerator-list:
         enumerator {printf("enumerator-list-> enumerator\n");}
@@ -705,14 +722,14 @@
             {
                 t=t->arrType;
             }
-            t->arrType = $2;
+            t->arrType = $2->type;
             $$ = $2->update($1);
         }
         | direct-declarator {printf("declarator-> direct-declarator\n");}
         ;
     direct-declarator:
         IDENTIFIER {
-            $$ = $1->update(new type(varType));
+            $$ = $1->update(new ttype(varType));
             currentSymbol = $$;
         }
         | LEFT_PARENTHESIS declarator RIGHT_PARENTHESIS {
@@ -732,10 +749,6 @@
                 prev = t;
                 t = t->arrType;
             }
-            if(t->type == "ptr")
-            {
-                yyerror("Array of pointers not allowed");
-            }
             if(prev == NULL)
             {
                 int temp=atoi($3->loc->value.c_str());
@@ -743,7 +756,7 @@
                 {
                     yyerror("Array size must be greater than 0");
                 }
-                type* tp = new type("arr",$1->type,temp);
+                type* tp = new ttype("arr",$1->type,temp);
                 $$ = $1->update(tp);
             }
             else
@@ -753,7 +766,7 @@
                 {
                     yyerror("Array size must be greater than 0");
                 }
-                type* tp = new type("arr",t,temp);
+                type* tp = new ttype("arr",t,temp);
                 prev->arrType = tp;
                 $$ = $1->update($1->type);
             }
@@ -769,50 +782,56 @@
             }
             if(prev==NULL)
             {
-                type* tp=new type("arr",$1->type,0);
+                type* tp=new ttype("arr",$1->type,0);
                 $$=$1->update(tp);
             }
             else
             {
-                type* tp=new type("arr",t,0);
+                type* tp=new ttype("arr",t,0);
                 prev->arrType=tp;
                 $$=$1->update($1->type);
             }
         }
-        | direct-declarator LEFT_SQUARE_BRACKET STATIC_TOKEN type-qualifier-listopt assignment-expression RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [STATIC type-qualifier-listopt assignment-expression]\n");}
+        | direct-declarator LEFT_SQUARE_BRACKET STATIC_TOKEN type-qualifier-list assignment-expression RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [STATIC type-qualifier-listopt assignment-expression]\n");}
+        | direct-declarator LEFT_SQUARE_BRACKET STATIC_TOKEN assignment-expression RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [type-qualifier-list STATIC assignment-expression]\n");}
         | direct-declarator LEFT_SQUARE_BRACKET type-qualifier-list STATIC_TOKEN assignment-expression RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [type-qualifier-list STATIC assignment-expression]\n");}
-        | direct-declarator LEFT_SQUARE_BRACKET type-qualifier-listopt STAR RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [type-qualifier-listopt *]\n");}
-        | direct-declarator LEFT_PARENTHESIS parameter-type-list RIGHT_PARENTHESIS {
+        | direct-declarator LEFT_SQUARE_BRACKET type-qualifier-list STAR RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [type-qualifier-listopt *]\n");}
+        | direct-declarator LEFT_SQUARE_BRACKET STAR RIGHT_SQUARE_BRACKET {printf("direct-declarator-> direct-declarator [*]\n");}
+        | direct-declarator LEFT_PARENTHESIS change-table parameter-type-list RIGHT_PARENTHESIS {
             currentST->name = $1->name;
-            if($1->type_info->type != "void") {
-                symbol* s = currentST->lookup("return");    // Lookup for return value
+            if($1->type->type != "void") {
+                symbol* s = currentST->lookup("return");   
                 s->update($1->type);
             }
             $1->nestedTable = currentST;
-            currentST->parent = globalST;   // Update parent symbol table
-            switchTable(globalST);          // Switch current table to point to the global symbol table
+            currentST->parent = globalST; 
+            switchTable(globalST);        
             currentSymbol = $$;
         }
-        | direct-declarator LEFT_PARENTHESIS identifier-listopt RIGHT_PARENTHESIS {printf("direct-declarator-> direct-declarator (identifier-listopt)\n");}
+        | direct-declarator LEFT_PARENTHESIS identifier-list RIGHT_PARENTHESIS {printf("direct-declarator-> direct-declarator (identifier-listopt)\n");}
+        | direct-declarator LEFT_PARENTHESIS change-table RIGHT_PARENTHESIS
+        {
+            currentST->name = $1->name;
+            if($1->type->type != "void") {
+                symbol* s = currentST->lookup("return");   
+                s->update($1->type);
+            }
+            $1->nestedTable = currentST;
+            currentST->parent = globalST; 
+            switchTable(globalST);        
+            currentSymbol = $$;
+        }
         ;
     type-qualifier-listopt:
         type-qualifier-list {printf("type-qualifier-listopt-> type-qualifier-list\n");}
-        | {printf("type-qualifier-listopt-> \n");}
-        ;
-    assignment-expressionopt:
-        assignment-expression {printf("assignment-expressionopt-> assignment-expression\n");}
-        | {printf("assignment-expressionopt-> \n");}
-        ;
-    identifier-listopt:
-        identifier-list {printf("identifier-listopt-> identifier-list\n");}
-        | {printf("identifier-listopt-> \n");}
+        | %empty {printf("type-qualifier-listopt-> \n");}
         ;
     pointer:
         STAR type-qualifier-listopt {
-            $$ = new type("ptr");
+            $$ = new ttype("ptr");
         }
         | STAR type-qualifier-listopt pointer {
-            $$ = new type("ptr",$3);
+            $$ = new ttype("ptr",$3);
         }
         ;
     type-qualifier-list:
@@ -851,7 +870,7 @@
         ;
     designationopt:
         designation {printf("designationopt-> designation\n");}
-        | {printf("designationopt-> \n");}
+        | %empty {printf("designationopt-> \n");}
         ;
     designation:
         designator-list EQUALS {printf("designation-> designator-list =\n");}
@@ -866,55 +885,238 @@
         ;
     statement:
         labeled-statement {printf("statement-> labeled-statement\n");}
-        | compound-statement {printf("statement-> compound-statement\n");}
-        | expression-statement {printf("statement-> expression-statement\n");}
-        | selection-statement {printf("statement-> selection-statement\n");}
-        | iteration-statement {printf("statement-> iteration-statement\n");}
-        | jump-statement {printf("statement-> jump-statement\n");}
+        | compound-statement {
+            $$ = $1;
+        }
+        | expression-statement {
+            $$ = new statement();
+            $$->nextlist = $1->nextlist;
+        }
+        | selection-statement {
+            $$ = $1;
+        }
+        | iteration-statement {
+            $$ = $1;
+        }
+        | jump-statement {
+            $$ = $1;
+        }
+    loop-statement:
+        labeled-statement {printf("loop-statement-> labeled-statement\n");}
+        | expression-statement {
+            $$ = new statement();
+            $$->nextlist = $1->nextlist;
+        }
+        | selection-statement {
+            $$ = $1;
+        }
+        | iteration-statement {
+            $$ = $1;
+        }
+        | jump-statement {
+            $$ = $1;
+        }
+        ;
     labeled-statement:
         IDENTIFIER COLON statement {printf("labeled-statement-> IDENTIFIER : statement\n");}
         | CASE constant-expression COLON statement {printf("labeled-statement-> CASE constant-expression : statement\n");}
         | DEFAULT COLON statement {printf("labeled-statement-> DEFAULT : statement\n");}
         ;
     compound-statement:
-        LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET {printf("compound-statement-> {block-item-listopt}\n");}
+        LEFT_CURLY_BRACKET A change-table block-item-listopt RIGHT_CURLY_BRACKET {
+            $$ = $4;
+            switch_table(currentST->parent);
+        }
+        ;
+    A:  %empty
+        {
+            string new_ST = currentST->name + "_" + block_name + "_" + to_string(stcount++);
+            symbol* sym = currentST->lookup(new_ST);
+            sym->NestedTable = new symbolTable(new_ST);
+            sym->name = new_ST;
+            sym->NestedTable->parent = currentST;
+            sym->type = new symbolType("block");
+            currentSymbol = sym;
+        }
+        ;
+    change-table:   %empty
+        {
+            if(currentSymbol->nestedTable != NULL)
+            {
+                switchTable(currentSymbol->nestedTable);
+                quads.emit("label",currentST->name);
+            }
+            else
+            {
+                switchTable(new symbolTable(""));
+            }
+        }
         ;
     block-item-listopt:
-        block-item-list {printf("block-item-listopt-> block-item-list\n");}
-        | {printf("block-item-listopt-> \n");}
+        block-item-list {
+            $$ = $1;
+        }
+        | %empty {
+            $$ = new statement();
+        }
         ;
     block-item-list:
-        block-item {printf("block-item-list-> block-item\n");}
-        | block-item-list block-item {printf("block-item-list-> block-item-list block-item\n");}
+        block-item {
+            $$ = $1;
+        }
+        | block-item-list M block-item {
+            $$ = $3;
+            backpatch($1->nextlist, $2);
+        }
         ;
     block-item:
-        declaration {printf("block-item-> declaration\n");}
-        | statement {printf("block-item-> statement\n");}
+        declaration {
+            $$ = new statement();
+        }
+        | statement {
+            $$ = $1;
+        }
         ;
     expression-statement:
-        expressionopt SEMICOLON {printf("expression-statement-> expressionopt ;\n");}
-        ;
-    expressionopt:
-        expression {printf("expressionopt-> expression\n");}
-        | {printf("expressionopt-> \n");}
+        expression SEMICOLON {
+            $$ = $1;
+        }
+        | SEMICOLON {
+            $$ = new expression();
+        }
         ;
     selection-statement:
-        IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement %prec LOWER_THAN_ELSE
-        {printf("selection-statement-> IF (expression) statement\n");}
-        | IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement ELSE statement {printf("selection-statement-> IF (expression) statement ELSE statement\n");}
+        IF LEFT_PARENTHESIS expression N RIGHT_PARENTHESIS M statement N %prec LOWER_THAN_ELSE
+        {
+            backpatch($4->nextlist,nextinstr());
+            convertIntToBool($3);
+            $$ = new statement();
+            backpatch($3->truelist,$6);
+            list<int> l1 = merge($3->falselist,$7->nextlist);
+            $$->nextlist = merge(l1,$8->nextlist);
+        }
+        | IF LEFT_PARENTHESIS expression N RIGHT_PARENTHESIS  M statement N ELSE M statement {
+            backpatch($4->nextlist,nextinstr());
+            convertIntToBool($3);
+            $$ = new statement();
+            backpatch($3->truelist,$6);
+            backpatch($3->falselist,$10);
+            list<int> l1 = merge($7->nextlist,$8->nextlist);
+            $$->nextlist = merge(l1,$11->nextlist);
+        }
         | SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("selection-statement-> SWITCH (expression) statement\n");}
         ;
     iteration-statement:
-        WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("iteration-statement-> WHILE (expression) statement\n");}
-        | DO statement WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {printf("iteration-statement-> DO statement WHILE (expression) ;\n");}
-        | FOR LEFT_PARENTHESIS expressionopt SEMICOLON expressionopt SEMICOLON expressionopt RIGHT_PARENTHESIS statement {printf("iteration-statement-> FOR (expressionopt ; expressionopt ; expressionopt) statement\n");}
-        | FOR LEFT_PARENTHESIS declaration expressionopt SEMICOLON expressionopt RIGHT_PARENTHESIS statement {printf("iteration-statement-> FOR (declaration expressionopt ; expressionopt) statement\n");}
+        WHILE W LEFT_PARENTHESIS A change-table M expression RIGHT_PARENTHESIS M loop-statement {
+            $$ = new statement();
+            convertInttoBool($7);
+            backpatch($10->nextlist, $6);
+            backpatch($7->trulist, $9);
+            $$->nextlist = $7->falselist;
+            quads.emit("goto", convertInttoString($6));
+            blockName = "";
+            switchTable(currentST->parent);
+
+        }
+        | WHILE W LEFT_PARENTHESIS A change-table M expression RIGHT_PARENTHESIS LEFT_CURLY_BRACKET M block-item-listopt RIGHT_CURLY_BRACKET {
+            $$ = new statement();
+            convertInttoBool($7);
+            backpatch($11->nextlist, $6);
+            backpatch($7->truelist, $10);
+            $$->nextlist = $7->falselist;
+            quads.emit("goto", convertInttoString($6));
+            blockName = "";
+            switchTable(currentST->parent);
+        }
+        | DO D M loop-statement M WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {
+            $$ = new statement();
+            convertInttoBool($8);
+            backpatch($8->truelist, $3);
+            backpatch($4->nextlist, $5);
+            $$->nextlist = $8->falselist;
+            blockName = "";
+        }
+        | DO D LEFT_CURLY_BRACKET M block-item-listopt RIGHT_CURLY_BRACKET M WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {
+            $$ = new statement();
+            convertInttoBool($10);
+            backpatch($10->truelist, $4);
+            backpatch($5->nextlist, $7);
+            $$->nextlist = $10->falselist;
+            blockName = "";
+        }
+        | FOR F LEFT_PARENTHESIS A change-table declaration M expression-statement M expression N RIGHT_PARENTHESIS M loop-statement {
+            $$ = new statement();
+            convertInttoBool($8);
+            backpatch($8->nextlist, $13);
+            backpatch($11->nextlist, $7);
+            backpatch($14->nextlist, $9);
+            quads.emit("goto", convertInttoString($9));
+            $$->nextlist = $8->falselist;
+            blockName = "";
+            switchTable(currentST->parent);
+        }
+        | FOR F LEFT_PARENTHESIS A change-table expression-statement M expression-statement M expression N RIGHT_PARENTHESIS M loop-statement {
+            $$ = new statement();
+            convertInttoBool($8);
+            backpatch($8->truelist, $13);
+            backpatch($11->nextlist, $7);
+            backpatch($14->nextlist, $9);
+            quads.emit("goto", convertInttoString($9));
+            $$->nextlist = $8->falselist;
+            blockName = "";
+            switchTable(currentST->parent);
+        }
+        | FOR F LEFT_PARENTHESIS A change-table declaration M expression-statement M expression N RIGHT_PARENTHESIS M LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET {
+            $$ = new statement();
+            convertInttoBool($8);
+            backpatch($8->truelist, $13);
+            backpatch($11->nextlist, $7);
+            backpatch($15->nextlist, $9);
+            quads.emit("goto", convertInttoString($9));
+            $$->nextlist = $8->falselist;
+            blockName = "";
+            switchTable(currentST->parent);
+        }
+        | FOR F LEFT_PARENTHESIS A change-table expression-statement M expression-statement M expression N RIGHT_PARENTHESIS M LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET{
+            $$ = new statement();                   
+            convertInttoBool($8);                 
+            backpatch($8->truelist, $13);          
+            backpatch($11->nextlist, $7);          
+            backpatch($15->nextlist, $9);          
+            emit("goto", convertIntToString($9)); 
+            $$->nextlist = $8->falselist;           
+            blockName = "";
+            switchTable(currentST->parent);
+        }
         ;
+    F: %empty{
+        blockName = "FOR";
+    }
+    ;
+    W: %empty{
+        blockName = "WHILE";
+    }
+    ;
+    D: %empty{
+        blockName = "DO_WHILE";
+    }
+    ;
     jump-statement:
         GOTO IDENTIFIER SEMICOLON {printf("jump-statement-> GOTO IDENTIFIER ;\n");}
-        | CONTINUE SEMICOLON {printf("jump-statement-> CONTINUE ;\n");}
-        | BREAK SEMICOLON {printf("jump-statement-> BREAK ;\n");}
-        | RETURN expressionopt SEMICOLON {printf("jump-statement-> RETURN expressionopt ;\n");}
+        | CONTINUE SEMICOLON {
+            $$ = new statement();
+        }
+        | BREAK SEMICOLON {
+            $$ = new statement();
+        }
+        | RETURN expression SEMICOLON {
+            $$ = new statement();
+            quads.emit("return", $2->loc->name);
+        }
+        | RETURN SEMICOLON {
+            $$ = new statement();
+            quads.emit("return", "");
+        }
         ;
     translation-unit:
         external-declaration {printf("translation-unit-> external-declaration\n");}
@@ -925,7 +1127,11 @@
         | declaration {printf("external-declaration-> declaration\n");}
         ;
     function-definition:
-        declaration-specifiers declarator declaration-listopt compound-statement {printf("function-definition-> declaration-specifiers declarator declaration-listopt compound-statement\n");}
+        declaration-specifiers declarator declaration-listopt change-table LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET {
+            currentST->parent = globalST;
+            STcount=0;
+            switchTable(globalST);
+        }
         ;
     declaration-listopt:
         declaration-list {printf("declaration-listopt-> declaration-list\n");}

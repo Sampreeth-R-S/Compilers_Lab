@@ -1,28 +1,60 @@
 
 #ifndef __TRANSLATOR_H
 #define __TRANSLATOR_H
-#import <bits/stdc++.h>
-class SymbolTable
+//#import <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+#include <iostream>
+using namespace std;
+
+#define __VOIDSIZE 0
+#define __INTSIZE 4
+#define __FLOATSIZE 8
+#define __CHARSIZE 1
+#define __POINTERSIZE 4
+#define __FUNCSIZE 0
+class symbolTable;
+class symbol;
+class array;
+class expression;
+class statement;
+class ttype;
+class quad;
+class symbolTable;
+extern symbol* currentSymbol;
+extern symbolTable* currentST;
+extern symbolTable* globalST;
+extern quadArray quads;
+extern int STCount;
+extern string blockName;
+extern string varType;
+extern char* yytext;
+extern int yyparse();
+class symbolTable
 {
     public:
     string name;
     symbolTable* parent;
-    map<string, symbol*> table;
-    symbolTable(string name, symbolTable* parent=NULL);
+    int tempcount;
+    list<symbol> table;
+    symbolTable(string name_, symbolTable* parent_ = NULL);
     symbol* lookup(string name);
-    symbol* gentemp(type* type_info);
+    static symbol* gentemp(ttype* type, string initvalue = "");
     void update();
     void print();
-}
+};
 class symbol{
     public:
     string name;
-    type* type_info;
+    ttype* type;
     int size, offset;
     string value;
     symbolTable* nested_table;
-    symbol(string name, type* type_info, int size=0);
-}
+    symbol(string name_, string t_="int",ttype* arrtype = NULL, int width_ = 0);
+    symbol* update(ttype* t);
+};
 
 class expression{
     public:
@@ -30,20 +62,20 @@ class expression{
     string type;
     list<int> truelist, falselist;
     list<int> nextlist;
-}
+};
 
 class statement{
     public:
     list<int> nextlist;
-}
+};
 
-class type{
+class ttype{
     public:
     string type;
     int width;
-    type* arrtype;
-    type(string type,int width=1, type* arrtype=NULL);
-}
+    ttype* arrtype;
+    ttype(string type_,int width_=1, ttype* arrtype_=NULL);
+};
 
 class quad{
     public:
@@ -51,31 +83,42 @@ class quad{
     string result;
     string arg1;
     string arg2;
-    quad(string result, string arg1, string op="", string arg2="");
+    quad(string result_, string arg1_, string op_="=", string arg2_="");
+    quad(string result_, int arg1_, string op_="=", string arg2_="");
+    quad(string result_, float arg1_, string op_="=", string arg2_="");
     void print();
-}
+};
 
 class quadArray{
     public:
     vector<quad> array;
-    void emit(string result, string arg1, string op="", string arg2="");
+    void emit(string op, string result, string arg1="", string arg2="");
+    void emit(string op, string result, int arg1, string arg2="");
+    void emit(string op, string result, float arg1, string arg2="");
     void print();
-}
+};
 
-class array{
+class aarray{
     public:
     string array_type;
     symbol* loc;
     symbol* Array;
-    type* type_info;
-}
+    ttype* type;
+};
 list<int> makelist(int i);
 list<int> merge(list<int> &a, list<int> &b);
 void backpatch(list<int> &a, int i);
 bool typecheck(symbol* s1, symbol* s2);
-bool typecheck(type* t1, type* t2);
-type* convertType(symbol* s1, type* t2);
-
+bool typecheck(ttype* t1, ttype* t2);
+ttype* convertType(symbol* s1, ttype* t2);
+string convertInttoString(int i);
+string convertFloattoString(float f);
+expression* convertInttoBool(expression* e);
+expression* convertBooltoInt(expression* e);
+void switchTable(symbolTable* newtable);
+int nextinstr();
+int sizeoftype(ttype* t);
+string checkType(ttype* t);
 
 
 #endif
