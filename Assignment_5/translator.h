@@ -23,10 +23,11 @@ class statement;
 class ttype;
 class quad;
 class symbolTable;
+class quadArray;
 extern symbol* currentSymbol;
 extern symbolTable* currentST;
 extern symbolTable* globalST;
-extern quadArray quads;
+//extern quadArray quads;
 extern int STCount;
 extern string blockName;
 extern string varType;
@@ -42,6 +43,7 @@ class symbolTable
     symbolTable(string name_, symbolTable* parent_ = NULL);
     symbol* lookup(string name);
     static symbol* gentemp(ttype* type, string initvalue = "");
+    static symbol* gentemp(string type, string initvalue = "");
     void update();
     void print();
 };
@@ -74,7 +76,7 @@ class ttype{
     string type;
     int width;
     ttype* arrtype;
-    ttype(string type_,int width_=1, ttype* arrtype_=NULL);
+    ttype(string type_, ttype* arrtype_=NULL, int width_=1);
 };
 
 class quad{
@@ -92,9 +94,7 @@ class quad{
 class quadArray{
     public:
     vector<quad> array;
-    void emit(string op, string result, string arg1="", string arg2="");
-    void emit(string op, string result, int arg1, string arg2="");
-    void emit(string op, string result, float arg1, string arg2="");
+    
     void print();
 };
 
@@ -110,7 +110,7 @@ list<int> merge(list<int> &a, list<int> &b);
 void backpatch(list<int> &a, int i);
 bool typecheck(symbol* s1, symbol* s2);
 bool typecheck(ttype* t1, ttype* t2);
-ttype* convertType(symbol* s1, ttype* t2);
+symbol* convertType(symbol* s1, string t);
 string convertInttoString(int i);
 string convertFloattoString(float f);
 expression* convertInttoBool(expression* e);
@@ -119,6 +119,8 @@ void switchTable(symbolTable* newtable);
 int nextinstr();
 int sizeoftype(ttype* t);
 string checkType(ttype* t);
-
+void emit(string op, string result, string arg1="", string arg2="");
+void emit(string op, string result, int arg1, string arg2="");
+void emit(string op, string result, float arg1, string arg2="");
 
 #endif

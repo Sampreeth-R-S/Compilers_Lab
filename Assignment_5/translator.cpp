@@ -14,12 +14,12 @@ int STCount;
 string blockName;
 string varType;
 
-ttype::ttype(string type_, int width_, ttype* arrtype_):
+ttype::ttype(string type_, ttype* arrtype_, int width_):
 type(type_),width(width_),arrtype(arrtype_) {}
 
 symbol::symbol(string name_, string t_, ttype* arrtype_, int width_):
 name(name_),value("-"),offset(0),nested_table(NULL){
-    type = new ttype(t_,width_,arrtype_);
+    type = new ttype(t_,arrtype_,width_);
     size = sizeoftype(type);
 }
 
@@ -53,6 +53,17 @@ symbol* symbolTable::gentemp(ttype* type,string initvalue){
     s->type = type;
     s->value = initvalue;
     s->size = sizeoftype(type);
+    currentST->table.push_back(*s);
+    return &(currentST->table.back());
+}
+
+symbol* symbolTable::gentemp(string type,string initvalue){
+    string name = "t"+convertInttoString(currentST->tempcount++);
+    symbol* s = new symbol(name);
+    ttype* temptype = new ttype(type);
+    s->type = temptype;
+    s->value = initvalue;
+    s->size = sizeoftype(temptype);
     currentST->table.push_back(*s);
     return &(currentST->table.back());
 }
@@ -184,19 +195,19 @@ void quadArray::print(){
     }
 }
 
-void quadArray::emit(string op, string result, string arg1, string arg2){
+void emit(string op, string result, string arg1, string arg2){
     quad* q = new quad(result,arg1,op,arg2);
-    array.push_back(*q);
+    quads.array.push_back(*q);
 }
 
-void quadArray::emit(string op, string result, int arg1, string arg2){
+void emit(string op, string result, int arg1, string arg2){
     quad* q = new quad(result,arg1,op,arg2);
-    array.push_back(*q);
+    quads.array.push_back(*q);
 }
 
-void quadArray::emit(string op, string result, float arg1, string arg2){
+void emit(string op, string result, float arg1, string arg2){
     quad* q = new quad(result,arg1,op,arg2);
-    array.push_back(*q);
+    quads.array.push_back(*q);
 }
 
 void backpatch(list<int> &a, int i){
@@ -237,11 +248,11 @@ symbol* convertType(symbol* s, string t) {
 
     if(s->type->type == "float") {
         if(t == "int") {
-            quads.emit("=", temp->name, "float2int(" + s->name + ")");
+            emit("=", temp->name, "float2int(" + s->name + ")");
             return temp;
         }
         else if(t == "char") {
-            quads.emit("=", temp->name, "float2char(" + s->name + ")");
+            emit("=", temp->name, "float2char(" + s->name + ")");
             return temp;
         }
         return s;
@@ -249,11 +260,11 @@ symbol* convertType(symbol* s, string t) {
 
     else if(s->type->type == "int") {
         if(t == "float") {
-            quads.emit("=", temp->name, "int2float(" + s->name + ")");
+            emit("=", temp->name, "int2float(" + s->name + ")");
             return temp;
         }
         else if(t == "char") {
-            quads.emit("=", temp->name, "int2char(" + s->name + ")");
+            emit("=", temp->name, "int2char(" + s->name + ")");
             return temp;
         }
         return s;
@@ -261,11 +272,11 @@ symbol* convertType(symbol* s, string t) {
 
     else if(s->type->type == "char") {
         if(t == "float") {
-            quads.emit("=", temp->name, "char2float(" + s->name + ")");
+            emit("=", temp->name, "char2float(" + s->name + ")");
             return temp;
         }
         else if(t == "int") {
-           quads. emit("=", temp->name, "char2int(" + s->name + ")");
+            emit("=", temp->name, "char2int(" + s->name + ")");
             return temp;
         }
         return s;
@@ -291,9 +302,9 @@ expression* convertInttoBool(expression* e)
     if(e->type != "bool")
     {
         e->falselist = makelist(nextinstr());
-        quads.emit("==",e->loc->name,"0");
+        emit("==",e->loc->name,"0");
         e->truelist = makelist(nextinstr());
-        quads.emit("goto","");
+        emit("goto","");
     }
     return e;
 }
@@ -304,10 +315,10 @@ expression* convertBooltoInt(expression* e)
     {
         e->loc = symbolTable::gentemp(new ttype("int"));
         backpatch(e->truelist,nextinstr());
-        quads.emit("=",e->loc->name,"true");
-        quads.emit("goto",convertInttoString(nextinstr()+1));
+        emit("=",e->loc->name,"true");
+        emit("goto",convertInttoString(nextinstr()+1));
         backpatch(e->falselist,nextinstr());
-        quads.emit("=",e->loc->name,"false");
+        emit("=",e->loc->name,"false");
     }
     return e;
 }
@@ -322,7 +333,7 @@ int nextinstr()
     return quads.array.size();
 }
 
-int sizeOfType(ttype* t) {
+int sizeoftype(ttype* t) {
     if(t->type == "void")
         return __VOIDSIZE;
     else if(t->type == "char")
@@ -334,7 +345,7 @@ int sizeOfType(ttype* t) {
     else if(t->type == "float")
         return __FLOATSIZE;
     else if(t->type == "arr")
-        return t->width * sizeOfType(t->arrtype);
+        return t->width * sizeoftype(t->arrtype);
     else if(t->type == "func")
         return __FUNCSIZE;
     else
@@ -356,3 +367,4 @@ int main()
     quads.print();
 
 }
+
