@@ -39,7 +39,7 @@
 # define YY_YY_Y_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 1
+# define YYDEBUG 0
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -56,7 +56,7 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     IDENTIFIER = 258,              /* IDENTIFIER  */
     INTEGER = 259,                 /* INTEGER  */
-    FLOAT = 260,                   /* FLOAT  */
+    FLOATING_CONSTANT = 260,       /* FLOATING_CONSTANT  */
     CHARACTER_CONSTANT = 261,      /* CHARACTER_CONSTANT  */
     STRING_LITERAL = 262,          /* STRING_LITERAL  */
     ENUM = 263,                    /* ENUM  */
@@ -80,60 +80,61 @@ extern int yydebug;
     TYPE_QUALIFIER = 281,          /* TYPE_QUALIFIER  */
     KEYWORD = 282,                 /* KEYWORD  */
     ENUMERATION_CONST = 283,       /* ENUMERATION_CONST  */
-    PUNCTUATOR = 284,              /* PUNCTUATOR  */
-    ASSIGNMENT_OPERATOR = 285,     /* ASSIGNMENT_OPERATOR  */
-    SINGLE_LINE_COMMENT = 286,     /* SINGLE_LINE_COMMENT  */
-    MULTI_LINE_COMMENT = 287,      /* MULTI_LINE_COMMENT  */
-    ERROR = 288,                   /* ERROR  */
-    VOID = 289,                    /* VOID  */
-    CHAR = 290,                    /* CHAR  */
-    SHORT = 291,                   /* SHORT  */
-    INT = 292,                     /* INT  */
-    LONG = 293,                    /* LONG  */
-    DOUBLE = 294,                  /* DOUBLE  */
-    SIGNED = 295,                  /* SIGNED  */
-    UNSIGNED = 296,                /* UNSIGNED  */
-    BOOL = 297,                    /* BOOL  */
-    COMPLEX = 298,                 /* COMPLEX  */
-    IMAGINARY = 299,               /* IMAGINARY  */
-    IF = 300,                      /* IF  */
-    EQUALS = 301,                  /* EQUALS  */
-    INCREMENT = 302,               /* INCREMENT  */
-    DECREMENT = 303,               /* DECREMENT  */
-    AND = 304,                     /* AND  */
-    STAR = 305,                    /* STAR  */
-    PLUS = 306,                    /* PLUS  */
-    MINUS = 307,                   /* MINUS  */
-    TILDE = 308,                   /* TILDE  */
-    NOT = 309,                     /* NOT  */
-    DIV = 310,                     /* DIV  */
-    MOD = 311,                     /* MOD  */
-    LEFT_SHIFT = 312,              /* LEFT_SHIFT  */
-    RIGHT_SHIFT = 313,             /* RIGHT_SHIFT  */
-    LESS_THAN = 314,               /* LESS_THAN  */
-    GREATER_THAN = 315,            /* GREATER_THAN  */
-    LESS_THAN_EQUAL = 316,         /* LESS_THAN_EQUAL  */
-    GREATER_THAN_EQUAL = 317,      /* GREATER_THAN_EQUAL  */
-    EQUAL_TO = 318,                /* EQUAL_TO  */
-    NOT_EQUAL_TO = 319,            /* NOT_EQUAL_TO  */
-    XOR = 320,                     /* XOR  */
-    OR = 321,                      /* OR  */
-    AND_AND = 322,                 /* AND_AND  */
-    OR_OR = 323,                   /* OR_OR  */
-    QUESTION = 324,                /* QUESTION  */
-    COLON = 325,                   /* COLON  */
-    SEMICOLON = 326,               /* SEMICOLON  */
-    COMMA = 327,                   /* COMMA  */
-    LEFT_SQUARE_BRACKET = 328,     /* LEFT_SQUARE_BRACKET  */
-    RIGHT_SQUARE_BRACKET = 329,    /* RIGHT_SQUARE_BRACKET  */
-    LEFT_CURLY_BRACKET = 330,      /* LEFT_CURLY_BRACKET  */
-    RIGHT_CURLY_BRACKET = 331,     /* RIGHT_CURLY_BRACKET  */
-    LEFT_PARENTHESIS = 332,        /* LEFT_PARENTHESIS  */
-    RIGHT_PARENTHESIS = 333,       /* RIGHT_PARENTHESIS  */
-    DOT = 334,                     /* DOT  */
-    ELLIPSIS = 335,                /* ELLIPSIS  */
-    ARROW = 336,                   /* ARROW  */
-    LOWER_THAN_ELSE = 337          /* LOWER_THAN_ELSE  */
+    FLOAT = 284,                   /* FLOAT  */
+    PUNCTUATOR = 285,              /* PUNCTUATOR  */
+    ASSIGNMENT_OPERATOR = 286,     /* ASSIGNMENT_OPERATOR  */
+    SINGLE_LINE_COMMENT = 287,     /* SINGLE_LINE_COMMENT  */
+    MULTI_LINE_COMMENT = 288,      /* MULTI_LINE_COMMENT  */
+    ERROR = 289,                   /* ERROR  */
+    VOID = 290,                    /* VOID  */
+    CHAR = 291,                    /* CHAR  */
+    SHORT = 292,                   /* SHORT  */
+    INT = 293,                     /* INT  */
+    LONG = 294,                    /* LONG  */
+    DOUBLE = 295,                  /* DOUBLE  */
+    SIGNED = 296,                  /* SIGNED  */
+    UNSIGNED = 297,                /* UNSIGNED  */
+    BOOL = 298,                    /* BOOL  */
+    COMPLEX = 299,                 /* COMPLEX  */
+    IMAGINARY = 300,               /* IMAGINARY  */
+    IF = 301,                      /* IF  */
+    EQUALS = 302,                  /* EQUALS  */
+    INCREMENT = 303,               /* INCREMENT  */
+    DECREMENT = 304,               /* DECREMENT  */
+    AND = 305,                     /* AND  */
+    STAR = 306,                    /* STAR  */
+    PLUS = 307,                    /* PLUS  */
+    MINUS = 308,                   /* MINUS  */
+    TILDE = 309,                   /* TILDE  */
+    NOT = 310,                     /* NOT  */
+    DIV = 311,                     /* DIV  */
+    MOD = 312,                     /* MOD  */
+    LEFT_SHIFT = 313,              /* LEFT_SHIFT  */
+    RIGHT_SHIFT = 314,             /* RIGHT_SHIFT  */
+    LESS_THAN = 315,               /* LESS_THAN  */
+    GREATER_THAN = 316,            /* GREATER_THAN  */
+    LESS_THAN_EQUAL = 317,         /* LESS_THAN_EQUAL  */
+    GREATER_THAN_EQUAL = 318,      /* GREATER_THAN_EQUAL  */
+    EQUAL_TO = 319,                /* EQUAL_TO  */
+    NOT_EQUAL_TO = 320,            /* NOT_EQUAL_TO  */
+    XOR = 321,                     /* XOR  */
+    OR = 322,                      /* OR  */
+    AND_AND = 323,                 /* AND_AND  */
+    OR_OR = 324,                   /* OR_OR  */
+    QUESTION = 325,                /* QUESTION  */
+    COLON = 326,                   /* COLON  */
+    SEMICOLON = 327,               /* SEMICOLON  */
+    COMMA = 328,                   /* COMMA  */
+    LEFT_SQUARE_BRACKET = 329,     /* LEFT_SQUARE_BRACKET  */
+    RIGHT_SQUARE_BRACKET = 330,    /* RIGHT_SQUARE_BRACKET  */
+    LEFT_CURLY_BRACKET = 331,      /* LEFT_CURLY_BRACKET  */
+    RIGHT_CURLY_BRACKET = 332,     /* RIGHT_CURLY_BRACKET  */
+    LEFT_PARENTHESIS = 333,        /* LEFT_PARENTHESIS  */
+    RIGHT_PARENTHESIS = 334,       /* RIGHT_PARENTHESIS  */
+    DOT = 335,                     /* DOT  */
+    ELLIPSIS = 336,                /* ELLIPSIS  */
+    ARROW = 337,                   /* ARROW  */
+    LOWER_THAN_ELSE = 338          /* LOWER_THAN_ELSE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -144,7 +145,7 @@ extern int yydebug;
 #define YYUNDEF 257
 #define IDENTIFIER 258
 #define INTEGER 259
-#define FLOAT 260
+#define FLOATING_CONSTANT 260
 #define CHARACTER_CONSTANT 261
 #define STRING_LITERAL 262
 #define ENUM 263
@@ -168,60 +169,61 @@ extern int yydebug;
 #define TYPE_QUALIFIER 281
 #define KEYWORD 282
 #define ENUMERATION_CONST 283
-#define PUNCTUATOR 284
-#define ASSIGNMENT_OPERATOR 285
-#define SINGLE_LINE_COMMENT 286
-#define MULTI_LINE_COMMENT 287
-#define ERROR 288
-#define VOID 289
-#define CHAR 290
-#define SHORT 291
-#define INT 292
-#define LONG 293
-#define DOUBLE 294
-#define SIGNED 295
-#define UNSIGNED 296
-#define BOOL 297
-#define COMPLEX 298
-#define IMAGINARY 299
-#define IF 300
-#define EQUALS 301
-#define INCREMENT 302
-#define DECREMENT 303
-#define AND 304
-#define STAR 305
-#define PLUS 306
-#define MINUS 307
-#define TILDE 308
-#define NOT 309
-#define DIV 310
-#define MOD 311
-#define LEFT_SHIFT 312
-#define RIGHT_SHIFT 313
-#define LESS_THAN 314
-#define GREATER_THAN 315
-#define LESS_THAN_EQUAL 316
-#define GREATER_THAN_EQUAL 317
-#define EQUAL_TO 318
-#define NOT_EQUAL_TO 319
-#define XOR 320
-#define OR 321
-#define AND_AND 322
-#define OR_OR 323
-#define QUESTION 324
-#define COLON 325
-#define SEMICOLON 326
-#define COMMA 327
-#define LEFT_SQUARE_BRACKET 328
-#define RIGHT_SQUARE_BRACKET 329
-#define LEFT_CURLY_BRACKET 330
-#define RIGHT_CURLY_BRACKET 331
-#define LEFT_PARENTHESIS 332
-#define RIGHT_PARENTHESIS 333
-#define DOT 334
-#define ELLIPSIS 335
-#define ARROW 336
-#define LOWER_THAN_ELSE 337
+#define FLOAT 284
+#define PUNCTUATOR 285
+#define ASSIGNMENT_OPERATOR 286
+#define SINGLE_LINE_COMMENT 287
+#define MULTI_LINE_COMMENT 288
+#define ERROR 289
+#define VOID 290
+#define CHAR 291
+#define SHORT 292
+#define INT 293
+#define LONG 294
+#define DOUBLE 295
+#define SIGNED 296
+#define UNSIGNED 297
+#define BOOL 298
+#define COMPLEX 299
+#define IMAGINARY 300
+#define IF 301
+#define EQUALS 302
+#define INCREMENT 303
+#define DECREMENT 304
+#define AND 305
+#define STAR 306
+#define PLUS 307
+#define MINUS 308
+#define TILDE 309
+#define NOT 310
+#define DIV 311
+#define MOD 312
+#define LEFT_SHIFT 313
+#define RIGHT_SHIFT 314
+#define LESS_THAN 315
+#define GREATER_THAN 316
+#define LESS_THAN_EQUAL 317
+#define GREATER_THAN_EQUAL 318
+#define EQUAL_TO 319
+#define NOT_EQUAL_TO 320
+#define XOR 321
+#define OR 322
+#define AND_AND 323
+#define OR_OR 324
+#define QUESTION 325
+#define COLON 326
+#define SEMICOLON 327
+#define COMMA 328
+#define LEFT_SQUARE_BRACKET 329
+#define RIGHT_SQUARE_BRACKET 330
+#define LEFT_CURLY_BRACKET 331
+#define RIGHT_CURLY_BRACKET 332
+#define LEFT_PARENTHESIS 333
+#define RIGHT_PARENTHESIS 334
+#define DOT 335
+#define ELLIPSIS 336
+#define ARROW 337
+#define LOWER_THAN_ELSE 338
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -230,18 +232,19 @@ union YYSTYPE
 #line 17 "assgn_4_21CS30059_21CS30038.y"
 
     int value;
-    expression* exp;
+    int instr;
     int intval;
+    char unaryOp;
     float floatval;
     char* charval;
-    aarray* Array;
     int numParams;
-    char operator;
-    symbol* pointer;
-    statement stmt;
     ttype* ptr;
+    expression* exp;
+    aarray* Array;
+    symbol* pointer;
+    statement* stmt;
 
-#line 245 "y.tab.h"
+#line 248 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

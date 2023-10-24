@@ -1,12 +1,15 @@
 %{
     #include <stdio.h>
     #include "translator.h"
-    #include "y.tab.h"
+    #include "assgn_4_21CS30059_21CS30038.tab.h"
     int lineno=1;
 
 %}
 
-keywords    "auto"|"break"|"case"|"char"|"const"|"continue"|"default"|"do"|"double"|"else"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"restrict"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"volatile"|"while"|"_Bool"|"_Complex"|"_Imaginary"
+
+%option noyywrap
+
+keywords    "auto"|"break"|"case"|"char"|"continue"|"default"|"do"|"double"|"else"|"extern"|"float"|"for"|"goto"|"if"|"inline"|"int"|"long"|"register"|"return"|"short"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"void"|"while"|"_Bool"|"_Complex"|"_Imaginary"
 type_qualifier "const"|"restrict"|"volatile"
 storage_class_specifier   "auto"|"register"|"static"|"extern"
 function_specifier  "inline"
@@ -37,7 +40,7 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 %s enumerator
 %%
 "static"    {return STATIC_TOKEN;}
-"0"     {return INTEGER;}
+"0"     {yylval.intval = 0;return INTEGER;}
 "{" {return LEFT_CURLY_BRACKET;}
 "}" {return RIGHT_CURLY_BRACKET;}
 "," {return COMMA;}
@@ -108,11 +111,11 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 "return"    {return RETURN;}
 {type_qualifier}   {return TYPE_QUALIFIER;}
 {keywords}  {return KEYWORD;}
-{identifier}    {yylval.pointer=currentST->lookup(yytext);return IDENTIFIER;}
-<enumerator>{enumeration_constant}  {yylval.pointer=currentST->lookup(yytext);return ENUMERATION_CONST;}
 
+<enumerator>{enumeration_constant}  {yylval.pointer=currentST->lookup(yytext);return ENUMERATION_CONST;}
+{identifier}    {yylval.pointer=currentST->lookup(yytext);return IDENTIFIER;}
 {integer_constant}  {yylval.intval=atoi(yytext);return INTEGER;}
-{floating_constant} {yylval.floatval=atof(yytext);return FLOAT;}
+{floating_constant} {yylval.floatval=atof(yytext);return FLOATING_CONSTANT;}
 
 {character_constant}    {yylval.charval=yytext;return CHARACTER_CONSTANT;}
 {string_literal}    {yylval.charval=yytext;return STRING_LITERAL;}

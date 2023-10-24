@@ -5,12 +5,13 @@
     extern int yylex();
     //extern int yylineno=1;
     extern int lineno;
-    extern string vartype;
+    extern string varType;
     extern char* yytext;
     void yyerror(char *s) {
         printf("error: %s at line %d\n", s, lineno);
         printf("Unable to parse: %s",yytext);
     }
+    //int yydebug=1;
 %}
 
 %union{
@@ -29,9 +30,9 @@
 }
 %token <pointer> IDENTIFIER
 %token <intval> INTEGER
-%token <floatval> FLOAT
+%token <floatval> FLOATING_CONSTANT
 %token <charval> CHARACTER_CONSTANT STRING_LITERAL
-%token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF OF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER KEYWORD ENUMERATION_CONST IDENTIFIER INTEGER FLOAT PUNCTUATOR CHARACTER_CONSTANT STRING_LITERAL ASSIGNMENT_OPERATOR SINGLE_LINE_COMMENT MULTI_LINE_COMMENT ERROR
+%token ENUM TYPE_SPECIFIER_TOKEN STORAGE_CLASS_SPECIFIER STATIC_TOKEN FUNCTION_SPECIFIER CASE DEFAULT SIZEOF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN TYPE_QUALIFIER FLOAT ASSIGNMENT_OPERATOR ENUMERATION_CONST KEYWORD PUNCTUATOR ERROR
 %token VOID CHAR SHORT INT LONG DOUBLE SIGNED UNSIGNED BOOL COMPLEX IMAGINARY
 %token IF EQUALS INCREMENT DECREMENT AND STAR PLUS MINUS TILDE NOT DIV MOD LEFT_SHIFT RIGHT_SHIFT LESS_THAN GREATER_THAN LESS_THAN_EQUAL GREATER_THAN_EQUAL EQUAL_TO NOT_EQUAL_TO XOR OR AND_AND OR_OR QUESTION COLON SEMICOLON COMMA LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET LEFT_CURLY_BRACKET RIGHT_CURLY_BRACKET LEFT_PARENTHESIS RIGHT_PARENTHESIS DOT ELLIPSIS ARROW
 %start translation-unit
@@ -68,7 +69,7 @@ primary-expression:
             $$->loc=symbolTable::gentemp(new ttype("int"),convertInttoString($1));
             emit("=",$$->loc->name,$1);
         }
-        | FLOAT    {
+        | FLOATING_CONSTANT    {
             $$ = new expression();
             $$->loc=symbolTable::gentemp(new ttype("float"),convertFloattoString($1));
             emit("=",$$->loc->name,$1);
@@ -617,8 +618,8 @@ init-declarator-listopt:
 declaration-specifiers:
         storage-class-specifier declaration-specifiers  {printf("declaration-specifiers-> storage-class-specifier declaration-specifiers\n");}
         | storage-class-specifier  {printf("declaration-specifiers-> storage-class-specifier\n");}
-        | TYPE_SPECIFIER_TOKEN declaration-specifiers  {printf("declaration-specifiers-> type-specifier declaration-specifiers\n");}
-        | TYPE_SPECIFIER_TOKEN  {printf("declaration-specifiers-> type-specifier\n");}
+        | type-specifier declaration-specifiers  {printf("declaration-specifiers-> type-specifier declaration-specifiers\n");}
+        | type-specifier  {printf("declaration-specifiers-> type-specifier\n");}
         | type-qualifier declaration-specifiers  {printf("declaration-specifiers-> type-qualifier declaration-specifiers\n");}
         | type-qualifier  {printf("declaration-specifiers-> type-qualifier\n");}
         | function-specifier declaration-specifiers  {printf("declaration-specifiers-> function-specifier declaration-specifiers\n");}
@@ -645,40 +646,40 @@ init-declarator:
         ;
 type-specifier:
         VOID{
-            vartype = "void";
+            varType = "void";
         }
         | CHAR{
-            vartype = "char";
+            varType = "char";
         }
         | SHORT{
-            vartype = "short";
+            varType = "short";
         }
         | INT{
-            vartype = "int";
+            varType = "int";
         }
         | LONG{
-            vartype = "long";
+            varType = "long";
         }
         | FLOAT{
-            vartype = "float";
+            varType = "float";
         }
         | DOUBLE{
-            vartype = "double";
+            varType = "double";
         }
         | SIGNED{
-            vartype = "signed";
+            varType = "signed";
         }
         | UNSIGNED{
-            vartype = "unsigned";
+            varType = "unsigned";
         }
         | BOOL{
-            vartype = "bool";
+            varType = "bool";
         }
         | COMPLEX{
-            vartype = "complex";
+            varType = "complex";
         }
         | IMAGINARY{
-            vartype = "imaginary";
+            varType = "imaginary";
         }
         | enum-specifier{
             printf("type-specifier-> enum-specifier\n");
@@ -1144,10 +1145,3 @@ declaration-list:
         | declaration-list declaration {printf("declaration-list-> declaration-list declaration\n");}
         ;
 %%
-
-
-
-int yywrap()
-{
-    return 1;
-}
