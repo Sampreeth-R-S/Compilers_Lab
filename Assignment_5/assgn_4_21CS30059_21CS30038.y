@@ -16,16 +16,16 @@
 %union{
     int value;
     int instr;
-    symbol* pointer;
-    statement* stmt;
-    ttype* ptr;
-    char unaryOp;
-    expression* exp;
     int intval;
+    char unaryOp;
     float floatval;
     char* charval;
-    aarray* Array;
     int numParams;
+    ttype* ptr;
+    expression* exp;
+    aarray* Array;
+    symbol* pointer;
+    statement* stmt;
 }
 %token <pointer> IDENTIFIER
 %token <intval> INTEGER
@@ -57,7 +57,7 @@
 %type<instr> M
 %type<stmt> N statement loop-statement jump-statement selection-statement iteration-statement labeled-statement compound-statement block-item block-item-list block-item-listopt
 %%
-    primary-expression:
+primary-expression:
         IDENTIFIER  {
             $$ = new expression();
             $$->loc = $1;
@@ -78,7 +78,6 @@
             $$->loc=symbolTable::gentemp(new ttype("char"),string($1));
             emit("=",$$->loc->name,string($1));
         }
-        | ENUMERATION_CONST   {printf("primary-expression-> ENUMERATION_CONST\n");}
         | STRING_LITERAL    {
             $$ = new expression();
             $$->loc=symbolTable::gentemp(new ttype("ptr"),string($1));
@@ -87,7 +86,7 @@
         }
         | LEFT_PARENTHESIS expression RIGHT_PARENTHESIS  {printf("primary-expression-> (expression)\n");}
         ;
-    postfix-expression:
+postfix-expression:
         primary-expression  {
             $$ = new aarray();
             $$->loc = $1->loc;
@@ -154,7 +153,7 @@ argument-expression-listopt:
         argument-expression-list  {
             $$ = $1;
         }
-        |  {$$ = 0;}
+        |  %empty {$$ = 0;}
         ;
 unary-expression:
         postfix-expression  {
@@ -222,7 +221,7 @@ unary-operator:
             $$ = '!';
         }
         ;
-    cast-expression:
+cast-expression:
         unary-expression  {
             $$ = $1;
         }
@@ -339,7 +338,7 @@ shift-expression:
             }
         }
         ;
-    relational-expression:
+relational-expression:
         shift-expression  {
             $$ = $1;
         }
@@ -404,7 +403,7 @@ shift-expression:
             }
         }
         ;
-    equality-expression:
+equality-expression:
         relational-expression  {
             $$ = $1;
         }
@@ -443,7 +442,7 @@ shift-expression:
             }
         }
         ;
-    AND-expression:
+AND-expression:
         equality-expression  {
             $$ = $1;
         }
@@ -463,7 +462,7 @@ shift-expression:
             }
         }
         ;
-    exclusive-OR-expression:
+exclusive-OR-expression:
         AND-expression  {
             $$ = $1;
         }
@@ -483,7 +482,7 @@ shift-expression:
             }
         }
         ;
-    inclusive-OR-expression:
+inclusive-OR-expression:
         exclusive-OR-expression  {
             $$ = $1;
         }
@@ -503,7 +502,7 @@ shift-expression:
             }
         }
         ;
-    logical-AND-expression:
+logical-AND-expression:
         inclusive-OR-expression  {
             $$ = $1;
         }
@@ -520,7 +519,7 @@ shift-expression:
             }
         }
         ;
-    logical-OR-expression:
+logical-OR-expression:
         logical-AND-expression  {
             $$ = $1;
         }
@@ -537,7 +536,7 @@ shift-expression:
             }
         }
         ;
-    conditional-expression:
+conditional-expression:
         logical-OR-expression  {
             $$ = $1;
         }
@@ -560,23 +559,23 @@ shift-expression:
             backpatch(l1, nextinstr());
         }
         ;
-    M:  %empty
+M:  %empty
     {
         $$=nextinstr();
     }
     ;
-    N:  %empty
+N:  %empty
     {
         $$ = new statement();
         $$->nextlist = makelist(nextinstr());
         emit("goto","");
     }
     ;
-    assignment-expression:
+assignment-expression:
         conditional-expression  {
             $$ = $1;
         }
-        | unary-expression ASSIGNMENT_OPERATOR assignment-expression  {
+        | unary-expression assignment-operator assignment-expression  {
             if($1->array_type=="arr")
             {
                 $3->loc=convertType($3->loc,$1->type->type);
@@ -594,23 +593,28 @@ shift-expression:
             $$ = $3;
         }
         ;
-    expression:
+assignment-operator:
+        EQUALS  {printf("assignment-operator-> =\n");}
+        | ASSIGNMENT_OPERATOR  {printf("assignment-operator-> assignment-operator-token\n");}
+        ;
+expression:
         assignment-expression  {
             $$ = $1;
         }
         | expression COMMA assignment-expression  {printf("expression-> expression , assignment-expression\n");}
         ;
-    constant-expression:
+constant-expression:
         conditional-expression  {printf("constant-expression-> conditional-expression\n");}
         ;
-    declaration:
-        declaration-specifiers init-declarator-listopt SEMICOLON  {printf("declaration-> declaration-specifiers init-declarator-listopt ;\n");}
+declaration:
+        declaration-specifiers init-declarator-list SEMICOLON  {printf("declaration-> declaration-specifiers init-declarator-listopt ;\n");}
+        | declaration-specifiers SEMICOLON  {printf("declaration-> declaration-specifiers ;\n");}
         ;
-    init-declarator-listopt:
+init-declarator-listopt:
         init-declarator-list  {printf("init-declarator-listopt-> init-declarator-list\n");}
         | %empty {printf("init-declarator-listopt-> \n");}
         ;
-    declaration-specifiers:
+declaration-specifiers:
         storage-class-specifier declaration-specifiers  {printf("declaration-specifiers-> storage-class-specifier declaration-specifiers\n");}
         | storage-class-specifier  {printf("declaration-specifiers-> storage-class-specifier\n");}
         | TYPE_SPECIFIER_TOKEN declaration-specifiers  {printf("declaration-specifiers-> type-specifier declaration-specifiers\n");}
@@ -620,14 +624,14 @@ shift-expression:
         | function-specifier declaration-specifiers  {printf("declaration-specifiers-> function-specifier declaration-specifiers\n");}
         | function-specifier  {printf("declaration-specifiers-> function-specifier\n");}
         ;
-    type-qualifier:
+type-qualifier:
         TYPE_QUALIFIER  {printf("type-qualifier-> type-qualifier-token\n");}
         ;
-    init-declarator-list:
+init-declarator-list:
         init-declarator  {printf("init-declarator-list-> init-declarator\n");}
         | init-declarator-list COMMA init-declarator  {printf("init-declarator-list-> init-declarator-list , init-declarator\n");}
         ;
-    init-declarator:
+init-declarator:
         declarator  {
             $$ = $1;
         }
@@ -639,7 +643,7 @@ shift-expression:
             emit("=", $1->name, $3->name);
         }
         ;
-    type-specifier:
+type-specifier:
         VOID{
             vartype = "void";
         }
@@ -680,40 +684,39 @@ shift-expression:
             printf("type-specifier-> enum-specifier\n");
         }
         ;
-    storage-class-specifier:
+storage-class-specifier:
         STORAGE_CLASS_SPECIFIER {printf("storage-class-specifier-> storage_class_specifier_token\n");}
         | STATIC_TOKEN {printf("storage-class-specifier-> storage_class_specifier_token\n");}
         ;
-    specifier-qualifier-list:
+specifier-qualifier-list:
         type-specifier specifier-qualifier-listopt {printf("specifier-qualifier-list-> type-specifier specifier-qualifier-listopt\n");}
-        | enum-specifier specifier-qualifier-listopt {printf("specifier-qualifier-list-> enum-specifier specifier-qualifier-listopt\n");}
         | TYPE_QUALIFIER specifier-qualifier-listopt {printf("specifier-qualifier-list-> type-qualifier specifier-qualifier-listopt\n");}
         ;
-    specifier-qualifier-listopt:
+specifier-qualifier-listopt:
         specifier-qualifier-list {printf("specifier-qualifier-listopt-> specifier-qualifier-list\n");}
         | %empty {printf("specifier-qualifier-listopt-> \n");}
         ;
-    enum-specifier:
+enum-specifier:
         ENUM identifieropt LEFT_CURLY_BRACKET enumerator-list RIGHT_CURLY_BRACKET {printf("enum-specifier-> enum IDENTIFIERopt {enumerator-list}\n");}
         | ENUM IDENTIFIER {printf("enum-specifier-> enum IDENTIFIER\n");}
         | ENUM identifieropt LEFT_CURLY_BRACKET enumerator-list COMMA RIGHT_CURLY_BRACKET {printf("enum-specifier-> enum IDENTIFIERopt {enumerator-list,}\n");}
         ;
-    identifieropt:
+identifieropt:
         IDENTIFIER {printf("identifieropt-> IDENTIFIER\n");}
         | %empty {printf("identifieropt-> \n");}
         ;
-    enumerator-list:
+enumerator-list:
         enumerator {printf("enumerator-list-> enumerator\n");}
         | enumerator-list COMMA enumerator {printf("enumerator-list-> enumerator-list , enumerator\n");}
         ;
-    enumerator:
+enumerator:
         IDENTIFIER {printf("enumerator-> enumeration-const\n");}
         | IDENTIFIER EQUALS constant-expression {printf("enumerator-> enumeration-const = constant-expression\n");}
         ;
-    function-specifier:
+function-specifier:
         FUNCTION_SPECIFIER {printf("function-specifier-> function-specifier-token\n");}
         ;
-    declarator:
+declarator:
         pointer direct-declarator {
             ttype* t = $1;
             while(t->arrtype!=NULL)
@@ -725,7 +728,7 @@ shift-expression:
         }
         | direct-declarator {printf("declarator-> direct-declarator\n");}
         ;
-    direct-declarator:
+direct-declarator:
         IDENTIFIER {
             $$ = $1->update(new ttype(varType));
             currentSymbol = $$;
@@ -820,11 +823,11 @@ shift-expression:
             currentSymbol = $$;
         }
         ;
-    type-qualifier-listopt:
+type-qualifier-listopt:
         type-qualifier-list {printf("type-qualifier-listopt-> type-qualifier-list\n");}
         | %empty {printf("type-qualifier-listopt-> \n");}
         ;
-    pointer:
+pointer:
         STAR type-qualifier-listopt {
             $$ = new ttype("ptr");
         }
@@ -832,56 +835,56 @@ shift-expression:
             $$ = new ttype("ptr",$3);
         }
         ;
-    type-qualifier-list:
+type-qualifier-list:
         TYPE_QUALIFIER {printf("type-qualifier-list-> type-qualifier\n");}
         | type-qualifier-list TYPE_QUALIFIER {printf("type-qualifier-list-> type-qualifier-list type-qualifier\n");}
         ;
-    parameter-type-list:
+parameter-type-list:
         parameter-list {printf("parameter-type-list-> parameter-list\n");}
         | parameter-list COMMA ELLIPSIS {printf("parameter-type-list-> parameter-list , ...\n");}
         ;
-    parameter-list:
+parameter-list:
         parameter-declaration {printf("parameter-list-> parameter-declaration\n");}
         | parameter-list COMMA parameter-declaration {printf("parameter-list-> parameter-list , parameter-declaration\n");}
         ;
-    parameter-declaration:
+parameter-declaration:
         declaration-specifiers declarator {printf("parameter-declaration-> declaration-specifiers declarator\n");}
         | declaration-specifiers {printf("parameter-declaration-> declaration-specifiers\n");}
         ;
-    identifier-list:
+identifier-list:
         IDENTIFIER {printf("identifier-list-> IDENTIFIER\n");}
         | identifier-list COMMA IDENTIFIER {printf("identifier-list-> identifier-list , IDENTIFIER\n");}
         ;
-    type-name:
+type-name:
         specifier-qualifier-list {printf("type-name-> specifier-qualifier-list\n");}
         ;
-    initializer:
+initializer:
         assignment-expression {
             $$ = $1->loc;
         }
         | LEFT_CURLY_BRACKET initializer-list RIGHT_CURLY_BRACKET {printf("initializer-> {initializer-list}\n");}
         | LEFT_CURLY_BRACKET initializer-list COMMA RIGHT_CURLY_BRACKET {printf("initializer-> {initializer-list,}\n");}
         ;
-    initializer-list:
+initializer-list:
         designationopt initializer {printf("initializer-list-> designationopt initializer\n");}
         | initializer-list COMMA designationopt initializer {printf("initializer-list-> initializer-list , designationopt initializer\n");}
         ;
-    designationopt:
+designationopt:
         designation {printf("designationopt-> designation\n");}
         | %empty {printf("designationopt-> \n");}
         ;
-    designation:
+designation:
         designator-list EQUALS {printf("designation-> designator-list =\n");}
         ;
-    designator-list:
+designator-list:
         designator {printf("designator-list-> designator\n");}
         | designator-list designator {printf("designator-list-> designation-list designator\n");}
         ;
-    designator:
+designator:
         LEFT_SQUARE_BRACKET constant-expression RIGHT_SQUARE_BRACKET {printf("designator-> [constant-expression]\n");}
         | DOT IDENTIFIER {printf("designator-> . IDENTIFIER\n");}
         ;
-    statement:
+statement:
         labeled-statement {printf("statement-> labeled-statement\n");}
         | compound-statement {
             $$ = $1;
@@ -899,7 +902,8 @@ shift-expression:
         | jump-statement {
             $$ = $1;
         }
-    loop-statement:
+        ;
+loop-statement:
         labeled-statement {printf("loop-statement-> labeled-statement\n");}
         | expression-statement {
             $$ = new statement();
@@ -915,18 +919,18 @@ shift-expression:
             $$ = $1;
         }
         ;
-    labeled-statement:
+labeled-statement:
         IDENTIFIER COLON statement {printf("labeled-statement-> IDENTIFIER : statement\n");}
         | CASE constant-expression COLON statement {printf("labeled-statement-> CASE constant-expression : statement\n");}
         | DEFAULT COLON statement {printf("labeled-statement-> DEFAULT : statement\n");}
         ;
-    compound-statement:
+compound-statement:
         LEFT_CURLY_BRACKET A change-table block-item-listopt RIGHT_CURLY_BRACKET {
             $$ = $4;
             switchTable(currentST->parent);
         }
         ;
-    A:  %empty
+A:  %empty
         {
             string new_ST = currentST->name + "_" + blockName + "_" + to_string(STCount++);
             symbol* sym = currentST->lookup(new_ST);
@@ -937,7 +941,7 @@ shift-expression:
             currentSymbol = sym;
         }
         ;
-    change-table:   %empty
+change-table:   %empty
         {
             if(currentSymbol->nested_table != NULL)
             {
@@ -950,7 +954,7 @@ shift-expression:
             }
         }
         ;
-    block-item-listopt:
+block-item-listopt:
         block-item-list {
             $$ = $1;
         }
@@ -958,7 +962,7 @@ shift-expression:
             $$ = new statement();
         }
         ;
-    block-item-list:
+block-item-list:
         block-item {
             $$ = $1;
         }
@@ -967,7 +971,7 @@ shift-expression:
             backpatch($1->nextlist, $2);
         }
         ;
-    block-item:
+block-item:
         declaration {
             $$ = new statement();
         }
@@ -975,7 +979,7 @@ shift-expression:
             $$ = $1;
         }
         ;
-    expression-statement:
+expression-statement:
         expression SEMICOLON {
             $$ = $1;
         }
@@ -983,7 +987,7 @@ shift-expression:
             $$ = new expression();
         }
         ;
-    selection-statement:
+selection-statement:
         IF LEFT_PARENTHESIS expression N RIGHT_PARENTHESIS M statement N %prec LOWER_THAN_ELSE
         {
             backpatch($4->nextlist,nextinstr());
@@ -1004,7 +1008,7 @@ shift-expression:
         }
         | SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("selection-statement-> SWITCH (expression) statement\n");}
         ;
-    iteration-statement:
+iteration-statement:
         WHILE W LEFT_PARENTHESIS A change-table M expression RIGHT_PARENTHESIS M loop-statement {
             $$ = new statement();
             convertInttoBool($7);
@@ -1087,19 +1091,19 @@ shift-expression:
             switchTable(currentST->parent);
         }
         ;
-    F: %empty{
+F: %empty{
         blockName = "FOR";
     }
     ;
-    W: %empty{
+W: %empty{
         blockName = "WHILE";
     }
     ;
-    D: %empty{
+D: %empty{
         blockName = "DO_WHILE";
     }
     ;
-    jump-statement:
+jump-statement:
         GOTO IDENTIFIER SEMICOLON {printf("jump-statement-> GOTO IDENTIFIER ;\n");}
         | CONTINUE SEMICOLON {
             $$ = new statement();
@@ -1116,26 +1120,26 @@ shift-expression:
             emit("return", "");
         }
         ;
-    translation-unit:
+translation-unit:
         external-declaration {printf("translation-unit-> external-declaration\n");}
         | translation-unit external-declaration {printf("translation-unit-> translation-unit external-declaration\n");}
         ;
-    external-declaration:
+external-declaration:
         function-definition {printf("external-declaration-> function-definition\n");}
         | declaration {printf("external-declaration-> declaration\n");}
         ;
-    function-definition:
+function-definition:
         declaration-specifiers declarator declaration-listopt change-table LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET {
             currentST->parent = globalST;
             STCount=0;
             switchTable(globalST);
         }
         ;
-    declaration-listopt:
+declaration-listopt:
         declaration-list {printf("declaration-listopt-> declaration-list\n");}
-        | {printf("declaration-listopt-> \n");}
+        | %empty {printf("declaration-listopt-> \n");}
         ;
-    declaration-list:
+declaration-list:
         declaration {printf("declaration-list-> declaration\n");}
         | declaration-list declaration {printf("declaration-list-> declaration-list declaration\n");}
         ;

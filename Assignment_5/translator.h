@@ -17,7 +17,7 @@ using namespace std;
 #define __FUNCSIZE 0
 class symbolTable;
 class symbol;
-class array;
+class aarray;
 class expression;
 class statement;
 class ttype;

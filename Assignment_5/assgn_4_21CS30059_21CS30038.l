@@ -1,8 +1,7 @@
 %{
-    #include <iostream>
+    #include <stdio.h>
     #include "translator.h"
     #include "y.tab.h"
-    
     int lineno=1;
 
 %}
