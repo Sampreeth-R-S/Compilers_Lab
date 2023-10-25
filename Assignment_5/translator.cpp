@@ -34,10 +34,10 @@ symbol* symbol::update(ttype* t){
 
 symbol* symbol::convert(string t)
 {
-    cout<<this->type->type<<endl<<t<<endl;
-    cout<<(this->type->type == t)<<endl;
+    //cout<<this->type->type<<endl<<t<<endl;
+    //cout<<(this->type->type == t)<<endl;
 
-    cout<<"Hello\n";
+    //cout<<"Hello\n";
     bool boolean = (this->type->type == t);
     symbol* temp = symbolTable::gentemp(t);
    // if(this->type->type!=t)
