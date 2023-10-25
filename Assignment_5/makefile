@@ -12,6 +12,8 @@ assgn_5_21CS30059_21CS30038.tab.h: assgn_5_21CS30059_21CS30038.y
 
 clean: 
 	rm a.out assgn_5_21CS30059_21CS30038.tab.c lex.yy.c assgn_5_21CS30059_21CS30038.tab.h assgn_5_21CS30059_21CS30038.output
+	rm ./output/*.out
+	rmdir output
 
 test: a.out
 	mkdir -p output
@@ -20,3 +22,4 @@ test: a.out
 	./a.out<./input/test3.c>./output/test3.out
 	./a.out<./input/test4.c>./output/test4.out
 	./a.out<./input/test5.c>./output/test5.out
+

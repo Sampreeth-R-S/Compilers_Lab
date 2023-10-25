@@ -8,9 +8,9 @@ int w[10];                      // 1D array declaration
 float f[20][50];                // 2D array declaration
 int a = 4, *p, b;               // pointer declaration
 
-void func (int i, float d) {
+int func (int i, float d) {
     d = i ^ 7;
-    return;
+    return i;
 }
 
 int main () {
@@ -18,7 +18,6 @@ int main () {
     int x = 120;
     int y = 17;
     char ch = 'c', d = 'a';     // character definitions
-
     // Arithmetic Operations
     i = x + y;
     j = x - y;
@@ -30,6 +29,6 @@ int main () {
     
     y = i << 2;
     x = i >> 1;
-
+    func(i, i);
     return 0;
 }

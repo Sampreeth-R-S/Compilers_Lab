@@ -1,8 +1,10 @@
 
-float calculate(int x, int n, float sum, float term)
+int calculate(int x, int n, float sum)
 {
     int i;
-    for(i=1;i<=n;i++)
+    float term=1;
+   
+    for(i=1;i<n;i++)
     {
         term=term*x/i;
         sum=sum+term;
@@ -16,8 +18,9 @@ int main()
 
     float sum=1;
     float term=1;
-
-    float result=calculate(x,n,sum,term);
-    return ;
+    int temp;
+    temp=term/sum;
+    float result=calculate(x,n,sum);
+    return 1;
 
 }

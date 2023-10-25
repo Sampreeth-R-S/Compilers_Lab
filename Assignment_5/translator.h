@@ -120,7 +120,7 @@ class aarray{
 list<int> makelist(int i);
 list<int> merge(list<int> &a, list<int> &b);
 void backpatch(list<int> &a, int i);
-bool typecheck(symbol* s1, symbol* s2);
+bool typecheck(symbol* &s1, symbol* &s2);
 bool typecheck(ttype* t1, ttype* t2);
 symbol* convertType(symbol* s1, string t);
 string itos(int i);
