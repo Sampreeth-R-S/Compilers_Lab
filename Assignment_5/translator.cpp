@@ -4,6 +4,8 @@
 #include <sstream>
 #include <stack>
 #include <iomanip>
+
+// Global Variables
 quadArray quads;
 using namespace std;
 symbol* currentSymbol;
@@ -12,31 +14,37 @@ symbolTable* globalST;
 //quadArray quads;
 int STCount;
 string blockName;
-string varType;
-
+string varType;//Stores last encountered data type in the c file
+//Class fucntion definitions
+//ttype constuctor
 ttype::ttype(string type_, ttype* arrtype_, int width_):
 type(type_),width(width_),arrtype(arrtype_) {}
-
+//Symbol constructor
 symbol::symbol(string name_, string t_, ttype* arrtype_, int width_):
 name(name_),value("-"),offset(0),nested_table(NULL){
     type = new ttype(t_,arrtype_,width_);
     size = sizeoft(type);
 }
-
+//Updates symbol type
 symbol* symbol::update(ttype* t){
     type = t;
     size = sizeoft(type);
     return this;
 }
-
+//Symbol table constructor
 symbolTable::symbolTable(string name_, symbolTable* parent):name(name_),tempcount(0){}
-
+//Lookup function
 symbol* symbolTable::lookup(string name){
+    //Search in existing table
     for(list<symbol>::iterator it = table.begin(); it!=table.end(); it++){
         if(it->name == name) return &(*it);
     }
+
     symbol* s = NULL;
+    //Search in parent table
     if(this->parent != NULL) s = this->parent->lookup(name);
+    //If found in parent table, return it
+    //Else create a new symbol and return it
     if(currentST==this && s==NULL)
     {
         s = new symbol(name);
@@ -46,7 +54,7 @@ symbol* symbolTable::lookup(string name){
     else if(s!=NULL) return s;
     return NULL;
 }
-
+//Generate temporary function
 symbol* symbolTable::gentemp(ttype* type,string initvalue){
     string name = "t"+itos(currentST->tempcount++);
     symbol* s = new symbol(name);
@@ -56,7 +64,6 @@ symbol* symbolTable::gentemp(ttype* type,string initvalue){
     currentST->table.push_back(*s);
     return &(currentST->table.back());
 }
-
 symbol* symbolTable::gentemp(string type,string initvalue){
     string name = "t"+itos(currentST->tempcount++);
     symbol* s = new symbol(name);
@@ -67,7 +74,7 @@ symbol* symbolTable::gentemp(string type,string initvalue){
     currentST->table.push_back(*s);
     return &(currentST->table.back());
 }
-
+//Print function(for symbol table)
 void symbolTable::print(){
     for(int i = 0; i < 150; i++) {
         cout << '.';
@@ -90,7 +97,7 @@ void symbolTable::print(){
     }
     cout << endl;
     list<symbolTable*> tablelist;
-     for(auto it = this->table.begin(); it != this->table.end(); it++) {
+    for(auto it = this->table.begin(); it != this->table.end(); it++) {
         cout << left << setw(25) << it->name;
         cout << left << setw(25) << checkType(it->type);
         cout << left << setw(20) << (it->value != "" ? it->value : "-");
@@ -111,11 +118,14 @@ void symbolTable::print(){
         cout << '.';
     }
     cout<<endl<<endl;
+    //Print the nested symbol tables
     for(auto it = tablelist.begin(); it != tablelist.end(); it++) {
         (*it)->print();
         cout<<endl<<endl;
     }
 }
+
+//Check type function
 string checkType(ttype* t)
 {
     if(t==NULL)
@@ -137,6 +147,8 @@ string checkType(ttype* t)
     else
     return "unknown";
 }
+
+//Update function(updates the offset of each symbol in the symbol table)
 void symbolTable::update(){
     list<symbolTable*> tableList;
     int offset;
@@ -152,7 +164,7 @@ void symbolTable::update(){
         (*it)->update();
     }
 }
-
+//Quad constructor
 quad::quad(string result_, string arg1_, string op_, string arg2_):
 result(result_),arg1(arg1_),op(op_),arg2(arg2_){}
 
@@ -165,7 +177,7 @@ quad::quad(string result_, float arg1_, string op_, string arg2_):
 result(result_),op(op_),arg2(arg2_){
     arg1 = ftos(arg1_);
 }
-
+//Print function(for quads)
 void quad::print() {
     if(op == "=")       // Simple assignment
         cout << result << " = " << arg1;
@@ -190,7 +202,7 @@ void quad::print() {
     else
         cout << "Unknown Operator";
 }
-
+//Print function(for quad array)
 void quadArray::print(){
     for(int i = 0; i < 150; i++) {
         cout << '.';
@@ -215,7 +227,7 @@ void quadArray::print(){
         cout << endl;
     }
 }
-
+//Emit functions(stores the quad in the quad array)
 void emit(string op, string result, string arg1, string arg2){
     quad* q = new quad(result,arg1,op,arg2);
     //cout<<op<<' '<<result<<' '<<arg1<<' '<<arg2<<endl;
@@ -233,24 +245,24 @@ void emit(string op, string result, float arg1, string arg2){
     //cout<<op<<' '<<result<<' '<<arg1<<' '<<arg2<<endl;
     quads.array.push_back(*q);
 }
-
+//Backpatch function
 void backpatch(list<int> &a, int i){
     string str = itos(i);
     for(list<int>::iterator it = a.begin(); it != a.end(); it++) {
         quads.array[*it].result = str;
     }
 }
-
+//Makelist function
 list<int> makelist(int i){
     list<int> l(1,i);
     return l;
 }
-
+//Merge function
 list<int> merge(list<int> &a, list<int> &b){
     a.merge(b);
     return a;
 }
-
+//typecheck function(checks for comapatibility of two symbols)
 bool typecheck(symbol* s1, symbol* s2){
     ttype* t1 = s1->type;
     ttype* t2 = s2->type;
@@ -259,14 +271,14 @@ bool typecheck(symbol* s1, symbol* s2){
     if(s2 = convertType(s2,t1->type)) return true;
     return false;
 }
-
+//typecheck function(checks for comapatibility of two types)
 bool typecheck(ttype* t1, ttype* t2){
     if(t1==NULL && t2==NULL)return true;
     if(t1==NULL || t2==NULL)return false;
     if(t1->type != t2->type)return false;
     return typecheck(t1->arrtype,t2->arrtype);
 }
-
+//convertType function(converts the type of a symbol to the given type)
 symbol* convertType(symbol* s, string t) {
     symbol* temp = symbolTable::gentemp(new ttype(t));
 
@@ -308,7 +320,7 @@ symbol* convertType(symbol* s, string t) {
 
     return s;
 }
-
+//Int to string and float to string functions
 string itos(int i){
     stringstream ss;
     ss << i;
@@ -320,7 +332,7 @@ string ftos(float f){
     ss << f;
     return ss.str();
 }
-
+//Int to bool and bool to int functions
 expression* itob(expression* e)
 {
     if(e->type != "bool")
@@ -346,7 +358,7 @@ expression* btoi(expression* e)
     }
     return e;
 }
-
+//Switch table function
 void switchTable(symbolTable* newtab)
 {
     currentST = newtab;
@@ -356,7 +368,7 @@ int nextinstr()
 {
     return quads.array.size();
 }
-
+// sizeof function
 int sizeoft(ttype* t) {
     if(t->type == "void")
         return __VOIDSIZE;
@@ -375,16 +387,18 @@ int sizeoft(ttype* t) {
     else
         return -1;
 }
-
+//Main
 int main()
 {
+    //Initialisation
     STCount = 0;
     globalST = new symbolTable("Global");
     currentST = globalST;
     blockName = "";
     varType = "";
+    //Parsing
     yyparse();
-
+    //Printing
     globalST->update();
     globalST->print();
     cout<<endl<<endl<<endl;
