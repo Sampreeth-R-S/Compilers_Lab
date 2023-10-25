@@ -281,8 +281,18 @@ bool typecheck(symbol* &s1, symbol* &s2){
     ttype* t1 = s1->type;
     ttype* t2 = s2->type;
     if(typecheck(t1,t2)) return true;
-    if(s1 = convertType(s1,t2->type)) return true;
-    if(s2 = convertType(s2,t1->type)) return true;
+    if(s1->type->type == "float" || s2->type->type == "float")
+    {
+        s1 = s1->convert("float");
+        s2 = s2->convert("float");
+        return true;
+    }
+    if(s1->type->type == "int" || s2->type->type == "int")
+    {
+        s1 = s1->convert("int");
+        s2 = s2->convert("int");
+        return true;
+    }
     return false;
 }
 //typecheck function(checks for comapatibility of two types)
