@@ -8,13 +8,15 @@
 #include <map>
 #include <iostream>
 using namespace std;
-
+//Sa=ize of data types
 #define __VOIDSIZE 0
 #define __INTSIZE 4
 #define __FLOATSIZE 8
 #define __CHARSIZE 1
 #define __POINTERSIZE 4
 #define __FUNCSIZE 0
+
+//Class declarations
 class symbolTable;
 class symbol;
 class aarray;
@@ -24,6 +26,8 @@ class ttype;
 class quad;
 class symbolTable;
 class quadArray;
+
+//Global variables
 extern symbol* currentSymbol;
 extern symbolTable* currentST;
 extern symbolTable* globalST;
@@ -32,14 +36,18 @@ extern int STCount;
 extern string blockName;
 extern string varType;
 extern char* yytext;
+
+//Parse function
 extern int yyparse();
+
+//SymbolTable class
 class symbolTable
 {
     public:
-    string name;
-    symbolTable* parent;
-    int tempcount;
-    list<symbol> table;
+    string name;//Name
+    symbolTable* parent;//Pointer to parent(null for GlobalST)
+    int tempcount;//Count of temporary variables
+    list<symbol> table;//List of symbols belonging to current scope
     symbolTable(string name_, symbolTable* parent_ = NULL);
     symbol* lookup(string name);
     static symbol* gentemp(ttype* type, string initvalue = "");
@@ -47,64 +55,68 @@ class symbolTable
     void update();
     void print();
 };
+
+//Symbol class
 class symbol{
     public:
-    string name;
-    ttype* type;
-    int size, offset;
-    string value;
-    symbolTable* nested_table;
+    string name;//name
+    ttype* type;//type information
+    int size, offset;//size and offset
+    string value;//Initial value
+    symbolTable* nested_table;//Pointer to nested table for functions and blocks
     symbol(string name_, string t_="int",ttype* arrtype = NULL, int width_ = 0);
     symbol* update(ttype* t);
 };
-
+//Expression class
 class expression{
     public:
-    symbol* loc;
-    string type;
-    list<int> truelist, falselist;
-    list<int> nextlist;
+    symbol* loc;//Pointer to symbol table entry of current expression result
+    string type;//Type
+    list<int> truelist, falselist;//For boolean expressions
+    list<int> nextlist;//For statements
 };
-
+//Statement class
 class statement{
     public:
-    list<int> nextlist;
+    list<int> nextlist;//Nextlist
 };
-
+//Symbol type class(defines the type of variables)
 class ttype{
     public:
-    string type;
-    int width;
-    ttype* arrtype;
+    string type;//type
+    int width;//width information
+    ttype* arrtype;//Arraytype information(for pointers and arrays)
     ttype(string type_, ttype* arrtype_=NULL, int width_=1);
 };
-
+//Quad class
 class quad{
     public:
-    string op;
-    string result;
-    string arg1;
-    string arg2;
+    string op;//Operator
+    string result;//Result
+    string arg1; //Argument 1
+    string arg2;//Argument 2
     quad(string result_, string arg1_, string op_="=", string arg2_="");
     quad(string result_, int arg1_, string op_="=", string arg2_="");
     quad(string result_, float arg1_, string op_="=", string arg2_="");
     void print();
 };
-
+//Array of quads for lazy spitting
 class quadArray{
     public:
     vector<quad> array;
     
     void print();
 };
-
+//Class for array type
 class aarray{
     public:
-    string array_type;
-    symbol* loc;
-    symbol* Array;
-    ttype* type;
+    string array_type;//Type(array or pointer to data type)
+    symbol* loc;//Entry to ST of the offset
+    symbol* Array;//Entry to ST of the array
+    ttype* type;//Type of the array(for multiple dimensions)
 };
+
+//Auxiliary functions
 list<int> makelist(int i);
 list<int> merge(list<int> &a, list<int> &b);
 void backpatch(list<int> &a, int i);
