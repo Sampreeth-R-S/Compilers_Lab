@@ -3,6 +3,7 @@
     #include "translator.h"
     #include "assgn_5_21CS30059_21CS30038.tab.h"
     int lineno=1;
+    string globe="";
 
 %}
 
@@ -113,7 +114,7 @@ multi_line_comment  "/*"([^*]|"*"[^/])*"*/"
 {keywords}  {return KEYWORD;}
 
 <enumerator>{enumeration_constant}  {yylval.pointer=currentST->lookup(yytext);return ENUMERATION_CONST;}
-{identifier}    {yylval.pointer=currentST->lookup(yytext);return IDENTIFIER;}
+{identifier}    {/*yylval.pointer=currentST->lookup(yytext);*/globe=yytext;return IDENTIFIER;}
 {integer_constant}  {yylval.intval=atoi(yytext);return INTEGER;}
 {floating_constant} {yylval.floatval=atof(yytext);return FLOATING_CONSTANT;}
 

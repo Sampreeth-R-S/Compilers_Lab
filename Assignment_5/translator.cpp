@@ -31,6 +31,13 @@ symbol* symbol::update(ttype* t){
     size = sizeoft(type);
     return this;
 }
+
+symbol* symbol::convert(string t)
+{
+    symbol* temp = symbolTable::gentemp(t);
+    emit("=",temp->name,this->type->type+"2"+t+"("+this->name+")");
+    return temp;
+}
 //Symbol table constructor
 symbolTable::symbolTable(string name_, symbolTable* parent):name(name_),tempcount(0){}
 //Lookup function
@@ -53,6 +60,13 @@ symbol* symbolTable::lookup(string name){
     }
     else if(s!=NULL) return s;
     return NULL;
+}
+
+symbol* symbolTable::lookup2(string name)
+{
+    symbol* s = new symbol(name);
+        table.push_back(*s);
+        return &(table.back());
 }
 //Generate temporary function
 symbol* symbolTable::gentemp(ttype* type,string initvalue){

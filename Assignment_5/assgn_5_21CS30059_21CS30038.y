@@ -6,6 +6,7 @@
     //extern int yylineno=1;
     extern int lineno;
     extern string varType;
+    extern string globe;
     extern char* yytext;
     void yyerror(char *s) {
         
@@ -83,8 +84,9 @@
 primary-expression:
         IDENTIFIER  {
             //Create new expression and store pointer of IDENTIFIER in the expression
+            symbol* temp = currentST->lookup(globe);
             $$ = new expression();
-            $$->loc = $1;
+            $$->loc = temp;
             $$->type = "non_bool";
             }
         | INTEGER   {
@@ -815,6 +817,7 @@ enum-specifier:
         ;
 identifieropt:
         IDENTIFIER {
+        
             //printf("identifieropt-> IDENTIFIER\n");
 }
         | %empty {
@@ -859,7 +862,9 @@ declarator:
         ;
 direct-declarator:
         IDENTIFIER {
-            $$ = $1->update(new ttype(varType));
+           // $$ = $1->update(new ttype(varType));
+            $$ = currentST->lookup2(globe);
+            $$->update(new ttype(varType));
             currentSymbol = $$;
         }
         | LEFT_PARENTHESIS declarator RIGHT_PARENTHESIS {

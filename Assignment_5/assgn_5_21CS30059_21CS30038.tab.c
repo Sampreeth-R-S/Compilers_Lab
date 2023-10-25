@@ -76,6 +76,7 @@
     //extern int yylineno=1;
     extern int lineno;
     extern string varType;
+    extern string globe;
     extern char* yytext;
     void yyerror(char *s) {
         
@@ -84,7 +85,7 @@
     }
     //int yydebug=1;
 
-#line 88 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 89 "assgn_5_21CS30059_21CS30038.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -662,28 +663,28 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    84,    84,    90,    96,   101,   106,   112,   118,   125,
-     146,   157,   160,   163,   170,   177,   180,   185,   189,   195,
-     198,   203,   206,   210,   214,   246,   249,   254,   258,   261,
-     264,   267,   270,   275,   278,   285,   301,   313,   325,   335,
-     338,   350,   364,   367,   379,   393,   396,   411,   426,   441,
-     458,   461,   478,   497,   500,   517,   520,   537,   540,   557,
-     560,   574,   577,   591,   594,   614,   620,   629,   632,   651,
-     654,   659,   662,   667,   672,   675,   688,   690,   693,   696,
-     699,   702,   705,   708,   713,   718,   721,   726,   729,   738,
-     742,   745,   748,   751,   754,   757,   760,   763,   766,   769,
-     772,   775,   782,   785,   790,   793,   798,   801,   806,   809,
-     812,   817,   820,   825,   828,   833,   836,   841,   846,   856,
-     861,   865,   868,   873,   878,   911,   934,   937,   940,   943,
-     946,   949,   962,   965,   980,   983,   988,   991,   996,   999,
-    1004,  1007,  1012,  1015,  1020,  1023,  1028,  1031,  1036,  1041,
-    1044,  1047,  1052,  1055,  1060,  1063,  1068,  1073,  1076,  1081,
-    1084,  1089,  1092,  1095,  1099,  1102,  1105,  1110,  1113,  1118,
-    1121,  1124,  1129,  1132,  1135,  1140,  1146,  1158,  1173,  1176,
-    1181,  1184,  1190,  1193,  1198,  1201,  1206,  1216,  1226,  1231,
-    1243,  1254,  1263,  1271,  1283,  1294,  1305,  1317,  1322,  1326,
-    1331,  1334,  1337,  1340,  1344,  1350,  1353,  1358,  1361,  1366,
-    1373,  1376,  1381,  1384
+       0,    85,    85,    92,    98,   103,   108,   114,   120,   127,
+     148,   159,   162,   165,   172,   179,   182,   187,   191,   197,
+     200,   205,   208,   212,   216,   248,   251,   256,   260,   263,
+     266,   269,   272,   277,   280,   287,   303,   315,   327,   337,
+     340,   352,   366,   369,   381,   395,   398,   413,   428,   443,
+     460,   463,   480,   499,   502,   519,   522,   539,   542,   559,
+     562,   576,   579,   593,   596,   616,   622,   631,   634,   653,
+     656,   661,   664,   669,   674,   677,   690,   692,   695,   698,
+     701,   704,   707,   710,   715,   720,   723,   728,   731,   740,
+     744,   747,   750,   753,   756,   759,   762,   765,   768,   771,
+     774,   777,   784,   787,   792,   795,   800,   803,   808,   811,
+     814,   819,   823,   828,   831,   836,   839,   844,   849,   859,
+     864,   870,   873,   878,   883,   916,   939,   942,   945,   948,
+     951,   954,   967,   970,   985,   988,   993,   996,  1001,  1004,
+    1009,  1012,  1017,  1020,  1025,  1028,  1033,  1036,  1041,  1046,
+    1049,  1052,  1057,  1060,  1065,  1068,  1073,  1078,  1081,  1086,
+    1089,  1094,  1097,  1100,  1104,  1107,  1110,  1115,  1118,  1123,
+    1126,  1129,  1134,  1137,  1140,  1145,  1151,  1163,  1178,  1181,
+    1186,  1189,  1195,  1198,  1203,  1206,  1211,  1221,  1231,  1236,
+    1248,  1259,  1268,  1276,  1288,  1299,  1310,  1322,  1327,  1331,
+    1336,  1339,  1342,  1345,  1349,  1355,  1358,  1363,  1366,  1371,
+    1378,  1381,  1386,  1389
 };
 #endif
 
@@ -1659,69 +1660,70 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* primary-expression: IDENTIFIER  */
-#line 84 "assgn_5_21CS30059_21CS30038.y"
+#line 85 "assgn_5_21CS30059_21CS30038.y"
                     {
             //Create new expression and store pointer of IDENTIFIER in the expression
+            symbol* temp = currentST->lookup(globe);
             (yyval.exp) = new expression();
-            (yyval.exp)->loc = (yyvsp[0].pointer);
+            (yyval.exp)->loc = temp;
             (yyval.exp)->type = "non_bool";
             }
-#line 1670 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1672 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 3: /* primary-expression: INTEGER  */
-#line 90 "assgn_5_21CS30059_21CS30038.y"
+#line 92 "assgn_5_21CS30059_21CS30038.y"
                     {
             //Create new expression and update initial value of the expression(symbol)
             (yyval.exp) = new expression();
             (yyval.exp)->loc=symbolTable::gentemp(new ttype("int"),itos((yyvsp[0].intval)));
             emit("=",(yyval.exp)->loc->name,(yyvsp[0].intval));
         }
-#line 1681 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1683 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 4: /* primary-expression: FLOATING_CONSTANT  */
-#line 96 "assgn_5_21CS30059_21CS30038.y"
+#line 98 "assgn_5_21CS30059_21CS30038.y"
                                {
             (yyval.exp) = new expression();
             (yyval.exp)->loc=symbolTable::gentemp(new ttype("float"),ftos((yyvsp[0].floatval)));
             emit("=",(yyval.exp)->loc->name,(yyvsp[0].floatval));
         }
-#line 1691 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1693 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 5: /* primary-expression: CHARACTER_CONSTANT  */
-#line 101 "assgn_5_21CS30059_21CS30038.y"
+#line 103 "assgn_5_21CS30059_21CS30038.y"
                                 {
             (yyval.exp) = new expression();
             (yyval.exp)->loc=symbolTable::gentemp(new ttype("char"),string((yyvsp[0].charval)));
             emit("=",(yyval.exp)->loc->name,string((yyvsp[0].charval)));
         }
-#line 1701 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1703 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 6: /* primary-expression: STRING_LITERAL  */
-#line 106 "assgn_5_21CS30059_21CS30038.y"
+#line 108 "assgn_5_21CS30059_21CS30038.y"
                             {
             (yyval.exp) = new expression();
             (yyval.exp)->loc=symbolTable::gentemp(new ttype("ptr"),string((yyvsp[0].charval)));
             //emit($$->loc->name,$1,"=");
             (yyval.exp)->loc->type->arrtype = new ttype("char");
         }
-#line 1712 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1714 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 7: /* primary-expression: LEFT_PARENTHESIS expression RIGHT_PARENTHESIS  */
-#line 112 "assgn_5_21CS30059_21CS30038.y"
+#line 114 "assgn_5_21CS30059_21CS30038.y"
                                                          {
             //printf("primary-expression-> (expression)\n");
             (yyval.exp) = (yyvsp[-1].exp);
         }
-#line 1721 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1723 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 8: /* postfix-expression: primary-expression  */
-#line 118 "assgn_5_21CS30059_21CS30038.y"
+#line 120 "assgn_5_21CS30059_21CS30038.y"
                             {
             //Create new array type variable and store pointer of primary expression in the array type
             (yyval.Array) = new aarray();
@@ -1729,11 +1731,11 @@ yyreduce:
             (yyval.Array)->Array = (yyval.Array)->loc;
             (yyval.Array)->type = (yyvsp[0].exp)->loc->type;//Update type
         }
-#line 1733 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1735 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 9: /* postfix-expression: postfix-expression LEFT_SQUARE_BRACKET expression RIGHT_SQUARE_BRACKET  */
-#line 125 "assgn_5_21CS30059_21CS30038.y"
+#line 127 "assgn_5_21CS30059_21CS30038.y"
                                                                                   {
             //Used for array indexing
             //Create new array type variable and store pointer of postfix expression in the array type
@@ -1755,11 +1757,11 @@ yyreduce:
                 emit("*",(yyval.Array)->loc->name,(yyvsp[-1].exp)->loc->name,itos(size));
             }
         }
-#line 1759 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1761 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 10: /* postfix-expression: postfix-expression LEFT_PARENTHESIS argument-expression-listopt RIGHT_PARENTHESIS  */
-#line 146 "assgn_5_21CS30059_21CS30038.y"
+#line 148 "assgn_5_21CS30059_21CS30038.y"
                                                                                              {
             //Function call
             (yyval.Array) = new aarray();
@@ -1771,27 +1773,27 @@ yyreduce:
             emit("call", (yyval.Array)->Array->name, (yyvsp[-3].Array)->Array->name, itos((yyvsp[-1].numParams)));//Call function with appropriate parameter number
             
         }
-#line 1775 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1777 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 11: /* postfix-expression: postfix-expression DOT IDENTIFIER  */
-#line 157 "assgn_5_21CS30059_21CS30038.y"
+#line 159 "assgn_5_21CS30059_21CS30038.y"
                                              {
             //printf("postfix-expression-> postfix-expression . IDENTIFIER\n");
         }
-#line 1783 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1785 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 12: /* postfix-expression: postfix-expression ARROW IDENTIFIER  */
-#line 160 "assgn_5_21CS30059_21CS30038.y"
+#line 162 "assgn_5_21CS30059_21CS30038.y"
                                                {
             //printf("postfix-expression-> postfix-expression -> IDENTIFIER\n");
         }
-#line 1791 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1793 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 13: /* postfix-expression: postfix-expression INCREMENT  */
-#line 163 "assgn_5_21CS30059_21CS30038.y"
+#line 165 "assgn_5_21CS30059_21CS30038.y"
                                         {
             //Increment operation
             (yyval.Array) = new aarray();
@@ -1799,11 +1801,11 @@ yyreduce:
             emit("=", (yyval.Array)->Array->name, (yyvsp[-1].Array)->Array->name);//Value of temp = unchanged value of variable
             emit("+", (yyvsp[-1].Array)->Array->name, (yyvsp[-1].Array)->Array->name, "1"); //Value of variable incremented by 1
         }
-#line 1803 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1805 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 14: /* postfix-expression: postfix-expression DECREMENT  */
-#line 170 "assgn_5_21CS30059_21CS30038.y"
+#line 172 "assgn_5_21CS30059_21CS30038.y"
                                         {
             //Decrement operation
             (yyval.Array) = new aarray();
@@ -1811,87 +1813,87 @@ yyreduce:
             emit("=", (yyval.Array)->Array->name, (yyvsp[-1].Array)->Array->name); //Value of temp = unchanged value of variable
             emit("-", (yyvsp[-1].Array)->Array->name, (yyvsp[-1].Array)->Array->name, "1");//Value of variable decremented by 1
         }
-#line 1815 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1817 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 15: /* postfix-expression: LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS LEFT_CURLY_BRACKET initializer-list RIGHT_CURLY_BRACKET  */
-#line 177 "assgn_5_21CS30059_21CS30038.y"
+#line 179 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                 {
             //printf("postfix-expression-> (type-name) {initializer-list}\n");
         }
-#line 1823 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1825 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 16: /* postfix-expression: LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS LEFT_CURLY_BRACKET initializer-list COMMA RIGHT_CURLY_BRACKET  */
-#line 180 "assgn_5_21CS30059_21CS30038.y"
+#line 182 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                       {
             //printf("postfix-expression-> (type-name) {initializer-list,}\n");
         }
-#line 1831 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1833 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 17: /* argument-expression-list: assignment-expression  */
-#line 185 "assgn_5_21CS30059_21CS30038.y"
+#line 187 "assgn_5_21CS30059_21CS30038.y"
                                {
             (yyval.numParams) = 1;//Parameter count
             emit("param",(yyvsp[0].exp)->loc->name);//Emit parameter
         }
-#line 1840 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1842 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 18: /* argument-expression-list: argument-expression-list COMMA assignment-expression  */
-#line 189 "assgn_5_21CS30059_21CS30038.y"
+#line 191 "assgn_5_21CS30059_21CS30038.y"
                                                                 {
             (yyval.numParams) = (yyvsp[-2].numParams)+1;//Update parameter count
             emit("param",(yyvsp[0].exp)->loc->name);//Emit parameter
         }
-#line 1849 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1851 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 19: /* argument-expression-listopt: argument-expression-list  */
-#line 195 "assgn_5_21CS30059_21CS30038.y"
+#line 197 "assgn_5_21CS30059_21CS30038.y"
                                   {
             (yyval.numParams) = (yyvsp[0].numParams);
         }
-#line 1857 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1859 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 20: /* argument-expression-listopt: %empty  */
-#line 198 "assgn_5_21CS30059_21CS30038.y"
+#line 200 "assgn_5_21CS30059_21CS30038.y"
                   {
             (yyval.numParams) = 0;//No argument, set count to 0
         }
-#line 1865 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1867 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 21: /* unary-expression: postfix-expression  */
-#line 203 "assgn_5_21CS30059_21CS30038.y"
+#line 205 "assgn_5_21CS30059_21CS30038.y"
                             {
             (yyval.Array) = (yyvsp[0].Array);
         }
-#line 1873 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1875 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 22: /* unary-expression: INCREMENT unary-expression  */
-#line 206 "assgn_5_21CS30059_21CS30038.y"
+#line 208 "assgn_5_21CS30059_21CS30038.y"
                                       {
             emit("+", (yyvsp[0].Array)->Array->name, (yyvsp[0].Array)->Array->name, "1"); //Increase value of variable
             (yyval.Array) = (yyvsp[0].Array);//Value of expression = incremented value of variable
         }
-#line 1882 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1884 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 23: /* unary-expression: DECREMENT unary-expression  */
-#line 210 "assgn_5_21CS30059_21CS30038.y"
+#line 212 "assgn_5_21CS30059_21CS30038.y"
                                       {
             emit("-", (yyvsp[0].Array)->Array->name, (yyvsp[0].Array)->Array->name, "1");//Decrease value of variable
             (yyval.Array) = (yyvsp[0].Array);//Value of expression = decremented value of variable
         }
-#line 1891 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1893 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 24: /* unary-expression: unary-operator cast-expression  */
-#line 214 "assgn_5_21CS30059_21CS30038.y"
+#line 216 "assgn_5_21CS30059_21CS30038.y"
                                           {
             //Unary operator
             (yyval.Array) = new aarray();
@@ -1924,94 +1926,94 @@ yyreduce:
                     break;
             }
         }
-#line 1928 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1930 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 25: /* unary-expression: SIZEOF unary-expression  */
-#line 246 "assgn_5_21CS30059_21CS30038.y"
+#line 248 "assgn_5_21CS30059_21CS30038.y"
                                    {
             //printf("unary-expression-> SIZEOF unary-expression\n");
         }
-#line 1936 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1938 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 26: /* unary-expression: SIZEOF LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS  */
-#line 249 "assgn_5_21CS30059_21CS30038.y"
+#line 251 "assgn_5_21CS30059_21CS30038.y"
                                                                {
             //printf("unary-expression-> SIZEOF (type-name)\n");
         }
-#line 1944 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1946 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 27: /* unary-operator: AND  */
-#line 254 "assgn_5_21CS30059_21CS30038.y"
+#line 256 "assgn_5_21CS30059_21CS30038.y"
              {
             //Store opreator information for unary operator
             (yyval.unaryOp) = '&';
         }
-#line 1953 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1955 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 28: /* unary-operator: STAR  */
-#line 258 "assgn_5_21CS30059_21CS30038.y"
+#line 260 "assgn_5_21CS30059_21CS30038.y"
                 {
             (yyval.unaryOp) = '*';
         }
-#line 1961 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1963 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 29: /* unary-operator: PLUS  */
-#line 261 "assgn_5_21CS30059_21CS30038.y"
+#line 263 "assgn_5_21CS30059_21CS30038.y"
                 {
             (yyval.unaryOp) = '+';
         }
-#line 1969 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1971 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 30: /* unary-operator: MINUS  */
-#line 264 "assgn_5_21CS30059_21CS30038.y"
+#line 266 "assgn_5_21CS30059_21CS30038.y"
                  {
             (yyval.unaryOp) = '-';
         }
-#line 1977 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1979 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 31: /* unary-operator: TILDE  */
-#line 267 "assgn_5_21CS30059_21CS30038.y"
+#line 269 "assgn_5_21CS30059_21CS30038.y"
                  {
             (yyval.unaryOp) = '~';
         }
-#line 1985 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1987 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 32: /* unary-operator: NOT  */
-#line 270 "assgn_5_21CS30059_21CS30038.y"
+#line 272 "assgn_5_21CS30059_21CS30038.y"
                {
             (yyval.unaryOp) = '!';
         }
-#line 1993 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 1995 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 33: /* cast-expression: unary-expression  */
-#line 275 "assgn_5_21CS30059_21CS30038.y"
+#line 277 "assgn_5_21CS30059_21CS30038.y"
                           {
             (yyval.Array) = (yyvsp[0].Array);
         }
-#line 2001 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2003 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 34: /* cast-expression: LEFT_PARENTHESIS type-name RIGHT_PARENTHESIS cast-expression  */
-#line 278 "assgn_5_21CS30059_21CS30038.y"
+#line 280 "assgn_5_21CS30059_21CS30038.y"
                                                                         {
             //Type casting
             (yyval.Array) = new aarray();
             (yyval.Array)->Array = convertType((yyvsp[0].Array)->Array, varType);//Convert type
         }
-#line 2011 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2013 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 35: /* multiplicative-expression: cast-expression  */
-#line 285 "assgn_5_21CS30059_21CS30038.y"
+#line 287 "assgn_5_21CS30059_21CS30038.y"
                          {
             (yyval.exp) = new expression();
             if((yyvsp[0].Array)->array_type=="arr")//Array addressing
@@ -2028,11 +2030,11 @@ yyreduce:
                 (yyval.exp)->loc = (yyvsp[0].Array)->Array;
             }
         }
-#line 2032 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2034 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 36: /* multiplicative-expression: multiplicative-expression STAR cast-expression  */
-#line 301 "assgn_5_21CS30059_21CS30038.y"
+#line 303 "assgn_5_21CS30059_21CS30038.y"
                                                           {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].Array)->Array))//Typecheck and emit quad for calculating result
             {
@@ -2045,11 +2047,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2049 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2051 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 37: /* multiplicative-expression: multiplicative-expression DIV cast-expression  */
-#line 313 "assgn_5_21CS30059_21CS30038.y"
+#line 315 "assgn_5_21CS30059_21CS30038.y"
                                                          {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].Array)->Array))//Typecheck and emit quad for calculating result
             {
@@ -2062,11 +2064,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2066 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2068 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 38: /* multiplicative-expression: multiplicative-expression MOD cast-expression  */
-#line 325 "assgn_5_21CS30059_21CS30038.y"
+#line 327 "assgn_5_21CS30059_21CS30038.y"
                                                          {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].Array)->Array))
             {
@@ -2075,19 +2077,19 @@ yyreduce:
                 emit("%", (yyval.exp)->loc->name, (yyvsp[-2].exp)->loc->name, (yyvsp[0].Array)->Array->name);   
             }
         }
-#line 2079 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2081 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 39: /* additive-expression: multiplicative-expression  */
-#line 335 "assgn_5_21CS30059_21CS30038.y"
+#line 337 "assgn_5_21CS30059_21CS30038.y"
                                    {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2087 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2089 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 40: /* additive-expression: additive-expression PLUS multiplicative-expression  */
-#line 338 "assgn_5_21CS30059_21CS30038.y"
+#line 340 "assgn_5_21CS30059_21CS30038.y"
                                                               {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type and emit quad for calculating result
             {
@@ -2100,11 +2102,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2104 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2106 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 41: /* additive-expression: additive-expression MINUS multiplicative-expression  */
-#line 350 "assgn_5_21CS30059_21CS30038.y"
+#line 352 "assgn_5_21CS30059_21CS30038.y"
                                                                {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type and emit quad for calculating result
             {
@@ -2117,19 +2119,19 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2121 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2123 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 42: /* shift-expression: additive-expression  */
-#line 364 "assgn_5_21CS30059_21CS30038.y"
+#line 366 "assgn_5_21CS30059_21CS30038.y"
                              {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2129 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2131 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 43: /* shift-expression: shift-expression LEFT_SHIFT additive-expression  */
-#line 367 "assgn_5_21CS30059_21CS30038.y"
+#line 369 "assgn_5_21CS30059_21CS30038.y"
                                                            {
             if((yyvsp[0].exp)->loc->type->type=="int")//Enforce int type for shift value
             {
@@ -2142,11 +2144,11 @@ yyreduce:
                 yyerror("Type Error, shift expression can only be applied to integer shift values");
             }
         }
-#line 2146 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2148 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 44: /* shift-expression: shift-expression RIGHT_SHIFT additive-expression  */
-#line 379 "assgn_5_21CS30059_21CS30038.y"
+#line 381 "assgn_5_21CS30059_21CS30038.y"
                                                             {
             if((yyvsp[0].exp)->loc->type->type=="int")//Enforce int type for shift value
             {
@@ -2159,19 +2161,19 @@ yyreduce:
                 yyerror("Type Error, shift expression can only be applied to integer shift values");
             }
         }
-#line 2163 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2165 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 45: /* relational-expression: shift-expression  */
-#line 393 "assgn_5_21CS30059_21CS30038.y"
+#line 395 "assgn_5_21CS30059_21CS30038.y"
                           {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2171 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2173 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 46: /* relational-expression: relational-expression LESS_THAN shift-expression  */
-#line 396 "assgn_5_21CS30059_21CS30038.y"
+#line 398 "assgn_5_21CS30059_21CS30038.y"
                                                             {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type of operands compared
             {
@@ -2187,11 +2189,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2191 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2193 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 47: /* relational-expression: relational-expression GREATER_THAN shift-expression  */
-#line 411 "assgn_5_21CS30059_21CS30038.y"
+#line 413 "assgn_5_21CS30059_21CS30038.y"
                                                                {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type of operands compared
             {
@@ -2207,11 +2209,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2211 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2213 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 48: /* relational-expression: relational-expression LESS_THAN_EQUAL shift-expression  */
-#line 426 "assgn_5_21CS30059_21CS30038.y"
+#line 428 "assgn_5_21CS30059_21CS30038.y"
                                                                   {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))
             {
@@ -2227,11 +2229,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2231 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2233 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 49: /* relational-expression: relational-expression GREATER_THAN_EQUAL shift-expression  */
-#line 441 "assgn_5_21CS30059_21CS30038.y"
+#line 443 "assgn_5_21CS30059_21CS30038.y"
                                                                      {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))
             {
@@ -2247,19 +2249,19 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2251 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2253 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 50: /* equality-expression: relational-expression  */
-#line 458 "assgn_5_21CS30059_21CS30038.y"
+#line 460 "assgn_5_21CS30059_21CS30038.y"
                                {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2259 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2261 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 51: /* equality-expression: equality-expression EQUAL_TO relational-expression  */
-#line 461 "assgn_5_21CS30059_21CS30038.y"
+#line 463 "assgn_5_21CS30059_21CS30038.y"
                                                               {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type of operands compared
             {
@@ -2277,11 +2279,11 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2281 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2283 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 52: /* equality-expression: equality-expression NOT_EQUAL_TO relational-expression  */
-#line 478 "assgn_5_21CS30059_21CS30038.y"
+#line 480 "assgn_5_21CS30059_21CS30038.y"
                                                                   {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))
             {
@@ -2299,19 +2301,19 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2303 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2305 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 53: /* AND-expression: equality-expression  */
-#line 497 "assgn_5_21CS30059_21CS30038.y"
+#line 499 "assgn_5_21CS30059_21CS30038.y"
                              {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2311 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2313 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 54: /* AND-expression: AND-expression AND equality-expression  */
-#line 500 "assgn_5_21CS30059_21CS30038.y"
+#line 502 "assgn_5_21CS30059_21CS30038.y"
                                                   {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type of operands
             {
@@ -2327,19 +2329,19 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2331 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2333 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 55: /* exclusive-OR-expression: AND-expression  */
-#line 517 "assgn_5_21CS30059_21CS30038.y"
+#line 519 "assgn_5_21CS30059_21CS30038.y"
                         {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2339 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2341 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 56: /* exclusive-OR-expression: exclusive-OR-expression XOR AND-expression  */
-#line 520 "assgn_5_21CS30059_21CS30038.y"
+#line 522 "assgn_5_21CS30059_21CS30038.y"
                                                       {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type of operands
             {
@@ -2355,19 +2357,19 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2359 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2361 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 57: /* inclusive-OR-expression: exclusive-OR-expression  */
-#line 537 "assgn_5_21CS30059_21CS30038.y"
+#line 539 "assgn_5_21CS30059_21CS30038.y"
                                  {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2367 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2369 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 58: /* inclusive-OR-expression: inclusive-OR-expression OR exclusive-OR-expression  */
-#line 540 "assgn_5_21CS30059_21CS30038.y"
+#line 542 "assgn_5_21CS30059_21CS30038.y"
                                                               {
             if(typecheck((yyvsp[-2].exp)->loc,(yyvsp[0].exp)->loc))//Check type of operands
             {
@@ -2383,19 +2385,19 @@ yyreduce:
                 yyerror("Type mismatch");
             }
         }
-#line 2387 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2389 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 59: /* logical-AND-expression: inclusive-OR-expression  */
-#line 557 "assgn_5_21CS30059_21CS30038.y"
+#line 559 "assgn_5_21CS30059_21CS30038.y"
                                  {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2395 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2397 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 60: /* logical-AND-expression: logical-AND-expression AND_AND M inclusive-OR-expression  */
-#line 560 "assgn_5_21CS30059_21CS30038.y"
+#line 562 "assgn_5_21CS30059_21CS30038.y"
                                                                     {
             //M added to augment grammar
             {
@@ -2408,19 +2410,19 @@ yyreduce:
                 (yyval.exp)->falselist = merge((yyvsp[-3].exp)->falselist,(yyvsp[0].exp)->falselist);//Merge falselist of other 2
             }
         }
-#line 2412 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2414 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 61: /* logical-OR-expression: logical-AND-expression  */
-#line 574 "assgn_5_21CS30059_21CS30038.y"
+#line 576 "assgn_5_21CS30059_21CS30038.y"
                                 {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2420 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2422 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 62: /* logical-OR-expression: logical-OR-expression OR_OR M logical-AND-expression  */
-#line 577 "assgn_5_21CS30059_21CS30038.y"
+#line 579 "assgn_5_21CS30059_21CS30038.y"
                                                                 {
             
             {
@@ -2433,19 +2435,19 @@ yyreduce:
                 (yyval.exp)->truelist = merge((yyvsp[-3].exp)->truelist,(yyvsp[0].exp)->truelist);//Merge truelist of other 2
             }
         }
-#line 2437 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2439 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 63: /* conditional-expression: logical-OR-expression  */
-#line 591 "assgn_5_21CS30059_21CS30038.y"
+#line 593 "assgn_5_21CS30059_21CS30038.y"
                                {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2445 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2447 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 64: /* conditional-expression: logical-OR-expression N QUESTION M expression N COLON M conditional-expression  */
-#line 594 "assgn_5_21CS30059_21CS30038.y"
+#line 596 "assgn_5_21CS30059_21CS30038.y"
                                                                                           {
             //M and N added to augment grammar(M to aid jumping to different points and N to jump over the else part)
             (yyval.exp) = new expression;
@@ -2465,39 +2467,39 @@ yyreduce:
             backpatch((yyvsp[-8].exp)->falselist, (yyvsp[-1].instr)); //Backpatch                     
             backpatch(l1, nextinstr());
         }
-#line 2469 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2471 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 65: /* M: %empty  */
-#line 615 "assgn_5_21CS30059_21CS30038.y"
+#line 617 "assgn_5_21CS30059_21CS30038.y"
     {
         //Dummy Non terminal for augmentation
         (yyval.instr)=nextinstr();
     }
-#line 2478 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2480 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 66: /* N: %empty  */
-#line 621 "assgn_5_21CS30059_21CS30038.y"
+#line 623 "assgn_5_21CS30059_21CS30038.y"
     {
         //Dummy non terminal for preventing fallthrough
         (yyval.stmt) = new statement();
         (yyval.stmt)->nextlist = makelist(nextinstr());
         emit("goto","");
     }
-#line 2489 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2491 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 67: /* assignment-expression: conditional-expression  */
-#line 629 "assgn_5_21CS30059_21CS30038.y"
+#line 631 "assgn_5_21CS30059_21CS30038.y"
                                 {
             (yyval.exp) = (yyvsp[0].exp);//Simple assignment
         }
-#line 2497 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2499 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 68: /* assignment-expression: unary-expression assignment-operator assignment-expression  */
-#line 632 "assgn_5_21CS30059_21CS30038.y"
+#line 634 "assgn_5_21CS30059_21CS30038.y"
                                                                       {
             if((yyvsp[-2].Array)->array_type=="arr")//Array indexing
             {
@@ -2515,162 +2517,162 @@ yyreduce:
             }
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2519 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2521 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 69: /* assignment-operator: EQUALS  */
-#line 651 "assgn_5_21CS30059_21CS30038.y"
+#line 653 "assgn_5_21CS30059_21CS30038.y"
                 {
             
         }
-#line 2527 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2529 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 70: /* assignment-operator: ASSIGNMENT_OPERATOR  */
-#line 654 "assgn_5_21CS30059_21CS30038.y"
+#line 656 "assgn_5_21CS30059_21CS30038.y"
                                {
             
         }
-#line 2535 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2537 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 71: /* expression: assignment-expression  */
-#line 659 "assgn_5_21CS30059_21CS30038.y"
+#line 661 "assgn_5_21CS30059_21CS30038.y"
                                {
             (yyval.exp) = (yyvsp[0].exp);
         }
-#line 2543 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2545 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 72: /* expression: expression COMMA assignment-expression  */
-#line 662 "assgn_5_21CS30059_21CS30038.y"
+#line 664 "assgn_5_21CS30059_21CS30038.y"
                                                   {
             //printf("expression-> expression , assignment-expression\n");
         }
-#line 2551 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2553 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 73: /* constant-expression: conditional-expression  */
-#line 667 "assgn_5_21CS30059_21CS30038.y"
+#line 669 "assgn_5_21CS30059_21CS30038.y"
                                 {
             
         }
-#line 2559 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2561 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 74: /* declaration: declaration-specifiers init-declarator-list SEMICOLON  */
-#line 672 "assgn_5_21CS30059_21CS30038.y"
+#line 674 "assgn_5_21CS30059_21CS30038.y"
                                                                {
             //printf("declaration-> declaration-specifiers init-declarator-listopt ;\n");
         }
-#line 2567 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2569 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 75: /* declaration: declaration-specifiers SEMICOLON  */
-#line 675 "assgn_5_21CS30059_21CS30038.y"
+#line 677 "assgn_5_21CS30059_21CS30038.y"
                                             {
             
         }
-#line 2575 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2577 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 76: /* declaration-specifiers: storage-class-specifier declaration-specifiers  */
-#line 688 "assgn_5_21CS30059_21CS30038.y"
+#line 690 "assgn_5_21CS30059_21CS30038.y"
                                                         {//printf("declaration-specifiers-> storage-class-specifier declaration-specifiers\n");
         }
-#line 2582 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2584 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 77: /* declaration-specifiers: storage-class-specifier  */
-#line 690 "assgn_5_21CS30059_21CS30038.y"
+#line 692 "assgn_5_21CS30059_21CS30038.y"
                                    {
             //printf("declaration-specifiers-> storage-class-specifier\n");
         }
-#line 2590 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2592 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 78: /* declaration-specifiers: type-specifier declaration-specifiers  */
-#line 693 "assgn_5_21CS30059_21CS30038.y"
+#line 695 "assgn_5_21CS30059_21CS30038.y"
                                                  {
             //printf("declaration-specifiers-> type-specifier declaration-specifiers\n");
 }
-#line 2598 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2600 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 79: /* declaration-specifiers: type-specifier  */
-#line 696 "assgn_5_21CS30059_21CS30038.y"
+#line 698 "assgn_5_21CS30059_21CS30038.y"
                           {
             //printf("declaration-specifiers-> type-specifier\n");
 }
-#line 2606 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2608 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 80: /* declaration-specifiers: type-qualifier declaration-specifiers  */
-#line 699 "assgn_5_21CS30059_21CS30038.y"
+#line 701 "assgn_5_21CS30059_21CS30038.y"
                                                  {
             //printf("declaration-specifiers-> type-qualifier declaration-specifiers\n");
 }
-#line 2614 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2616 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 81: /* declaration-specifiers: type-qualifier  */
-#line 702 "assgn_5_21CS30059_21CS30038.y"
+#line 704 "assgn_5_21CS30059_21CS30038.y"
                           {
             //printf("declaration-specifiers-> type-qualifier\n");
 }
-#line 2622 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2624 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 82: /* declaration-specifiers: function-specifier declaration-specifiers  */
-#line 705 "assgn_5_21CS30059_21CS30038.y"
+#line 707 "assgn_5_21CS30059_21CS30038.y"
                                                      {
             //printf("declaration-specifiers-> function-specifier declaration-specifiers\n");
 }
-#line 2630 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2632 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 83: /* declaration-specifiers: function-specifier  */
-#line 708 "assgn_5_21CS30059_21CS30038.y"
+#line 710 "assgn_5_21CS30059_21CS30038.y"
                               {
             //printf("declaration-specifiers-> function-specifier\n");
 }
-#line 2638 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2640 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 84: /* type-qualifier: TYPE_QUALIFIER  */
-#line 713 "assgn_5_21CS30059_21CS30038.y"
+#line 715 "assgn_5_21CS30059_21CS30038.y"
                         {
             //printf("type-qualifier-> type-qualifier-token\n");
 }
-#line 2646 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2648 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 85: /* init-declarator-list: init-declarator  */
-#line 718 "assgn_5_21CS30059_21CS30038.y"
+#line 720 "assgn_5_21CS30059_21CS30038.y"
                          {
             //printf("init-declarator-list-> init-declarator\n");
 }
-#line 2654 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2656 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 86: /* init-declarator-list: init-declarator-list COMMA init-declarator  */
-#line 721 "assgn_5_21CS30059_21CS30038.y"
+#line 723 "assgn_5_21CS30059_21CS30038.y"
                                                       {
             //printf("init-declarator-list-> init-declarator-list , init-declarator\n");
 }
-#line 2662 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2664 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 87: /* init-declarator: declarator  */
-#line 726 "assgn_5_21CS30059_21CS30038.y"
+#line 728 "assgn_5_21CS30059_21CS30038.y"
                     {
             (yyval.pointer) = (yyvsp[0].pointer);
         }
-#line 2670 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2672 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 88: /* init-declarator: declarator EQUALS initializer  */
-#line 729 "assgn_5_21CS30059_21CS30038.y"
+#line 731 "assgn_5_21CS30059_21CS30038.y"
                                          {
             if((yyvsp[0].pointer)->value !="")//Propagate initial value to the symbol
             {
@@ -2678,246 +2680,247 @@ yyreduce:
             }
             emit("=", (yyvsp[-2].pointer)->name, (yyvsp[0].pointer)->name);
         }
-#line 2682 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2684 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 89: /* type-specifier: VOID  */
-#line 738 "assgn_5_21CS30059_21CS30038.y"
+#line 740 "assgn_5_21CS30059_21CS30038.y"
             {
             //Set Vartype to the last seen variable type
             varType = "void";
         }
-#line 2691 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2693 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 90: /* type-specifier: CHAR  */
-#line 742 "assgn_5_21CS30059_21CS30038.y"
+#line 744 "assgn_5_21CS30059_21CS30038.y"
               {
             varType = "char";
         }
-#line 2699 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2701 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 91: /* type-specifier: SHORT  */
-#line 745 "assgn_5_21CS30059_21CS30038.y"
+#line 747 "assgn_5_21CS30059_21CS30038.y"
                {
             varType = "short";
         }
-#line 2707 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2709 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 92: /* type-specifier: INT  */
-#line 748 "assgn_5_21CS30059_21CS30038.y"
+#line 750 "assgn_5_21CS30059_21CS30038.y"
              {
             varType = "int";
         }
-#line 2715 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2717 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 93: /* type-specifier: LONG  */
-#line 751 "assgn_5_21CS30059_21CS30038.y"
+#line 753 "assgn_5_21CS30059_21CS30038.y"
               {
             varType = "long";
         }
-#line 2723 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2725 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 94: /* type-specifier: FLOAT  */
-#line 754 "assgn_5_21CS30059_21CS30038.y"
+#line 756 "assgn_5_21CS30059_21CS30038.y"
                {
             varType = "float";
         }
-#line 2731 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2733 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 95: /* type-specifier: DOUBLE  */
-#line 757 "assgn_5_21CS30059_21CS30038.y"
+#line 759 "assgn_5_21CS30059_21CS30038.y"
                 {
             varType = "double";
         }
-#line 2739 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2741 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 96: /* type-specifier: SIGNED  */
-#line 760 "assgn_5_21CS30059_21CS30038.y"
+#line 762 "assgn_5_21CS30059_21CS30038.y"
                 {
             varType = "signed";
         }
-#line 2747 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2749 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 97: /* type-specifier: UNSIGNED  */
-#line 763 "assgn_5_21CS30059_21CS30038.y"
+#line 765 "assgn_5_21CS30059_21CS30038.y"
                   {
             varType = "unsigned";
         }
-#line 2755 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2757 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 98: /* type-specifier: BOOL  */
-#line 766 "assgn_5_21CS30059_21CS30038.y"
+#line 768 "assgn_5_21CS30059_21CS30038.y"
               {
             varType = "bool";
         }
-#line 2763 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2765 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 99: /* type-specifier: COMPLEX  */
-#line 769 "assgn_5_21CS30059_21CS30038.y"
+#line 771 "assgn_5_21CS30059_21CS30038.y"
                  {
             varType = "complex";
         }
-#line 2771 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2773 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 100: /* type-specifier: IMAGINARY  */
-#line 772 "assgn_5_21CS30059_21CS30038.y"
+#line 774 "assgn_5_21CS30059_21CS30038.y"
                    {
             varType = "imaginary";
         }
-#line 2779 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2781 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 101: /* type-specifier: enum-specifier  */
-#line 775 "assgn_5_21CS30059_21CS30038.y"
+#line 777 "assgn_5_21CS30059_21CS30038.y"
                         {
             
             //printf("type-specifier-> enum-specifier\n")
 ;
         }
-#line 2789 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2791 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 102: /* storage-class-specifier: STORAGE_CLASS_SPECIFIER  */
-#line 782 "assgn_5_21CS30059_21CS30038.y"
+#line 784 "assgn_5_21CS30059_21CS30038.y"
                                 {
             //printf("storage-class-specifier-> storage_class_specifier_token\n");
 }
-#line 2797 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2799 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 103: /* storage-class-specifier: STATIC_TOKEN  */
-#line 785 "assgn_5_21CS30059_21CS30038.y"
+#line 787 "assgn_5_21CS30059_21CS30038.y"
                        {
             //printf("storage-class-specifier-> storage_class_specifier_token\n");
 }
-#line 2805 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2807 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 104: /* specifier-qualifier-list: type-specifier specifier-qualifier-listopt  */
-#line 790 "assgn_5_21CS30059_21CS30038.y"
+#line 792 "assgn_5_21CS30059_21CS30038.y"
                                                    {
             //printf("specifier-qualifier-list-> type-specifier specifier-qualifier-listopt\n");
 }
-#line 2813 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2815 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 105: /* specifier-qualifier-list: TYPE_QUALIFIER specifier-qualifier-listopt  */
-#line 793 "assgn_5_21CS30059_21CS30038.y"
+#line 795 "assgn_5_21CS30059_21CS30038.y"
                                                      {
             //printf("specifier-qualifier-list-> type-qualifier specifier-qualifier-listopt\n");
 }
-#line 2821 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2823 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 106: /* specifier-qualifier-listopt: specifier-qualifier-list  */
-#line 798 "assgn_5_21CS30059_21CS30038.y"
+#line 800 "assgn_5_21CS30059_21CS30038.y"
                                  {
             //printf("specifier-qualifier-listopt-> specifier-qualifier-list\n");
 }
-#line 2829 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2831 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 107: /* specifier-qualifier-listopt: %empty  */
-#line 801 "assgn_5_21CS30059_21CS30038.y"
+#line 803 "assgn_5_21CS30059_21CS30038.y"
                  {
             //printf("specifier-qualifier-listopt-> \n");
 }
-#line 2837 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2839 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 108: /* enum-specifier: ENUM identifieropt LEFT_CURLY_BRACKET enumerator-list RIGHT_CURLY_BRACKET  */
-#line 806 "assgn_5_21CS30059_21CS30038.y"
+#line 808 "assgn_5_21CS30059_21CS30038.y"
                                                                                   {
             //printf("enum-specifier-> enum IDENTIFIERopt {enumerator-list}\n");
 }
-#line 2845 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2847 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 109: /* enum-specifier: ENUM IDENTIFIER  */
-#line 809 "assgn_5_21CS30059_21CS30038.y"
+#line 811 "assgn_5_21CS30059_21CS30038.y"
                           {
             //printf("enum-specifier-> enum IDENTIFIER\n");
 }
-#line 2853 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2855 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 110: /* enum-specifier: ENUM identifieropt LEFT_CURLY_BRACKET enumerator-list COMMA RIGHT_CURLY_BRACKET  */
-#line 812 "assgn_5_21CS30059_21CS30038.y"
+#line 814 "assgn_5_21CS30059_21CS30038.y"
                                                                                           {
             //printf("enum-specifier-> enum IDENTIFIERopt {enumerator-list,}\n");
 }
-#line 2861 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2863 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 111: /* identifieropt: IDENTIFIER  */
-#line 817 "assgn_5_21CS30059_21CS30038.y"
+#line 819 "assgn_5_21CS30059_21CS30038.y"
                    {
+        
             //printf("identifieropt-> IDENTIFIER\n");
 }
-#line 2869 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2872 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 112: /* identifieropt: %empty  */
-#line 820 "assgn_5_21CS30059_21CS30038.y"
+#line 823 "assgn_5_21CS30059_21CS30038.y"
                  {
             //printf("identifieropt-> \n");
 }
-#line 2877 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2880 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 113: /* enumerator-list: enumerator  */
-#line 825 "assgn_5_21CS30059_21CS30038.y"
+#line 828 "assgn_5_21CS30059_21CS30038.y"
                    {
             //printf("enumerator-list-> enumerator\n");
 }
-#line 2885 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2888 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 114: /* enumerator-list: enumerator-list COMMA enumerator  */
-#line 828 "assgn_5_21CS30059_21CS30038.y"
+#line 831 "assgn_5_21CS30059_21CS30038.y"
                                            {
             //printf("enumerator-list-> enumerator-list , enumerator\n");
 }
-#line 2893 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2896 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 115: /* enumerator: IDENTIFIER  */
-#line 833 "assgn_5_21CS30059_21CS30038.y"
+#line 836 "assgn_5_21CS30059_21CS30038.y"
                    {
             //printf("enumerator-> enumeration-const\n");
 }
-#line 2901 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2904 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 116: /* enumerator: IDENTIFIER EQUALS constant-expression  */
-#line 836 "assgn_5_21CS30059_21CS30038.y"
+#line 839 "assgn_5_21CS30059_21CS30038.y"
                                                 {
             //printf("enumerator-> enumeration-const = constant-expression\n");
 }
-#line 2909 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2912 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 117: /* function-specifier: FUNCTION_SPECIFIER  */
-#line 841 "assgn_5_21CS30059_21CS30038.y"
+#line 844 "assgn_5_21CS30059_21CS30038.y"
                            {
             //printf("function-specifier-> function-specifier-token\n");
 }
-#line 2917 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2920 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 118: /* declarator: pointer direct-declarator  */
-#line 846 "assgn_5_21CS30059_21CS30038.y"
+#line 849 "assgn_5_21CS30059_21CS30038.y"
                                   {
             ttype* t = (yyvsp[-1].ptr);
             //Go to the root of the array type for multidimensional arrays using loop
@@ -2928,56 +2931,58 @@ yyreduce:
             t->arrtype = (yyvsp[0].pointer)->type;//Set base type
             (yyval.pointer) = (yyvsp[0].pointer)->update((yyvsp[-1].ptr));//Update type
         }
-#line 2932 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2935 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 119: /* declarator: direct-declarator  */
-#line 856 "assgn_5_21CS30059_21CS30038.y"
+#line 859 "assgn_5_21CS30059_21CS30038.y"
                             {
             //printf("declarator-> direct-declarator\n");
 }
-#line 2940 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2943 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 120: /* direct-declarator: IDENTIFIER  */
-#line 861 "assgn_5_21CS30059_21CS30038.y"
+#line 864 "assgn_5_21CS30059_21CS30038.y"
                    {
-            (yyval.pointer) = (yyvsp[0].pointer)->update(new ttype(varType));
+           // $$ = $1->update(new ttype(varType));
+            (yyval.pointer) = currentST->lookup2(globe);
+            (yyval.pointer)->update(new ttype(varType));
             currentSymbol = (yyval.pointer);
         }
-#line 2949 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2954 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 121: /* direct-declarator: LEFT_PARENTHESIS declarator RIGHT_PARENTHESIS  */
-#line 865 "assgn_5_21CS30059_21CS30038.y"
+#line 870 "assgn_5_21CS30059_21CS30038.y"
                                                         {
             (yyval.pointer) = (yyvsp[-1].pointer);
         }
-#line 2957 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2962 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 122: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET type-qualifier-list RIGHT_SQUARE_BRACKET  */
-#line 868 "assgn_5_21CS30059_21CS30038.y"
+#line 873 "assgn_5_21CS30059_21CS30038.y"
                                                                                         {
             
             //printf("direct-declarator-> direct-declarator [type-qualifier-list]\n")
 ;
         }
-#line 2967 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2972 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 123: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET type-qualifier-list assignment-expression RIGHT_SQUARE_BRACKET  */
-#line 873 "assgn_5_21CS30059_21CS30038.y"
+#line 878 "assgn_5_21CS30059_21CS30038.y"
                                                                                                               {
             
             //printf("direct-declarator-> direct-declarator [type-qualifier-list assignment-expression]\n")
 ;
         }
-#line 2977 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 2982 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 124: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET assignment-expression RIGHT_SQUARE_BRACKET  */
-#line 878 "assgn_5_21CS30059_21CS30038.y"
+#line 883 "assgn_5_21CS30059_21CS30038.y"
                                                                                            {
             //Array declaration
             ttype *t = (yyvsp[-3].pointer)->type;
@@ -3011,11 +3016,11 @@ yyreduce:
             }
 
         }
-#line 3015 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3020 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 125: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET RIGHT_SQUARE_BRACKET  */
-#line 911 "assgn_5_21CS30059_21CS30038.y"
+#line 916 "assgn_5_21CS30059_21CS30038.y"
                                                                     {
             //Array declaration without size(inferred size)
             ttype* t=(yyvsp[-2].pointer)->type;
@@ -3039,51 +3044,51 @@ yyreduce:
                 (yyval.pointer)=(yyvsp[-2].pointer)->update((yyvsp[-2].pointer)->type);
             }
         }
-#line 3043 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3048 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 126: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET STATIC_TOKEN type-qualifier-list assignment-expression RIGHT_SQUARE_BRACKET  */
-#line 934 "assgn_5_21CS30059_21CS30038.y"
+#line 939 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                             {
             //printf("direct-declarator-> direct-declarator [STATIC type-qualifier-listopt assignment-expression]\n");
 }
-#line 3051 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3056 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 127: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET STATIC_TOKEN assignment-expression RIGHT_SQUARE_BRACKET  */
-#line 937 "assgn_5_21CS30059_21CS30038.y"
+#line 942 "assgn_5_21CS30059_21CS30038.y"
                                                                                                         {
             //printf("direct-declarator-> direct-declarator [type-qualifier-list STATIC assignment-expression]\n");
 }
-#line 3059 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3064 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 128: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET type-qualifier-list STATIC_TOKEN assignment-expression RIGHT_SQUARE_BRACKET  */
-#line 940 "assgn_5_21CS30059_21CS30038.y"
+#line 945 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                             {
             //printf("direct-declarator-> direct-declarator [type-qualifier-list STATIC assignment-expression]\n");
 }
-#line 3067 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3072 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 129: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET type-qualifier-list STAR RIGHT_SQUARE_BRACKET  */
-#line 943 "assgn_5_21CS30059_21CS30038.y"
+#line 948 "assgn_5_21CS30059_21CS30038.y"
                                                                                               {
             //printf("direct-declarator-> direct-declarator [type-qualifier-listopt *]\n");
 }
-#line 3075 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3080 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 130: /* direct-declarator: direct-declarator LEFT_SQUARE_BRACKET STAR RIGHT_SQUARE_BRACKET  */
-#line 946 "assgn_5_21CS30059_21CS30038.y"
+#line 951 "assgn_5_21CS30059_21CS30038.y"
                                                                           {
             //printf("direct-declarator-> direct-declarator [*]\n");
 }
-#line 3083 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3088 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 131: /* direct-declarator: direct-declarator LEFT_PARENTHESIS change-table parameter-type-list RIGHT_PARENTHESIS  */
-#line 949 "assgn_5_21CS30059_21CS30038.y"
+#line 954 "assgn_5_21CS30059_21CS30038.y"
                                                                                                 {
             //Function declaration
             //Change-table added to augment the grammar to change table before of parameter declaration
@@ -3097,19 +3102,19 @@ yyreduce:
             switchTable(globalST); //Switch back to global ST at end of declaration       
             currentSymbol = (yyval.pointer);
         }
-#line 3101 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3106 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 132: /* direct-declarator: direct-declarator LEFT_PARENTHESIS identifier-list RIGHT_PARENTHESIS  */
-#line 962 "assgn_5_21CS30059_21CS30038.y"
+#line 967 "assgn_5_21CS30059_21CS30038.y"
                                                                                {
             //printf("direct-declarator-> direct-declarator (identifier-listopt)\n");
 }
-#line 3109 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3114 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 133: /* direct-declarator: direct-declarator LEFT_PARENTHESIS change-table RIGHT_PARENTHESIS  */
-#line 966 "assgn_5_21CS30059_21CS30038.y"
+#line 971 "assgn_5_21CS30059_21CS30038.y"
         {
             //Function declaration without parameters
             currentST->name = (yyvsp[-3].pointer)->name;//Update symbol table name of the function
@@ -3122,352 +3127,352 @@ yyreduce:
             switchTable(globalST);//Switch back to global ST at end of declaration        
             currentSymbol = (yyval.pointer);
         }
-#line 3126 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3131 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 134: /* type-qualifier-listopt: type-qualifier-list  */
-#line 980 "assgn_5_21CS30059_21CS30038.y"
+#line 985 "assgn_5_21CS30059_21CS30038.y"
                             {
             //printf("type-qualifier-listopt-> type-qualifier-list\n");
 }
-#line 3134 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3139 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 135: /* type-qualifier-listopt: %empty  */
-#line 983 "assgn_5_21CS30059_21CS30038.y"
+#line 988 "assgn_5_21CS30059_21CS30038.y"
                  {
             //printf("type-qualifier-listopt-> \n");
 }
-#line 3142 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3147 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 136: /* pointer: STAR type-qualifier-listopt  */
-#line 988 "assgn_5_21CS30059_21CS30038.y"
+#line 993 "assgn_5_21CS30059_21CS30038.y"
                                     {
             (yyval.ptr) = new ttype("ptr");//Pointer type
         }
-#line 3150 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3155 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 137: /* pointer: STAR type-qualifier-listopt pointer  */
-#line 991 "assgn_5_21CS30059_21CS30038.y"
+#line 996 "assgn_5_21CS30059_21CS30038.y"
                                               {
             (yyval.ptr) = new ttype("ptr",(yyvsp[0].ptr));//Pointer to pointer
         }
-#line 3158 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3163 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 138: /* type-qualifier-list: TYPE_QUALIFIER  */
-#line 996 "assgn_5_21CS30059_21CS30038.y"
+#line 1001 "assgn_5_21CS30059_21CS30038.y"
                        {
             //printf("type-qualifier-list-> type-qualifier\n");
 }
-#line 3166 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3171 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 139: /* type-qualifier-list: type-qualifier-list TYPE_QUALIFIER  */
-#line 999 "assgn_5_21CS30059_21CS30038.y"
+#line 1004 "assgn_5_21CS30059_21CS30038.y"
                                              {
             //printf("type-qualifier-list-> type-qualifier-list type-qualifier\n");
 }
-#line 3174 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3179 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 140: /* parameter-type-list: parameter-list  */
-#line 1004 "assgn_5_21CS30059_21CS30038.y"
+#line 1009 "assgn_5_21CS30059_21CS30038.y"
                        {
             //printf("parameter-type-list-> parameter-list\n");
 }
-#line 3182 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3187 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 141: /* parameter-type-list: parameter-list COMMA ELLIPSIS  */
-#line 1007 "assgn_5_21CS30059_21CS30038.y"
+#line 1012 "assgn_5_21CS30059_21CS30038.y"
                                         {
             //printf("parameter-type-list-> parameter-list , ...\n");
 }
-#line 3190 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3195 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 142: /* parameter-list: parameter-declaration  */
-#line 1012 "assgn_5_21CS30059_21CS30038.y"
+#line 1017 "assgn_5_21CS30059_21CS30038.y"
                               {
             //printf("parameter-list-> parameter-declaration\n");
 }
-#line 3198 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3203 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 143: /* parameter-list: parameter-list COMMA parameter-declaration  */
-#line 1015 "assgn_5_21CS30059_21CS30038.y"
+#line 1020 "assgn_5_21CS30059_21CS30038.y"
                                                      {
             //printf("parameter-list-> parameter-list , parameter-declaration\n");
 }
-#line 3206 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3211 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 144: /* parameter-declaration: declaration-specifiers declarator  */
-#line 1020 "assgn_5_21CS30059_21CS30038.y"
+#line 1025 "assgn_5_21CS30059_21CS30038.y"
                                           {
             //printf("parameter-declaration-> declaration-specifiers declarator\n");
 }
-#line 3214 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3219 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 145: /* parameter-declaration: declaration-specifiers  */
-#line 1023 "assgn_5_21CS30059_21CS30038.y"
+#line 1028 "assgn_5_21CS30059_21CS30038.y"
                                  {
             //printf("parameter-declaration-> declaration-specifiers\n");
 }
-#line 3222 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3227 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 146: /* identifier-list: IDENTIFIER  */
-#line 1028 "assgn_5_21CS30059_21CS30038.y"
+#line 1033 "assgn_5_21CS30059_21CS30038.y"
                    {
             //printf("identifier-list-> IDENTIFIER\n");
 }
-#line 3230 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3235 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 147: /* identifier-list: identifier-list COMMA IDENTIFIER  */
-#line 1031 "assgn_5_21CS30059_21CS30038.y"
+#line 1036 "assgn_5_21CS30059_21CS30038.y"
                                            {
             //printf("identifier-list-> identifier-list , IDENTIFIER\n");
 }
-#line 3238 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3243 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 148: /* type-name: specifier-qualifier-list  */
-#line 1036 "assgn_5_21CS30059_21CS30038.y"
+#line 1041 "assgn_5_21CS30059_21CS30038.y"
                                  {
             //printf("type-name-> specifier-qualifier-list\n");
 }
-#line 3246 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3251 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 149: /* initializer: assignment-expression  */
-#line 1041 "assgn_5_21CS30059_21CS30038.y"
+#line 1046 "assgn_5_21CS30059_21CS30038.y"
                               {
             (yyval.pointer) = (yyvsp[0].exp)->loc;
         }
-#line 3254 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3259 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 150: /* initializer: LEFT_CURLY_BRACKET initializer-list RIGHT_CURLY_BRACKET  */
-#line 1044 "assgn_5_21CS30059_21CS30038.y"
+#line 1049 "assgn_5_21CS30059_21CS30038.y"
                                                                   {
             //printf("initializer-> {initializer-list}\n");
 }
-#line 3262 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3267 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 151: /* initializer: LEFT_CURLY_BRACKET initializer-list COMMA RIGHT_CURLY_BRACKET  */
-#line 1047 "assgn_5_21CS30059_21CS30038.y"
+#line 1052 "assgn_5_21CS30059_21CS30038.y"
                                                                         {
             //printf("initializer-> {initializer-list,}\n");
 }
-#line 3270 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3275 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 152: /* initializer-list: designationopt initializer  */
-#line 1052 "assgn_5_21CS30059_21CS30038.y"
+#line 1057 "assgn_5_21CS30059_21CS30038.y"
                                    {
             //printf("initializer-list-> designationopt initializer\n");
 }
-#line 3278 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3283 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 153: /* initializer-list: initializer-list COMMA designationopt initializer  */
-#line 1055 "assgn_5_21CS30059_21CS30038.y"
+#line 1060 "assgn_5_21CS30059_21CS30038.y"
                                                             {
             //printf("initializer-list-> initializer-list , designationopt initializer\n");
 }
-#line 3286 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3291 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 154: /* designationopt: designation  */
-#line 1060 "assgn_5_21CS30059_21CS30038.y"
+#line 1065 "assgn_5_21CS30059_21CS30038.y"
                     {
             //printf("designationopt-> designation\n");
 }
-#line 3294 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3299 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 155: /* designationopt: %empty  */
-#line 1063 "assgn_5_21CS30059_21CS30038.y"
+#line 1068 "assgn_5_21CS30059_21CS30038.y"
                  {
             //printf("designationopt-> \n");
 }
-#line 3302 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3307 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 156: /* designation: designator-list EQUALS  */
-#line 1068 "assgn_5_21CS30059_21CS30038.y"
+#line 1073 "assgn_5_21CS30059_21CS30038.y"
                                {
             //printf("designation-> designator-list =\n");
 }
-#line 3310 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3315 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 157: /* designator-list: designator  */
-#line 1073 "assgn_5_21CS30059_21CS30038.y"
+#line 1078 "assgn_5_21CS30059_21CS30038.y"
                    {
             //printf("designator-list-> designator\n");
 }
-#line 3318 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3323 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 158: /* designator-list: designator-list designator  */
-#line 1076 "assgn_5_21CS30059_21CS30038.y"
+#line 1081 "assgn_5_21CS30059_21CS30038.y"
                                      {
             //printf("designator-list-> designation-list designator\n");
 }
-#line 3326 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3331 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 159: /* designator: LEFT_SQUARE_BRACKET constant-expression RIGHT_SQUARE_BRACKET  */
-#line 1081 "assgn_5_21CS30059_21CS30038.y"
+#line 1086 "assgn_5_21CS30059_21CS30038.y"
                                                                      {
             //printf("designator-> [constant-expression]\n");
 }
-#line 3334 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3339 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 160: /* designator: DOT IDENTIFIER  */
-#line 1084 "assgn_5_21CS30059_21CS30038.y"
+#line 1089 "assgn_5_21CS30059_21CS30038.y"
                          {
             //printf("designator-> . IDENTIFIER\n");
 }
-#line 3342 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3347 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 161: /* statement: labeled-statement  */
-#line 1089 "assgn_5_21CS30059_21CS30038.y"
+#line 1094 "assgn_5_21CS30059_21CS30038.y"
                           {
             //printf("statement-> labeled-statement\n");
 }
-#line 3350 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3355 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 162: /* statement: compound-statement  */
-#line 1092 "assgn_5_21CS30059_21CS30038.y"
+#line 1097 "assgn_5_21CS30059_21CS30038.y"
                              {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3358 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3363 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 163: /* statement: expression-statement  */
-#line 1095 "assgn_5_21CS30059_21CS30038.y"
+#line 1100 "assgn_5_21CS30059_21CS30038.y"
                                {
             (yyval.stmt) = new statement();
             (yyval.stmt)->nextlist = (yyvsp[0].exp)->nextlist;//Convert from expression to statement
         }
-#line 3367 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3372 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 164: /* statement: selection-statement  */
-#line 1099 "assgn_5_21CS30059_21CS30038.y"
+#line 1104 "assgn_5_21CS30059_21CS30038.y"
                               {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3375 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3380 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 165: /* statement: iteration-statement  */
-#line 1102 "assgn_5_21CS30059_21CS30038.y"
+#line 1107 "assgn_5_21CS30059_21CS30038.y"
                               {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3383 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3388 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 166: /* statement: jump-statement  */
-#line 1105 "assgn_5_21CS30059_21CS30038.y"
+#line 1110 "assgn_5_21CS30059_21CS30038.y"
                          {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3391 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3396 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 167: /* loop-statement: labeled-statement  */
-#line 1110 "assgn_5_21CS30059_21CS30038.y"
+#line 1115 "assgn_5_21CS30059_21CS30038.y"
                           {
             //printf("loop-statement-> labeled-statement\n");
 }
-#line 3399 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3404 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 168: /* loop-statement: expression-statement  */
-#line 1113 "assgn_5_21CS30059_21CS30038.y"
+#line 1118 "assgn_5_21CS30059_21CS30038.y"
                                {
             //Loop statement for loops
             (yyval.stmt) = new statement();
             (yyval.stmt)->nextlist = (yyvsp[0].exp)->nextlist;
         }
-#line 3409 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3414 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 169: /* loop-statement: selection-statement  */
-#line 1118 "assgn_5_21CS30059_21CS30038.y"
+#line 1123 "assgn_5_21CS30059_21CS30038.y"
                               {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3417 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3422 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 170: /* loop-statement: iteration-statement  */
-#line 1121 "assgn_5_21CS30059_21CS30038.y"
+#line 1126 "assgn_5_21CS30059_21CS30038.y"
                               {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3425 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3430 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 171: /* loop-statement: jump-statement  */
-#line 1124 "assgn_5_21CS30059_21CS30038.y"
+#line 1129 "assgn_5_21CS30059_21CS30038.y"
                          {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3433 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3438 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 172: /* labeled-statement: IDENTIFIER COLON statement  */
-#line 1129 "assgn_5_21CS30059_21CS30038.y"
+#line 1134 "assgn_5_21CS30059_21CS30038.y"
                                    {
             //printf("labeled-statement-> IDENTIFIER : statement\n");
 }
-#line 3441 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3446 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 173: /* labeled-statement: CASE constant-expression COLON statement  */
-#line 1132 "assgn_5_21CS30059_21CS30038.y"
+#line 1137 "assgn_5_21CS30059_21CS30038.y"
                                                    {
             //printf("labeled-statement-> CASE constant-expression : statement\n");
 }
-#line 3449 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3454 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 174: /* labeled-statement: DEFAULT COLON statement  */
-#line 1135 "assgn_5_21CS30059_21CS30038.y"
+#line 1140 "assgn_5_21CS30059_21CS30038.y"
                                   {
             //printf("labeled-statement-> DEFAULT : statement\n");
 }
-#line 3457 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3462 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 175: /* compound-statement: LEFT_CURLY_BRACKET A change-table block-item-listopt RIGHT_CURLY_BRACKET  */
-#line 1140 "assgn_5_21CS30059_21CS30038.y"
+#line 1145 "assgn_5_21CS30059_21CS30038.y"
                                                                                  {
             //A and change-table added to switch to new symbol table when new block begins(A creates a new table, change-table switches to it)
             (yyval.stmt) = (yyvsp[-1].stmt);
             switchTable(currentST->parent);//Switch back to parent at end of block
         }
-#line 3467 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3472 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 176: /* A: %empty  */
-#line 1147 "assgn_5_21CS30059_21CS30038.y"
+#line 1152 "assgn_5_21CS30059_21CS30038.y"
         {
             //Dummy non terminal to create a new symbol table
             string new_ST = currentST->name + "_" + blockName + "_" + to_string(STCount++);//Nmae for the new ST
@@ -3478,11 +3483,11 @@ yyreduce:
             sym->type = new ttype("block");
             currentSymbol = sym;
         }
-#line 3482 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3487 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 177: /* change-table: %empty  */
-#line 1159 "assgn_5_21CS30059_21CS30038.y"
+#line 1164 "assgn_5_21CS30059_21CS30038.y"
         {
             //Dummy nonterminal to switch to new symbol table
             if(currentSymbol->nested_table != NULL)
@@ -3495,76 +3500,76 @@ yyreduce:
                 switchTable(new symbolTable(""));
             }
         }
-#line 3499 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3504 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 178: /* block-item-listopt: block-item-list  */
-#line 1173 "assgn_5_21CS30059_21CS30038.y"
+#line 1178 "assgn_5_21CS30059_21CS30038.y"
                         {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3507 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3512 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 179: /* block-item-listopt: %empty  */
-#line 1176 "assgn_5_21CS30059_21CS30038.y"
+#line 1181 "assgn_5_21CS30059_21CS30038.y"
                  {
             (yyval.stmt) = new statement();
         }
-#line 3515 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3520 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 180: /* block-item-list: block-item  */
-#line 1181 "assgn_5_21CS30059_21CS30038.y"
+#line 1186 "assgn_5_21CS30059_21CS30038.y"
                    {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3523 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3528 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 181: /* block-item-list: block-item-list M block-item  */
-#line 1184 "assgn_5_21CS30059_21CS30038.y"
+#line 1189 "assgn_5_21CS30059_21CS30038.y"
                                        {
             (yyval.stmt) = (yyvsp[0].stmt);
             backpatch((yyvsp[-2].stmt)->nextlist, (yyvsp[-1].instr));//Backpatch the dabgling ends of the previous block to the start of the current block
         }
-#line 3532 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3537 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 182: /* block-item: declaration  */
-#line 1190 "assgn_5_21CS30059_21CS30038.y"
+#line 1195 "assgn_5_21CS30059_21CS30038.y"
                     {
             (yyval.stmt) = new statement();
         }
-#line 3540 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3545 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 183: /* block-item: statement  */
-#line 1193 "assgn_5_21CS30059_21CS30038.y"
+#line 1198 "assgn_5_21CS30059_21CS30038.y"
                     {
             (yyval.stmt) = (yyvsp[0].stmt);
         }
-#line 3548 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3553 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 184: /* expression-statement: expression SEMICOLON  */
-#line 1198 "assgn_5_21CS30059_21CS30038.y"
+#line 1203 "assgn_5_21CS30059_21CS30038.y"
                              {
             (yyval.exp) = (yyvsp[-1].exp);
         }
-#line 3556 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3561 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 185: /* expression-statement: SEMICOLON  */
-#line 1201 "assgn_5_21CS30059_21CS30038.y"
+#line 1206 "assgn_5_21CS30059_21CS30038.y"
                     {
             (yyval.exp) = new expression();
         }
-#line 3564 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3569 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 186: /* selection-statement: IF LEFT_PARENTHESIS expression N RIGHT_PARENTHESIS M statement N  */
-#line 1207 "assgn_5_21CS30059_21CS30038.y"
+#line 1212 "assgn_5_21CS30059_21CS30038.y"
         {
             //M and N added to augment grammar and aid in control flow
             backpatch((yyvsp[-4].stmt)->nextlist,nextinstr());//Backpatch
@@ -3574,11 +3579,11 @@ yyreduce:
             list<int> l1 = merge((yyvsp[-5].exp)->falselist,(yyvsp[-1].stmt)->nextlist);//Merge falselist and nextlist
             (yyval.stmt)->nextlist = merge(l1,(yyvsp[0].stmt)->nextlist);
         }
-#line 3578 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3583 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 187: /* selection-statement: IF LEFT_PARENTHESIS expression N RIGHT_PARENTHESIS M statement N ELSE M statement  */
-#line 1216 "assgn_5_21CS30059_21CS30038.y"
+#line 1221 "assgn_5_21CS30059_21CS30038.y"
                                                                                              {
             //M and N added to augment grammar and aid in control flow
             backpatch((yyvsp[-7].stmt)->nextlist,nextinstr());//Backpatch
@@ -3589,19 +3594,19 @@ yyreduce:
             list<int> l1 = merge((yyvsp[-4].stmt)->nextlist,(yyvsp[-3].stmt)->nextlist);
             (yyval.stmt)->nextlist = merge(l1,(yyvsp[0].stmt)->nextlist);
         }
-#line 3593 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3598 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 188: /* selection-statement: SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement  */
-#line 1226 "assgn_5_21CS30059_21CS30038.y"
+#line 1231 "assgn_5_21CS30059_21CS30038.y"
                                                                          {
             //printf("selection-statement-> SWITCH (expression) statement\n");
 }
-#line 3601 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3606 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 189: /* iteration-statement: WHILE W LEFT_PARENTHESIS A change-table M expression RIGHT_PARENTHESIS M loop-statement  */
-#line 1231 "assgn_5_21CS30059_21CS30038.y"
+#line 1236 "assgn_5_21CS30059_21CS30038.y"
                                                                                                 {
             //W sets the blockName to while(needed for creating symbol table), A, change-table, M and N added for augmentation
             (yyval.stmt) = new statement();
@@ -3614,11 +3619,11 @@ yyreduce:
             switchTable(currentST->parent);//Switch table back at the end of loop
 
         }
-#line 3618 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3623 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 190: /* iteration-statement: WHILE W LEFT_PARENTHESIS A change-table M expression RIGHT_PARENTHESIS LEFT_CURLY_BRACKET M block-item-listopt RIGHT_CURLY_BRACKET  */
-#line 1243 "assgn_5_21CS30059_21CS30038.y"
+#line 1248 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                              {
             //Same augmentation as explained above
             (yyval.stmt) = new statement();
@@ -3630,11 +3635,11 @@ yyreduce:
             blockName = "";
             switchTable(currentST->parent);
         }
-#line 3634 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3639 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 191: /* iteration-statement: DO D M loop-statement M WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON  */
-#line 1254 "assgn_5_21CS30059_21CS30038.y"
+#line 1259 "assgn_5_21CS30059_21CS30038.y"
                                                                                                 {
             //D sets blockName, M, N, A, change-table added for augmentation
             (yyval.stmt) = new statement();
@@ -3644,11 +3649,11 @@ yyreduce:
             (yyval.stmt)->nextlist = (yyvsp[-2].exp)->falselist;//Merge falselist
             blockName = "";//Set blockname back to default
         }
-#line 3648 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3653 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 192: /* iteration-statement: DO D LEFT_CURLY_BRACKET M block-item-listopt RIGHT_CURLY_BRACKET M WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON  */
-#line 1263 "assgn_5_21CS30059_21CS30038.y"
+#line 1268 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                            {
             (yyval.stmt) = new statement();
             itob((yyvsp[-2].exp));
@@ -3657,11 +3662,11 @@ yyreduce:
             (yyval.stmt)->nextlist = (yyvsp[-2].exp)->falselist;
             blockName = "";
         }
-#line 3661 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3666 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 193: /* iteration-statement: FOR F LEFT_PARENTHESIS A change-table declaration M expression-statement M expression N RIGHT_PARENTHESIS M loop-statement  */
-#line 1271 "assgn_5_21CS30059_21CS30038.y"
+#line 1276 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                      {
             //F sets blockName, A, change-table, M, N added for augmentation
             (yyval.stmt) = new statement();
@@ -3674,11 +3679,11 @@ yyreduce:
             blockName = "";//Set blockname back to default
             switchTable(currentST->parent);
         }
-#line 3678 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3683 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 194: /* iteration-statement: FOR F LEFT_PARENTHESIS A change-table expression-statement M expression-statement M expression N RIGHT_PARENTHESIS M loop-statement  */
-#line 1283 "assgn_5_21CS30059_21CS30038.y"
+#line 1288 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                               {
             (yyval.stmt) = new statement();
             itob((yyvsp[-6].exp));
@@ -3690,11 +3695,11 @@ yyreduce:
             blockName = "";
             switchTable(currentST->parent);
         }
-#line 3694 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3699 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 195: /* iteration-statement: FOR F LEFT_PARENTHESIS A change-table declaration M expression-statement M expression N RIGHT_PARENTHESIS M LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET  */
-#line 1294 "assgn_5_21CS30059_21CS30038.y"
+#line 1299 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                                                                 {
             (yyval.stmt) = new statement();
             itob((yyvsp[-8].exp));
@@ -3706,11 +3711,11 @@ yyreduce:
             blockName = "";
             switchTable(currentST->parent);
         }
-#line 3710 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3715 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 196: /* iteration-statement: FOR F LEFT_PARENTHESIS A change-table expression-statement M expression-statement M expression N RIGHT_PARENTHESIS M LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET  */
-#line 1305 "assgn_5_21CS30059_21CS30038.y"
+#line 1310 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                                                                         {
             (yyval.stmt) = new statement();                   
             itob((yyvsp[-8].exp));                 
@@ -3722,152 +3727,152 @@ yyreduce:
             blockName = "";
             switchTable(currentST->parent);
         }
-#line 3726 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3731 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 197: /* F: %empty  */
-#line 1317 "assgn_5_21CS30059_21CS30038.y"
+#line 1322 "assgn_5_21CS30059_21CS30038.y"
          {
         //Dummy non terminals for setting the blockName
         blockName = "FOR";
     }
-#line 3735 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3740 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 198: /* W: %empty  */
-#line 1322 "assgn_5_21CS30059_21CS30038.y"
+#line 1327 "assgn_5_21CS30059_21CS30038.y"
          {
         blockName = "WHILE";
     }
-#line 3743 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3748 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 199: /* D: %empty  */
-#line 1326 "assgn_5_21CS30059_21CS30038.y"
+#line 1331 "assgn_5_21CS30059_21CS30038.y"
          {
         blockName = "DO_WHILE";
     }
-#line 3751 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3756 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 200: /* jump-statement: GOTO IDENTIFIER SEMICOLON  */
-#line 1331 "assgn_5_21CS30059_21CS30038.y"
+#line 1336 "assgn_5_21CS30059_21CS30038.y"
                                   {
             //printf("jump-statement-> GOTO IDENTIFIER ;\n");
 }
-#line 3759 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3764 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 201: /* jump-statement: CONTINUE SEMICOLON  */
-#line 1334 "assgn_5_21CS30059_21CS30038.y"
+#line 1339 "assgn_5_21CS30059_21CS30038.y"
                              {
             (yyval.stmt) = new statement();
         }
-#line 3767 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3772 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 202: /* jump-statement: BREAK SEMICOLON  */
-#line 1337 "assgn_5_21CS30059_21CS30038.y"
+#line 1342 "assgn_5_21CS30059_21CS30038.y"
                           {
             (yyval.stmt) = new statement();
         }
-#line 3775 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3780 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 203: /* jump-statement: RETURN expression SEMICOLON  */
-#line 1340 "assgn_5_21CS30059_21CS30038.y"
+#line 1345 "assgn_5_21CS30059_21CS30038.y"
                                       {
             (yyval.stmt) = new statement();
             emit("return", (yyvsp[-1].exp)->loc->name);//Return statements
         }
-#line 3784 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3789 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 204: /* jump-statement: RETURN SEMICOLON  */
-#line 1344 "assgn_5_21CS30059_21CS30038.y"
+#line 1349 "assgn_5_21CS30059_21CS30038.y"
                            {
             (yyval.stmt) = new statement();
             emit("return", "");
         }
-#line 3793 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3798 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 205: /* translation-unit: external-declaration  */
-#line 1350 "assgn_5_21CS30059_21CS30038.y"
+#line 1355 "assgn_5_21CS30059_21CS30038.y"
                              {
             //printf("translation-unit-> external-declaration\n");
 }
-#line 3801 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3806 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 206: /* translation-unit: translation-unit external-declaration  */
-#line 1353 "assgn_5_21CS30059_21CS30038.y"
+#line 1358 "assgn_5_21CS30059_21CS30038.y"
                                                 {
             //printf("translation-unit-> translation-unit external-declaration\n");
 }
-#line 3809 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3814 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 207: /* external-declaration: function-definition  */
-#line 1358 "assgn_5_21CS30059_21CS30038.y"
+#line 1363 "assgn_5_21CS30059_21CS30038.y"
                             {
             //printf("external-declaration-> function-definition\n");
 }
-#line 3817 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3822 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 208: /* external-declaration: declaration  */
-#line 1361 "assgn_5_21CS30059_21CS30038.y"
+#line 1366 "assgn_5_21CS30059_21CS30038.y"
                       {
             //printf("external-declaration-> declaration\n");
 }
-#line 3825 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3830 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 209: /* function-definition: declaration-specifiers declarator declaration-listopt change-table LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET  */
-#line 1366 "assgn_5_21CS30059_21CS30038.y"
+#line 1371 "assgn_5_21CS30059_21CS30038.y"
                                                                                                                                      {
             currentST->parent = globalST;
             STCount=0;
             switchTable(globalST);
         }
-#line 3835 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3840 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 210: /* declaration-listopt: declaration-list  */
-#line 1373 "assgn_5_21CS30059_21CS30038.y"
+#line 1378 "assgn_5_21CS30059_21CS30038.y"
                          {
             //printf("declaration-listopt-> declaration-list\n");
 }
-#line 3843 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3848 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 211: /* declaration-listopt: %empty  */
-#line 1376 "assgn_5_21CS30059_21CS30038.y"
+#line 1381 "assgn_5_21CS30059_21CS30038.y"
                  {
             //printf("declaration-listopt-> \n");
 }
-#line 3851 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3856 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 212: /* declaration-list: declaration  */
-#line 1381 "assgn_5_21CS30059_21CS30038.y"
+#line 1386 "assgn_5_21CS30059_21CS30038.y"
                     {
             //printf("declaration-list-> declaration\n");
 }
-#line 3859 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3864 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
   case 213: /* declaration-list: declaration-list declaration  */
-#line 1384 "assgn_5_21CS30059_21CS30038.y"
+#line 1389 "assgn_5_21CS30059_21CS30038.y"
                                        {
             //printf("declaration-list-> declaration-list declaration\n");
 }
-#line 3867 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3872 "assgn_5_21CS30059_21CS30038.tab.c"
     break;
 
 
-#line 3871 "assgn_5_21CS30059_21CS30038.tab.c"
+#line 3876 "assgn_5_21CS30059_21CS30038.tab.c"
 
       default: break;
     }
@@ -4060,5 +4065,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 1388 "assgn_5_21CS30059_21CS30038.y"
+#line 1393 "assgn_5_21CS30059_21CS30038.y"
 

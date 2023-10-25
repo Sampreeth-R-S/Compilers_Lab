@@ -35,6 +35,7 @@ extern symbolTable* globalST;
 extern int STCount;
 extern string blockName;
 extern string varType;
+extern string globe;
 extern char* yytext;
 
 //Parse function
@@ -50,6 +51,7 @@ class symbolTable
     list<symbol> table;//List of symbols belonging to current scope
     symbolTable(string name_, symbolTable* parent_ = NULL);
     symbol* lookup(string name);
+    symbol* lookup2(string name);
     static symbol* gentemp(ttype* type, string initvalue = "");
     static symbol* gentemp(string type, string initvalue = "");
     void update();
@@ -66,6 +68,7 @@ class symbol{
     symbolTable* nested_table;//Pointer to nested table for functions and blocks
     symbol(string name_, string t_="int",ttype* arrtype = NULL, int width_ = 0);
     symbol* update(ttype* t);
+    symbol* convert(string t);
 };
 //Expression class
 class expression{
