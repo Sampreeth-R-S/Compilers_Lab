@@ -706,11 +706,11 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "assgn_4_21CS30059_21CS30038.l"
-#line 2 "assgn_4_21CS30059_21CS30038.l"
+#line 1 "assgn_5_21CS30059_21CS30038.l"
+#line 2 "assgn_5_21CS30059_21CS30038.l"
     #include <stdio.h>
     #include "translator.h"
-    #include "assgn_4_21CS30059_21CS30038.tab.h"
+    #include "assgn_5_21CS30059_21CS30038.tab.h"
     int lineno=1;
 
 #line 717 "lex.yy.c"
@@ -933,7 +933,7 @@ YY_DECL
 		}
 
 	{
-#line 41 "assgn_4_21CS30059_21CS30038.l"
+#line 41 "assgn_5_21CS30059_21CS30038.l"
 
 #line 939 "lex.yy.c"
 
@@ -994,436 +994,436 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "assgn_4_21CS30059_21CS30038.l"
+#line 42 "assgn_5_21CS30059_21CS30038.l"
 {return STATIC_TOKEN;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 43 "assgn_4_21CS30059_21CS30038.l"
+#line 43 "assgn_5_21CS30059_21CS30038.l"
 {yylval.intval = 0;return INTEGER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 44 "assgn_4_21CS30059_21CS30038.l"
+#line 44 "assgn_5_21CS30059_21CS30038.l"
 {return LEFT_CURLY_BRACKET;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "assgn_4_21CS30059_21CS30038.l"
+#line 45 "assgn_5_21CS30059_21CS30038.l"
 {return RIGHT_CURLY_BRACKET;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 46 "assgn_4_21CS30059_21CS30038.l"
+#line 46 "assgn_5_21CS30059_21CS30038.l"
 {return COMMA;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 47 "assgn_4_21CS30059_21CS30038.l"
+#line 47 "assgn_5_21CS30059_21CS30038.l"
 {return INCREMENT;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 48 "assgn_4_21CS30059_21CS30038.l"
+#line 48 "assgn_5_21CS30059_21CS30038.l"
 {return DECREMENT;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 49 "assgn_4_21CS30059_21CS30038.l"
+#line 49 "assgn_5_21CS30059_21CS30038.l"
 {return EQUALS;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 50 "assgn_4_21CS30059_21CS30038.l"
+#line 50 "assgn_5_21CS30059_21CS30038.l"
 {return AND;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 51 "assgn_4_21CS30059_21CS30038.l"
+#line 51 "assgn_5_21CS30059_21CS30038.l"
 {return STAR;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 52 "assgn_4_21CS30059_21CS30038.l"
+#line 52 "assgn_5_21CS30059_21CS30038.l"
 {return PLUS;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 53 "assgn_4_21CS30059_21CS30038.l"
+#line 53 "assgn_5_21CS30059_21CS30038.l"
 {return MINUS;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 54 "assgn_4_21CS30059_21CS30038.l"
+#line 54 "assgn_5_21CS30059_21CS30038.l"
 {return TILDE;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 55 "assgn_4_21CS30059_21CS30038.l"
+#line 55 "assgn_5_21CS30059_21CS30038.l"
 {return NOT;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 56 "assgn_4_21CS30059_21CS30038.l"
+#line 56 "assgn_5_21CS30059_21CS30038.l"
 {return DIV;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 57 "assgn_4_21CS30059_21CS30038.l"
+#line 57 "assgn_5_21CS30059_21CS30038.l"
 {return MOD;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 58 "assgn_4_21CS30059_21CS30038.l"
+#line 58 "assgn_5_21CS30059_21CS30038.l"
 {return LEFT_SHIFT;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 59 "assgn_4_21CS30059_21CS30038.l"
+#line 59 "assgn_5_21CS30059_21CS30038.l"
 {return RIGHT_SHIFT;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 60 "assgn_4_21CS30059_21CS30038.l"
+#line 60 "assgn_5_21CS30059_21CS30038.l"
 {return LESS_THAN;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 61 "assgn_4_21CS30059_21CS30038.l"
+#line 61 "assgn_5_21CS30059_21CS30038.l"
 {return GREATER_THAN;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 62 "assgn_4_21CS30059_21CS30038.l"
+#line 62 "assgn_5_21CS30059_21CS30038.l"
 {return LESS_THAN_EQUAL;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 63 "assgn_4_21CS30059_21CS30038.l"
+#line 63 "assgn_5_21CS30059_21CS30038.l"
 {return GREATER_THAN_EQUAL;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 64 "assgn_4_21CS30059_21CS30038.l"
+#line 64 "assgn_5_21CS30059_21CS30038.l"
 {return EQUAL_TO;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 65 "assgn_4_21CS30059_21CS30038.l"
+#line 65 "assgn_5_21CS30059_21CS30038.l"
 {return NOT_EQUAL_TO;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 66 "assgn_4_21CS30059_21CS30038.l"
+#line 66 "assgn_5_21CS30059_21CS30038.l"
 {return XOR;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 67 "assgn_4_21CS30059_21CS30038.l"
+#line 67 "assgn_5_21CS30059_21CS30038.l"
 {return OR;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 68 "assgn_4_21CS30059_21CS30038.l"
+#line 68 "assgn_5_21CS30059_21CS30038.l"
 {return AND_AND;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 69 "assgn_4_21CS30059_21CS30038.l"
+#line 69 "assgn_5_21CS30059_21CS30038.l"
 {return OR_OR;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 70 "assgn_4_21CS30059_21CS30038.l"
+#line 70 "assgn_5_21CS30059_21CS30038.l"
 {return QUESTION;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 71 "assgn_4_21CS30059_21CS30038.l"
+#line 71 "assgn_5_21CS30059_21CS30038.l"
 {return COLON;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 72 "assgn_4_21CS30059_21CS30038.l"
+#line 72 "assgn_5_21CS30059_21CS30038.l"
 {return SEMICOLON;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 73 "assgn_4_21CS30059_21CS30038.l"
+#line 73 "assgn_5_21CS30059_21CS30038.l"
 {return COMMA;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 74 "assgn_4_21CS30059_21CS30038.l"
+#line 74 "assgn_5_21CS30059_21CS30038.l"
 {return LEFT_SQUARE_BRACKET;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 75 "assgn_4_21CS30059_21CS30038.l"
+#line 75 "assgn_5_21CS30059_21CS30038.l"
 {return RIGHT_SQUARE_BRACKET;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "assgn_4_21CS30059_21CS30038.l"
+#line 76 "assgn_5_21CS30059_21CS30038.l"
 {return LEFT_PARENTHESIS;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 77 "assgn_4_21CS30059_21CS30038.l"
+#line 77 "assgn_5_21CS30059_21CS30038.l"
 {return RIGHT_PARENTHESIS;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 78 "assgn_4_21CS30059_21CS30038.l"
+#line 78 "assgn_5_21CS30059_21CS30038.l"
 {return DOT;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 79 "assgn_4_21CS30059_21CS30038.l"
+#line 79 "assgn_5_21CS30059_21CS30038.l"
 {return ELLIPSIS;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 80 "assgn_4_21CS30059_21CS30038.l"
+#line 80 "assgn_5_21CS30059_21CS30038.l"
 {return LEFT_CURLY_BRACKET;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 81 "assgn_4_21CS30059_21CS30038.l"
+#line 81 "assgn_5_21CS30059_21CS30038.l"
 {return RIGHT_CURLY_BRACKET;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 82 "assgn_4_21CS30059_21CS30038.l"
+#line 82 "assgn_5_21CS30059_21CS30038.l"
 {return ARROW;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 83 "assgn_4_21CS30059_21CS30038.l"
+#line 83 "assgn_5_21CS30059_21CS30038.l"
 {/*BEGIN(enumerator);*/return ENUM;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 84 "assgn_4_21CS30059_21CS30038.l"
+#line 84 "assgn_5_21CS30059_21CS30038.l"
 {return  VOID;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 85 "assgn_4_21CS30059_21CS30038.l"
+#line 85 "assgn_5_21CS30059_21CS30038.l"
 {return CHAR;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 86 "assgn_4_21CS30059_21CS30038.l"
+#line 86 "assgn_5_21CS30059_21CS30038.l"
 {return SHORT;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 87 "assgn_4_21CS30059_21CS30038.l"
+#line 87 "assgn_5_21CS30059_21CS30038.l"
 {return INT;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 88 "assgn_4_21CS30059_21CS30038.l"
+#line 88 "assgn_5_21CS30059_21CS30038.l"
 {return LONG;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 89 "assgn_4_21CS30059_21CS30038.l"
+#line 89 "assgn_5_21CS30059_21CS30038.l"
 {return FLOAT;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 90 "assgn_4_21CS30059_21CS30038.l"
+#line 90 "assgn_5_21CS30059_21CS30038.l"
 {return DOUBLE;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 91 "assgn_4_21CS30059_21CS30038.l"
+#line 91 "assgn_5_21CS30059_21CS30038.l"
 {return SIGNED;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 92 "assgn_4_21CS30059_21CS30038.l"
+#line 92 "assgn_5_21CS30059_21CS30038.l"
 {return UNSIGNED;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 93 "assgn_4_21CS30059_21CS30038.l"
+#line 93 "assgn_5_21CS30059_21CS30038.l"
 {return BOOL;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 94 "assgn_4_21CS30059_21CS30038.l"
+#line 94 "assgn_5_21CS30059_21CS30038.l"
 {return COMPLEX;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 95 "assgn_4_21CS30059_21CS30038.l"
+#line 95 "assgn_5_21CS30059_21CS30038.l"
 {return IMAGINARY;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 96 "assgn_4_21CS30059_21CS30038.l"
+#line 96 "assgn_5_21CS30059_21CS30038.l"
 {return TYPE_QUALIFIER;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 97 "assgn_4_21CS30059_21CS30038.l"
+#line 97 "assgn_5_21CS30059_21CS30038.l"
 {return STORAGE_CLASS_SPECIFIER;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 98 "assgn_4_21CS30059_21CS30038.l"
+#line 98 "assgn_5_21CS30059_21CS30038.l"
 {return FUNCTION_SPECIFIER;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 99 "assgn_4_21CS30059_21CS30038.l"
+#line 99 "assgn_5_21CS30059_21CS30038.l"
 {return CASE;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 100 "assgn_4_21CS30059_21CS30038.l"
+#line 100 "assgn_5_21CS30059_21CS30038.l"
 {return DEFAULT;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 101 "assgn_4_21CS30059_21CS30038.l"
+#line 101 "assgn_5_21CS30059_21CS30038.l"
 {return SIZEOF;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 102 "assgn_4_21CS30059_21CS30038.l"
+#line 102 "assgn_5_21CS30059_21CS30038.l"
 {return IF;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 103 "assgn_4_21CS30059_21CS30038.l"
+#line 103 "assgn_5_21CS30059_21CS30038.l"
 {return ELSE;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 104 "assgn_4_21CS30059_21CS30038.l"
+#line 104 "assgn_5_21CS30059_21CS30038.l"
 {return SWITCH;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 105 "assgn_4_21CS30059_21CS30038.l"
+#line 105 "assgn_5_21CS30059_21CS30038.l"
 {return WHILE;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 106 "assgn_4_21CS30059_21CS30038.l"
+#line 106 "assgn_5_21CS30059_21CS30038.l"
 {return DO;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 107 "assgn_4_21CS30059_21CS30038.l"
+#line 107 "assgn_5_21CS30059_21CS30038.l"
 {return FOR;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 108 "assgn_4_21CS30059_21CS30038.l"
+#line 108 "assgn_5_21CS30059_21CS30038.l"
 {return GOTO;}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 109 "assgn_4_21CS30059_21CS30038.l"
+#line 109 "assgn_5_21CS30059_21CS30038.l"
 {return CONTINUE;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 110 "assgn_4_21CS30059_21CS30038.l"
+#line 110 "assgn_5_21CS30059_21CS30038.l"
 {return BREAK;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 111 "assgn_4_21CS30059_21CS30038.l"
+#line 111 "assgn_5_21CS30059_21CS30038.l"
 {return RETURN;}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 112 "assgn_4_21CS30059_21CS30038.l"
+#line 112 "assgn_5_21CS30059_21CS30038.l"
 {return TYPE_QUALIFIER;}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 113 "assgn_4_21CS30059_21CS30038.l"
+#line 113 "assgn_5_21CS30059_21CS30038.l"
 {return KEYWORD;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 115 "assgn_4_21CS30059_21CS30038.l"
+#line 115 "assgn_5_21CS30059_21CS30038.l"
 {yylval.pointer=currentST->lookup(yytext);return ENUMERATION_CONST;}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 116 "assgn_4_21CS30059_21CS30038.l"
+#line 116 "assgn_5_21CS30059_21CS30038.l"
 {yylval.pointer=currentST->lookup(yytext);return IDENTIFIER;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 117 "assgn_4_21CS30059_21CS30038.l"
+#line 117 "assgn_5_21CS30059_21CS30038.l"
 {yylval.intval=atoi(yytext);return INTEGER;}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 118 "assgn_4_21CS30059_21CS30038.l"
+#line 118 "assgn_5_21CS30059_21CS30038.l"
 {yylval.floatval=atof(yytext);return FLOATING_CONSTANT;}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 120 "assgn_4_21CS30059_21CS30038.l"
+#line 120 "assgn_5_21CS30059_21CS30038.l"
 {yylval.charval=yytext;return CHARACTER_CONSTANT;}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 121 "assgn_4_21CS30059_21CS30038.l"
+#line 121 "assgn_5_21CS30059_21CS30038.l"
 {yylval.charval=yytext;return STRING_LITERAL;}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 122 "assgn_4_21CS30059_21CS30038.l"
+#line 122 "assgn_5_21CS30059_21CS30038.l"
 {return ASSIGNMENT_OPERATOR;}
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 123 "assgn_4_21CS30059_21CS30038.l"
+#line 123 "assgn_5_21CS30059_21CS30038.l"
 {return PUNCTUATOR;}
 	YY_BREAK
 case 81:
 /* rule 81 can match eol */
 YY_RULE_SETUP
-#line 124 "assgn_4_21CS30059_21CS30038.l"
+#line 124 "assgn_5_21CS30059_21CS30038.l"
 {lineno++;}
 	YY_BREAK
 case 82:
 /* rule 82 can match eol */
 YY_RULE_SETUP
-#line 125 "assgn_4_21CS30059_21CS30038.l"
+#line 125 "assgn_5_21CS30059_21CS30038.l"
 ;
 	YY_BREAK
 case 83:
 /* rule 83 can match eol */
 YY_RULE_SETUP
-#line 126 "assgn_4_21CS30059_21CS30038.l"
+#line 126 "assgn_5_21CS30059_21CS30038.l"
 {/*Single Line Comment*/lineno++;}
 	YY_BREAK
 case 84:
 /* rule 84 can match eol */
 YY_RULE_SETUP
-#line 127 "assgn_4_21CS30059_21CS30038.l"
+#line 127 "assgn_5_21CS30059_21CS30038.l"
 {/*Multi line comment*/for(int i=0;i<yyleng;i++){if(yytext[i]=='\n')lineno++;}}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 128 "assgn_4_21CS30059_21CS30038.l"
+#line 128 "assgn_5_21CS30059_21CS30038.l"
 {return ERROR;}
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 129 "assgn_4_21CS30059_21CS30038.l"
+#line 129 "assgn_5_21CS30059_21CS30038.l"
 ECHO;
 	YY_BREAK
 #line 1430 "lex.yy.c"
@@ -2432,7 +2432,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 129 "assgn_4_21CS30059_21CS30038.l"
+#line 129 "assgn_5_21CS30059_21CS30038.l"
 
 
 
