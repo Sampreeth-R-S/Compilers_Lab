@@ -14,4 +14,9 @@ clean:
 	rm a.out assgn_5_21CS30059_21CS30038.tab.c lex.yy.c assgn_5_21CS30059_21CS30038.tab.h assgn_5_21CS30059_21CS30038.output
 
 test: a.out
-	./a.out<test.c
+	mkdir -p output
+	./a.out<./input/test.c>./output/test1.out
+	./a.out<./input/test2.c>./output/test2.out
+	./a.out<./input/test3.c>./output/test3.out
+	./a.out<./input/test4.c>./output/test4.out
+	./a.out<./input/test5.c>./output/test5.out
