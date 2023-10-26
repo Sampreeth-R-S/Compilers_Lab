@@ -42,7 +42,7 @@ symbol* symbol::convert(string t)
     symbol* temp = symbolTable::gentemp(t);
    // if(this->type->type!=t)
     if(!boolean)
-    emit("=",temp->name,this->type->type+"2"+t+"("+this->name+")");
+    emit("=",temp->name,this->type->type+"to"+t+"("+this->name+")");
     else 
     emit("=",temp->name,this->name);
 
@@ -318,11 +318,11 @@ symbol* convertType(symbol* s, string t) {
 
     if(s->type->type == "float") {
         if(t == "int") {
-            emit("=", temp->name, "float2int(" + s->name + ")");
+            emit("=", temp->name, "floattoint(" + s->name + ")");
             return temp;
         }
         else if(t == "char") {
-            emit("=", temp->name, "float2char(" + s->name + ")");
+            emit("=", temp->name, "floattochar(" + s->name + ")");
             return temp;
         }
         return s;
@@ -330,11 +330,11 @@ symbol* convertType(symbol* s, string t) {
 
     else if(s->type->type == "int") {
         if(t == "float") {
-            emit("=", temp->name, "int2float(" + s->name + ")");
+            emit("=", temp->name, "inttofloat(" + s->name + ")");
             return temp;
         }
         else if(t == "char") {
-            emit("=", temp->name, "int2char(" + s->name + ")");
+            emit("=", temp->name, "inttochar(" + s->name + ")");
             return temp;
         }
         return s;
@@ -342,11 +342,11 @@ symbol* convertType(symbol* s, string t) {
 
     else if(s->type->type == "char") {
         if(t == "float") {
-            emit("=", temp->name, "char2float(" + s->name + ")");
+            emit("=", temp->name, "chartofloat(" + s->name + ")");
             return temp;
         }
         else if(t == "int") {
-            emit("=", temp->name, "char2int(" + s->name + ")");
+            emit("=", temp->name, "chartoint(" + s->name + ")");
             return temp;
         }
         return s;
