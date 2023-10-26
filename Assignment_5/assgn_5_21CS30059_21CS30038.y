@@ -92,22 +92,22 @@ primary-expression:
         | INTEGER   {
             //Create new expression and update initial value of the expression(symbol)
             $$ = new expression();
-            $$->loc=symbolTable::gentemp(new ttype("int"),itos($1));
+            $$->loc=symTab::gentemp(new ttype("int"),itos($1));
             emit("=",$$->loc->name,$1);
         }
         | FLOATING_CONSTANT    {
             $$ = new expression();
-            $$->loc=symbolTable::gentemp(new ttype("float"),ftos($1));
+            $$->loc=symTab::gentemp(new ttype("float"),ftos($1));
             emit("=",$$->loc->name,$1);
         }
         | CHARACTER_CONSTANT    {
             $$ = new expression();
-            $$->loc=symbolTable::gentemp(new ttype("char"),string($1));
+            $$->loc=symTab::gentemp(new ttype("char"),string($1));
             emit("=",$$->loc->name,string($1));
         }
         | STRING_LITERAL    {
             $$ = new expression();
-            $$->loc=symbolTable::gentemp(new ttype("ptr"),string($1));
+            $$->loc=symTab::gentemp(new ttype("ptr"),string($1));
             //emit($$->loc->name,$1,"=");
             $$->loc->type->arrtype = new ttype("char");
         }
@@ -128,13 +128,13 @@ postfix-expression:
             //Used for array indexing
             //Create new array type variable and store pointer of postfix expression in the array type
             $$ = new aarray();
-            $$->loc = symbolTable::gentemp("int");
+            $$->loc = symTab::gentemp("int");
             $$->type = $1->type->arrtype;//Update type
             $$->array_type = "arr";
             $$->Array = $1->Array;
             if($1->array_type=="arr")//Calculate offset of array address
             {
-                symbol*temp = symbolTable::gentemp("int");
+                symbol*temp = symTab::gentemp("int");
                 int size = sizeoft($$->type);
                 emit("*",temp->name,$3->loc->name,itos(size));
                 emit("+",$$->loc->name,$1->loc->name,temp->name);
@@ -148,11 +148,11 @@ postfix-expression:
         | postfix-expression LEFT_PARENTHESIS argument-expression-listopt RIGHT_PARENTHESIS  {
             //Function call
             $$ = new aarray();
-            //$$->loc = symbolTable::gentemp($1->type);
+            //$$->loc = symTab::gentemp($1->type);
             //$$->array_type = "func";
             //$$->Array = $1->Array;
             //$$->type = $1->type;
-            $$->Array = symbolTable::gentemp($1->type);
+            $$->Array = symTab::gentemp($1->type);
             emit("call", $$->Array->name, $1->Array->name, itos($3));//Call function with appropriate parameter number
             
         }
@@ -165,14 +165,14 @@ postfix-expression:
         | postfix-expression INCREMENT  {
             //Increment operation
             $$ = new aarray();
-            $$->Array = symbolTable::gentemp($1->Array->type);
+            $$->Array = symTab::gentemp($1->Array->type);
             emit("=", $$->Array->name, $1->Array->name);//Value of temp = unchanged value of variable
             emit("+", $1->Array->name, $1->Array->name, "1"); //Value of variable incremented by 1
         }
         | postfix-expression DECREMENT  {
             //Decrement operation
             $$ = new aarray();
-            $$->Array = symbolTable::gentemp($1->Array->type);
+            $$->Array = symTab::gentemp($1->Array->type);
             emit("=", $$->Array->name, $1->Array->name); //Value of temp = unchanged value of variable
             emit("-", $1->Array->name, $1->Array->name, "1");//Value of variable decremented by 1
         }
@@ -218,13 +218,13 @@ unary-expression:
             $$ = new aarray();
             switch($1){
                 case '&'://Addressing
-                    $$->Array = symbolTable::gentemp(new ttype("ptr"));
+                    $$->Array = symTab::gentemp(new ttype("ptr"));
                     $$->Array->type->arrtype = $2->Array->type;
                     emit("= &",$$->Array->name,$2->Array->name);
                     break;
                 case '*'://Derefrencing
                     $$->Array = $2->Array;
-                    $$->loc = symbolTable::gentemp($2->Array->type->arrtype);
+                    $$->loc = symTab::gentemp($2->Array->type->arrtype);
                     $$->array_type = "ptr";
                     emit("= *", $$->loc->name, $2->Array->name);  
                     break;
@@ -232,15 +232,15 @@ unary-expression:
                     $$ = $2;
                     break;
                 case '-'://Unary minus
-                    $$->Array = symbolTable::gentemp($2->Array->type->type);
+                    $$->Array = symTab::gentemp($2->Array->type->type);
                     emit("= -", $$->Array->name, $2->Array->name);   
                     break;
                 case '~'://Bitwise complement
-                    $$->Array = symbolTable::gentemp($2->Array->type->type);
+                    $$->Array = symTab::gentemp($2->Array->type->type);
                     emit("= ~", $$->Array->name, $2->Array->name);
                     break;
                 case '!'://Logical complement
-                    $$->Array = symbolTable::gentemp($2->Array->type->type);
+                    $$->Array = symTab::gentemp($2->Array->type->type);
                     emit("= !", $$->Array->name, $2->Array->name);
                     break;
             }
@@ -288,7 +288,7 @@ multiplicative-expression:
             $$ = new expression();
             if($1->array_type=="arr")//Array addressing
             {
-                $$->loc = symbolTable::gentemp($1->loc->type);
+                $$->loc = symTab::gentemp($1->loc->type);
                 emit("=[]", $$->loc->name, $1->Array->name, $1->loc->name);
             }
             else if($1->array_type=="ptr")//Pointer
@@ -304,7 +304,7 @@ multiplicative-expression:
             if(typecheck($1->loc,$3->Array))//Typecheck and emit quad for calculating result
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                $$->loc = symTab::gentemp(new ttype($1->loc->type->type));
                 emit("*", $$->loc->name, $1->loc->name, $3->Array->name);    
             }
             else
@@ -316,7 +316,7 @@ multiplicative-expression:
             if(typecheck($1->loc,$3->Array))//Typecheck and emit quad for calculating result
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                $$->loc = symTab::gentemp(new ttype($1->loc->type->type));
                 emit("/", $$->loc->name, $1->loc->name, $3->Array->name);
             }
             else
@@ -328,7 +328,7 @@ multiplicative-expression:
             if(typecheck($1->loc,$3->Array))
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                $$->loc = symTab::gentemp(new ttype($1->loc->type->type));
                 emit("%", $$->loc->name, $1->loc->name, $3->Array->name);   
             }
         }
@@ -341,7 +341,7 @@ additive-expression:
             if(typecheck($1->loc,$3->loc))//Check type and emit quad for calculating result
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                $$->loc = symTab::gentemp(new ttype($1->loc->type->type));
                 emit("+", $$->loc->name, $1->loc->name, $3->loc->name);    
             }
             else
@@ -353,7 +353,7 @@ additive-expression:
             if(typecheck($1->loc,$3->loc))//Check type and emit quad for calculating result
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype($1->loc->type->type));
+                $$->loc = symTab::gentemp(new ttype($1->loc->type->type));
                 emit("-", $$->loc->name, $1->loc->name, $3->loc->name);           
             }
             else
@@ -370,7 +370,7 @@ shift-expression:
             if($3->loc->type->type=="int")//Enforce int type for shift value
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype("int"));
+                $$->loc = symTab::gentemp(new ttype("int"));
                 emit("<<", $$->loc->name, $1->loc->name, $3->loc->name);  //Emit quad for calculating result
             }
             else
@@ -382,7 +382,7 @@ shift-expression:
             if($3->loc->type->type=="int")//Enforce int type for shift value
             {
                 $$ = new expression();
-                $$->loc = symbolTable::gentemp(new ttype("int"));
+                $$->loc = symTab::gentemp(new ttype("int"));
                 emit(">>", $$->loc->name, $1->loc->name, $3->loc->name); //Emit quad for calculating result
             }
             else
@@ -506,7 +506,7 @@ AND-expression:
                 btoi($1);//Insert code to convert operands to int
                 btoi($3);
                 $$->type = "notbool";
-                $$->loc = symbolTable::gentemp(new ttype("int"));
+                $$->loc = symTab::gentemp(new ttype("int"));
                 emit("&", $$->loc->name, $1->loc->name, $3->loc->name);  //Emit quad for calculating result
             }
             else
@@ -526,7 +526,7 @@ exclusive-OR-expression:
                 btoi($1);//insert code to convert operands to int
                 btoi($3);
                 $$->type = "notbool";
-                $$->loc = symbolTable::gentemp(new ttype("int"));
+                $$->loc = symTab::gentemp(new ttype("int"));
                 emit("^", $$->loc->name, $1->loc->name, $3->loc->name);
             }
             else
@@ -546,7 +546,7 @@ inclusive-OR-expression:
                 btoi($1);//Convert operands to bool
                 btoi($3);
                 $$->type = "notbool";
-                $$->loc = symbolTable::gentemp(new ttype("int"));
+                $$->loc = symTab::gentemp(new ttype("int"));
                 emit("|", $$->loc->name, $1->loc->name, $3->loc->name); //Emit quad for calculating result
             }
             else
@@ -596,7 +596,7 @@ conditional-expression:
         | logical-OR-expression N QUESTION M expression N COLON M conditional-expression  {
             //M and N added to augment grammar(M to aid jumping to different points and N to jump over the else part)
             $$ = new expression;
-            $$->loc = symbolTable::gentemp($5->loc->type);
+            $$->loc = symTab::gentemp($5->loc->type);
             $$->loc->update($5->loc->type);
             emit("=", $$->loc->name, $9->loc->name); //Assign result to conditional expression
             list<int> l1 = makelist(nextinstr());
@@ -865,7 +865,7 @@ direct-declarator:
            // $$ = $1->update(new ttype(varType));
             $$ = currentST->lookup2(globe);
             $$->update(new ttype(varType));
-            currentSymbol = $$;
+            lastseensym = $$;
         }
         | LEFT_PARENTHESIS declarator RIGHT_PARENTHESIS {
             $$ = $2;
@@ -962,7 +962,7 @@ direct-declarator:
             $1->nested_table = currentST;//Update ST entry
             currentST->parent = globalST; 
             switchTable(globalST); //Switch back to global ST at end of declaration       
-            currentSymbol = $$;
+            lastseensym = $$;
         }
         | direct-declarator LEFT_PARENTHESIS identifier-list RIGHT_PARENTHESIS {
             //printf("direct-declarator-> direct-declarator (identifier-listopt)\n");
@@ -978,7 +978,7 @@ direct-declarator:
             $1->nested_table = currentST;//Update ST entry
             currentST->parent = globalST; 
             switchTable(globalST);//Switch back to global ST at end of declaration        
-            currentSymbol = $$;
+            lastseensym = $$;
         }
         ;
 type-qualifier-listopt:
@@ -1151,26 +1151,26 @@ compound-statement:
 A:  %empty
         {
             //Dummy non terminal to create a new symbol table
-            string new_ST = currentST->name + "_" + blockName + "_" + to_string(STCount++);//Nmae for the new ST
+            string new_ST = currentST->name + "_" + blocktype + "_" + to_string(STCount++);//Nmae for the new ST
             symbol* sym = currentST->lookup(new_ST);
-            sym->nested_table = new symbolTable(new_ST);
+            sym->nested_table = new symTab(new_ST);
             sym->name = new_ST;
             sym->nested_table->parent = currentST;
             sym->type = new ttype("block");
-            currentSymbol = sym;
+            lastseensym = sym;
         }
         ;
 change-table:   %empty
         {
             //Dummy nonterminal to switch to new symbol table
-            if(currentSymbol->nested_table != NULL)
+            if(lastseensym->nested_table != NULL)
             {
-                switchTable(currentSymbol->nested_table);
+                switchTable(lastseensym->nested_table);
                 emit("label",currentST->name);
             }
             else
             {
-                switchTable(new symbolTable(""));
+                switchTable(new symTab(""));
             }
         }
         ;
@@ -1234,14 +1234,14 @@ selection-statement:
         ;
 iteration-statement:
         WHILE W LEFT_PARENTHESIS A change-table M expression RIGHT_PARENTHESIS M loop-statement {
-            //W sets the blockName to while(needed for creating symbol table), A, change-table, M and N added for augmentation
+            //W sets the blocktype to while(needed for creating symbol table), A, change-table, M and N added for augmentation
             $$ = new statement();
             itob($7);
             backpatch($10->nextlist, $6);//Backpatch nextlist of expression to start of loop to prevent fall through
             backpatch($7->truelist, $9);//Backpatch truelist to start of loop
             $$->nextlist = $7->falselist;
             emit("goto", itos($6));//Prevent fall through
-            blockName = "";//Set blockName back to default
+            blocktype = "";//Set blocktype back to default
             switchTable(currentST->parent);//Switch table back at the end of loop
 
         }
@@ -1253,17 +1253,17 @@ iteration-statement:
             backpatch($7->truelist, $10);
             $$->nextlist = $7->falselist;
             emit("goto", itos($6));
-            blockName = "";
+            blocktype = "";
             switchTable(currentST->parent);
         }
         | DO D M loop-statement M WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {
-            //D sets blockName, M, N, A, change-table added for augmentation
+            //D sets blocktype, M, N, A, change-table added for augmentation
             $$ = new statement();
             itob($8);//Convert expression to bool
             backpatch($8->truelist, $3);//Backpatch truelist to start of loop
             backpatch($4->nextlist, $5);//Backpatch nextlist of expression to beginning of condition checking
             $$->nextlist = $8->falselist;//Merge falselist
-            blockName = "";//Set blockname back to default
+            blocktype = "";//Set blocktype back to default
         }
         | DO D LEFT_CURLY_BRACKET M block-item-listopt RIGHT_CURLY_BRACKET M WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {
             $$ = new statement();
@@ -1271,10 +1271,10 @@ iteration-statement:
             backpatch($10->truelist, $4);
             backpatch($5->nextlist, $7);
             $$->nextlist = $10->falselist;
-            blockName = "";
+            blocktype = "";
         }
         | FOR F LEFT_PARENTHESIS A change-table declaration M expression-statement M expression N RIGHT_PARENTHESIS M loop-statement {
-            //F sets blockName, A, change-table, M, N added for augmentation
+            //F sets blocktype, A, change-table, M, N added for augmentation
             $$ = new statement();
             itob($8);//Convert expression to bool
             backpatch($8->truelist, $13);//Backpatch truelist to start of loop statement
@@ -1282,7 +1282,7 @@ iteration-statement:
             backpatch($14->nextlist, $9);//Backpatch nextlist of loop statement to expression to be executed at end of each iteration
             emit("goto", itos($9));//Prevent fall through
             $$->nextlist = $8->falselist;
-            blockName = "";//Set blockname back to default
+            blocktype = "";//Set blocktype back to default
             switchTable(currentST->parent);
         }
         | FOR F LEFT_PARENTHESIS A change-table expression-statement M expression-statement M expression N RIGHT_PARENTHESIS M loop-statement {
@@ -1293,7 +1293,7 @@ iteration-statement:
             backpatch($14->nextlist, $9);
             emit("goto", itos($9));
             $$->nextlist = $8->falselist;
-            blockName = "";
+            blocktype = "";
             switchTable(currentST->parent);
         }
         | FOR F LEFT_PARENTHESIS A change-table declaration M expression-statement M expression N RIGHT_PARENTHESIS M LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET {
@@ -1304,7 +1304,7 @@ iteration-statement:
             backpatch($15->nextlist, $9);
             emit("goto", itos($9));
             $$->nextlist = $8->falselist;
-            blockName = "";
+            blocktype = "";
             switchTable(currentST->parent);
         }
         | FOR F LEFT_PARENTHESIS A change-table expression-statement M expression-statement M expression N RIGHT_PARENTHESIS M LEFT_CURLY_BRACKET block-item-listopt RIGHT_CURLY_BRACKET{
@@ -1315,21 +1315,21 @@ iteration-statement:
             backpatch($15->nextlist, $9);          
             emit("goto", itos($9)); 
             $$->nextlist = $8->falselist;           
-            blockName = "";
+            blocktype = "";
             switchTable(currentST->parent);
         }
         ;
 F: %empty{
-        //Dummy non terminals for setting the blockName
-        blockName = "FOR";
+        //Dummy non terminals for setting the blocktype
+        blocktype = "FOR";
     }
     ;
 W: %empty{
-        blockName = "WHILE";
+        blocktype = "WHILE";
     }
     ;
 D: %empty{
-        blockName = "DO_WHILE";
+        blocktype = "DO_WHILE";
     }
     ;
 jump-statement:

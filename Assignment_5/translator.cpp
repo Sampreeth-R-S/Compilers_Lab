@@ -6,14 +6,14 @@
 #include <iomanip>
 
 // Global Variables
-quadArray quads;
+quadslist quads;
 using namespace std;
-symbol* currentSymbol;
-symbolTable* currentST;
-symbolTable* globalST;
-//quadArray quads;
+symbol* lastseensym;
+symTab* currentST;
+symTab* globalST;
+//quadslist quads;
 int STCount;
-string blockName;
+string blocktype;
 string varType;//Stores last encountered data type in the c file
 //Class fucntion definitions
 //ttype constuctor
@@ -39,7 +39,7 @@ symbol* symbol::convert(string t)
 
     //cout<<"Hello\n";
     bool boolean = (this->type->type == t);
-    symbol* temp = symbolTable::gentemp(t);
+    symbol* temp = symTab::gentemp(t);
    // if(this->type->type!=t)
     if(!boolean)
     emit("=",temp->name,this->type->type+"to"+t+"("+this->name+")");
@@ -49,9 +49,9 @@ symbol* symbol::convert(string t)
     return temp;
 }
 //Symbol table constructor
-symbolTable::symbolTable(string name_, symbolTable* parent):name(name_),tempcount(0){}
+symTab::symTab(string name_, symTab* parent):name(name_),tempcount(0){}
 //Lookup function
-symbol* symbolTable::lookup(string name){
+symbol* symTab::lookup(string name){
     //Search in existing table
     for(list<symbol>::iterator it = table.begin(); it!=table.end(); it++){
         if(it->name == name) return &(*it);
@@ -72,14 +72,14 @@ symbol* symbolTable::lookup(string name){
     return NULL;
 }
 
-symbol* symbolTable::lookup2(string name)
+symbol* symTab::lookup2(string name)
 {
     symbol* s = new symbol(name);
         table.push_back(*s);
         return &(table.back());
 }
 //Generate temporary function
-symbol* symbolTable::gentemp(ttype* type,string initvalue){
+symbol* symTab::gentemp(ttype* type,string initvalue){
     string name = "t"+itos(currentST->tempcount++);
     symbol* s = new symbol(name);
     s->type = type;
@@ -88,7 +88,7 @@ symbol* symbolTable::gentemp(ttype* type,string initvalue){
     currentST->table.push_back(*s);
     return &(currentST->table.back());
 }
-symbol* symbolTable::gentemp(string type,string initvalue){
+symbol* symTab::gentemp(string type,string initvalue){
     string name = "t"+itos(currentST->tempcount++);
     symbol* s = new symbol(name);
     ttype* temptype = new ttype(type);
@@ -99,7 +99,7 @@ symbol* symbolTable::gentemp(string type,string initvalue){
     return &(currentST->table.back());
 }
 //Print function(for symbol table)
-void symbolTable::print(){
+void symTab::print(){
     for(int i = 0; i < 150; i++) {
         cout << '.';
     }
@@ -120,7 +120,7 @@ void symbolTable::print(){
         cout << '.';
     }
     cout << endl;
-    list<symbolTable*> tablelist;
+    list<symTab*> tablelist;
     for(auto it = this->table.begin(); it != this->table.end(); it++) {
         cout << left << setw(25) << it->name;
         cout << left << setw(25) << checkType(it->type);
@@ -173,8 +173,8 @@ string checkType(ttype* t)
 }
 
 //Update function(updates the offset of each symbol in the symbol table)
-void symbolTable::update(){
-    list<symbolTable*> tableList;
+void symTab::update(){
+    list<symTab*> tableList;
     int offset;
     for(list<symbol>::iterator it=this->table.begin();it!=this->table.end();it++){
         if(it==this->table.begin()) offset = it->size;
@@ -227,7 +227,7 @@ void quad::print() {
         cout << "Unknown Operator";
 }
 //Print function(for quad array)
-void quadArray::print(){
+void quadslist::print(){
     for(int i = 0; i < 150; i++) {
         cout << '.';
     }
@@ -314,7 +314,7 @@ bool typecheck(ttype* t1, ttype* t2){
 }
 //convertType function(converts the type of a symbol to the given type)
 symbol* convertType(symbol* s, string t) {
-    symbol* temp = symbolTable::gentemp(new ttype(t));
+    symbol* temp = symTab::gentemp(new ttype(t));
 
     if(s->type->type == "float") {
         if(t == "int") {
@@ -383,7 +383,7 @@ expression* btoi(expression* e)
 {
     if(e->type == "bool")
     {
-        e->loc = symbolTable::gentemp(new ttype("int"));
+        e->loc = symTab::gentemp(new ttype("int"));
         backpatch(e->truelist,nextinstr());
         emit("=",e->loc->name,"true");
         emit("goto",itos(nextinstr()+1));
@@ -393,7 +393,7 @@ expression* btoi(expression* e)
     return e;
 }
 //Switch table function
-void switchTable(symbolTable* newtab)
+void switchTable(symTab* newtab)
 {
     currentST = newtab;
 }
@@ -426,9 +426,9 @@ int main()
 {
     //Initialisation
     STCount = 0;
-    globalST = new symbolTable("Global");
+    globalST = new symTab("Global");
     currentST = globalST;
-    blockName = "";
+    blocktype = "";
     varType = "";
     //Parsing
     yyparse();

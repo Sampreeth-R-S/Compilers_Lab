@@ -17,23 +17,23 @@ using namespace std;
 #define __FUNCSIZE 0
 
 //Class declarations
-class symbolTable;
+class symTab;
 class symbol;
 class aarray;
 class expression;
 class statement;
 class ttype;
 class quad;
-class symbolTable;
-class quadArray;
+class symTab;
+class quadslist;
 
 //Global variables
-extern symbol* currentSymbol;
-extern symbolTable* currentST;
-extern symbolTable* globalST;
-//extern quadArray quads;
+extern symbol* lastseensym;
+extern symTab* currentST;
+extern symTab* globalST;
+//extern quadslist quads;
 extern int STCount;
-extern string blockName;
+extern string blocktype;
 extern string varType;
 extern string globe;
 extern char* yytext;
@@ -41,15 +41,15 @@ extern char* yytext;
 //Parse function
 extern int yyparse();
 
-//SymbolTable class
-class symbolTable
+//symTab class
+class symTab
 {
     public:
     string name;//Name
-    symbolTable* parent;//Pointer to parent(null for GlobalST)
+    symTab* parent;//Pointer to parent(null for GlobalST)
     int tempcount;//Count of temporary variables
     list<symbol> table;//List of symbols belonging to current scope
-    symbolTable(string name_, symbolTable* parent_ = NULL);
+    symTab(string name_, symTab* parent_ = NULL);
     symbol* lookup(string name);
     symbol* lookup2(string name);
     static symbol* gentemp(ttype* type, string initvalue = "");
@@ -65,7 +65,7 @@ class symbol{
     ttype* type;//type information
     int size, offset;//size and offset
     string value;//Initial value
-    symbolTable* nested_table;//Pointer to nested table for functions and blocks
+    symTab* nested_table;//Pointer to nested table for functions and blocks
     symbol(string name_, string t_="int",ttype* arrtype = NULL, int width_ = 0);
     symbol* update(ttype* t);
     symbol* convert(string t);
@@ -104,7 +104,7 @@ class quad{
     void print();
 };
 //Array of quads for lazy spitting
-class quadArray{
+class quadslist{
     public:
     vector<quad> array;
     
@@ -130,7 +130,7 @@ string itos(int i);
 string ftos(float f);
 expression* itob(expression* e);
 expression* btoi(expression* e);
-void switchTable(symbolTable* newtable);
+void switchTable(symTab* newtable);
 int nextinstr();
 int sizeoft(ttype* t);
 string checkType(ttype* t);
