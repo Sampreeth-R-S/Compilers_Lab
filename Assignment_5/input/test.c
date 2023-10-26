@@ -14,11 +14,9 @@ int func (int i, float d) {
 }
 
 int main () {
-    // Variable Declaration
     int x = 120;
     int y = 17;
-    char ch = 'c', d = 'a';     // character definitions
-    // Arithmetic Operations
+    char ch = 'c', d = 'a'; 
     i = x + y;
     j = x - y;
     k = x * y;
@@ -26,7 +24,6 @@ int main () {
     m = x % y;
     n = x & y;
     o = x | y;
-    
     y = i << 2;
     x = i >> 1;
     func(i, i);
