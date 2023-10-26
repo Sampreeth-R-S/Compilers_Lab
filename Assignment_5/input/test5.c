@@ -1,3 +1,4 @@
+//Typecasting(implicit and explicit) and pointers
 int main()
 {
     int n=5;
@@ -6,5 +7,8 @@ int main()
     float x=b*n;
     int y=(int)x;
     int z=n*b;
+    int *p;
+    p = &n;
+    *p=10;
     return 0;
 }

@@ -18,5 +18,15 @@ int main()
 {
     int n=5;
     int result=fibo(n);
+    if(result == 5)
+    {
+        if(n>5)
+        {
+            return result+result;
+        }
+        else{
+            return result;
+        }
+    }
     return 0;
 }

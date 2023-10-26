@@ -1,4 +1,4 @@
-
+//Function calls and returns and ternary operator
 int calculate(int x, int n, float sum)
 {
     int i;
@@ -11,6 +11,14 @@ int calculate(int x, int n, float sum)
     }
     return sum;
 }
+
+int min (int x, int y) {
+    int ans;
+    ans = x > y ? y:x;             
+    return ans;
+}
+
+
 int main()
 {
     int x=5;

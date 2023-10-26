@@ -220,7 +220,7 @@ unary-expression:
                 case '&'://Addressing
                     $$->Array = symbolTable::gentemp(new ttype("ptr"));
                     $$->Array->type->arrtype = $2->Array->type;
-                    emit($$->Array->name,$2->Array->name,"= &");
+                    emit("= &",$$->Array->name,$2->Array->name);
                     break;
                 case '*'://Derefrencing
                     $$->Array = $2->Array;
