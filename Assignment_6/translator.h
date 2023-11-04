@@ -1,0 +1,155 @@
+
+#ifndef __TRANSLATOR_H
+#define __TRANSLATOR_H
+//#import <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+#include <iostream>
+
+using namespace std;
+//Sa=ize of data types
+#define __VOIDSIZE 0
+#define __INTSIZE 4
+#define __FLOATSIZE 8
+#define __CHARSIZE 1
+#define __POINTERSIZE 8
+#define __FUNCSIZE 0
+
+//Class declarations
+class symTab;
+class symbol;
+class aarray;
+class expression;
+class statement;
+class ttype;
+class quad;
+class symTab;
+class quadslist;
+class AR;
+
+//Global variables
+extern symbol* lastseensym;
+extern symTab* currentST;
+extern symTab* globalST;
+extern quadslist quads;
+extern int STCount;
+extern string blocktype;
+extern string varType;
+extern string globe;
+extern char* yytext;
+extern vector<string> stringconstants;
+extern FILE *yyin;
+//Parse function
+extern int yyparse();
+
+//symTab class
+class symTab
+{
+    public:
+    string name;//Name
+    symTab* parent;//Pointer to parent(null for GlobalST)
+    static int tempcount;//Count of temporary variables
+    list<symbol> table;//List of symbols belonging to current scope
+    AR* activationrecord;
+    symTab(string name_, symTab* parent_ = NULL);
+    symbol* lookup(string name);
+    symbol* lookup2(string name);
+    void flatten();
+    static symbol* gentemp(ttype* type, string initvalue = "");
+    static symbol* gentemp(string type, string initvalue = "");
+    int update(int i=0);
+    void print();
+};
+
+class AR{
+    public:
+    map<string,int> disp;
+    int maxdisp;
+    AR();
+};
+
+//Symbol class
+class symbol{
+    public:
+    string name;//name
+    ttype* type;//type information
+    int size, offset;//size and offset
+    string value;//Initial value
+    bool is_function;
+    bool is_parameter;
+    symTab* nested_table;//Pointer to nested table for functions and blocks
+    symbol(string name_, string t_="int",ttype* arrtype = NULL, int width_ = 0);
+    symbol* update(ttype* t);
+    symbol* convert(string t);
+};
+//Expression class
+class expression{
+    public:
+    symbol* loc;//Pointer to symbol table entry of current expression result
+    string type;//Type
+    list<int> truelist, falselist;//For boolean expressions
+    list<int> nextlist;//For statements
+};
+//Statement class
+class statement{
+    public:
+    list<int> nextlist;//Nextlist
+};
+//Symbol type class(defines the type of variables)
+class ttype{
+    public:
+    string type;//type
+    int width;//width information
+    ttype* arrtype;//Arraytype information(for pointers and arrays)
+    ttype(string type_, ttype* arrtype_=NULL, int width_=1);
+};
+//Quad class
+class quad{
+    public:
+    string op;//Operator
+    string result;//Result
+    string arg1; //Argument 1
+    string arg2;//Argument 2
+    quad(string result_, string arg1_, string op_="=", string arg2_="");
+    quad(string result_, int arg1_, string op_="=", string arg2_="");
+    quad(string result_, float arg1_, string op_="=", string arg2_="");
+    void print();
+};
+//Array of quads for lazy spitting
+class quadslist{
+    public:
+    vector<quad> array;
+    
+    void print();
+};
+//Class for array type
+class aarray{
+    public:
+    string array_type;//Type(array or pointer to data type)
+    symbol* loc;//Entry to ST of the offset
+    symbol* Array;//Entry to ST of the array
+    ttype* type;//Type of the array(for multiple dimensions)
+};
+
+//Auxiliary functions
+list<int> makelist(int i);
+list<int> merge(list<int> &a, list<int> &b);
+void backpatch(list<int> &a, int i);
+bool typecheck(symbol* &s1, symbol* &s2);
+bool typecheck(ttype* t1, ttype* t2);
+symbol* convertType(symbol* s1, string t);
+string itos(int i);
+string ftos(float f);
+expression* itob(expression* e);
+expression* btoi(expression* e);
+void switchTable(symTab* newtable);
+int nextinstr();
+int sizeoft(ttype* t);
+string checkType(ttype* t);
+void emit(string op, string result, string arg1="", string arg2="");
+void emit(string op, string result, int arg1, string arg2="");
+void emit(string op, string result, float arg1, string arg2="");
+
+#endif
