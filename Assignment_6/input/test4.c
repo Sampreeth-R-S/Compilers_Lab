@@ -1,39 +1,105 @@
-// Include predefined functions 
-int printStr (char *ch);
-int printInt (int n);
-int readInt (int *eP);
+int printStr(char *s);
+int readInt(int *eP);
+int printInt(int n);
 
-// Function to find maximum subarray sum
-int maxSubArrSum (int a[], int n) {                 // Array as parameter                 
-    int max_so_far = -1000, max_ending_here = 0; 
-    int i;
-    for (i = 0; i < n; i++) { 
-        max_ending_here = max_ending_here + a[i]; 
-        if (max_so_far < max_ending_here) {
-            max_so_far = max_ending_here; 
-        }
-  
-        if (max_ending_here < 0) {
-            max_ending_here = 0; 
-        }
-    } 
-    return max_so_far; 
-} 
-  
-// Driver program to test maxSubArrSum
-int main() { 
-    int a[8];
-    a[0]= -20;
-    a[1]= -30;
-    a[2]= 40;
-    a[3]= -10;
-    a[4]= -20;
-    a[5]= 10;
-    a[6]= 50;
-    a[7]= -370;
-    int max_subArr_sum = maxSubArrSum(a, 8);        // Passing array as argument
-    printStr("Maximum contiguous sum is ");
-    printInt(max_subArr_sum);
+int numG1 = 20, numG2;
+char charG1 = 'b', charG2;
+int *ptrG1, *ptrG2;
+char *strG1 = "Hello World, I am a global string.", *strG2;
+
+int main() {
+    printStr("\n#### TEST 4 (Global variables, pointers and addresses) ####");
+
+    int numL1 = 5, numL2;
+    char charL1 = 'a', charL2;
+    int *ptrL1 = &numL1, *ptrL2;
+    char *strL1 = "Hello World, I am a local string.", *strL2;
+    
+    printStr("\nLocal variables: ");
+    printStr("\nnumL1 = ");
+    printInt(numL1);
+    printStr(", charL1 (ascii value) = ");
+    printInt(charL1);
+    printStr(", ptrL1 (adress, truncated to first 32 bits only) = ");
+    printInt(ptrL1);
+    printStr(", strL1 = ");
+    printStr(strL1);
+
+    ptrG1 = &numG1;
+
+    printStr("\nGlobal variables: ");
+    printStr("\nnumG1 = ");
+    printInt(numG1);
+    printStr(", charG1 (ascii value) = ");
+    printInt(charG1);
+    printStr(", ptrG1 (adress, truncated to first 32 bits only) = ");
+    printInt(ptrG1);
+    printStr(", strG1 = ");
+    printStr(strG1);
+    
     printStr("\n");
-    return 0; 
+
+    printStr("\nAssigning locals to globals: ");
+    numG2 = numL1;
+    charG2 = charL1;
+    ptrG2 = ptrL1;
+    strG2 = strL1;
+    printStr("\nnumG2 = ");
+    printInt(numG2);
+    printStr(", charG2 (ascii value) = ");
+    printInt(charG2);
+    printStr(", ptrG2 (adress, truncated to first 32 bits only) = ");
+    printInt(ptrG2);
+    printStr(", strG2 = ");
+    printStr(strG2);
+    if(numG2 == numL1 && charG2 == charL1 && ptrG2 == ptrL1 && strG2 == strL1) {
+        printStr("\nSUCCESS: Local variables assigned to global variables.");
+    } else {
+        printStr("\nFAILURE: Local variables not assigned to global variables.");
+    }
+
+    printStr("\n");
+
+    printStr("\nAssigning globals to locals: ");
+    numL2 = numG1;
+    charL2 = charG1;
+    ptrL2 = ptrG1;
+    strL2 = strG1;
+    printStr("\nnumL2 = ");
+    printInt(numL2);
+    printStr(", charL2 (ascii value) = ");
+    printInt(charL2);
+    printStr(", ptrL2 (adress, truncated to first 32 bits only) = ");
+    printInt(ptrL2);
+    printStr(", strL2 = ");
+    printStr(strL2);
+    if(numL2 == numG1 && charL2 == charG1 && ptrL2 == ptrG1 && strL2 == strG1) {
+        printStr("\nSUCCESS: Global variables assigned to local variables.");
+    } else {
+        printStr("\nFAILURE: Global variables not assigned to local variables.");
+    }
+
+    printStr("\n");
+
+    printStr("\nAssigning globals to globals: ");
+    numG2 = numG1;
+    charG2 = charG1;
+    ptrG2 = ptrG1;
+    strG2 = strG1;
+    printStr("\nnumG2 = ");
+    printInt(numG2);
+    printStr(", charG2 (ascii value) = ");
+    printInt(charG2);
+    printStr(", ptrG2 (adress, truncated to first 32 bits only) = ");
+    printInt(ptrG2);
+    printStr(", strG2 = ");
+    printStr(strG2);
+    if(numG2 == numG1 && charG2 == charG1 && ptrG2 == ptrG1 && strG2 == strG1) {
+        printStr("\nSUCCESS: Global variables assigned to global variables.");
+    } else {
+        printStr("\nFAILURE: Global variables not assigned to global variables.");
+    }
+
+    printStr("\n\n");
+    return 0;
 }

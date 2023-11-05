@@ -110,7 +110,7 @@ primary-expression:
         | STRING_LITERAL    {
             $$ = new expression();
             $$->loc=symTab::gentemp(new ttype("ptr"),string($1));
-            emit("=",$$->loc->name,"$.LC"+to_string(stringconstants.size()));
+            emit("=str",$$->loc->name,".LC"+to_string(stringconstants.size()));
             $$->loc->type->arrtype = new ttype("char");
             //$$->loc=new symbol(".LC"+to_string(stringconstants.size()),"ptr", new ttype("char"));
             string temp =string($1);
@@ -293,7 +293,7 @@ multiplicative-expression:
             $$ = new expression();
             if($1->array_type=="arr")//Array addressing
             {
-                $$->loc = symTab::gentemp($1->loc->type);
+                $$->loc = symTab::gentemp($1->Array->type->arrtype->type);
                 emit("=[]", $$->loc->name, $1->Array->name, $1->loc->name);
             }
             else if($1->array_type=="ptr")//Pointer

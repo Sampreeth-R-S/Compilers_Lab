@@ -1,49 +1,85 @@
-int printStr (char *ch);
-int printInt (int n);
-int readInt (int *eP);
+int printStr(char *s);
+int readInt(int *eP);
+int printInt(int n);
 
-// Global declarations
-float d = 2.3;
-char c; 
-int i, j, k, l, m;
-int w[10];                      // 1D array declaration
-int a = 4, *p, b;               // pointer declaration
+int testInt(int num) {
+    return num;
+}
 
-int main () {
-    int x;                      // Variable Declarations
-    int y;
-    int flag;
-    printStr("Enter x: ");
-    x = readInt(&flag);
-    printStr("Enter y: ");
-    y = readInt(&flag);
-    char ch = 'c';              // Character definitions
+int *testIntPtr(int *numPtr) {
+    return numPtr;
+}
 
-    // Arithmetic Operators
-    i = x + y;                  // Addition  
-    printStr("i = x + y = ");
-    printInt(i);
-    printStr("\n");
+char testChar(char c) {
+    return c;
+}
 
-    j = x - y;                  // Subtraction
-    printStr("j = x - y = ");
-    printInt(j);
-    printStr("\n");
+char *testCharPtr(char *cPtr) {
+    return cPtr;
+}
 
-    k = x * y;                  // Multiplication
-    printStr("k = x * y = ");
-    printInt(k);
-    printStr("\n");
+void testVoid() {
+    printStr("\nHello World, I am a void function. I don't return anything.");
+    return;
+}
 
-    l = x / y;                  // Division
-    printStr("l = x / y = ");
-    printInt(l);
-    printStr("\n");
+int main() {
+    printStr("\n#### TEST 3 (Function calls and returns) ####");
+    int n = 10;
+    int *nPtr = &n;
+    
+    printStr("\nTesting integer value return: ");
+    int retInt = testInt(n);
+    if (retInt == n) {
+        printStr("Passed");
+    } else {
+        printStr("Failed");
+    }
+    
+    printStr("\nTesting integer pointer return: ");
+    int *retIntPtr = testIntPtr(nPtr);
+    if (retIntPtr == nPtr) {
+        printStr("Passed");
+    } else {
+        printStr("Failed");
+    }
 
-    m = x % y;                  // Modulo
-    printStr("m = x % y = ");
-    printInt(m);
-    printStr("\n");
+    char c = 'm';
+    char *cPtr = &c;
 
+    printStr("\nTesting character value return: ");
+    char retChar = testChar(c);
+    if (retChar == c) {
+        printStr("Passed");
+    } else {
+        printStr("Failed");
+    }
+
+    printStr("\nTesting character pointer return: ");
+    char *retCharPtr = testCharPtr(cPtr);
+    if (retCharPtr == cPtr) {
+        printStr("Passed");
+    } else {
+        printStr("Failed");
+    }
+
+    char *str = "Hello World, I am a string.";
+    printStr("\nTesting string return: ");
+    char *retStr = testCharPtr(str);
+    if (retStr == str) {
+        printStr("Passed");
+    } else {
+        printStr("Failed");
+    }
+    printStr(" [ Passed string: ");
+    printStr(str);
+    printStr(" ], ");
+    printStr("[ Returned string: ");
+    printStr(retStr);
+    printStr(" ]");
+
+    printStr("\nTesting void return: ");
+    testVoid();
+    printStr("\n\n");
     return 0;
 }

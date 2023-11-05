@@ -116,6 +116,17 @@ void translate(){
     assemblyfile<<left;
     assemblyfile<<"\t.file\t\""+input+"\""<<endl;
     assemblyfile<<endl;
+
+    assemblyfile << "#\t" << "Allocation of function variables and temporaries on the stack:\n" << endl;
+    for(auto &symbol : globalST->table) {
+        if(symbol.is_function) {
+            assemblyfile << "#\t" << symbol.name << endl;
+            for(auto &record: symbol.nested_table->activationrecord->disp) {
+                assemblyfile << "#\t" << record.first << ": " << record.second << endl;
+            }
+        }
+    }
+    assemblyfile << endl;
     if(stringconstants.size()>0)
     {
         assemblyfile<<"\t.section\t.rodata"<<endl;
@@ -128,10 +139,11 @@ void translate(){
     }
     for(auto i:globalST->table)
     {
-        if(i.value==""&&!i.is_function)
+        if((i.value=="-")&&(!i.is_function))
         {
             assemblyfile<<"\t.comm\t"<<i.name<<", "<<i.size<<", "<<i.size<<endl;
         }
+        //cout<<i.value<<"Hello"<<i.name<<endl;
     }
     map<int,string>labels;
     int count=0;
@@ -236,19 +248,24 @@ void translate(){
                 {
                     assemblyfile<<labels[count2]<<":"<<endl;
                 }
+                if(op=="=str")
+                {
+                    assemblyfile << "\tmovq\t" << "$"<< arg1 << ", " << getloc(res) << endl;
+                }
                 if(op=="=")
                 {
+                    
                     if(arg1[0]<='9'&&arg1[0]>='0')
                     {
-                        assemblyfile<<"\tmovq\t$"<<arg1<<", "<<getloc(res)<<endl;
+                        assemblyfile<<"\tmovl\t$"<<arg1<<", "<<getloc(res)<<endl;
                     }
                     else if(arg1[0]=='\'')
                     {
-                        assemblyfile<<"\t"<<"movb"<<"$"<<chartoascii(arg1)<<", "<<getloc(res)<<endl;
+                        assemblyfile<<"\t"<<"movb\t"<<"$"<<chartoascii(arg1)<<", "<<getloc(res)<<endl;
                     }
                     else
                     {
-                        auto size=currentST->lookup(arg1)->size;
+                        auto size=currentST->lookup(res)->size;
                         if(size==1)
                         {
                             assemblyfile<<"\tmovb\t"<<getloc(arg1)<<", "<<"%al"<<endl;
@@ -272,8 +289,8 @@ void translate(){
                 }
                 if(op=="call")
                 {
-                    int num_parameters = params.size();
-                    while(!params.empty())
+                    int num_parameters = stoi(arg2);
+                    while(num_parameters)
                     {
                         parameter_store(params.top(),num_parameters);
                         params.pop();
@@ -312,7 +329,7 @@ void translate(){
                             assemblyfile<<"\tmovq\t"<<getloc(res)<<", "<<"%rax"<<endl;
                         }
                     }
-                    if(quads.array[count2].op!="func_end")
+                    if(quads.array[count2+1].op!="func_end")
                     {
                         assemblyfile<<"\tjmp\t"<<function_end<<endl;
                     }
@@ -326,18 +343,18 @@ void translate(){
                     int size=currentST->lookup(arg1)->size;
                     if(size==1)
                     {
-                        assemblyfile<<"\tmovb\t"<<getloc(arg1)<<", "<<"%al"<<endl;
-                        assemblyfile<<"\tcmpb\t"<<"%al, "<<getloc(arg2)<<endl;
+                        assemblyfile<<"\tmovb\t"<<getloc(arg2)<<", "<<"%al"<<endl;
+                        assemblyfile<<"\tcmpb\t"<<"%al, "<<getloc(arg1)<<endl;
                     }
                     if(size==4)
                     {
-                        assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
-                        assemblyfile<<"\tcmpl\t"<<"%eax, "<<getloc(arg2)<<endl;
+                        assemblyfile<<"\tmovl\t"<<getloc(arg2)<<", "<<"%eax"<<endl;
+                        assemblyfile<<"\tcmpl\t"<<"%eax, "<<getloc(arg1)<<endl;
                     }
                     if(size==8)
                     {
-                        assemblyfile<<"\tmovq\t"<<getloc(arg1)<<", "<<"%rax"<<endl;
-                        assemblyfile<<"\tcmpq\t"<<"%rax, "<<getloc(arg2)<<endl;
+                        assemblyfile<<"\tmovq\t"<<getloc(arg2)<<", "<<"%rax"<<endl;
+                        assemblyfile<<"\tcmpq\t"<<"%rax, "<<getloc(arg1)<<endl;
                     }
                     if(op=="==")
                     {
@@ -372,23 +389,10 @@ void translate(){
                         assemblyfile<<"\tincl\t"<<getloc(arg1)<<endl;
                         continue;
                     }
-                    if(size==1)
-                    {
-                        assemblyfile<<"\tmovb\t"<<getloc(arg1)<<", "<<"%al"<<endl;
-                        assemblyfile<<"\taddb\t"<<"%al, "<<getloc(arg2)<<endl;
-                        assemblyfile<<"\tmovb\t"<<"%al, "<<getloc(res)<<endl;
-                    }
-                    if(size==4)
-                    {
-                        assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
-                        assemblyfile<<"\taddl\t"<<"%eax, "<<getloc(arg2)<<endl;
-                        assemblyfile<<"\tmovl\t"<<"%eax, "<<getloc(res)<<endl;
-                    }
-                    if(size==8)
-                    {
-                        assemblyfile<<"\tmovq\t"<<getloc(arg1)<<", "<<"%rax"<<endl;
-                        assemblyfile<<"\taddq\t"<<"%rax, "<<getloc(arg2)<<endl;
-                        assemblyfile<<"\tmovq\t"<<"%rax, "<<getloc(res)<<endl;
+                    else {
+                        assemblyfile << "\t" << setw(8) << "movl" << getloc(arg1) << ", " << "%eax" << endl;
+                        assemblyfile << "\t" << setw(8) << "addl" << getloc(arg2) << ", " << "%eax" << endl;
+                        assemblyfile << "\t" << setw(8) << "movl" << "%eax" << ", " << getloc(res) << endl;
                     }
                 }
                 if(op=="-")
@@ -398,24 +402,11 @@ void translate(){
                         assemblyfile<<"\tdecl\t"<<getloc(arg1)<<endl;
                         continue;
                     }
-                    int size=currentST->lookup(arg1)->size;
-                    if(size==1)
-                    {
-                        assemblyfile<<"\tmovb\t"<<getloc(arg1)<<", "<<"%al"<<endl;
-                        assemblyfile<<"\tsubb\t"<<"%al, "<<getloc(arg2)<<endl;
-                        assemblyfile<<"\tmovb\t"<<"%al, "<<getloc(res)<<endl;
-                    }
-                    if(size==4)
-                    {
-                        assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
-                        assemblyfile<<"\tsubl\t"<<"%eax, "<<getloc(arg2)<<endl;
-                        assemblyfile<<"\tmovl\t"<<"%eax, "<<getloc(res)<<endl;
-                    }
-                    if(size==8)
-                    {
-                        assemblyfile<<"\tmovq\t"<<getloc(arg1)<<", "<<"%rax"<<endl;
-                        assemblyfile<<"\tsubq\t"<<"%rax, "<<getloc(arg2)<<endl;
-                        assemblyfile<<"\tmovq\t"<<"%rax, "<<getloc(res)<<endl;
+                    
+                    else {
+                        assemblyfile << "\t" << setw(8) << "movl" << getloc(arg1) << ", " << "%eax" << endl;
+                        assemblyfile << "\t" << setw(8) << "subl" << getloc(arg2) << ", " << "%eax" << endl;
+                        assemblyfile << "\t" << setw(8) << "movl" << "%eax" << ", " << getloc(res) << endl;
                     }
                 }
                 if(op=="*")
@@ -584,6 +575,7 @@ int main(int argc, char const*argv[])
     yyparse();
     //Printing
     //globalST->update();
+    patchexits();
     list<symTab*> tableList;
     int offset=0;
     for(list<symbol>::iterator it=globalST->table.begin();it!=globalST->table.end();it++){

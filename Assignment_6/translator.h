@@ -147,6 +147,7 @@ expression* btoi(expression* e);
 void switchTable(symTab* newtable);
 int nextinstr();
 int sizeoft(ttype* t);
+void patchexits();
 string checkType(ttype* t);
 void emit(string op, string result, string arg1="", string arg2="");
 void emit(string op, string result, int arg1, string arg2="");

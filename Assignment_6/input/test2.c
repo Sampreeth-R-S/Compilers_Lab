@@ -1,53 +1,41 @@
-// This program tests function declaration, calling, global variable scope, some operators : / % * ... 
-// Checks basic statements, expression, readInt and printInt library functions created earlier
-// Also checks the recursive fib function to check the function call and return methodology
-int printStr (char *ch);
-int printInt (int n);
-int readInt (int *eP);
+int printStr(char *s);
+int readInt(int *eP);
+int printInt(int n);
 
-int global_var = 0;                         // Testing global variable
-int counter = 0;
-
-int fibn (int n);                           // Testing function declaration
-
-int main () {
-    counter++;
-    global_var = counter;
-    int n, flag;
-    printStr("Enter n (n < 20): ");
-    n = readInt(&flag);
+void fillFib(int *fib, int n) {
     int i;
-    int fib[100];
-
-    // for loop to print the fibonacci series.
     for (i = 0; i < n; i++) {
-        fib[i] = fibn(i+1);
-        counter++;
-        global_var = counter;
+        if (i == 0) {
+            fib[i] = 0;
+        } else if (i == 1) {
+            fib[i] = 1;
+        } else {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
     }
-    for (i = 0; i < n; i++) {
-        printStr("fib[");
-        printInt(i + 1);
-        printStr("] = ");
-        printInt(fib[i]);
-        printStr("\n");
-    }
-    return 0;
 }
 
-int fibn (int n) {
-    counter++;
-    global_var = counter;
-
-    if (n == 0) {
-        return 0;
+int main() {
+    printStr("\n#### TEST 2 (1-D Arrays) ####");
+    int fib[15];
+    fillFib(fib, 15);
+    int i;
+    printStr("\nFibonacci Series: ");
+    for (i = 0; i < 15; i++) {
+        printInt(fib[i]);
+        printStr(" ");
     }
-    else if (n == 1 || n == 2) {
-        return 1;
+    char vowels[5];
+    vowels[0] = 'a';
+    vowels[1] = 'e';
+    vowels[2] = 'i';
+    vowels[3] = 'o';
+    vowels[4] = 'u';
+    printStr("\nAscii values of vowels: ");
+    for (i = 0; i < 5; i++) {
+        printInt(vowels[i]);
+        printStr(" ");
     }
- 
-    // Testing recursive function
-    else {
-        return fibn(n - 1) + fibn(n - 2);
-    }
+    printStr("\n\n");
+    return 0;
 }

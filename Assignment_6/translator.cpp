@@ -214,10 +214,6 @@ int symTab::update(int i){
         //if(it==this->table.begin()) offset += it->size;
         //else{
             it->offset = offset;
-            if(it->type->type=="arr")
-            {
-                it->size=8;
-            }
             offset += it->size;
         //}
         if(it->nested_table != NULL) tableList.push_back(it->nested_table);
@@ -408,6 +404,26 @@ symbol* convertType(symbol* s, string t) {
     }
 
     return s;
+}
+
+void patchexits()
+{
+    int exit=quads.array.size();
+    for(int i=exit-1;i>=0;i--)
+    {
+        if(quads.array[i].op=="func_end")
+        {
+            exit=i;
+        }
+        string op = quads.array[i].op;
+        if(op=="goto"||op=="=="||op=="!="||op=="<"||op==">"||op=="<="||op==">=")
+        {
+            if(quads.array[i].result=="_")
+            {
+                quads.array[i].result=itos(exit);
+            }
+        }
+    }
 }
 //Int to string and float to string functions
 string itos(int i){
