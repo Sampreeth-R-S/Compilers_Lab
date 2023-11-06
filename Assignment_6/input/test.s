@@ -272,207 +272,6 @@ f13:
 .data
 	f__:
 	.float	0.0
-	.data
-n:
-	.float	10
-	.data
-n1:
-	.float	10
-	.data
-n2:
-	.float	10
-	.data
-n3:
-	.float	10
-	.data
-n4:
-	.float	10
-	.data
-t6:
-	.float	10
-	.data
-t7:
-	.float	10
-	.data
-t8:
-	.float	10
-	.data
-t9:
-	.float	10
-	.data
-t10:
-	.float	10
-	.data
-t11:
-	.float	10
-	.data
-t12:
-	.float	10
-	.data
-t13:
-	.float	10
-	.data
-t14:
-	.float	10
-	.data
-n5:
-	.float	10
-	.data
-t36:
-	.float	10
-	.data
-n6:
-	.float	10
-	.data
-t37:
-	.float	10
-	.data
-n7:
-	.float	10
-	.data
-t38:
-	.float	10
-	.data
-n8:
-	.float	10
-	.data
-t39:
-	.float	10
-	.data
-n9:
-	.float	10
-	.data
-t40:
-	.float	10
-	.data
-n10:
-	.float	10
-	.data
-t56:
-	.float	10
-	.data
-t57:
-	.float	10
-	.data
-t58:
-	.float	10
-	.data
-t59:
-	.float	10
-	.data
-t60:
-	.float	10
-	.data
-t61:
-	.float	10
-	.data
-n11:
-	.float	10
-	.data
-t62:
-	.float	10
-	.data
-t63:
-	.float	10
-	.data
-t64:
-	.float	10
-	.data
-t65:
-	.float	10
-	.data
-t66:
-	.float	10
-	.data
-n12:
-	.float	10
-	.data
-t67:
-	.float	10
-	.data
-t68:
-	.float	10
-	.data
-t69:
-	.float	10
-	.data
-t70:
-	.float	10
-	.data
-t71:
-	.float	10
-	.data
-n13:
-	.float	10
-	.data
-t72:
-	.float	10
-	.data
-t73:
-	.float	10
-	.data
-t74:
-	.float	10
-	.data
-t75:
-	.float	10
-	.data
-t76:
-	.float	10
-	.data
-t77:
-	.float	10
-	.data
-t92:
-	.float	10
-	.data
-t96:
-	.float	10
-	.data
-t101:
-	.float	10
-	.data
-t102:
-	.float	10
-	.data
-t105:
-	.float	10
-	.data
-t106:
-	.float	10
-	.data
-t109:
-	.float	10
-	.data
-t110:
-	.float	10
-	.data
-t113:
-	.float	10
-	.data
-t114:
-	.float	10
-	.data
-t117:
-	.float	10
-	.data
-t118:
-	.float	10
-	.data
-t123:
-	.float	10
-	.data
-t129:
-	.float	10
-	.data
-t135:
-	.float	10
-	.data
-t141:
-	.float	10
-	.data
-t146:
-	.float	10
 	.globl  global_var
 	.data   
 	.align  4
@@ -492,12 +291,12 @@ testIncDec:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$32, %rsp
-	movss   	%xmm0, n
+	movss   	%xmm0, -8(%rbp)
 	movq	$.LC0, -20(%rbp)
 	movq    -20(%rbp), %rdi
 	call	printStr
 	movl	%eax, -24(%rbp)
-	movss   	n, %xmm0
+	movss   	-8(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -32(%rbp)
 .LFE0:
@@ -524,25 +323,33 @@ main:
 	call	printStr
 	movl	%eax, -16(%rbp)
 	movss	f0, %xmm0
-	movss	%xmm0, t6
-	movss	t6, %xmm0
-	movss	%xmm0, n1
+	movss	%xmm0, -56(%rbp)
+	movss	f0, %xmm0
+	movss	%xmm0, -56(%rbp)
+	movss	-56(%rbp), %xmm0
+	movss	%xmm0, -24(%rbp)
 	movss	f1, %xmm0
-	movss	%xmm0, t8
-	movss	t8, %xmm0
-	movss	%xmm0, n2
+	movss	%xmm0, -72(%rbp)
+	movss	f1, %xmm0
+	movss	%xmm0, -72(%rbp)
+	movss	-72(%rbp), %xmm0
+	movss	%xmm0, -32(%rbp)
 	movss	f2, %xmm0
-	movss	%xmm0, t10
-	movss	t10, %xmm0
-	movss	%xmm0, n3
+	movss	%xmm0, -88(%rbp)
+	movss	f2, %xmm0
+	movss	%xmm0, -88(%rbp)
+	movss	-88(%rbp), %xmm0
+	movss	%xmm0, -40(%rbp)
 	movss	f3, %xmm0
-	movss	%xmm0, t12
-	movss	t12, %xmm0
+	movss	%xmm0, -104(%rbp)
+	movss	f3, %xmm0
+	movss	%xmm0, -104(%rbp)
+	movss	-104(%rbp), %xmm0
 	movss f__, %xmm1
 	subss	%xmm0, %xmm1
-	movss	%xmm1, t13
-	movss	t13, %xmm0
-	movss	%xmm0, n4
+	movss	%xmm1, -112(%rbp)
+	movss	-112(%rbp), %xmm0
+	movss	%xmm0, -48(%rbp)
 	movl	$1, -128(%rbp)
 	movl	-128(%rbp), %eax
 	movl	%eax, -124(%rbp)
@@ -565,209 +372,219 @@ main:
 	movq    -180(%rbp), %rdi
 	call	printStr
 	movl	%eax, -184(%rbp)
-	movss   	n1, %xmm0
+	movss   	-24(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -192(%rbp)
 	movq	$.LC6, -200(%rbp)
 	movq    -200(%rbp), %rdi
 	call	printStr
 	movl	%eax, -204(%rbp)
-	movss   	n2, %xmm0
+	movss   	-32(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -208(%rbp)
 	movq	$.LC7, -216(%rbp)
 	movq    -216(%rbp), %rdi
 	call	printStr
 	movl	%eax, -220(%rbp)
-	movss   	n3, %xmm0
+	movss   	-40(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -224(%rbp)
 	movq	$.LC8, -232(%rbp)
 	movq    -232(%rbp), %rdi
 	call	printStr
 	movl	%eax, -236(%rbp)
-	movss   	n4, %xmm0
+	movss   	-48(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -240(%rbp)
-	movss	n1, %xmm0
-	addss	n2, %xmm0
-	movss	%xmm0, t36
-	movss	t36, %xmm0
-	movss	%xmm0, n5
-	movss	n1, %xmm0
-	subss	n2, %xmm0
-	movss	%xmm0, t37
-	movss	t37, %xmm0
-	movss	%xmm0, n6
-	movss	n1, %xmm0
-	mulss	n2, %xmm0
-	movss	%xmm0, t38
-	movss	t38, %xmm0
-	movss	%xmm0, n7
-	movss	n1, %xmm0
-	divss	n2, %xmm0
-	movss	%xmm0, t39
-	movss	t39, %xmm0
-	movss	%xmm0, n8
+	movss	-24(%rbp), %xmm0
+	addss	-32(%rbp), %xmm0
+	movss	%xmm0, -256(%rbp)
+	movss	-256(%rbp), %xmm0
+	movss	%xmm0, -248(%rbp)
+	movss	-24(%rbp), %xmm0
+	subss	-32(%rbp), %xmm0
+	movss	%xmm0, -272(%rbp)
+	movss	-272(%rbp), %xmm0
+	movss	%xmm0, -264(%rbp)
+	movss	-24(%rbp), %xmm0
+	mulss	-32(%rbp), %xmm0
+	movss	%xmm0, -288(%rbp)
+	movss	-288(%rbp), %xmm0
+	movss	%xmm0, -280(%rbp)
+	movss	-24(%rbp), %xmm0
+	divss	-32(%rbp), %xmm0
+	movss	%xmm0, -304(%rbp)
+	movss	-304(%rbp), %xmm0
+	movss	%xmm0, -296(%rbp)
 	movss	f4, %xmm0
-	movss	%xmm0, t40
-	movss	t40, %xmm0
-	movss	%xmm0, n9
+	movss	%xmm0, -320(%rbp)
+	movss	f4, %xmm0
+	movss	%xmm0, -320(%rbp)
+	movss	-320(%rbp), %xmm0
+	movss	%xmm0, -312(%rbp)
 	movq	$.LC9, -328(%rbp)
 	movq    -328(%rbp), %rdi
 	call	printStr
 	movl	%eax, -332(%rbp)
-	movss   	n5, %xmm0
+	movss   	-248(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -336(%rbp)
 	movq	$.LC10, -344(%rbp)
 	movq    -344(%rbp), %rdi
 	call	printStr
 	movl	%eax, -348(%rbp)
-	movss   	n6, %xmm0
+	movss   	-264(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -352(%rbp)
 	movq	$.LC11, -360(%rbp)
 	movq    -360(%rbp), %rdi
 	call	printStr
 	movl	%eax, -364(%rbp)
-	movss   	n7, %xmm0
+	movss   	-280(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -368(%rbp)
 	movq	$.LC12, -376(%rbp)
 	movq    -376(%rbp), %rdi
 	call	printStr
 	movl	%eax, -380(%rbp)
-	movss   	n8, %xmm0
+	movss   	-296(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -384(%rbp)
 	movq	$.LC13, -392(%rbp)
 	movq    -392(%rbp), %rdi
 	call	printStr
 	movl	%eax, -396(%rbp)
-	movss   	n9, %xmm0
+	movss   	-312(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -400(%rbp)
-	movss	n1, %xmm0
+	movss	-24(%rbp), %xmm0
 	movss f__, %xmm1
 	subss	%xmm0, %xmm1
-	movss	%xmm1, t56
-	movss	t56, %xmm0
-	addss	n2, %xmm0
-	movss	%xmm0, t57
-	movss	t57, %xmm0
-	subss	n3, %xmm0
-	movss	%xmm0, t58
-	movss	t58, %xmm0
-	addss	n4, %xmm0
-	movss	%xmm0, t59
+	movss	%xmm1, -416(%rbp)
+	movss	-416(%rbp), %xmm0
+	addss	-32(%rbp), %xmm0
+	movss	%xmm0, -424(%rbp)
+	movss	-424(%rbp), %xmm0
+	subss	-40(%rbp), %xmm0
+	movss	%xmm0, -432(%rbp)
+	movss	-432(%rbp), %xmm0
+	addss	-48(%rbp), %xmm0
+	movss	%xmm0, -440(%rbp)
 	movss	f5, %xmm0
-	movss	%xmm0, t60
-	movss	t59, %xmm0
-	addss	t60, %xmm0
-	movss	%xmm0, t61
-	movss	t61, %xmm0
-	movss	%xmm0, n10
-	movss	n1, %xmm0
-	mulss	n2, %xmm0
-	movss	%xmm0, t62
-	movss	t62, %xmm0
-	divss	n3, %xmm0
-	movss	%xmm0, t63
-	movss	t63, %xmm0
-	addss	n4, %xmm0
-	movss	%xmm0, t64
+	movss	%xmm0, -448(%rbp)
+	movss	f5, %xmm0
+	movss	%xmm0, -448(%rbp)
+	movss	-440(%rbp), %xmm0
+	addss	-448(%rbp), %xmm0
+	movss	%xmm0, -456(%rbp)
+	movss	-456(%rbp), %xmm0
+	movss	%xmm0, -408(%rbp)
+	movss	-24(%rbp), %xmm0
+	mulss	-32(%rbp), %xmm0
+	movss	%xmm0, -472(%rbp)
+	movss	-472(%rbp), %xmm0
+	divss	-40(%rbp), %xmm0
+	movss	%xmm0, -480(%rbp)
+	movss	-480(%rbp), %xmm0
+	addss	-48(%rbp), %xmm0
+	movss	%xmm0, -488(%rbp)
 	movss	f6, %xmm0
-	movss	%xmm0, t65
-	movss	t64, %xmm0
-	subss	t65, %xmm0
-	movss	%xmm0, t66
-	movss	t66, %xmm0
-	movss	%xmm0, n11
-	movss	n2, %xmm0
-	mulss	n3, %xmm0
-	movss	%xmm0, t67
-	movss	t67, %xmm0
-	divss	n4, %xmm0
-	movss	%xmm0, t68
-	movss	n1, %xmm0
-	addss	t68, %xmm0
-	movss	%xmm0, t69
+	movss	%xmm0, -496(%rbp)
+	movss	f6, %xmm0
+	movss	%xmm0, -496(%rbp)
+	movss	-488(%rbp), %xmm0
+	subss	-496(%rbp), %xmm0
+	movss	%xmm0, -504(%rbp)
+	movss	-504(%rbp), %xmm0
+	movss	%xmm0, -464(%rbp)
+	movss	-32(%rbp), %xmm0
+	mulss	-40(%rbp), %xmm0
+	movss	%xmm0, -520(%rbp)
+	movss	-520(%rbp), %xmm0
+	divss	-48(%rbp), %xmm0
+	movss	%xmm0, -528(%rbp)
+	movss	-24(%rbp), %xmm0
+	addss	-528(%rbp), %xmm0
+	movss	%xmm0, -536(%rbp)
 	movss	f7, %xmm0
-	movss	%xmm0, t70
-	movss	t69, %xmm0
-	subss	t70, %xmm0
-	movss	%xmm0, t71
-	movss	t71, %xmm0
-	movss	%xmm0, n12
-	movss	n1, %xmm0
-	addss	n2, %xmm0
-	movss	%xmm0, t72
-	movss	n3, %xmm0
+	movss	%xmm0, -544(%rbp)
+	movss	f7, %xmm0
+	movss	%xmm0, -544(%rbp)
+	movss	-536(%rbp), %xmm0
+	subss	-544(%rbp), %xmm0
+	movss	%xmm0, -552(%rbp)
+	movss	-552(%rbp), %xmm0
+	movss	%xmm0, -512(%rbp)
+	movss	-24(%rbp), %xmm0
+	addss	-32(%rbp), %xmm0
+	movss	%xmm0, -568(%rbp)
+	movss	-40(%rbp), %xmm0
 	movss f__, %xmm1
 	subss	%xmm0, %xmm1
-	movss	%xmm1, t73
-	movss	t73, %xmm0
-	divss	n4, %xmm0
-	movss	%xmm0, t74
-	movss	t72, %xmm0
-	mulss	t74, %xmm0
-	movss	%xmm0, t75
+	movss	%xmm1, -576(%rbp)
+	movss	-576(%rbp), %xmm0
+	divss	-48(%rbp), %xmm0
+	movss	%xmm0, -584(%rbp)
+	movss	-568(%rbp), %xmm0
+	mulss	-584(%rbp), %xmm0
+	movss	%xmm0, -592(%rbp)
 	movss	f8, %xmm0
-	movss	%xmm0, t76
-	movss	t75, %xmm0
-	subss	t76, %xmm0
-	movss	%xmm0, t77
-	movss	t77, %xmm0
-	movss	%xmm0, n13
+	movss	%xmm0, -600(%rbp)
+	movss	f8, %xmm0
+	movss	%xmm0, -600(%rbp)
+	movss	-592(%rbp), %xmm0
+	subss	-600(%rbp), %xmm0
+	movss	%xmm0, -608(%rbp)
+	movss	-608(%rbp), %xmm0
+	movss	%xmm0, -560(%rbp)
 	movq	$.LC14, -616(%rbp)
 	movq    -616(%rbp), %rdi
 	call	printStr
 	movl	%eax, -620(%rbp)
-	movss   	n10, %xmm0
+	movss   	-408(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -624(%rbp)
 	movq	$.LC15, -632(%rbp)
 	movq    -632(%rbp), %rdi
 	call	printStr
 	movl	%eax, -636(%rbp)
-	movss   	n11, %xmm0
+	movss   	-464(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -640(%rbp)
 	movq	$.LC16, -648(%rbp)
 	movq    -648(%rbp), %rdi
 	call	printStr
 	movl	%eax, -652(%rbp)
-	movss   	n12, %xmm0
+	movss   	-512(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -656(%rbp)
 	movq	$.LC17, -664(%rbp)
 	movq    -664(%rbp), %rdi
 	call	printStr
 	movl	%eax, -668(%rbp)
-	movss   	n13, %xmm0
+	movss   	-560(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -672(%rbp)
 	movq	$.LC18, -680(%rbp)
 	movq    -680(%rbp), %rdi
 	call	printStr
 	movl	%eax, -684(%rbp)
-	movss	n3, %xmm0
+	movss	-40(%rbp), %xmm0
 	movss f__, %xmm1
 	subss	%xmm0, %xmm1
-	movss	%xmm1, t92
-	movss   	t92, %xmm0
+	movss	%xmm1, -692(%rbp)
+	movss   	-692(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -696(%rbp)
 	movq	$.LC19, -704(%rbp)
 	movq    -704(%rbp), %rdi
 	call	printStr
 	movl	%eax, -708(%rbp)
-	movss	n4, %xmm0
+	movss	-48(%rbp), %xmm0
 	movss f__, %xmm1
 	subss	%xmm0, %xmm1
-	movss	%xmm1, t96
-	movss   	t96, %xmm0
+	movss	%xmm1, -716(%rbp)
+	movss   	-716(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -720(%rbp)
 	movl	$5, -764(%rbp)
@@ -776,50 +593,60 @@ main:
 	imull	$8, %eax
 	movl	%eax, -772(%rbp)
 	movss	f9, %xmm0
-	movss	%xmm0, t101
+	movss	%xmm0, -780(%rbp)
+	movss	f9, %xmm0
+	movss	%xmm0, -780(%rbp)
 	movl    -772(%rbp), %eax
 	cltq    
-	movss   t101, %xmm0
+	movss   -780(%rbp), %xmm0
 	movss   %xmm0, -760(%rbp, %rax, 1)
 	movl	$1, -792(%rbp)
 	movl	-792(%rbp), %eax
 	imull	$8, %eax
 	movl	%eax, -796(%rbp)
 	movss	f10, %xmm0
-	movss	%xmm0, t105
+	movss	%xmm0, -804(%rbp)
+	movss	f10, %xmm0
+	movss	%xmm0, -804(%rbp)
 	movl    -796(%rbp), %eax
 	cltq    
-	movss   t105, %xmm0
+	movss   -804(%rbp), %xmm0
 	movss   %xmm0, -760(%rbp, %rax, 1)
 	movl	$2, -816(%rbp)
 	movl	-816(%rbp), %eax
 	imull	$8, %eax
 	movl	%eax, -820(%rbp)
 	movss	f11, %xmm0
-	movss	%xmm0, t109
+	movss	%xmm0, -828(%rbp)
+	movss	f11, %xmm0
+	movss	%xmm0, -828(%rbp)
 	movl    -820(%rbp), %eax
 	cltq    
-	movss   t109, %xmm0
+	movss   -828(%rbp), %xmm0
 	movss   %xmm0, -760(%rbp, %rax, 1)
 	movl	$3, -840(%rbp)
 	movl	-840(%rbp), %eax
 	imull	$8, %eax
 	movl	%eax, -844(%rbp)
 	movss	f12, %xmm0
-	movss	%xmm0, t113
+	movss	%xmm0, -852(%rbp)
+	movss	f12, %xmm0
+	movss	%xmm0, -852(%rbp)
 	movl    -844(%rbp), %eax
 	cltq    
-	movss   t113, %xmm0
+	movss   -852(%rbp), %xmm0
 	movss   %xmm0, -760(%rbp, %rax, 1)
 	movl	$4, -864(%rbp)
 	movl	-864(%rbp), %eax
 	imull	$8, %eax
 	movl	%eax, -868(%rbp)
 	movss	f13, %xmm0
-	movss	%xmm0, t117
+	movss	%xmm0, -876(%rbp)
+	movss	f13, %xmm0
+	movss	%xmm0, -876(%rbp)
 	movl    -868(%rbp), %eax
 	cltq    
-	movss   t117, %xmm0
+	movss   -876(%rbp), %xmm0
 	movss   %xmm0, -760(%rbp, %rax, 1)
 	movq	$.LC20, -892(%rbp)
 	movq    -892(%rbp), %rdi
@@ -832,8 +659,8 @@ main:
 	movl    -904(%rbp), %eax
 	cltq    
 	movss   -760(%rbp, %rax, 1), %xmm0
-	movss   %xmm0, t123
-	movss   	t123, %xmm0
+	movss   %xmm0, -912(%rbp)
+	movss   	-912(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -916(%rbp)
 	movq	$.LC21, -924(%rbp)
@@ -847,8 +674,8 @@ main:
 	movl    -936(%rbp), %eax
 	cltq    
 	movss   -760(%rbp, %rax, 1), %xmm0
-	movss   %xmm0, t129
-	movss   	t129, %xmm0
+	movss   %xmm0, -944(%rbp)
+	movss   	-944(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -948(%rbp)
 	movq	$.LC22, -956(%rbp)
@@ -862,8 +689,8 @@ main:
 	movl    -968(%rbp), %eax
 	cltq    
 	movss   -760(%rbp, %rax, 1), %xmm0
-	movss   %xmm0, t135
-	movss   	t135, %xmm0
+	movss   %xmm0, -976(%rbp)
+	movss   	-976(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -980(%rbp)
 	movq	$.LC23, -988(%rbp)
@@ -877,11 +704,11 @@ main:
 	movl    -1000(%rbp), %eax
 	cltq    
 	movss   -760(%rbp, %rax, 1), %xmm0
-	movss   %xmm0, t141
-	movss   	t141, %xmm0
+	movss   %xmm0, -1008(%rbp)
+	movss   	-1008(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -1012(%rbp)
-	leaq	n10, %rax
+	leaq	-408(%rbp), %rax
 	movq	%rax, -1028(%rbp)
 	movq	-1028(%rbp), %rax
 	movq	%rax, -1020(%rbp)
@@ -891,8 +718,8 @@ main:
 	movl	%eax, -1040(%rbp)
 	movq	-1020(%rbp), %rax
 	movss	(%rax), %xmm0
-	movss	%xmm0, t146
-	movss   	t146, %xmm0
+	movss	%xmm0, -1048(%rbp)
+	movss   	-1048(%rbp), %xmm0
 	call	printFlt
 	movl	%eax, -1052(%rbp)
 	movq	$.LC25, -1060(%rbp)
