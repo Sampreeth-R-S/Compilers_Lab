@@ -1,3 +1,4 @@
+int global_var=0;
 void testIncDec(float n) {
     printStr("Value passed to function = ");
     printFlt(n);
@@ -10,7 +11,11 @@ int main() {
     n2 = 16.0;
     n3 = 7.0;
     n4 = -22.0;
-
+    int global_var=1;
+    printStr("\nglobal_var = ");
+    printInt(global_var);
+    printStr("\n");
+    printStr("\n");
     printStr("\nn1 = ");
     printFlt(n1);
     printStr("\nn2 = ");
@@ -72,5 +77,9 @@ int main() {
     printStr("\n*ptr = ");
     printFlt(*ptr);
     printStr("\n\n");
+   
+    printStr("global_var = ");
+    printInt(global_var);
+    printStr("\n");
     return 0;
 }
