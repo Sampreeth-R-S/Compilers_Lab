@@ -2,27 +2,22 @@ int printStr(char *s);
 int readInt(int *eP);
 int printInt(int n);
 
-void fillFib(int *fib, int n) {
+void Facts(int *fact, int n) {
     int i;
-    for (i = 0; i < n; i++) {
-        if (i == 0) {
-            fib[i] = 0;
-        } else if (i == 1) {
-            fib[i] = 1;
-        } else {
-            fib[i] = fib[i - 1] + fib[i - 2];
-        }
+    fact[i]=1;
+    for (i = 2; i < n; i++) {
+        fact[i] = fact[i-1]*i;
     }
 }
 
 int main() {
     printStr("\n#### TEST 2 (1-D Arrays) ####");
-    int fib[15];
-    fillFib(fib, 15);
+    int fact[10];
+    Facts(fact, 10);
     int i;
-    printStr("\nFibonacci Series: ");
-    for (i = 0; i < 15; i++) {
-        printInt(fib[i]);
+    printStr("\nFirst 10 Factorials: ");
+    for (i = 0; i < 10; i++) {
+        printInt(fact[i]);
         printStr(" ");
     }
     char vowels[5];

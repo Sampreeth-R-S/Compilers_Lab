@@ -2,6 +2,8 @@ int printStr(char *s);
 int readInt(int *eP);
 int printInt(int n);
 
+
+int glob_var;
 int testInt(int num) {
     return num;
 }
@@ -18,14 +20,14 @@ char *testCharPtr(char *cPtr) {
     return cPtr;
 }
 
-void testVoid() {
-    printStr("\nHello World, I am a void function. I don't return anything.");
+void setVar() {
+    glob_var = 6;
     return;
 }
 
 int main() {
-    printStr("\n#### TEST 3 (Function calls and returns) ####");
-    int n = 10;
+    // printStr("\n#### TEST 3 (Function calls and returns) ####");
+    int n = 6;
     int *nPtr = &n;
     
     printStr("\nTesting integer value return: ");
@@ -79,7 +81,12 @@ int main() {
     printStr(" ]");
 
     printStr("\nTesting void return: ");
-    testVoid();
+    setVar();
+    if (glob_var == 10) {
+        printStr("Passed");
+    } else {
+        printStr("Failed");
+    }
     printStr("\n\n");
     return 0;
 }
