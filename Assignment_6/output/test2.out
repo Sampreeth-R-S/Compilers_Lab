@@ -248,7 +248,7 @@ TAC:
 36  :    fillFib end
 
 37  : main: 
-38  :    Unknown Operator
+38  :    t22 = .LC0
 39  :    param t22
 40  :    t23 = call printStr, 1
 41  :    t24 = 15
@@ -256,7 +256,7 @@ TAC:
 43  :    t25 = 15
 44  :    param t25
 45  :    t26 = call fillFib, 2
-46  :    Unknown Operator
+46  :    t27 = .LC1
 47  :    param t27
 48  :    t28 = call printStr, 1
 49  :    t29 = 0
@@ -271,7 +271,7 @@ TAC:
 58  :    t34 = fib[t33]
 59  :    param t34
 60  :    t35 = call printInt, 1
-61  :    Unknown Operator
+61  :    t36 = .LC2
 62  :    param t36
 63  :    t37 = call printStr, 1
 64  :    goto 54
@@ -296,7 +296,7 @@ TAC:
 83  :    t56 = t55 * 1
 84  :    t57 = 'u'
 85  :    vowels[t56] = t57
-86  :    Unknown Operator
+86  :    t59 = .LC3
 87  :    param t59
 88  :    t60 = call printStr, 1
 89  :    t61 = 0
@@ -311,11 +311,11 @@ TAC:
 98  :    t66 = vowels[t65]
 99  :    param t66
 100 :    t67 = call printInt, 1
-101 :    Unknown Operator
+101 :    t68 = .LC4
 102 :    param t68
 103 :    t69 = call printStr, 1
 104 :    goto 94
-105 :    Unknown Operator
+105 :    t70 = .LC5
 106 :    param t70
 107 :    t71 = call printStr, 1
 108 :    t72 = 0

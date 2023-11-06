@@ -196,7 +196,7 @@ TAC:
 ......................................................................................................................................................
 
 0   : testIncDec: 
-1   :    Unknown Operator
+1   :    t0 = .LC0
 2   :    param t0
 3   :    t1 = call printStr, 1
 4   :    param n
@@ -204,7 +204,7 @@ TAC:
 6   :    testIncDec end
 
 7   : main: 
-8   :    Unknown Operator
+8   :    t3 = .LC1
 9   :    param t3
 10  :    t4 = call printStr, 1
 11  :    t5 = f0
@@ -216,22 +216,22 @@ TAC:
 17  :    t11 = f3
 18  :    t12 = -t11
 19  :    n4 = t12
-20  :    Unknown Operator
+20  :    t14 = .LC2
 21  :    param t14
 22  :    t15 = call printStr, 1
 23  :    param n1
 24  :    t16 = call printFlt, 1
-25  :    Unknown Operator
+25  :    t17 = .LC3
 26  :    param t17
 27  :    t18 = call printStr, 1
 28  :    param n2
 29  :    t19 = call printFlt, 1
-30  :    Unknown Operator
+30  :    t20 = .LC4
 31  :    param t20
 32  :    t21 = call printStr, 1
 33  :    param n3
 34  :    t22 = call printFlt, 1
-35  :    Unknown Operator
+35  :    t23 = .LC5
 36  :    param t23
 37  :    t24 = call printStr, 1
 38  :    param n4
@@ -246,27 +246,27 @@ TAC:
 47  :    n8 = t29
 48  :    t30 = f4
 49  :    n9 = t30
-50  :    Unknown Operator
+50  :    t31 = .LC6
 51  :    param t31
 52  :    t32 = call printStr, 1
 53  :    param n5
 54  :    t33 = call printFlt, 1
-55  :    Unknown Operator
+55  :    t34 = .LC7
 56  :    param t34
 57  :    t35 = call printStr, 1
 58  :    param n6
 59  :    t36 = call printFlt, 1
-60  :    Unknown Operator
+60  :    t37 = .LC8
 61  :    param t37
 62  :    t38 = call printStr, 1
 63  :    param n7
 64  :    t39 = call printFlt, 1
-65  :    Unknown Operator
+65  :    t40 = .LC9
 66  :    param t40
 67  :    t41 = call printStr, 1
 68  :    param n8
 69  :    t42 = call printFlt, 1
-70  :    Unknown Operator
+70  :    t43 = .LC10
 71  :    param t43
 72  :    t44 = call printStr, 1
 73  :    param n9
@@ -297,33 +297,33 @@ TAC:
 98  :    t66 = f8
 99  :    t67 = t65 - t66
 100 :    n13 = t67
-101 :    Unknown Operator
+101 :    t68 = .LC11
 102 :    param t68
 103 :    t69 = call printStr, 1
 104 :    param n10
 105 :    t70 = call printFlt, 1
-106 :    Unknown Operator
+106 :    t71 = .LC12
 107 :    param t71
 108 :    t72 = call printStr, 1
 109 :    param n11
 110 :    t73 = call printFlt, 1
-111 :    Unknown Operator
+111 :    t74 = .LC13
 112 :    param t74
 113 :    t75 = call printStr, 1
 114 :    param n12
 115 :    t76 = call printFlt, 1
-116 :    Unknown Operator
+116 :    t77 = .LC14
 117 :    param t77
 118 :    t78 = call printStr, 1
 119 :    param n13
 120 :    t79 = call printFlt, 1
-121 :    Unknown Operator
+121 :    t80 = .LC15
 122 :    param t80
 123 :    t81 = call printStr, 1
 124 :    t82 = -n3
 125 :    param t82
 126 :    t83 = call printFlt, 1
-127 :    Unknown Operator
+127 :    t84 = .LC16
 128 :    param t84
 129 :    t85 = call printStr, 1
 130 :    t86 = -n4
@@ -350,7 +350,7 @@ TAC:
 151 :    t106 = t105 * 8
 152 :    t107 = f13
 153 :    arr[t106] = t107
-154 :    Unknown Operator
+154 :    t109 = .LC17
 155 :    param t109
 156 :    t110 = call printStr, 1
 157 :    t111 = 0
@@ -358,7 +358,7 @@ TAC:
 159 :    t113 = arr[t112]
 160 :    param t113
 161 :    t114 = call printFlt, 1
-162 :    Unknown Operator
+162 :    t115 = .LC18
 163 :    param t115
 164 :    t116 = call printStr, 1
 165 :    t117 = 1
@@ -366,7 +366,7 @@ TAC:
 167 :    t119 = arr[t118]
 168 :    param t119
 169 :    t120 = call printFlt, 1
-170 :    Unknown Operator
+170 :    t121 = .LC19
 171 :    param t121
 172 :    t122 = call printStr, 1
 173 :    t123 = 2
@@ -374,7 +374,7 @@ TAC:
 175 :    t125 = arr[t124]
 176 :    param t125
 177 :    t126 = call printFlt, 1
-178 :    Unknown Operator
+178 :    t127 = .LC20
 179 :    param t127
 180 :    t128 = call printStr, 1
 181 :    t129 = 3
@@ -384,13 +384,13 @@ TAC:
 185 :    t132 = call printFlt, 1
 186 :    t133 = &n10
 187 :    ptr = t133
-188 :    Unknown Operator
+188 :    t134 = .LC21
 189 :    param t134
 190 :    t135 = call printStr, 1
 191 :    t136 = *ptr
 192 :    param t136
 193 :    t137 = call printFlt, 1
-194 :    Unknown Operator
+194 :    t138 = .LC22
 195 :    param t138
 196 :    t139 = call printStr, 1
 197 :    t140 = 0

@@ -351,39 +351,39 @@ TAC:
 ......................................................................................................................................................
 
 0   : main: 
-1   :    Unknown Operator
+1   :    t0 = .LC0
 2   :    param t0
 3   :    t1 = call printStr, 1
 4   :    t2 = 5
 5   :    n1 = t2
 6   :    t4 = 5
 7   :    n2 = t4
-8   :    Unknown Operator
+8   :    t6 = .LC1
 9   :    param t6
 10  :    t7 = call printStr, 1
 11  :    if n1 == n2 goto 14
 12  :    goto 18
 13  :    goto 21
-14  :    Unknown Operator
+14  :    t8 = .LC2
 15  :    param t8
 16  :    t9 = call printStr, 1
 17  :    goto 21
-18  :    Unknown Operator
+18  :    t10 = .LC3
 19  :    param t10
 20  :    t11 = call printStr, 1
 21  :    t12 = 6
 22  :    n2 = t12
-23  :    Unknown Operator
+23  :    t14 = .LC4
 24  :    param t14
 25  :    t15 = call printStr, 1
 26  :    if n1 != n2 goto 29
 27  :    goto 33
 28  :    goto 36
-29  :    Unknown Operator
+29  :    t16 = .LC5
 30  :    param t16
 31  :    t17 = call printStr, 1
 32  :    goto 36
-33  :    Unknown Operator
+33  :    t18 = .LC6
 34  :    param t18
 35  :    t19 = call printStr, 1
 36  :    t20 = 1
@@ -391,123 +391,123 @@ TAC:
 38  :    n1 = t21
 39  :    t23 = 3
 40  :    n2 = t23
-41  :    Unknown Operator
+41  :    t25 = .LC7
 42  :    param t25
 43  :    t26 = call printStr, 1
 44  :    if n1 < n2 goto 47
 45  :    goto 51
 46  :    goto 54
-47  :    Unknown Operator
+47  :    t27 = .LC8
 48  :    param t27
 49  :    t28 = call printStr, 1
 50  :    goto 54
-51  :    Unknown Operator
+51  :    t29 = .LC9
 52  :    param t29
 53  :    t30 = call printStr, 1
 54  :    t31 = 1
 55  :    t32 = -t31
 56  :    n2 = t32
-57  :    Unknown Operator
+57  :    t34 = .LC10
 58  :    param t34
 59  :    t35 = call printStr, 1
 60  :    if n1 < n2 goto 63
 61  :    goto 67
 62  :    goto 70
-63  :    Unknown Operator
+63  :    t36 = .LC11
 64  :    param t36
 65  :    t37 = call printStr, 1
 66  :    goto 70
-67  :    Unknown Operator
+67  :    t38 = .LC12
 68  :    param t38
 69  :    t39 = call printStr, 1
-70  :    Unknown Operator
+70  :    t40 = .LC13
 71  :    param t40
 72  :    t41 = call printStr, 1
 73  :    if n1 <= n2 goto 76
 74  :    goto 80
 75  :    goto 83
-76  :    Unknown Operator
+76  :    t42 = .LC14
 77  :    param t42
 78  :    t43 = call printStr, 1
 79  :    goto 83
-80  :    Unknown Operator
+80  :    t44 = .LC15
 81  :    param t44
 82  :    t45 = call printStr, 1
 83  :    t46 = 2
 84  :    t47 = -t46
 85  :    n1 = t47
-86  :    Unknown Operator
+86  :    t49 = .LC16
 87  :    param t49
 88  :    t50 = call printStr, 1
 89  :    if n1 <= n2 goto 92
 90  :    goto 96
 91  :    goto 99
-92  :    Unknown Operator
+92  :    t51 = .LC17
 93  :    param t51
 94  :    t52 = call printStr, 1
 95  :    goto 99
-96  :    Unknown Operator
+96  :    t53 = .LC18
 97  :    param t53
 98  :    t54 = call printStr, 1
 99  :    t55 = 7
 100 :    n1 = t55
-101 :    Unknown Operator
+101 :    t57 = .LC19
 102 :    param t57
 103 :    t58 = call printStr, 1
 104 :    if n1 > n2 goto 107
 105 :    goto 111
 106 :    goto 114
-107 :    Unknown Operator
+107 :    t59 = .LC20
 108 :    param t59
 109 :    t60 = call printStr, 1
 110 :    goto 114
-111 :    Unknown Operator
+111 :    t61 = .LC21
 112 :    param t61
 113 :    t62 = call printStr, 1
 114 :    t63 = 7
 115 :    n2 = t63
-116 :    Unknown Operator
+116 :    t65 = .LC22
 117 :    param t65
 118 :    t66 = call printStr, 1
 119 :    if n1 > n2 goto 122
 120 :    goto 126
 121 :    goto 129
-122 :    Unknown Operator
+122 :    t67 = .LC23
 123 :    param t67
 124 :    t68 = call printStr, 1
 125 :    goto 129
-126 :    Unknown Operator
+126 :    t69 = .LC24
 127 :    param t69
 128 :    t70 = call printStr, 1
-129 :    Unknown Operator
+129 :    t71 = .LC25
 130 :    param t71
 131 :    t72 = call printStr, 1
 132 :    if n1 >= n2 goto 135
 133 :    goto 139
 134 :    goto 142
-135 :    Unknown Operator
+135 :    t73 = .LC26
 136 :    param t73
 137 :    t74 = call printStr, 1
 138 :    goto 142
-139 :    Unknown Operator
+139 :    t75 = .LC27
 140 :    param t75
 141 :    t76 = call printStr, 1
 142 :    t77 = 8
 143 :    n1 = t77
-144 :    Unknown Operator
+144 :    t79 = .LC28
 145 :    param t79
 146 :    t80 = call printStr, 1
 147 :    if n1 >= n2 goto 150
 148 :    goto 154
 149 :    goto 157
-150 :    Unknown Operator
+150 :    t81 = .LC29
 151 :    param t81
 152 :    t82 = call printStr, 1
 153 :    goto 157
-154 :    Unknown Operator
+154 :    t83 = .LC30
 155 :    param t83
 156 :    t84 = call printStr, 1
-157 :    Unknown Operator
+157 :    t85 = .LC31
 158 :    param t85
 159 :    t86 = call printStr, 1
 160 :    t87 = 0

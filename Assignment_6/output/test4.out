@@ -253,11 +253,11 @@ TAC:
 1   :    numG1 = t0
 2   :    t1 = 'b'
 3   :    charG1 = t1
-4   :    Unknown Operator
+4   :    t2 = .LC0
 5   :    strG1 = t2
 
 6   : main: 
-7   :    Unknown Operator
+7   :    t3 = .LC1
 8   :    param t3
 9   :    t4 = call printStr, 1
 10  :    t5 = 5
@@ -266,82 +266,82 @@ TAC:
 13  :    charL1 = t6
 14  :    t7 = &numL1
 15  :    ptrL1 = t7
-16  :    Unknown Operator
+16  :    t8 = .LC2
 17  :    strL1 = t8
-18  :    Unknown Operator
+18  :    t9 = .LC3
 19  :    param t9
 20  :    t10 = call printStr, 1
-21  :    Unknown Operator
+21  :    t11 = .LC4
 22  :    param t11
 23  :    t12 = call printStr, 1
 24  :    param numL1
 25  :    t13 = call printInt, 1
-26  :    Unknown Operator
+26  :    t14 = .LC5
 27  :    param t14
 28  :    t15 = call printStr, 1
 29  :    param charL1
 30  :    t16 = call printInt, 1
-31  :    Unknown Operator
+31  :    t17 = .LC6
 32  :    param t17
 33  :    t18 = call printStr, 1
 34  :    param ptrL1
 35  :    t19 = call printInt, 1
-36  :    Unknown Operator
+36  :    t20 = .LC7
 37  :    param t20
 38  :    t21 = call printStr, 1
 39  :    param strL1
 40  :    t22 = call printStr, 1
 41  :    t23 = &numG1
 42  :    ptrG1 = t23
-43  :    Unknown Operator
+43  :    t25 = .LC8
 44  :    param t25
 45  :    t26 = call printStr, 1
-46  :    Unknown Operator
+46  :    t27 = .LC9
 47  :    param t27
 48  :    t28 = call printStr, 1
 49  :    param numG1
 50  :    t29 = call printInt, 1
-51  :    Unknown Operator
+51  :    t30 = .LC10
 52  :    param t30
 53  :    t31 = call printStr, 1
 54  :    param charG1
 55  :    t32 = call printInt, 1
-56  :    Unknown Operator
+56  :    t33 = .LC11
 57  :    param t33
 58  :    t34 = call printStr, 1
 59  :    param ptrG1
 60  :    t35 = call printInt, 1
-61  :    Unknown Operator
+61  :    t36 = .LC12
 62  :    param t36
 63  :    t37 = call printStr, 1
 64  :    param strG1
 65  :    t38 = call printStr, 1
-66  :    Unknown Operator
+66  :    t39 = .LC13
 67  :    param t39
 68  :    t40 = call printStr, 1
-69  :    Unknown Operator
+69  :    t41 = .LC14
 70  :    param t41
 71  :    t42 = call printStr, 1
 72  :    numG2 = numL1
 73  :    charG2 = charL1
 74  :    ptrG2 = ptrL1
 75  :    strG2 = strL1
-76  :    Unknown Operator
+76  :    t47 = .LC15
 77  :    param t47
 78  :    t48 = call printStr, 1
 79  :    param numG2
 80  :    t49 = call printInt, 1
-81  :    Unknown Operator
+81  :    t50 = .LC16
 82  :    param t50
 83  :    t51 = call printStr, 1
 84  :    param charG2
 85  :    t52 = call printInt, 1
-86  :    Unknown Operator
+86  :    t53 = .LC17
 87  :    param t53
 88  :    t54 = call printStr, 1
 89  :    param ptrG2
 90  :    t55 = call printInt, 1
-91  :    Unknown Operator
+91  :    t56 = .LC18
 92  :    param t56
 93  :    t57 = call printStr, 1
 94  :    param strG2
@@ -355,39 +355,39 @@ TAC:
 102 :    if strG2 == strL1 goto 105
 103 :    goto 109
 104 :    goto 112
-105 :    Unknown Operator
+105 :    t59 = .LC19
 106 :    param t59
 107 :    t60 = call printStr, 1
 108 :    goto 112
-109 :    Unknown Operator
+109 :    t61 = .LC20
 110 :    param t61
 111 :    t62 = call printStr, 1
-112 :    Unknown Operator
+112 :    t63 = .LC21
 113 :    param t63
 114 :    t64 = call printStr, 1
-115 :    Unknown Operator
+115 :    t65 = .LC22
 116 :    param t65
 117 :    t66 = call printStr, 1
 118 :    numL2 = numG1
 119 :    charL2 = charG1
 120 :    ptrL2 = ptrG1
 121 :    strL2 = strG1
-122 :    Unknown Operator
+122 :    t71 = .LC23
 123 :    param t71
 124 :    t72 = call printStr, 1
 125 :    param numL2
 126 :    t73 = call printInt, 1
-127 :    Unknown Operator
+127 :    t74 = .LC24
 128 :    param t74
 129 :    t75 = call printStr, 1
 130 :    param charL2
 131 :    t76 = call printInt, 1
-132 :    Unknown Operator
+132 :    t77 = .LC25
 133 :    param t77
 134 :    t78 = call printStr, 1
 135 :    param ptrL2
 136 :    t79 = call printInt, 1
-137 :    Unknown Operator
+137 :    t80 = .LC26
 138 :    param t80
 139 :    t81 = call printStr, 1
 140 :    param strL2
@@ -401,39 +401,39 @@ TAC:
 148 :    if strL2 == strG1 goto 151
 149 :    goto 155
 150 :    goto 158
-151 :    Unknown Operator
+151 :    t83 = .LC27
 152 :    param t83
 153 :    t84 = call printStr, 1
 154 :    goto 158
-155 :    Unknown Operator
+155 :    t85 = .LC28
 156 :    param t85
 157 :    t86 = call printStr, 1
-158 :    Unknown Operator
+158 :    t87 = .LC29
 159 :    param t87
 160 :    t88 = call printStr, 1
-161 :    Unknown Operator
+161 :    t89 = .LC30
 162 :    param t89
 163 :    t90 = call printStr, 1
 164 :    numG2 = numG1
 165 :    charG2 = charG1
 166 :    ptrG2 = ptrG1
 167 :    strG2 = strG1
-168 :    Unknown Operator
+168 :    t95 = .LC31
 169 :    param t95
 170 :    t96 = call printStr, 1
 171 :    param numG2
 172 :    t97 = call printInt, 1
-173 :    Unknown Operator
+173 :    t98 = .LC32
 174 :    param t98
 175 :    t99 = call printStr, 1
 176 :    param charG2
 177 :    t100 = call printInt, 1
-178 :    Unknown Operator
+178 :    t101 = .LC33
 179 :    param t101
 180 :    t102 = call printStr, 1
 181 :    param ptrG2
 182 :    t103 = call printInt, 1
-183 :    Unknown Operator
+183 :    t104 = .LC34
 184 :    param t104
 185 :    t105 = call printStr, 1
 186 :    param strG2
@@ -447,14 +447,14 @@ TAC:
 194 :    if strG2 == strG1 goto 197
 195 :    goto 201
 196 :    goto 204
-197 :    Unknown Operator
+197 :    t107 = .LC35
 198 :    param t107
 199 :    t108 = call printStr, 1
 200 :    goto 204
-201 :    Unknown Operator
+201 :    t109 = .LC36
 202 :    param t109
 203 :    t110 = call printStr, 1
-204 :    Unknown Operator
+204 :    t111 = .LC37
 205 :    param t111
 206 :    t112 = call printStr, 1
 207 :    t113 = 0

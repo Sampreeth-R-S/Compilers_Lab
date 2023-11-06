@@ -76,6 +76,7 @@ symbol* symTab::lookup(string name){
     //Search in existing table
     for(list<symbol>::iterator it = table.begin(); it!=table.end(); it++){
         if(it->name == name) return &(*it);
+        if(it->name.length() > name.length()+3 && it->name.substr(0,name.length()) == name && it->name[name.length()+1]=='_'&&it->name[name.length()+2]=='_') return &(*it);
     }
 
     symbol* s = NULL;
@@ -248,7 +249,7 @@ result(result_),op(op_),arg2(arg2_){
 }
 //Print function(for quads)
 void quad::print() {
-    if(op == "=")       // Simple assignment
+    if(op == "="||op=="=str")       // Simple assignment
         cout << result << " = " << arg1;
     else if(op == "*=")
         cout << "*" << result << " = " << arg1;
