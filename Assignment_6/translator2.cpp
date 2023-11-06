@@ -69,6 +69,27 @@ void parameter_load(string name, int number)
         assemblyfile << "\t" << setw(8) << "movq";
         size=8;
     }
+    else if(type=="float")
+    {
+        assemblyfile << "\t" << setw(8) << "movss";
+        if(number==1)
+        {
+            assemblyfile<<"\t%xmm0"<<", "<<name<<endl;
+        }
+        if(number==2)
+        {
+            assemblyfile<<"\t%xmm1"<<", "<<name<<endl;
+        }
+        if(number==3)
+        {
+            assemblyfile<<"\t%xmm2"<<", "<<name<<endl;
+        }
+        if(number==4)
+        {
+            assemblyfile<<"\t%xmm3"<<", "<<name<<endl;
+        }
+        return;
+    }
     else if(size==1)
     {
         assemblyfile << "\t" << setw(8) << "movb";
@@ -95,6 +116,27 @@ void parameter_store(string name, int number)
     {
         assemblyfile << "\t" << setw(8) << "leaq";
         size=8;
+    }
+    else if(type=="float")
+    {
+        assemblyfile << "\t" << setw(8) << "movss";
+        if(number==1)
+        {
+            assemblyfile<<"\t"<<name<<", %xmm0"<<endl;
+        }
+        if(number==2)
+        {
+            assemblyfile<<"\t"<<name<<", %xmm1"<<endl;
+        }
+        if(number==3)
+        {
+            assemblyfile<<"\t"<<name<<", %xmm2"<<endl;
+        }
+        if(number==4)
+        {
+            assemblyfile<<"\t"<<name<<", %xmm3"<<endl;
+        }
+        return;
     }
     else if(size==1)
     {
@@ -136,6 +178,35 @@ void translate(){
             assemblyfile<<"\t.string\t\""+stringconstants[i]+"\""<<endl;
         }
         assemblyfile<<endl;
+    }
+    if(floatconstants.size()>0)
+    {
+        assemblyfile<<".data"<<endl;
+        for(int i=0;i<floatconstants.size();i++)
+        {
+            assemblyfile<<"f"+to_string(i)+":"<<endl;
+            assemblyfile<<"\t.float\t"<<floatconstants[i]<<endl;
+        }
+        assemblyfile<<endl;
+    }
+    assemblyfile<<".data"<<endl;
+    assemblyfile<<"\tf__:"<<endl;
+    assemblyfile<<"\t.float\t0.0"<<endl;
+    for(auto i:globalST->table)
+    {
+        if(i.nested_table!=NULL)
+        {
+            auto temp = i.nested_table;
+            for(auto symbol:temp->table)
+            {
+                if(symbol.type->type=="float")
+                {
+                    assemblyfile<<"\t.data"<<endl;
+                    assemblyfile<<symbol.name<<":"<<endl;
+                    assemblyfile<<"\t.float\t10"<<endl;
+                }
+            }
+        }
     }
     for(auto i:globalST->table)
     {
@@ -266,6 +337,12 @@ void translate(){
                     else
                     {
                         auto size=currentST->lookup(res)->size;
+                        if(currentST->lookup(res)->type->type=="float")
+                        {
+                            assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                            assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                            continue;
+                        }
                         if(size==1)
                         {
                             assemblyfile<<"\tmovb\t"<<getloc(arg1)<<", "<<"%al"<<endl;
@@ -298,6 +375,11 @@ void translate(){
                     }
                     assemblyfile<<"\tcall\t"<<arg1<<endl;
                     int return_size=currentST->lookup(res)->size;
+                    if(currentST->lookup(res)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                        continue;
+                    }
                     if(return_size==1)
                     {
                         assemblyfile<<"\tmovb\t"<<"%al"<<", "<<getloc(res)<<endl;
@@ -316,6 +398,11 @@ void translate(){
                     if(res!="")
                     {
                         int return_size=currentST->lookup(res)->size;
+                        if(currentST->lookup(res)->type->type=="float")
+                        {
+                            assemblyfile<<"\tmovss\t"<<res<<", "<<"%xmm0"<<endl;
+                            continue;
+                        }
                         if(return_size==1)
                         {
                             assemblyfile<<"\tmovb\t"<<getloc(res)<<", "<<"%al"<<endl;
@@ -341,6 +428,35 @@ void translate(){
                 if(op=="=="||op=="!="||op=="<"||op==">"||op=="<="||op==">=")
                 {
                     int size=currentST->lookup(arg1)->size;
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tcomiss\t"<<arg2<<", "<<"%xmm0"<<endl;
+                        if(op=="==")
+                        {
+                            assemblyfile<<"\tje\t"<<labels[stoi(res)]<<endl;
+                        }
+                        else if(op=="!=")
+                        {
+                            assemblyfile<<"\tjne\t"<<labels[stoi(res)]<<endl;
+                        }
+                        else if(op=="<")
+                        {
+                            assemblyfile<<"\tjb\t"<<labels[stoi(res)]<<endl;
+                        }
+                        else if(op==">")
+                        {
+                            assemblyfile<<"\tja\t"<<labels[stoi(res)]<<endl;
+                        }
+                        else if(op=="<=")
+                        {
+                            assemblyfile<<"\tjbe\t"<<labels[stoi(res)]<<endl;
+                        }
+                        else if(op==">=")
+                        {
+                            assemblyfile<<"\tjae\t"<<labels[stoi(res)]<<endl;
+                        }
+                    } 
                     if(size==1)
                     {
                         assemblyfile<<"\tmovb\t"<<getloc(arg2)<<", "<<"%al"<<endl;
@@ -384,6 +500,13 @@ void translate(){
                 if(op=="+")
                 {
                     int size=currentST->lookup(arg1)->size;
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\taddss\t"<<arg2<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                        continue;
+                    }
                     if(res==arg1&&arg2=="1")
                     {
                         assemblyfile<<"\tincl\t"<<getloc(arg1)<<endl;
@@ -397,6 +520,13 @@ void translate(){
                 }
                 if(op=="-")
                 {
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tsubss\t"<<arg2<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                        continue;
+                    }
                     if(res==arg1&&arg2=="1")
                     {
                         assemblyfile<<"\tdecl\t"<<getloc(arg1)<<endl;
@@ -412,6 +542,13 @@ void translate(){
                 if(op=="*")
                 {
                     int size=currentST->lookup(arg1)->size;
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmulss\t"<<arg2<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                        continue;
+                    }
                     assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
                     if(arg2[0]<='9'&&arg2[0]>='0')
                     {
@@ -426,6 +563,13 @@ void translate(){
                 if(op=="/")
                 {
                     int size = currentST->lookup(arg1)->size;
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tdivss\t"<<arg2<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                        continue;
+                    }
                     assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
                     assemblyfile<<"\tcdq"<<endl;
                     assemblyfile<<"\tidivl\t"<<getloc(arg2)<<endl;
@@ -441,6 +585,25 @@ void translate(){
                 if(op=="=[]")
                 {
                     auto t=currentST->lookup(arg1);
+                    if(currentST->lookup(res)->type->type=="float")
+                    {
+                        if(t->is_parameter)
+                        {
+                            assemblyfile << "\t" << setw(8) << "movl" << getloc(arg2) << ", " << "%eax" << endl;
+                            assemblyfile << "\t" << setw(8) << "cltq" << endl;
+                            assemblyfile << "\t" << setw(8) << "addq" << getloc(arg1) << ", " << "%rax" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << "(%rax)" << ", " << "%xmm0" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << "%xmm0" << ", " << res << endl;
+                        }
+                        else
+                        {
+                            assemblyfile << "\t" << setw(8) << "movl" << getloc(arg2) << ", " << "%eax" << endl;
+                            assemblyfile << "\t" << setw(8) << "cltq" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << currentAR->disp[arg1] << "(%rbp, %rax, 1)" << ", " << "%xmm0" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << "%xmm0" << ", " << res << endl;
+                        }
+                        continue;
+                    }
                     if(t->is_parameter)
                     {
                         assemblyfile << "\t" << setw(8) << "movl" << getloc(arg2) << ", " << "%eax" << endl;
@@ -460,6 +623,25 @@ void translate(){
                 if(op=="[]=")
                 {
                     auto t=currentST->lookup(res);
+                    if(currentST->lookup(arg2)->type->type=="float")
+                    {
+                        if(t->is_parameter)
+                        {
+                            assemblyfile << "\t" << setw(8) << "movl" << getloc(arg1) << ", " << "%eax" << endl;
+                            assemblyfile << "\t" << setw(8) << "cltq" << endl;
+                            assemblyfile << "\t" << setw(8) << "addq" << getloc(res) << ", " << "%rax" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << arg2 << ", " << "%xmm0" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << "%xmm0" << ", " << "(%rax)" << endl;
+                        }
+                        else
+                        {
+                            assemblyfile << "\t" << setw(8) << "movl" << getloc(arg1) << ", " << "%eax" << endl;
+                            assemblyfile << "\t" << setw(8) << "cltq" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << arg2 << ", " << "%xmm0" << endl;
+                            assemblyfile << "\t" << setw(8) << "movss" << "%xmm0" << ", " << currentAR->disp[res] << "(%rbp, %rax, 1)" << endl;
+                        }
+                        continue;
+                    }
                     if(t->is_parameter)
                     {
                         assemblyfile << "\t" << setw(8) << "movl" << getloc(arg1) << ", " << "%eax" << endl;
@@ -478,23 +660,51 @@ void translate(){
                 }
                 if(op=="= &")
                 {
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tleaq\t"<<arg1<<", "<<"%rax"<<endl;
+                        assemblyfile<<"\tmovq\t"<<"%rax, "<<getloc(res)<<endl;
+                        continue;
+                    }
                     assemblyfile<<"\tleaq\t"<<getloc(arg1)<<", "<<"%rax"<<endl;
                     assemblyfile<<"\tmovq\t"<<"%rax, "<<getloc(res)<<endl;
                 }
                 if(op=="= *")
                 {
+                    if(currentST->lookup(res)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovq\t"<<getloc(arg1)<<", "<<"%rax"<<endl;
+                        assemblyfile<<"\tmovss\t(%rax), %xmm0"<<endl;
+                        assemblyfile<<"\tmovss\t"<<"%xmm0, "<<res<<endl;
+                        continue;
+                    }
                     assemblyfile<<"\tmovq\t"<<getloc(arg1)<<", "<<"%rax"<<endl;
                     assemblyfile<<"\tmovl\t(%rax), %eax"<<endl;
                     assemblyfile<<"\tmovl\t"<<"%eax, "<<getloc(res)<<endl;
                 }
                 if(op=="= -")
                 {
+                    if(currentST->lookup(res)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmovss f__, %xmm1"<<endl;
+                        assemblyfile<<"\tsubss\t"<<"%xmm0, %xmm1"<<endl;
+                        assemblyfile<<"\tmovss\t%xmm1, "<<res<<endl;
+                        continue;
+                    }
                     assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
                     assemblyfile<<"\tnegl\t"<<"%eax"<<endl;
                     assemblyfile<<"\tmovl\t"<<"%eax, "<<getloc(res)<<endl;
                 }
                 if(op=="*=")
                 {
+                    if(currentST->lookup(arg1)->type->type=="float")
+                    {
+                        assemblyfile<<"\tmovss\t"<<arg1<<", "<<"%xmm0"<<endl;
+                        assemblyfile<<"\tmovq\t"<<res<<", %rbx"<<endl;
+                        assemblyfile << "\t" << "movss\t" << "%xmm0" << ", " << "(%rbx)" << endl;
+                        continue;
+                    }
                     assemblyfile<<"\tmovl\t"<<getloc(arg1)<<", "<<"%eax"<<endl;
                     assemblyfile<<"\tmovq\t"<<getloc(res)<<", %rbx"<<endl;
                     assemblyfile << "\t" << "movl\t" << "%eax" << ", " << "(%rbx)" << endl;

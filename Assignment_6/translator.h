@@ -41,6 +41,7 @@ extern string globe;
 extern char* yytext;
 extern vector<string> stringconstants;
 extern FILE *yyin;
+extern vector<float> floatconstants;
 //Parse function
 extern int yyparse();
 

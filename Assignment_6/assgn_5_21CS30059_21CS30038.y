@@ -8,6 +8,7 @@
     extern string varType;
     extern string globe;
     vector<string> stringconstants;
+    vector<float>floatconstants;
     extern char* yytext;
     symbol* lastseenST;
     void yyerror(string s) {
@@ -100,7 +101,8 @@ primary-expression:
         | FLOATING_CONSTANT    {
             $$ = new expression();
             $$->loc=symTab::gentemp(new ttype("float"),ftos($1));
-            emit("=",$$->loc->name,$1);
+            emit("=",$$->loc->name,"f"+to_string(floatconstants.size()));
+            floatconstants.push_back($1);
         }
         | CHARACTER_CONSTANT    {
             $$ = new expression();

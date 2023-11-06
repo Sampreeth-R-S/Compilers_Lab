@@ -1,0 +1,405 @@
+hello
+......................................................................................................................................................
+ST_name: Global                                            Parent: NULL                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+testIncDec               void                     -                   0              0              testIncDec
+main                     int                      -                   4              0              main
+......................................................................................................................................................
+
+......................................................................................................................................................
+ST_name: testIncDec                                        Parent: Global                                            
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+n                        param                    -                   8              0              NULL
+printStr                 int                      -                   4              8              NULL
+t0                       ptr(char)                "Value passed to function = "8              12             NULL
+t1                       int                      -                   4              20             NULL
+printFlt                 int                      -                   4              24             NULL
+t2                       int                      -                   4              28             NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main                                              Parent: Global                                            
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+return                   int                      -                   4              0              NULL
+printStr                 int                      -                   4              4              NULL
+t3                       ptr(char)                "\n#### TEST 1 (Arithmetic operators) ####"8              8              NULL
+t4                       int                      -                   4              16             NULL
+n1                       float                    -                   8              20             NULL
+n2                       float                    -                   8              28             NULL
+n3                       float                    -                   8              36             NULL
+n4                       float                    -                   8              44             NULL
+t5                       float                    300                 8              52             NULL
+t6                       float                    -                   8              60             NULL
+t7                       float                    16                  8              68             NULL
+t8                       float                    -                   8              76             NULL
+t9                       float                    7                   8              84             NULL
+t10                      float                    -                   8              92             NULL
+t11                      float                    22                  8              100            NULL
+t12                      float                    -                   8              108            NULL
+t13                      float                    -                   8              116            NULL
+t14                      ptr(char)                "\nn1 = "           8              124            NULL
+t15                      int                      -                   4              132            NULL
+printFlt                 int                      -                   4              136            NULL
+t16                      int                      -                   4              140            NULL
+t17                      ptr(char)                "\nn2 = "           8              144            NULL
+t18                      int                      -                   4              152            NULL
+t19                      int                      -                   4              156            NULL
+t20                      ptr(char)                "\nn3 = "           8              160            NULL
+t21                      int                      -                   4              168            NULL
+t22                      int                      -                   4              172            NULL
+t23                      ptr(char)                "\nn4 = "           8              176            NULL
+t24                      int                      -                   4              184            NULL
+t25                      int                      -                   4              188            NULL
+n5                       float                    -                   8              192            NULL
+t26                      float                    -                   8              200            NULL
+n6                       float                    -                   8              208            NULL
+t27                      float                    -                   8              216            NULL
+n7                       float                    -                   8              224            NULL
+t28                      float                    -                   8              232            NULL
+n8                       float                    -                   8              240            NULL
+t29                      float                    -                   8              248            NULL
+n9                       float                    0.1                 8              256            NULL
+t30                      float                    0.1                 8              264            NULL
+t31                      ptr(char)                "\nn1 + n2 = "      8              272            NULL
+t32                      int                      -                   4              280            NULL
+t33                      int                      -                   4              284            NULL
+t34                      ptr(char)                "\nn1 - n2 = "      8              288            NULL
+t35                      int                      -                   4              296            NULL
+t36                      int                      -                   4              300            NULL
+t37                      ptr(char)                "\nn1 * n2 = "      8              304            NULL
+t38                      int                      -                   4              312            NULL
+t39                      int                      -                   4              316            NULL
+t40                      ptr(char)                "\nn1 / n2 = "      8              320            NULL
+t41                      int                      -                   4              328            NULL
+t42                      int                      -                   4              332            NULL
+t43                      ptr(char)                "\nn1 % n2 = "      8              336            NULL
+t44                      int                      -                   4              344            NULL
+t45                      int                      -                   4              348            NULL
+n10                      float                    -                   8              352            NULL
+t46                      float                    -                   8              360            NULL
+t47                      float                    -                   8              368            NULL
+t48                      float                    -                   8              376            NULL
+t49                      float                    -                   8              384            NULL
+t50                      float                    10                  8              392            NULL
+t51                      float                    -                   8              400            NULL
+n11                      float                    -                   8              408            NULL
+t52                      float                    -                   8              416            NULL
+t53                      float                    -                   8              424            NULL
+t54                      float                    -                   8              432            NULL
+t55                      float                    10                  8              440            NULL
+t56                      float                    -                   8              448            NULL
+n12                      float                    -                   8              456            NULL
+t57                      float                    -                   8              464            NULL
+t58                      float                    -                   8              472            NULL
+t59                      float                    -                   8              480            NULL
+t60                      float                    0                   8              488            NULL
+t61                      float                    -                   8              496            NULL
+n13                      float                    -                   8              504            NULL
+t62                      float                    -                   8              512            NULL
+t63                      float                    -                   8              520            NULL
+t64                      float                    -                   8              528            NULL
+t65                      float                    -                   8              536            NULL
+t66                      float                    15                  8              544            NULL
+t67                      float                    -                   8              552            NULL
+t68                      ptr(char)                "\n-n1 + n2 - n3 + n4 + 10 = "8              560            NULL
+t69                      int                      -                   4              568            NULL
+t70                      int                      -                   4              572            NULL
+t71                      ptr(char)                "\nn1 * n2 / n3 + n4 - 10 = "8              576            NULL
+t72                      int                      -                   4              584            NULL
+t73                      int                      -                   4              588            NULL
+t74                      ptr(char)                "\nn1 + n2 * n3 / n4 - 0 = "8              592            NULL
+t75                      int                      -                   4              600            NULL
+t76                      int                      -                   4              604            NULL
+t77                      ptr(char)                "\n(n1 + n2) * (n3 / n4) - 15 = "8              608            NULL
+t78                      int                      -                   4              616            NULL
+t79                      int                      -                   4              620            NULL
+t80                      ptr(char)                "\n-n3 = "          8              624            NULL
+t81                      int                      -                   4              632            NULL
+t82                      float                    -                   8              636            NULL
+t83                      int                      -                   4              644            NULL
+t84                      ptr(char)                "\n-n4 = "          8              648            NULL
+t85                      int                      -                   4              656            NULL
+t86                      float                    -                   8              660            NULL
+t87                      int                      -                   4              668            NULL
+arr                      arr(float,5)             -                   40             672            NULL
+t88                      int                      5                   4              712            NULL
+t89                      int                      0                   4              716            NULL
+t90                      int                      -                   4              720            NULL
+t91                      float                    0                   8              724            NULL
+t92                      float                    -                   8              732            NULL
+t93                      int                      1                   4              740            NULL
+t94                      int                      -                   4              744            NULL
+t95                      float                    1                   8              748            NULL
+t96                      float                    -                   8              756            NULL
+t97                      int                      2                   4              764            NULL
+t98                      int                      -                   4              768            NULL
+t99                      float                    2                   8              772            NULL
+t100                     float                    -                   8              780            NULL
+t101                     int                      3                   4              788            NULL
+t102                     int                      -                   4              792            NULL
+t103                     float                    3                   8              796            NULL
+t104                     float                    -                   8              804            NULL
+t105                     int                      4                   4              812            NULL
+t106                     int                      -                   4              816            NULL
+t107                     float                    4                   8              820            NULL
+t108                     float                    -                   8              828            NULL
+t109                     ptr(char)                "\narr[0] = "       8              836            NULL
+t110                     int                      -                   4              844            NULL
+t111                     int                      0                   4              848            NULL
+t112                     int                      -                   4              852            NULL
+t113                     float                    -                   8              856            NULL
+t114                     int                      -                   4              864            NULL
+t115                     ptr(char)                "\narr[1] = "       8              868            NULL
+t116                     int                      -                   4              876            NULL
+t117                     int                      1                   4              880            NULL
+t118                     int                      -                   4              884            NULL
+t119                     float                    -                   8              888            NULL
+t120                     int                      -                   4              896            NULL
+t121                     ptr(char)                "\narr[2] = "       8              900            NULL
+t122                     int                      -                   4              908            NULL
+t123                     int                      2                   4              912            NULL
+t124                     int                      -                   4              916            NULL
+t125                     float                    -                   8              920            NULL
+t126                     int                      -                   4              928            NULL
+t127                     ptr(char)                "\narr[3] = "       8              932            NULL
+t128                     int                      -                   4              940            NULL
+t129                     int                      3                   4              944            NULL
+t130                     int                      -                   4              948            NULL
+t131                     float                    -                   8              952            NULL
+t132                     int                      -                   4              960            NULL
+ptr                      ptr(float)               -                   8              964            NULL
+t133                     ptr(float)               -                   8              972            NULL
+t134                     ptr(char)                "\n*ptr = "         8              980            NULL
+t135                     int                      -                   4              988            NULL
+t136                     float                    -                   8              992            NULL
+t137                     int                      -                   4              1000           NULL
+t138                     ptr(char)                "\n\n"              8              1004           NULL
+t139                     int                      -                   4              1012           NULL
+t140                     int                      0                   4              1016           NULL
+......................................................................................................................................................
+
+
+
+
+
+
+......................................................................................................................................................
+TAC: 
+......................................................................................................................................................
+
+0   : testIncDec: 
+1   :    Unknown Operator
+2   :    param t0
+3   :    t1 = call printStr, 1
+4   :    param n
+5   :    t2 = call printFlt, 1
+6   :    testIncDec end
+
+7   : main: 
+8   :    Unknown Operator
+9   :    param t3
+10  :    t4 = call printStr, 1
+11  :    t5 = f0
+12  :    n1 = t5
+13  :    t7 = f1
+14  :    n2 = t7
+15  :    t9 = f2
+16  :    n3 = t9
+17  :    t11 = f3
+18  :    t12 = -t11
+19  :    n4 = t12
+20  :    Unknown Operator
+21  :    param t14
+22  :    t15 = call printStr, 1
+23  :    param n1
+24  :    t16 = call printFlt, 1
+25  :    Unknown Operator
+26  :    param t17
+27  :    t18 = call printStr, 1
+28  :    param n2
+29  :    t19 = call printFlt, 1
+30  :    Unknown Operator
+31  :    param t20
+32  :    t21 = call printStr, 1
+33  :    param n3
+34  :    t22 = call printFlt, 1
+35  :    Unknown Operator
+36  :    param t23
+37  :    t24 = call printStr, 1
+38  :    param n4
+39  :    t25 = call printFlt, 1
+40  :    t26 = n1 + n2
+41  :    n5 = t26
+42  :    t27 = n1 - n2
+43  :    n6 = t27
+44  :    t28 = n1 * n2
+45  :    n7 = t28
+46  :    t29 = n1 / n2
+47  :    n8 = t29
+48  :    t30 = f4
+49  :    n9 = t30
+50  :    Unknown Operator
+51  :    param t31
+52  :    t32 = call printStr, 1
+53  :    param n5
+54  :    t33 = call printFlt, 1
+55  :    Unknown Operator
+56  :    param t34
+57  :    t35 = call printStr, 1
+58  :    param n6
+59  :    t36 = call printFlt, 1
+60  :    Unknown Operator
+61  :    param t37
+62  :    t38 = call printStr, 1
+63  :    param n7
+64  :    t39 = call printFlt, 1
+65  :    Unknown Operator
+66  :    param t40
+67  :    t41 = call printStr, 1
+68  :    param n8
+69  :    t42 = call printFlt, 1
+70  :    Unknown Operator
+71  :    param t43
+72  :    t44 = call printStr, 1
+73  :    param n9
+74  :    t45 = call printFlt, 1
+75  :    t46 = -n1
+76  :    t47 = t46 + n2
+77  :    t48 = t47 - n3
+78  :    t49 = t48 + n4
+79  :    t50 = f5
+80  :    t51 = t49 + t50
+81  :    n10 = t51
+82  :    t52 = n1 * n2
+83  :    t53 = t52 / n3
+84  :    t54 = t53 + n4
+85  :    t55 = f6
+86  :    t56 = t54 - t55
+87  :    n11 = t56
+88  :    t57 = n2 * n3
+89  :    t58 = t57 / n4
+90  :    t59 = n1 + t58
+91  :    t60 = f7
+92  :    t61 = t59 - t60
+93  :    n12 = t61
+94  :    t62 = n1 + n2
+95  :    t63 = -n3
+96  :    t64 = t63 / n4
+97  :    t65 = t62 * t64
+98  :    t66 = f8
+99  :    t67 = t65 - t66
+100 :    n13 = t67
+101 :    Unknown Operator
+102 :    param t68
+103 :    t69 = call printStr, 1
+104 :    param n10
+105 :    t70 = call printFlt, 1
+106 :    Unknown Operator
+107 :    param t71
+108 :    t72 = call printStr, 1
+109 :    param n11
+110 :    t73 = call printFlt, 1
+111 :    Unknown Operator
+112 :    param t74
+113 :    t75 = call printStr, 1
+114 :    param n12
+115 :    t76 = call printFlt, 1
+116 :    Unknown Operator
+117 :    param t77
+118 :    t78 = call printStr, 1
+119 :    param n13
+120 :    t79 = call printFlt, 1
+121 :    Unknown Operator
+122 :    param t80
+123 :    t81 = call printStr, 1
+124 :    t82 = -n3
+125 :    param t82
+126 :    t83 = call printFlt, 1
+127 :    Unknown Operator
+128 :    param t84
+129 :    t85 = call printStr, 1
+130 :    t86 = -n4
+131 :    param t86
+132 :    t87 = call printFlt, 1
+133 :    t88 = 5
+134 :    t89 = 0
+135 :    t90 = t89 * 8
+136 :    t91 = f9
+137 :    arr[t90] = t91
+138 :    t93 = 1
+139 :    t94 = t93 * 8
+140 :    t95 = f10
+141 :    arr[t94] = t95
+142 :    t97 = 2
+143 :    t98 = t97 * 8
+144 :    t99 = f11
+145 :    arr[t98] = t99
+146 :    t101 = 3
+147 :    t102 = t101 * 8
+148 :    t103 = f12
+149 :    arr[t102] = t103
+150 :    t105 = 4
+151 :    t106 = t105 * 8
+152 :    t107 = f13
+153 :    arr[t106] = t107
+154 :    Unknown Operator
+155 :    param t109
+156 :    t110 = call printStr, 1
+157 :    t111 = 0
+158 :    t112 = t111 * 8
+159 :    t113 = arr[t112]
+160 :    param t113
+161 :    t114 = call printFlt, 1
+162 :    Unknown Operator
+163 :    param t115
+164 :    t116 = call printStr, 1
+165 :    t117 = 1
+166 :    t118 = t117 * 8
+167 :    t119 = arr[t118]
+168 :    param t119
+169 :    t120 = call printFlt, 1
+170 :    Unknown Operator
+171 :    param t121
+172 :    t122 = call printStr, 1
+173 :    t123 = 2
+174 :    t124 = t123 * 8
+175 :    t125 = arr[t124]
+176 :    param t125
+177 :    t126 = call printFlt, 1
+178 :    Unknown Operator
+179 :    param t127
+180 :    t128 = call printStr, 1
+181 :    t129 = 3
+182 :    t130 = t129 * 8
+183 :    t131 = arr[t130]
+184 :    param t131
+185 :    t132 = call printFlt, 1
+186 :    t133 = &n10
+187 :    ptr = t133
+188 :    Unknown Operator
+189 :    param t134
+190 :    t135 = call printStr, 1
+191 :    t136 = *ptr
+192 :    param t136
+193 :    t137 = call printFlt, 1
+194 :    Unknown Operator
+195 :    param t138
+196 :    t139 = call printStr, 1
+197 :    t140 = 0
+198 :    return t140
+199 :    main end
+0 .LFB0
+6 .LFE0
+7 .LFB1
+199 .LFE1
+n
+6
+199

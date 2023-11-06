@@ -1,0 +1,466 @@
+hello
+......................................................................................................................................................
+ST_name: Global                                            Parent: NULL                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+printStr                 int                      -                   4              0              printStr
+readInt                  int                      -                   4              4              readInt
+printInt                 int                      -                   4              8              printInt
+numG1                    int                      20                  4              12             NULL
+t0                       int                      20                  4              16             NULL
+numG2                    int                      -                   4              20             NULL
+charG1                   char                     'b'                 1              24             NULL
+t1                       char                     'b'                 1              25             NULL
+charG2                   char                     -                   1              26             NULL
+ptrG1                    ptr(int)                 -                   8              27             NULL
+ptrG2                    ptr(int)                 -                   8              35             NULL
+strG1                    ptr(char)                "Hello World, I am a global string."8              43             NULL
+t2                       ptr(char)                "Hello World, I am a global string."8              51             NULL
+strG2                    ptr(char)                -                   8              59             NULL
+main                     int                      -                   4              67             main
+......................................................................................................................................................
+
+......................................................................................................................................................
+ST_name: printStr                                          Parent: Global                                            
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+s                        param                    -                   8              0              NULL
+return                   int                      -                   4              8              NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: readInt                                           Parent: Global                                            
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+eP                       param                    -                   8              0              NULL
+return                   int                      -                   4              8              NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: printInt                                          Parent: Global                                            
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+n                        param                    -                   4              0              NULL
+return                   int                      -                   4              4              NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main                                              Parent: Global                                            
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+return                   int                      -                   4              0              NULL
+t3                       ptr(char)                "\n#### TEST 4 (Global variables, pointers and addresses) ####"8              4              NULL
+t4                       int                      -                   4              12             NULL
+numL1                    int                      5                   4              16             NULL
+t5                       int                      5                   4              20             NULL
+numL2                    int                      -                   4              24             NULL
+charL1                   char                     'a'                 1              28             NULL
+t6                       char                     'a'                 1              29             NULL
+charL2                   char                     -                   1              30             NULL
+ptrL1                    ptr(int)                 -                   8              31             NULL
+t7                       ptr(int)                 -                   8              39             NULL
+ptrL2                    ptr(int)                 -                   8              47             NULL
+strL1                    ptr(char)                "Hello World, I am a local string."8              55             NULL
+t8                       ptr(char)                "Hello World, I am a local string."8              63             NULL
+strL2                    ptr(char)                -                   8              71             NULL
+t9                       ptr(char)                "\nLocal variables: "8              79             NULL
+t10                      int                      -                   4              87             NULL
+t11                      ptr(char)                "\nnumL1 = "        8              91             NULL
+t12                      int                      -                   4              99             NULL
+t13                      int                      -                   4              103            NULL
+t14                      ptr(char)                ", charL1 (ascii value) = "8              107            NULL
+t15                      int                      -                   4              115            NULL
+t16                      int                      -                   4              119            NULL
+t17                      ptr(char)                ", ptrL1 (adress, truncated to first 32 bits only) = "8              123            NULL
+t18                      int                      -                   4              131            NULL
+t19                      int                      -                   4              135            NULL
+t20                      ptr(char)                ", strL1 = "        8              139            NULL
+t21                      int                      -                   4              147            NULL
+t22                      int                      -                   4              151            NULL
+t23                      ptr(int)                 -                   8              155            NULL
+t24                      ptr(null)                -                   8              163            NULL
+t25                      ptr(char)                "\nGlobal variables: "8              171            NULL
+t26                      int                      -                   4              179            NULL
+t27                      ptr(char)                "\nnumG1 = "        8              183            NULL
+t28                      int                      -                   4              191            NULL
+t29                      int                      -                   4              195            NULL
+t30                      ptr(char)                ", charG1 (ascii value) = "8              199            NULL
+t31                      int                      -                   4              207            NULL
+t32                      int                      -                   4              211            NULL
+t33                      ptr(char)                ", ptrG1 (adress, truncated to first 32 bits only) = "8              215            NULL
+t34                      int                      -                   4              223            NULL
+t35                      int                      -                   4              227            NULL
+t36                      ptr(char)                ", strG1 = "        8              231            NULL
+t37                      int                      -                   4              239            NULL
+t38                      int                      -                   4              243            NULL
+t39                      ptr(char)                "\n"                8              247            NULL
+t40                      int                      -                   4              255            NULL
+t41                      ptr(char)                "\nAssigning locals to globals: "8              259            NULL
+t42                      int                      -                   4              267            NULL
+t43                      int                      -                   4              271            NULL
+t44                      char                     -                   1              275            NULL
+t45                      ptr(null)                -                   8              276            NULL
+t46                      ptr(null)                -                   8              284            NULL
+t47                      ptr(char)                "\nnumG2 = "        8              292            NULL
+t48                      int                      -                   4              300            NULL
+t49                      int                      -                   4              304            NULL
+t50                      ptr(char)                ", charG2 (ascii value) = "8              308            NULL
+t51                      int                      -                   4              316            NULL
+t52                      int                      -                   4              320            NULL
+t53                      ptr(char)                ", ptrG2 (adress, truncated to first 32 bits only) = "8              324            NULL
+t54                      int                      -                   4              332            NULL
+t55                      int                      -                   4              336            NULL
+t56                      ptr(char)                ", strG2 = "        8              340            NULL
+t57                      int                      -                   4              348            NULL
+t58                      int                      -                   4              352            NULL
+main__0                  block                    -                   4              356            main__0
+main__1                  block                    -                   4              360            main__1
+t63                      ptr(char)                "\n"                8              364            NULL
+t64                      int                      -                   4              372            NULL
+t65                      ptr(char)                "\nAssigning globals to locals: "8              376            NULL
+t66                      int                      -                   4              384            NULL
+t67                      int                      -                   4              388            NULL
+t68                      char                     -                   1              392            NULL
+t69                      ptr(null)                -                   8              393            NULL
+t70                      ptr(null)                -                   8              401            NULL
+t71                      ptr(char)                "\nnumL2 = "        8              409            NULL
+t72                      int                      -                   4              417            NULL
+t73                      int                      -                   4              421            NULL
+t74                      ptr(char)                ", charL2 (ascii value) = "8              425            NULL
+t75                      int                      -                   4              433            NULL
+t76                      int                      -                   4              437            NULL
+t77                      ptr(char)                ", ptrL2 (adress, truncated to first 32 bits only) = "8              441            NULL
+t78                      int                      -                   4              449            NULL
+t79                      int                      -                   4              453            NULL
+t80                      ptr(char)                ", strL2 = "        8              457            NULL
+t81                      int                      -                   4              465            NULL
+t82                      int                      -                   4              469            NULL
+main__2                  block                    -                   4              473            main__2
+main__3                  block                    -                   4              477            main__3
+t87                      ptr(char)                "\n"                8              481            NULL
+t88                      int                      -                   4              489            NULL
+t89                      ptr(char)                "\nAssigning globals to globals: "8              493            NULL
+t90                      int                      -                   4              501            NULL
+t91                      int                      -                   4              505            NULL
+t92                      char                     -                   1              509            NULL
+t93                      ptr(null)                -                   8              510            NULL
+t94                      ptr(null)                -                   8              518            NULL
+t95                      ptr(char)                "\nnumG2 = "        8              526            NULL
+t96                      int                      -                   4              534            NULL
+t97                      int                      -                   4              538            NULL
+t98                      ptr(char)                ", charG2 (ascii value) = "8              542            NULL
+t99                      int                      -                   4              550            NULL
+t100                     int                      -                   4              554            NULL
+t101                     ptr(char)                ", ptrG2 (adress, truncated to first 32 bits only) = "8              558            NULL
+t102                     int                      -                   4              566            NULL
+t103                     int                      -                   4              570            NULL
+t104                     ptr(char)                ", strG2 = "        8              574            NULL
+t105                     int                      -                   4              582            NULL
+t106                     int                      -                   4              586            NULL
+main__4                  block                    -                   4              590            main__4
+main__5                  block                    -                   4              594            main__5
+t111                     ptr(char)                "\n\n"              8              598            NULL
+t112                     int                      -                   4              606            NULL
+t113                     int                      0                   4              610            NULL
+......................................................................................................................................................
+
+......................................................................................................................................................
+ST_name: main__0                                           Parent: main                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+t59                      ptr(char)                "\nSUCCESS: Local variables assigned to global variables."8              614            NULL
+t60                      int                      -                   4              622            NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main__1                                           Parent: main                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+t61                      ptr(char)                "\nFAILURE: Local variables not assigned to global variables."8              626            NULL
+t62                      int                      -                   4              634            NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main__2                                           Parent: main                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+t83                      ptr(char)                "\nSUCCESS: Global variables assigned to local variables."8              638            NULL
+t84                      int                      -                   4              646            NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main__3                                           Parent: main                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+t85                      ptr(char)                "\nFAILURE: Global variables not assigned to local variables."8              650            NULL
+t86                      int                      -                   4              658            NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main__4                                           Parent: main                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+t107                     ptr(char)                "\nSUCCESS: Global variables assigned to global variables."8              662            NULL
+t108                     int                      -                   4              670            NULL
+......................................................................................................................................................
+
+
+
+......................................................................................................................................................
+ST_name: main__5                                           Parent: main                                              
+......................................................................................................................................................
+Name                     Type                     Initial Value       Size           Offset         Nested
+......................................................................................................................................................
+t109                     ptr(char)                "\nFAILURE: Global variables not assigned to global variables."8              674            NULL
+t110                     int                      -                   4              682            NULL
+......................................................................................................................................................
+
+
+
+
+
+
+
+
+......................................................................................................................................................
+TAC: 
+......................................................................................................................................................
+0   :    t0 = 20
+1   :    numG1 = t0
+2   :    t1 = 'b'
+3   :    charG1 = t1
+4   :    Unknown Operator
+5   :    strG1 = t2
+
+6   : main: 
+7   :    Unknown Operator
+8   :    param t3
+9   :    t4 = call printStr, 1
+10  :    t5 = 5
+11  :    numL1 = t5
+12  :    t6 = 'a'
+13  :    charL1 = t6
+14  :    t7 = &numL1
+15  :    ptrL1 = t7
+16  :    Unknown Operator
+17  :    strL1 = t8
+18  :    Unknown Operator
+19  :    param t9
+20  :    t10 = call printStr, 1
+21  :    Unknown Operator
+22  :    param t11
+23  :    t12 = call printStr, 1
+24  :    param numL1
+25  :    t13 = call printInt, 1
+26  :    Unknown Operator
+27  :    param t14
+28  :    t15 = call printStr, 1
+29  :    param charL1
+30  :    t16 = call printInt, 1
+31  :    Unknown Operator
+32  :    param t17
+33  :    t18 = call printStr, 1
+34  :    param ptrL1
+35  :    t19 = call printInt, 1
+36  :    Unknown Operator
+37  :    param t20
+38  :    t21 = call printStr, 1
+39  :    param strL1
+40  :    t22 = call printStr, 1
+41  :    t23 = &numG1
+42  :    ptrG1 = t23
+43  :    Unknown Operator
+44  :    param t25
+45  :    t26 = call printStr, 1
+46  :    Unknown Operator
+47  :    param t27
+48  :    t28 = call printStr, 1
+49  :    param numG1
+50  :    t29 = call printInt, 1
+51  :    Unknown Operator
+52  :    param t30
+53  :    t31 = call printStr, 1
+54  :    param charG1
+55  :    t32 = call printInt, 1
+56  :    Unknown Operator
+57  :    param t33
+58  :    t34 = call printStr, 1
+59  :    param ptrG1
+60  :    t35 = call printInt, 1
+61  :    Unknown Operator
+62  :    param t36
+63  :    t37 = call printStr, 1
+64  :    param strG1
+65  :    t38 = call printStr, 1
+66  :    Unknown Operator
+67  :    param t39
+68  :    t40 = call printStr, 1
+69  :    Unknown Operator
+70  :    param t41
+71  :    t42 = call printStr, 1
+72  :    numG2 = numL1
+73  :    charG2 = charL1
+74  :    ptrG2 = ptrL1
+75  :    strG2 = strL1
+76  :    Unknown Operator
+77  :    param t47
+78  :    t48 = call printStr, 1
+79  :    param numG2
+80  :    t49 = call printInt, 1
+81  :    Unknown Operator
+82  :    param t50
+83  :    t51 = call printStr, 1
+84  :    param charG2
+85  :    t52 = call printInt, 1
+86  :    Unknown Operator
+87  :    param t53
+88  :    t54 = call printStr, 1
+89  :    param ptrG2
+90  :    t55 = call printInt, 1
+91  :    Unknown Operator
+92  :    param t56
+93  :    t57 = call printStr, 1
+94  :    param strG2
+95  :    t58 = call printStr, 1
+96  :    if numG2 == numL1 goto 98
+97  :    goto 109
+98  :    if charG2 == charL1 goto 100
+99  :    goto 109
+100 :    if ptrG2 == ptrL1 goto 102
+101 :    goto 109
+102 :    if strG2 == strL1 goto 105
+103 :    goto 109
+104 :    goto 112
+105 :    Unknown Operator
+106 :    param t59
+107 :    t60 = call printStr, 1
+108 :    goto 112
+109 :    Unknown Operator
+110 :    param t61
+111 :    t62 = call printStr, 1
+112 :    Unknown Operator
+113 :    param t63
+114 :    t64 = call printStr, 1
+115 :    Unknown Operator
+116 :    param t65
+117 :    t66 = call printStr, 1
+118 :    numL2 = numG1
+119 :    charL2 = charG1
+120 :    ptrL2 = ptrG1
+121 :    strL2 = strG1
+122 :    Unknown Operator
+123 :    param t71
+124 :    t72 = call printStr, 1
+125 :    param numL2
+126 :    t73 = call printInt, 1
+127 :    Unknown Operator
+128 :    param t74
+129 :    t75 = call printStr, 1
+130 :    param charL2
+131 :    t76 = call printInt, 1
+132 :    Unknown Operator
+133 :    param t77
+134 :    t78 = call printStr, 1
+135 :    param ptrL2
+136 :    t79 = call printInt, 1
+137 :    Unknown Operator
+138 :    param t80
+139 :    t81 = call printStr, 1
+140 :    param strL2
+141 :    t82 = call printStr, 1
+142 :    if numL2 == numG1 goto 144
+143 :    goto 155
+144 :    if charL2 == charG1 goto 146
+145 :    goto 155
+146 :    if ptrL2 == ptrG1 goto 148
+147 :    goto 155
+148 :    if strL2 == strG1 goto 151
+149 :    goto 155
+150 :    goto 158
+151 :    Unknown Operator
+152 :    param t83
+153 :    t84 = call printStr, 1
+154 :    goto 158
+155 :    Unknown Operator
+156 :    param t85
+157 :    t86 = call printStr, 1
+158 :    Unknown Operator
+159 :    param t87
+160 :    t88 = call printStr, 1
+161 :    Unknown Operator
+162 :    param t89
+163 :    t90 = call printStr, 1
+164 :    numG2 = numG1
+165 :    charG2 = charG1
+166 :    ptrG2 = ptrG1
+167 :    strG2 = strG1
+168 :    Unknown Operator
+169 :    param t95
+170 :    t96 = call printStr, 1
+171 :    param numG2
+172 :    t97 = call printInt, 1
+173 :    Unknown Operator
+174 :    param t98
+175 :    t99 = call printStr, 1
+176 :    param charG2
+177 :    t100 = call printInt, 1
+178 :    Unknown Operator
+179 :    param t101
+180 :    t102 = call printStr, 1
+181 :    param ptrG2
+182 :    t103 = call printInt, 1
+183 :    Unknown Operator
+184 :    param t104
+185 :    t105 = call printStr, 1
+186 :    param strG2
+187 :    t106 = call printStr, 1
+188 :    if numG2 == numG1 goto 190
+189 :    goto 201
+190 :    if charG2 == charG1 goto 192
+191 :    goto 201
+192 :    if ptrG2 == ptrG1 goto 194
+193 :    goto 201
+194 :    if strG2 == strG1 goto 197
+195 :    goto 201
+196 :    goto 204
+197 :    Unknown Operator
+198 :    param t107
+199 :    t108 = call printStr, 1
+200 :    goto 204
+201 :    Unknown Operator
+202 :    param t109
+203 :    t110 = call printStr, 1
+204 :    Unknown Operator
+205 :    param t111
+206 :    t112 = call printStr, 1
+207 :    t113 = 0
+208 :    return t113
+209 :    main end
+6 .LFB0
+209 .LFE0
+20
+209
