@@ -16,6 +16,7 @@ symTab* globalST;
 int STCount;
 string blocktype;
 string varType;//Stores last encountered data type in the c file
+map<string,int> used_symbols;
 //Class fucntion definitions
 //Activation record constructor
 AR::AR():maxdisp(0){}
@@ -106,11 +107,12 @@ bool check_exist(symTab* currentST, string name)
 
 symbol* symTab::lookup2(string name)
 {
-        if(check_exist(currentST,name))
+        if(used_symbols.count(name)!=0)
         {
             name = name+"__"+to_string(symTab::tempcount++);
         }
         symbol* s = new symbol(name);
+        used_symbols[name]=1;
         table.push_back(*s);
         return &(table.back());
 }

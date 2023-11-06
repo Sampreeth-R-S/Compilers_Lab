@@ -50,7 +50,7 @@ ST_name: fillFib                                           Parent: Global
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
 fib                      param                    -                   8              0              NULL
-n                        param                    -                   4              8              NULL
+n__0                     param                    -                   4              8              NULL
 i                        int                      -                   4              12             NULL
 fillFib_FOR_0            block                    -                   4              16             fillFib_FOR_0
 ......................................................................................................................................................
@@ -60,12 +60,12 @@ ST_name: fillFib_FOR_0                                     Parent: fillFib
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t0                       int                      0                   4              20             NULL
-t1                       int                      -                   4              24             NULL
-t2                       int                      -                   4              28             NULL
-t3                       int                      0                   4              32             NULL
+t1                       int                      0                   4              20             NULL
+t2                       int                      -                   4              24             NULL
+t3                       int                      -                   4              28             NULL
+t4                       int                      0                   4              32             NULL
 fillFib_FOR_0_FOR_1      block                    -                   4              36             fillFib_FOR_0_FOR_1
-t7                       int                      1                   4              40             NULL
+t8                       int                      1                   4              40             NULL
 fillFib_FOR_0_FOR_2      block                    -                   4              44             fillFib_FOR_0_FOR_2
 fillFib_FOR_0_FOR_3      block                    -                   4              48             fillFib_FOR_0_FOR_3
 ......................................................................................................................................................
@@ -75,9 +75,9 @@ ST_name: fillFib_FOR_0_FOR_1                               Parent: fillFib_FOR_0
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t4                       int                      -                   4              52             NULL
-t5                       int                      0                   4              56             NULL
-t6                       int                      -                   4              60             NULL
+t5                       int                      -                   4              52             NULL
+t6                       int                      0                   4              56             NULL
+t7                       int                      -                   4              60             NULL
 ......................................................................................................................................................
 
 
@@ -87,9 +87,9 @@ ST_name: fillFib_FOR_0_FOR_2                               Parent: fillFib_FOR_0
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t8                       int                      -                   4              64             NULL
-t9                       int                      1                   4              68             NULL
-t10                      int                      -                   4              72             NULL
+t9                       int                      -                   4              64             NULL
+t10                      int                      1                   4              68             NULL
+t11                      int                      -                   4              72             NULL
 ......................................................................................................................................................
 
 
@@ -99,17 +99,17 @@ ST_name: fillFib_FOR_0_FOR_3                               Parent: fillFib_FOR_0
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t11                      int                      -                   4              76             NULL
-t12                      int                      1                   4              80             NULL
-t13                      int                      -                   4              84             NULL
-t14                      int                      -                   4              88             NULL
-t15                      int                      -                   4              92             NULL
-t16                      int                      2                   4              96             NULL
-t17                      int                      -                   4              100            NULL
-t18                      int                      -                   4              104            NULL
-t19                      int                      -                   4              108            NULL
-t20                      int                      -                   4              112            NULL
-t21                      int                      -                   4              116            NULL
+t12                      int                      -                   4              76             NULL
+t13                      int                      1                   4              80             NULL
+t14                      int                      -                   4              84             NULL
+t15                      int                      -                   4              88             NULL
+t16                      int                      -                   4              92             NULL
+t17                      int                      2                   4              96             NULL
+t18                      int                      -                   4              100            NULL
+t19                      int                      -                   4              104            NULL
+t20                      int                      -                   4              108            NULL
+t21                      int                      -                   4              112            NULL
+t22                      int                      -                   4              116            NULL
 ......................................................................................................................................................
 
 
@@ -124,44 +124,44 @@ ST_name: main                                              Parent: Global
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
 return                   int                      -                   4              0              NULL
-t22                      ptr(char)                "\n#### TEST 2 (1-D Arrays) ####"8              4              NULL
-t23                      int                      -                   4              12             NULL
-fib                      arr(int,15)              -                   60             16             NULL
-t24                      int                      15                  4              76             NULL
-t25                      int                      15                  4              80             NULL
-t26                      void                     -                   0              84             NULL
-i                        int                      -                   4              84             NULL
-t27                      ptr(char)                "\nFibonacci Series: "8              88             NULL
-t28                      int                      -                   4              96             NULL
+t23                      ptr(char)                "\n#### TEST 2 (1-D Arrays) ####"8              4              NULL
+t24                      int                      -                   4              12             NULL
+fib__25                  arr(int,15)              -                   60             16             NULL
+t26                      int                      15                  4              76             NULL
+t27                      int                      15                  4              80             NULL
+t28                      void                     -                   0              84             NULL
+i__29                    int                      -                   4              84             NULL
+t30                      ptr(char)                "\nFibonacci Series: "8              88             NULL
+t31                      int                      -                   4              96             NULL
 main_FOR_0               block                    -                   4              100            main_FOR_0
 vowels                   arr(char,5)              -                   5              104            NULL
-t38                      int                      5                   4              109            NULL
-t39                      int                      0                   4              113            NULL
-t40                      int                      -                   4              117            NULL
-t41                      char                     'a'                 1              121            NULL
-t42                      char                     -                   1              122            NULL
-t43                      int                      1                   4              123            NULL
-t44                      int                      -                   4              127            NULL
-t45                      char                     'e'                 1              131            NULL
-t46                      char                     -                   1              132            NULL
-t47                      int                      2                   4              133            NULL
-t48                      int                      -                   4              137            NULL
-t49                      char                     'i'                 1              141            NULL
-t50                      char                     -                   1              142            NULL
-t51                      int                      3                   4              143            NULL
-t52                      int                      -                   4              147            NULL
-t53                      char                     'o'                 1              151            NULL
-t54                      char                     -                   1              152            NULL
-t55                      int                      4                   4              153            NULL
-t56                      int                      -                   4              157            NULL
-t57                      char                     'u'                 1              161            NULL
-t58                      char                     -                   1              162            NULL
-t59                      ptr(char)                "\nAscii values of vowels: "8              163            NULL
-t60                      int                      -                   4              171            NULL
+t41                      int                      5                   4              109            NULL
+t42                      int                      0                   4              113            NULL
+t43                      int                      -                   4              117            NULL
+t44                      char                     'a'                 1              121            NULL
+t45                      char                     -                   1              122            NULL
+t46                      int                      1                   4              123            NULL
+t47                      int                      -                   4              127            NULL
+t48                      char                     'e'                 1              131            NULL
+t49                      char                     -                   1              132            NULL
+t50                      int                      2                   4              133            NULL
+t51                      int                      -                   4              137            NULL
+t52                      char                     'i'                 1              141            NULL
+t53                      char                     -                   1              142            NULL
+t54                      int                      3                   4              143            NULL
+t55                      int                      -                   4              147            NULL
+t56                      char                     'o'                 1              151            NULL
+t57                      char                     -                   1              152            NULL
+t58                      int                      4                   4              153            NULL
+t59                      int                      -                   4              157            NULL
+t60                      char                     'u'                 1              161            NULL
+t61                      char                     -                   1              162            NULL
+t62                      ptr(char)                "\nAscii values of vowels: "8              163            NULL
+t63                      int                      -                   4              171            NULL
 main_FOR_1               block                    -                   4              175            main_FOR_1
-t70                      ptr(char)                "\n\n"              8              179            NULL
-t71                      int                      -                   4              187            NULL
-t72                      int                      0                   4              191            NULL
+t73                      ptr(char)                "\n\n"              8              179            NULL
+t74                      int                      -                   4              187            NULL
+t75                      int                      0                   4              191            NULL
 ......................................................................................................................................................
 
 ......................................................................................................................................................
@@ -169,15 +169,15 @@ ST_name: main_FOR_0                                        Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t29                      int                      0                   4              195            NULL
-t30                      int                      -                   4              199            NULL
-t31                      int                      15                  4              203            NULL
-t32                      int                      -                   4              207            NULL
-t33                      int                      -                   4              211            NULL
-t34                      int                      -                   4              215            NULL
-t35                      int                      -                   4              219            NULL
-t36                      ptr(char)                " "                 8              223            NULL
-t37                      int                      -                   4              231            NULL
+t32                      int                      0                   4              195            NULL
+t33                      int                      -                   4              199            NULL
+t34                      int                      15                  4              203            NULL
+t35                      int                      -                   4              207            NULL
+t36                      int                      -                   4              211            NULL
+t37                      int                      -                   4              215            NULL
+t38                      int                      -                   4              219            NULL
+t39                      ptr(char)                " "                 8              223            NULL
+t40                      int                      -                   4              231            NULL
 ......................................................................................................................................................
 
 
@@ -187,15 +187,15 @@ ST_name: main_FOR_1                                        Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t61                      int                      0                   4              235            NULL
-t62                      int                      -                   4              239            NULL
-t63                      int                      5                   4              243            NULL
-t64                      int                      -                   4              247            NULL
-t65                      int                      -                   4              251            NULL
-t66                      char                     -                   1              255            NULL
-t67                      int                      -                   4              256            NULL
-t68                      ptr(char)                " "                 8              260            NULL
-t69                      int                      -                   4              268            NULL
+t64                      int                      0                   4              235            NULL
+t65                      int                      -                   4              239            NULL
+t66                      int                      5                   4              243            NULL
+t67                      int                      -                   4              247            NULL
+t68                      int                      -                   4              251            NULL
+t69                      char                     -                   1              255            NULL
+t70                      int                      -                   4              256            NULL
+t71                      ptr(char)                " "                 8              260            NULL
+t72                      int                      -                   4              268            NULL
 ......................................................................................................................................................
 
 
@@ -210,122 +210,122 @@ TAC:
 ......................................................................................................................................................
 
 0   : fillFib: 
-1   :    t0 = 0
-2   :    i = t0
-3   :    if i < n goto 8
+1   :    t1 = 0
+2   :    i = t1
+3   :    if i < n__0 goto 8
 4   :    goto 36
-5   :    t2 = i
+5   :    t3 = i
 6   :    i = i + 1
 7   :    goto 3
-8   :    t3 = 0
-9   :    if i == t3 goto 12
+8   :    t4 = 0
+9   :    if i == t4 goto 12
 10  :    goto 16
 11  :    goto 35
-12  :    t4 = i * 4
-13  :    t5 = 0
-14  :    fib[t4] = t5
+12  :    t5 = i * 4
+13  :    t6 = 0
+14  :    fib[t5] = t6
 15  :    goto 5
-16  :    t7 = 1
-17  :    if i == t7 goto 20
+16  :    t8 = 1
+17  :    if i == t8 goto 20
 18  :    goto 24
 19  :    goto 35
-20  :    t8 = i * 4
-21  :    t9 = 1
-22  :    fib[t8] = t9
+20  :    t9 = i * 4
+21  :    t10 = 1
+22  :    fib[t9] = t10
 23  :    goto 5
-24  :    t11 = i * 4
-25  :    t12 = 1
-26  :    t13 = i - t12
-27  :    t14 = t13 * 4
-28  :    t15 = fib[t14]
-29  :    t16 = 2
-30  :    t17 = i - t16
-31  :    t18 = t17 * 4
-32  :    t19 = fib[t18]
-33  :    t20 = t15 + t19
-34  :    fib[t11] = t20
+24  :    t12 = i * 4
+25  :    t13 = 1
+26  :    t14 = i - t13
+27  :    t15 = t14 * 4
+28  :    t16 = fib[t15]
+29  :    t17 = 2
+30  :    t18 = i - t17
+31  :    t19 = t18 * 4
+32  :    t20 = fib[t19]
+33  :    t21 = t16 + t20
+34  :    fib[t12] = t21
 35  :    goto 5
 36  :    fillFib end
 
 37  : main: 
-38  :    t22 = .LC0
-39  :    param t22
-40  :    t23 = call printStr, 1
-41  :    t24 = 15
-42  :    param fib
-43  :    t25 = 15
-44  :    param t25
-45  :    t26 = call fillFib, 2
-46  :    t27 = .LC1
-47  :    param t27
-48  :    t28 = call printStr, 1
-49  :    t29 = 0
-50  :    i = t29
-51  :    t31 = 15
-52  :    if i < t31 goto 57
+38  :    t23 = .LC0
+39  :    param t23
+40  :    t24 = call printStr, 1
+41  :    t26 = 15
+42  :    param fib__25
+43  :    t27 = 15
+44  :    param t27
+45  :    t28 = call fillFib, 2
+46  :    t30 = .LC1
+47  :    param t30
+48  :    t31 = call printStr, 1
+49  :    t32 = 0
+50  :    i__29 = t32
+51  :    t34 = 15
+52  :    if i__29 < t34 goto 57
 53  :    goto 65
-54  :    t32 = i
-55  :    i = i + 1
+54  :    t35 = i__29
+55  :    i__29 = i__29 + 1
 56  :    goto 51
-57  :    t33 = i * 4
-58  :    t34 = fib[t33]
-59  :    param t34
-60  :    t35 = call printInt, 1
-61  :    t36 = .LC2
-62  :    param t36
-63  :    t37 = call printStr, 1
+57  :    t36 = i__29 * 4
+58  :    t37 = fib__25[t36]
+59  :    param t37
+60  :    t38 = call printInt, 1
+61  :    t39 = .LC2
+62  :    param t39
+63  :    t40 = call printStr, 1
 64  :    goto 54
-65  :    t38 = 5
-66  :    t39 = 0
-67  :    t40 = t39 * 1
-68  :    t41 = 'a'
-69  :    vowels[t40] = t41
-70  :    t43 = 1
-71  :    t44 = t43 * 1
-72  :    t45 = 'e'
-73  :    vowels[t44] = t45
-74  :    t47 = 2
-75  :    t48 = t47 * 1
-76  :    t49 = 'i'
-77  :    vowels[t48] = t49
-78  :    t51 = 3
-79  :    t52 = t51 * 1
-80  :    t53 = 'o'
-81  :    vowels[t52] = t53
-82  :    t55 = 4
-83  :    t56 = t55 * 1
-84  :    t57 = 'u'
-85  :    vowels[t56] = t57
-86  :    t59 = .LC3
-87  :    param t59
-88  :    t60 = call printStr, 1
-89  :    t61 = 0
-90  :    i = t61
-91  :    t63 = 5
-92  :    if i < t63 goto 97
+65  :    t41 = 5
+66  :    t42 = 0
+67  :    t43 = t42 * 1
+68  :    t44 = 'a'
+69  :    vowels[t43] = t44
+70  :    t46 = 1
+71  :    t47 = t46 * 1
+72  :    t48 = 'e'
+73  :    vowels[t47] = t48
+74  :    t50 = 2
+75  :    t51 = t50 * 1
+76  :    t52 = 'i'
+77  :    vowels[t51] = t52
+78  :    t54 = 3
+79  :    t55 = t54 * 1
+80  :    t56 = 'o'
+81  :    vowels[t55] = t56
+82  :    t58 = 4
+83  :    t59 = t58 * 1
+84  :    t60 = 'u'
+85  :    vowels[t59] = t60
+86  :    t62 = .LC3
+87  :    param t62
+88  :    t63 = call printStr, 1
+89  :    t64 = 0
+90  :    i__29 = t64
+91  :    t66 = 5
+92  :    if i__29 < t66 goto 97
 93  :    goto 105
-94  :    t64 = i
-95  :    i = i + 1
+94  :    t67 = i__29
+95  :    i__29 = i__29 + 1
 96  :    goto 91
-97  :    t65 = i * 1
-98  :    t66 = vowels[t65]
-99  :    param t66
-100 :    t67 = call printInt, 1
-101 :    t68 = .LC4
-102 :    param t68
-103 :    t69 = call printStr, 1
+97  :    t68 = i__29 * 1
+98  :    t69 = vowels[t68]
+99  :    param t69
+100 :    t70 = call printInt, 1
+101 :    t71 = .LC4
+102 :    param t71
+103 :    t72 = call printStr, 1
 104 :    goto 94
-105 :    t70 = .LC5
-106 :    param t70
-107 :    t71 = call printStr, 1
-108 :    t72 = 0
-109 :    return t72
+105 :    t73 = .LC5
+106 :    param t73
+107 :    t74 = call printStr, 1
+108 :    t75 = 0
+109 :    return t75
 110 :    main end
 0 .LFB0
 36 .LFE0
 37 .LFB1
 110 .LFE1
 fib
-n
+n__0
 36
 110

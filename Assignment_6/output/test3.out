@@ -111,62 +111,62 @@ Name                     Type                     Initial Value       Size      
 return                   int                      -                   4              0              NULL
 t2                       ptr(char)                "\n#### TEST 3 (Function calls and returns) ####"8              4              NULL
 t3                       int                      -                   4              12             NULL
-n                        int                      10                  4              16             NULL
-t4                       int                      10                  4              20             NULL
+n__4                     int                      10                  4              16             NULL
+t5                       int                      10                  4              20             NULL
 nPtr                     ptr(int)                 -                   8              24             NULL
-t5                       ptr(int)                 -                   8              32             NULL
-t6                       ptr(char)                "\nTesting integer value return: "8              40             NULL
-t7                       int                      -                   4              48             NULL
+t6                       ptr(int)                 -                   8              32             NULL
+t7                       ptr(char)                "\nTesting integer value return: "8              40             NULL
+t8                       int                      -                   4              48             NULL
 retInt                   int                      -                   4              52             NULL
-t8                       int                      -                   4              56             NULL
+t9                       int                      -                   4              56             NULL
 main__0                  block                    -                   4              60             main__0
 main__1                  block                    -                   4              64             main__1
-t13                      ptr(char)                "\nTesting integer pointer return: "8              68             NULL
-t14                      int                      -                   4              76             NULL
+t14                      ptr(char)                "\nTesting integer pointer return: "8              68             NULL
+t15                      int                      -                   4              76             NULL
 retIntPtr                ptr(int)                 -                   8              80             NULL
-t15                      ptr(int)                 -                   8              88             NULL
+t16                      ptr(int)                 -                   8              88             NULL
 main__2                  block                    -                   4              96             main__2
 main__3                  block                    -                   4              100            main__3
-c                        char                     'm'                 1              104            NULL
-t20                      char                     'm'                 1              105            NULL
-cPtr                     ptr(char)                -                   8              106            NULL
-t21                      ptr(char)                -                   8              114            NULL
-t22                      ptr(char)                "\nTesting character value return: "8              122            NULL
-t23                      int                      -                   4              130            NULL
+c__21                    char                     'm'                 1              104            NULL
+t22                      char                     'm'                 1              105            NULL
+cPtr__23                 ptr(char)                -                   8              106            NULL
+t24                      ptr(char)                -                   8              114            NULL
+t25                      ptr(char)                "\nTesting character value return: "8              122            NULL
+t26                      int                      -                   4              130            NULL
 retChar                  char                     -                   1              134            NULL
-t24                      char                     -                   1              135            NULL
+t27                      char                     -                   1              135            NULL
 main__4                  block                    -                   4              136            main__4
 main__5                  block                    -                   4              140            main__5
-t29                      ptr(char)                "\nTesting character pointer return: "8              144            NULL
-t30                      int                      -                   4              152            NULL
+t32                      ptr(char)                "\nTesting character pointer return: "8              144            NULL
+t33                      int                      -                   4              152            NULL
 retCharPtr               ptr(char)                -                   8              156            NULL
-t31                      ptr(char)                -                   8              164            NULL
+t34                      ptr(char)                -                   8              164            NULL
 main__6                  block                    -                   4              172            main__6
 main__7                  block                    -                   4              176            main__7
 str                      ptr(char)                "Hello World, I am a string."8              180            NULL
-t36                      ptr(char)                "Hello World, I am a string."8              188            NULL
-t37                      ptr(char)                "\nTesting string return: "8              196            NULL
-t38                      int                      -                   4              204            NULL
+t39                      ptr(char)                "Hello World, I am a string."8              188            NULL
+t40                      ptr(char)                "\nTesting string return: "8              196            NULL
+t41                      int                      -                   4              204            NULL
 retStr                   ptr(char)                -                   8              208            NULL
-t39                      ptr(char)                -                   8              216            NULL
+t42                      ptr(char)                -                   8              216            NULL
 main__8                  block                    -                   4              224            main__8
 main__9                  block                    -                   4              228            main__9
-t44                      ptr(char)                " [ Passed string: "8              232            NULL
-t45                      int                      -                   4              240            NULL
-t46                      int                      -                   4              244            NULL
-t47                      ptr(char)                " ], "              8              248            NULL
-t48                      int                      -                   4              256            NULL
-t49                      ptr(char)                "[ Returned string: "8              260            NULL
-t50                      int                      -                   4              268            NULL
-t51                      int                      -                   4              272            NULL
-t52                      ptr(char)                " ]"                8              276            NULL
-t53                      int                      -                   4              284            NULL
-t54                      ptr(char)                "\nTesting void return: "8              288            NULL
-t55                      int                      -                   4              296            NULL
-t56                      void                     -                   0              300            NULL
-t57                      ptr(char)                "\n\n"              8              300            NULL
-t58                      int                      -                   4              308            NULL
-t59                      int                      0                   4              312            NULL
+t47                      ptr(char)                " [ Passed string: "8              232            NULL
+t48                      int                      -                   4              240            NULL
+t49                      int                      -                   4              244            NULL
+t50                      ptr(char)                " ], "              8              248            NULL
+t51                      int                      -                   4              256            NULL
+t52                      ptr(char)                "[ Returned string: "8              260            NULL
+t53                      int                      -                   4              268            NULL
+t54                      int                      -                   4              272            NULL
+t55                      ptr(char)                " ]"                8              276            NULL
+t56                      int                      -                   4              284            NULL
+t57                      ptr(char)                "\nTesting void return: "8              288            NULL
+t58                      int                      -                   4              296            NULL
+t59                      void                     -                   0              300            NULL
+t60                      ptr(char)                "\n\n"              8              300            NULL
+t61                      int                      -                   4              308            NULL
+t62                      int                      0                   4              312            NULL
 ......................................................................................................................................................
 
 ......................................................................................................................................................
@@ -174,8 +174,8 @@ ST_name: main__0                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t9                       ptr(char)                "Passed"            8              316            NULL
-t10                      int                      -                   4              324            NULL
+t10                      ptr(char)                "Passed"            8              316            NULL
+t11                      int                      -                   4              324            NULL
 ......................................................................................................................................................
 
 
@@ -185,8 +185,8 @@ ST_name: main__1                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t11                      ptr(char)                "Failed"            8              328            NULL
-t12                      int                      -                   4              336            NULL
+t12                      ptr(char)                "Failed"            8              328            NULL
+t13                      int                      -                   4              336            NULL
 ......................................................................................................................................................
 
 
@@ -196,8 +196,8 @@ ST_name: main__2                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t16                      ptr(char)                "Passed"            8              340            NULL
-t17                      int                      -                   4              348            NULL
+t17                      ptr(char)                "Passed"            8              340            NULL
+t18                      int                      -                   4              348            NULL
 ......................................................................................................................................................
 
 
@@ -207,8 +207,8 @@ ST_name: main__3                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t18                      ptr(char)                "Failed"            8              352            NULL
-t19                      int                      -                   4              360            NULL
+t19                      ptr(char)                "Failed"            8              352            NULL
+t20                      int                      -                   4              360            NULL
 ......................................................................................................................................................
 
 
@@ -218,8 +218,8 @@ ST_name: main__4                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t25                      ptr(char)                "Passed"            8              364            NULL
-t26                      int                      -                   4              372            NULL
+t28                      ptr(char)                "Passed"            8              364            NULL
+t29                      int                      -                   4              372            NULL
 ......................................................................................................................................................
 
 
@@ -229,8 +229,8 @@ ST_name: main__5                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t27                      ptr(char)                "Failed"            8              376            NULL
-t28                      int                      -                   4              384            NULL
+t30                      ptr(char)                "Failed"            8              376            NULL
+t31                      int                      -                   4              384            NULL
 ......................................................................................................................................................
 
 
@@ -240,8 +240,8 @@ ST_name: main__6                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t32                      ptr(char)                "Passed"            8              388            NULL
-t33                      int                      -                   4              396            NULL
+t35                      ptr(char)                "Passed"            8              388            NULL
+t36                      int                      -                   4              396            NULL
 ......................................................................................................................................................
 
 
@@ -251,8 +251,8 @@ ST_name: main__7                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t34                      ptr(char)                "Failed"            8              400            NULL
-t35                      int                      -                   4              408            NULL
+t37                      ptr(char)                "Failed"            8              400            NULL
+t38                      int                      -                   4              408            NULL
 ......................................................................................................................................................
 
 
@@ -262,8 +262,8 @@ ST_name: main__8                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t40                      ptr(char)                "Passed"            8              412            NULL
-t41                      int                      -                   4              420            NULL
+t43                      ptr(char)                "Passed"            8              412            NULL
+t44                      int                      -                   4              420            NULL
 ......................................................................................................................................................
 
 
@@ -273,8 +273,8 @@ ST_name: main__9                                           Parent: main
 ......................................................................................................................................................
 Name                     Type                     Initial Value       Size           Offset         Nested
 ......................................................................................................................................................
-t42                      ptr(char)                "Failed"            8              424            NULL
-t43                      int                      -                   4              432            NULL
+t45                      ptr(char)                "Failed"            8              424            NULL
+t46                      int                      -                   4              432            NULL
 ......................................................................................................................................................
 
 
@@ -315,121 +315,121 @@ TAC:
 19  :    t2 = .LC1
 20  :    param t2
 21  :    t3 = call printStr, 1
-22  :    t4 = 10
-23  :    n = t4
-24  :    t5 = &n
-25  :    nPtr = t5
-26  :    t6 = .LC2
-27  :    param t6
-28  :    t7 = call printStr, 1
-29  :    param n
-30  :    t8 = call testInt, 1
-31  :    retInt = t8
-32  :    if retInt == n goto 35
+22  :    t5 = 10
+23  :    n__4 = t5
+24  :    t6 = &n__4
+25  :    nPtr = t6
+26  :    t7 = .LC2
+27  :    param t7
+28  :    t8 = call printStr, 1
+29  :    param n__4
+30  :    t9 = call testInt, 1
+31  :    retInt = t9
+32  :    if retInt == n__4 goto 35
 33  :    goto 39
 34  :    goto 42
-35  :    t9 = .LC3
-36  :    param t9
-37  :    t10 = call printStr, 1
+35  :    t10 = .LC3
+36  :    param t10
+37  :    t11 = call printStr, 1
 38  :    goto 42
-39  :    t11 = .LC4
-40  :    param t11
-41  :    t12 = call printStr, 1
-42  :    t13 = .LC5
-43  :    param t13
-44  :    t14 = call printStr, 1
+39  :    t12 = .LC4
+40  :    param t12
+41  :    t13 = call printStr, 1
+42  :    t14 = .LC5
+43  :    param t14
+44  :    t15 = call printStr, 1
 45  :    param nPtr
-46  :    t15 = call testIntPtr, 1
-47  :    retIntPtr = t15
+46  :    t16 = call testIntPtr, 1
+47  :    retIntPtr = t16
 48  :    if retIntPtr == nPtr goto 51
 49  :    goto 55
 50  :    goto 58
-51  :    t16 = .LC6
-52  :    param t16
-53  :    t17 = call printStr, 1
+51  :    t17 = .LC6
+52  :    param t17
+53  :    t18 = call printStr, 1
 54  :    goto 58
-55  :    t18 = .LC7
-56  :    param t18
-57  :    t19 = call printStr, 1
-58  :    t20 = 'm'
-59  :    c = t20
-60  :    t21 = &c
-61  :    cPtr = t21
-62  :    t22 = .LC8
-63  :    param t22
-64  :    t23 = call printStr, 1
-65  :    param c
-66  :    t24 = call testChar, 1
-67  :    retChar = t24
-68  :    if retChar == c goto 71
+55  :    t19 = .LC7
+56  :    param t19
+57  :    t20 = call printStr, 1
+58  :    t22 = 'm'
+59  :    c__21 = t22
+60  :    t24 = &c__21
+61  :    cPtr__23 = t24
+62  :    t25 = .LC8
+63  :    param t25
+64  :    t26 = call printStr, 1
+65  :    param c__21
+66  :    t27 = call testChar, 1
+67  :    retChar = t27
+68  :    if retChar == c__21 goto 71
 69  :    goto 75
 70  :    goto 78
-71  :    t25 = .LC9
-72  :    param t25
-73  :    t26 = call printStr, 1
+71  :    t28 = .LC9
+72  :    param t28
+73  :    t29 = call printStr, 1
 74  :    goto 78
-75  :    t27 = .LC10
-76  :    param t27
-77  :    t28 = call printStr, 1
-78  :    t29 = .LC11
-79  :    param t29
-80  :    t30 = call printStr, 1
-81  :    param cPtr
-82  :    t31 = call testCharPtr, 1
-83  :    retCharPtr = t31
-84  :    if retCharPtr == cPtr goto 87
+75  :    t30 = .LC10
+76  :    param t30
+77  :    t31 = call printStr, 1
+78  :    t32 = .LC11
+79  :    param t32
+80  :    t33 = call printStr, 1
+81  :    param cPtr__23
+82  :    t34 = call testCharPtr, 1
+83  :    retCharPtr = t34
+84  :    if retCharPtr == cPtr__23 goto 87
 85  :    goto 91
 86  :    goto 94
-87  :    t32 = .LC12
-88  :    param t32
-89  :    t33 = call printStr, 1
+87  :    t35 = .LC12
+88  :    param t35
+89  :    t36 = call printStr, 1
 90  :    goto 94
-91  :    t34 = .LC13
-92  :    param t34
-93  :    t35 = call printStr, 1
-94  :    t36 = .LC14
-95  :    str = t36
-96  :    t37 = .LC15
-97  :    param t37
-98  :    t38 = call printStr, 1
+91  :    t37 = .LC13
+92  :    param t37
+93  :    t38 = call printStr, 1
+94  :    t39 = .LC14
+95  :    str = t39
+96  :    t40 = .LC15
+97  :    param t40
+98  :    t41 = call printStr, 1
 99  :    param str
-100 :    t39 = call testCharPtr, 1
-101 :    retStr = t39
+100 :    t42 = call testCharPtr, 1
+101 :    retStr = t42
 102 :    if retStr == str goto 105
 103 :    goto 109
 104 :    goto 112
-105 :    t40 = .LC16
-106 :    param t40
-107 :    t41 = call printStr, 1
+105 :    t43 = .LC16
+106 :    param t43
+107 :    t44 = call printStr, 1
 108 :    goto 112
-109 :    t42 = .LC17
-110 :    param t42
-111 :    t43 = call printStr, 1
-112 :    t44 = .LC18
-113 :    param t44
-114 :    t45 = call printStr, 1
+109 :    t45 = .LC17
+110 :    param t45
+111 :    t46 = call printStr, 1
+112 :    t47 = .LC18
+113 :    param t47
+114 :    t48 = call printStr, 1
 115 :    param str
-116 :    t46 = call printStr, 1
-117 :    t47 = .LC19
-118 :    param t47
-119 :    t48 = call printStr, 1
-120 :    t49 = .LC20
-121 :    param t49
-122 :    t50 = call printStr, 1
+116 :    t49 = call printStr, 1
+117 :    t50 = .LC19
+118 :    param t50
+119 :    t51 = call printStr, 1
+120 :    t52 = .LC20
+121 :    param t52
+122 :    t53 = call printStr, 1
 123 :    param retStr
-124 :    t51 = call printStr, 1
-125 :    t52 = .LC21
-126 :    param t52
-127 :    t53 = call printStr, 1
-128 :    t54 = .LC22
-129 :    param t54
-130 :    t55 = call printStr, 1
-131 :    t56 = call testVoid, 0
-132 :    t57 = .LC23
-133 :    param t57
-134 :    t58 = call printStr, 1
-135 :    t59 = 0
-136 :    return t59
+124 :    t54 = call printStr, 1
+125 :    t55 = .LC21
+126 :    param t55
+127 :    t56 = call printStr, 1
+128 :    t57 = .LC22
+129 :    param t57
+130 :    t58 = call printStr, 1
+131 :    t59 = call testVoid, 0
+132 :    t60 = .LC23
+133 :    param t60
+134 :    t61 = call printStr, 1
+135 :    t62 = 0
+136 :    return t62
 137 :    main end
 0 .LFB0
 2 .LFE0
