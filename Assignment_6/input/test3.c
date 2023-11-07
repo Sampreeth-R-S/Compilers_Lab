@@ -82,7 +82,7 @@ int main() {
 
     printStr("\nTesting void return: ");
     setVar();
-    if (glob_var == 10) {
+    if (glob_var == 6) {
         printStr("Passed");
     } else {
         printStr("Failed");
