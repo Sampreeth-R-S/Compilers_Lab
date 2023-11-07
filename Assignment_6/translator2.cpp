@@ -802,6 +802,11 @@ int main(int argc, char const*argv[])
         if(it->nested_table != NULL) tableList.push_back(it->nested_table);
     }
     for(auto it = tableList.begin(); it != tableList.end(); it++) {
+        //(*it)->activationrecord = new AR();
+        //(*it)->update();
+        (*it)->flatten();
+    }
+    for(auto it = tableList.begin(); it != tableList.end(); it++) {
         (*it)->activationrecord = new AR();
         (*it)->update();
         //(*it)->flatten();
@@ -809,11 +814,7 @@ int main(int argc, char const*argv[])
     globalST->print();
     cout<<endl<<endl<<endl;
     quads.print();
-    for(auto it = tableList.begin(); it != tableList.end(); it++) {
-        //(*it)->activationrecord = new AR();
-        //(*it)->update();
-        (*it)->flatten();
-    }
+    
     assembly_file = string(argv[1]) + ".s";
     currentST=globalST;
     translate();

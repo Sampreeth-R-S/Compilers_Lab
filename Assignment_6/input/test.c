@@ -5,12 +5,12 @@ void testIncDec(float n) {
 }
 
 int main() {
-    printStr("\n#### TEST 1 (Arithmetic operators) ####");
+    printStr("\n#### TEST 1 (Arithmetic operators on float) ####");
     float n1, n2, n3, n4;
-    n1 = 300.0;
-    n2 = 16.0;
-    n3 = 7.0;
-    n4 = -22.0;
+    n1 = 300.1;
+    n2 = 16.2;
+    n3 = 7.3;
+    n4 = -22.4;
     int global_var=1;
     printStr("\nglobal_var = ");
     printInt(global_var);
@@ -42,10 +42,10 @@ int main() {
     printStr("\nn1 % n2 = ");
     printFlt(n9);
 
-    float n10 = -n1 + n2 - n3 + n4 + 10.0;
-    float n11 = n1 * n2 / n3 + n4 - 10.0;
-    float n12 = n1 + n2 * n3 / n4 - 0.0;
-    float n13 = (n1 + n2) * (-n3 / n4) - 15.0;
+    float n10 = -n1 + n2 - n3 + n4 + 10.5;
+    float n11 = n1 * n2 / n3 + n4 - 10.6;
+    float n12 = n1 + n2 * n3 / n4 - 0.7;
+    float n13 = (n1 + n2) * (-n3 / n4) - 15.8;
     printStr("\n-n1 + n2 - n3 + n4 + 10 = ");
     printFlt(n10);
     printStr("\nn1 * n2 / n3 + n4 - 10 = ");
@@ -60,11 +60,11 @@ int main() {
     printFlt(-n4);
 
     float arr[5];
-    arr[0]=0.0;
+    arr[0]=0.9;
     arr[1]=1.0;
-    arr[2]=2.0;
-    arr[3]=3.0;
-    arr[4]=4.0;
+    arr[2]=2.1;
+    arr[3]=3.2;
+    arr[4]=4.3;
     printStr("\narr[0] = ");
     printFlt(arr[0]);
     printStr("\narr[1] = ");
