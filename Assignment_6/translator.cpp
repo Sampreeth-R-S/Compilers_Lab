@@ -222,7 +222,7 @@ int symTab::update(int i){
         //}
         if(it->nested_table != NULL) tableList.push_back(it->nested_table);
     }
-    //activationrecord = new AR();
+    activationrecord = new AR();
     for (auto i:table)
     {
             if(i.size!=0&&i.name!="return")
@@ -232,7 +232,7 @@ int symTab::update(int i){
             }
     }
     for(auto it = tableList.begin(); it != tableList.end(); it++) {
-        (*it)->activationrecord = activationrecord;
+        //(*it)->activationrecord = activationrecord;
         offset=(*it)->update(offset);
     }
     return offset;
