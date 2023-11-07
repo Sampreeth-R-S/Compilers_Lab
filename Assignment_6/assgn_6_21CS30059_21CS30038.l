@@ -2,7 +2,7 @@
     #include <stdio.h>
     #include<string>
     #include "translator.h"
-    #include "assgn_5_21CS30059_21CS30038.tab.h"
+    #include "assgn_6_21CS30059_21CS30038.tab.h"
     int lineno=1;
     string globe="";
 

@@ -16,7 +16,7 @@ map<int,string> arg2Reg = {{1,"sil"},{4,"esi"},{8,"rsi"}};//Arg registers
 map<int,string> arg3Reg = {{1,"dl"},{4,"edx"},{8,"rdx"}};//Arg registers
 map<int,string> arg4Reg = {{1,"cl"},{4,"ecx"},{8,"rcx"}};//Arg registers
 map<char,int> escapecharascii = {{'n',10},{'t',9},{'r',13},{'b',8},{'f',12},{'v',11},{'a',7},{'0',0}};//Escape character to ascii map
-
+//Character to ascii map for character constants
 int chartoascii(string charconstant)
 {
     if(charconstant.length()==3)
@@ -29,7 +29,7 @@ int chartoascii(string charconstant)
     }
     return (int)charconstant[2];
 }
-
+//Returns register for given size
 string getReg(int number, int size)
 {
     if(number==1)
@@ -49,7 +49,7 @@ string getReg(int number, int size)
         return "%"+arg4Reg[size];
     }
 }
-
+//Returns offset of variable from the stackpointer
 string getloc(string name)
 {
     if(currentAR->disp.count(name)!=0)
@@ -59,6 +59,7 @@ string getloc(string name)
     else //Global
     return name;
 }
+//Function to print code to load the parameters from the registers to the stack
 void parameter_load(string name, int number)
 {
     auto s = currentST->lookup(name);
@@ -106,7 +107,7 @@ void parameter_load(string name, int number)
     //cout<<number<<endl;
     assemblyfile<<getReg(number,size)<<", "<<getloc(name)<<endl;
 }
-
+//Function to store the into registers parameters when calling functions
 void parameter_store(string name, int number)
 {
     auto s=currentST->lookup(name);
@@ -152,13 +153,13 @@ void parameter_store(string name, int number)
     }
     assemblyfile << getloc(name) << ", " << getReg(number, size)<<endl;
 }
-
+//Converts TAC to assembly
 void translate(){
     assemblyfile.open(assembly_file);
     assemblyfile<<left;
     assemblyfile<<"\t.file\t\""+input+"\""<<endl;
     assemblyfile<<endl;
-
+    //Prints activation record information for various symbol tables
     assemblyfile << "#\t" << "Allocation of function variables and temporaries on the stack:\n" << endl;
     for(auto &symbol : globalST->table) {
         if(symbol.is_function) {
@@ -168,7 +169,8 @@ void translate(){
             }
         }
     }
-    assemblyfile << endl;
+    assemblyfile << endl<<endl;
+    //Print string constants with labels
     if(stringconstants.size()>0)
     {
         assemblyfile<<"\t.section\t.rodata"<<endl;
@@ -179,6 +181,7 @@ void translate(){
         }
         assemblyfile<<endl;
     }
+    //Print float constants of the program
     if(floatconstants.size()>0)
     {
         assemblyfile<<".data"<<endl;
@@ -189,6 +192,7 @@ void translate(){
         }
         assemblyfile<<endl;
     }
+    //Print float constant 0
     assemblyfile<<".data"<<endl;
     assemblyfile<<"\tf__:"<<endl;
     assemblyfile<<"\t.float\t0.0"<<endl;
@@ -208,6 +212,7 @@ void translate(){
             }
         }
     }*/
+    //Print global variables
     for(auto i:globalST->table)
     {
         if((i.value=="-")&&(!i.is_function))
@@ -260,9 +265,11 @@ void translate(){
     string function_end;
     stack<string>params;
     count2=-1;
+    //Print the quads
     for(auto i:quads.array)
     {
         count2++;
+        //Printing prologue and epilogue
         if(i.op=="label")
         {
             if(!textspace)
@@ -315,10 +322,12 @@ void translate(){
             if(textspace)
             {
                 string op=i.op,res=i.result,arg1=i.arg1,arg2=i.arg2;
+                //Print labels for jump
                 if(labels.count(count2)!=0)
                 {
                     assemblyfile<<labels[count2]<<":"<<endl;
                 }
+                //Operators
                 if(op=="=str")
                 {
                     assemblyfile << "\tmovq\t" << "$"<< arg1 << ", " << getloc(res) << endl;
@@ -365,6 +374,7 @@ void translate(){
                         }
                     }
                 }
+                //Function calls
                 if(op=="param")
                 {
                     params.push(res);
@@ -398,6 +408,7 @@ void translate(){
                         assemblyfile<<"\tmovq\t"<<"%rax"<<", "<<getloc(res)<<endl;
                     }
                 }
+                //returns
                 if(op=="return")
                 {
                     if(res!="")
@@ -426,6 +437,7 @@ void translate(){
                         assemblyfile<<"\tjmp\t"<<function_end<<endl;
                     }
                 }
+                //jumps
                 if(op=="goto")
                 {
                     assemblyfile<<"\tjmp\t"<<labels[stoi(res)]<<endl;
@@ -502,6 +514,7 @@ void translate(){
                         assemblyfile<<"\tjge\t"<<labels[stoi(res)]<<endl;
                     }
                 }
+                //Arithmatic operations
                 if(op=="+")
                 {
                     int size=currentST->lookup(arg1)->size;

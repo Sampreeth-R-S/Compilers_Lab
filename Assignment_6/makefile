@@ -1,17 +1,17 @@
-a.out: translator.cpp assgn_5_21CS30059_21CS30038.tab.c lex.yy.c translator2.cpp
-	g++ translator.cpp translator2.cpp assgn_5_21CS30059_21CS30038.tab.c lex.yy.c -lfl
+a.out: translator.cpp assgn_6_21CS30059_21CS30038.tab.c lex.yy.c translator2.cpp
+	g++ translator.cpp translator2.cpp assgn_6_21CS30059_21CS30038.tab.c lex.yy.c -lfl
 
-assgn_5_21CS30059_21CS30038.tab.c: assgn_5_21CS30059_21CS30038.y
-	bison -dtv assgn_5_21CS30059_21CS30038.y
+assgn_6_21CS30059_21CS30038.tab.c: assgn_6_21CS30059_21CS30038.y
+	bison -dtv assgn_6_21CS30059_21CS30038.y
 
-lex.yy.c: assgn_5_21CS30059_21CS30038.l assgn_5_21CS30059_21CS30038.tab.h
-	flex assgn_5_21CS30059_21CS30038.l
+lex.yy.c: assgn_6_21CS30059_21CS30038.l assgn_6_21CS30059_21CS30038.tab.h
+	flex assgn_6_21CS30059_21CS30038.l
 
-assgn_5_21CS30059_21CS30038.tab.h: assgn_5_21CS30059_21CS30038.y
-	bison -dtv assgn_5_21CS30059_21CS30038.y
+assgn_6_21CS30059_21CS30038.tab.h: assgn_6_21CS30059_21CS30038.y
+	bison -dtv assgn_6_21CS30059_21CS30038.y
 
 clean: 
-	rm a.out assgn_5_21CS30059_21CS30038.tab.c lex.yy.c assgn_5_21CS30059_21CS30038.tab.h assgn_5_21CS30059_21CS30038.output
+	rm a.out assgn_6_21CS30059_21CS30038.tab.c lex.yy.c assgn_6_21CS30059_21CS30038.tab.h assgn_6_21CS30059_21CS30038.output
 	rm ./output/*.out
 	rmdir output
 	rm ./input/*.s
