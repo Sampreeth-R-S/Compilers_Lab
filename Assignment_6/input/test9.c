@@ -1,3 +1,5 @@
+int counter=0;
+int global_var=1;
 int fibn (int n) {
     counter++;
     global_var = counter;
