@@ -29,6 +29,7 @@ test: a.out ass2_21CS30038.c
 	./a.out ./input/test6 >./output/test6.out
 	./a.out ./input/test7 >./output/test7.out
 	./a.out ./input/test8 >./output/test8.out
+	./a.out ./input/test9 >./output/test9.out
 	gcc -c ass2_21CS30038.c
 	ar -rcs libass2.a ass2_21CS30038.o
 	mkdir -p binary
@@ -40,6 +41,7 @@ test: a.out ass2_21CS30038.c
 	gcc ./input/test6.s -L. -lass2 -no-pie -o ./binary/test6
 	gcc ./input/test7.s -L. -lass2 -no-pie -o ./binary/test7
 	gcc ./input/test8.s -L. -lass2 -no-pie -o ./binary/test8
+	gcc ./input/test9.s -L. -lass2 -no-pie -o ./binary/test9
 	./binary/test1
 	./binary/test2
 	./binary/test3
@@ -48,4 +50,5 @@ test: a.out ass2_21CS30038.c
 	./binary/test6
 	./binary/test7
 	./binary/test8
+	./binary/test9
 

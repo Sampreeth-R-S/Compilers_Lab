@@ -1168,7 +1168,7 @@ compound-statement:
 A:  %empty
         {
             //Dummy non terminal to create a new symbol table
-            string new_ST = currentST->name + "_" + blocktype + "_" + to_string(STCount++);//Nmae for the new ST
+            string new_ST = "__"+currentST->name + "_" + blocktype + "_" + to_string(STCount++);//Nmae for the new ST
             symbol* sym = currentST->lookup(new_ST);
             sym->nested_table = new symTab(new_ST);
             sym->name = new_ST;
