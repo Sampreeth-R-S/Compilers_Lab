@@ -28,18 +28,19 @@ void setVar() {
     return;
 }
 
+
 int main() {
     printStr("Test function calls and returns\n");
     int n = 6;
     int *nPtr = &n;
     
-    int rInt=returnInt(n);
+    int rInt=testInt(n);
     if(rInt==12)
         printStr("Integer return works fine\n");
     else
         printStr("Integer return failed\n");
     
-    int *rIntPtr=returnIntPtr(nPtr);
+    int *rIntPtr=testIntPtr(nPtr);
     if(*rIntPtr==12)
         printStr("Integer pointer return works fine\n");
     else
@@ -69,7 +70,7 @@ int main() {
     
     
     setVar();
-    if (glob_var == 10) 
+    if (glob_var == 6) 
         printStr("Global variable works fine");
     else
         printStr("Global variable failed");

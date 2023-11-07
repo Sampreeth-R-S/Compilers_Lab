@@ -3,7 +3,7 @@ int readInt(int *eP);
 int printInt(int n);
 
 int main(){
-    prinStr("Testing integer arithmetic");
+    printStr("Testing integer arithmetic\n");
 
     int a = 5;
     int b = 10;
@@ -34,6 +34,6 @@ int main(){
     printStr("a%b = ");
     printInt(g);
     printStr("\n");
-
+    return 0;
 
 }

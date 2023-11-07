@@ -4,31 +4,37 @@ int printInt(int n);
 
 int main(){
 
-    printStr("Testing Loops\n");
-    printStr("For loop");
+    printStr("Testing Loops and readInt\n");
+   
+    int n;
+    printStr("Enter the number of iterations:");
+    readInt(&n);
     int i;
-    for(i=0;i<10;i++){
+    printStr("\nFor loop\n");
+    for(i=0;i<n;i++){
         printStr("i = ");
         printInt(i);
         printStr("\n");
     }
 
-    printStr("While loop");
+    printStr("While loop\n");
     i=0;
-    while(i<10){
+    while(i<n){
         printStr("i = ");
         printInt(i);
         printStr("\n");
         i++;
     }
 
-    printStr("Do-While loop");
+    printStr("Do-While loop\n");
     i=0;
     do{
         printStr("i = ");
         printInt(i);
         printStr("\n");
         i++;
-    }while(i<10);
+    }while(i<n);
+
+    return 0;
     
 }
