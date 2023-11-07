@@ -11,7 +11,7 @@ void Facts(int *fact, int n) {
 }
 
 int main() {
-    printStr("\n#### TEST 2 (1-D Arrays) ####");
+    printStr("\nTesting loops and 1-D arrays\n");
     int fact[10];
     Facts(fact, 10);
     int i;
@@ -20,15 +20,15 @@ int main() {
         printInt(fact[i]);
         printStr(" ");
     }
-    char vowels[5];
-    vowels[0] = 'a';
-    vowels[1] = 'e';
-    vowels[2] = 'i';
-    vowels[3] = 'o';
-    vowels[4] = 'u';
-    printStr("\nAscii values of vowels: ");
+    char word[5];
+    word[0] = 'b';
+    word[1] = 'i';
+    word[2] = 's';
+    word[3] = 'o';
+    word[4] = 'n';
+    printStr("\nAscii values of some characters: ");
     for (i = 0; i < 5; i++) {
-        printInt(vowels[i]);
+        printInt(word[i]);
         printStr(" ");
     }
     printStr("\n\n");

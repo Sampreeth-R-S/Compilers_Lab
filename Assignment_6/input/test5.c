@@ -3,12 +3,11 @@ int readInt(int *eP);
 int printInt(int n);
 
 int main() {
-    printStr("\n#### TEST 7 (Conditional operators) ####\n");
     
     int n1, n2;
 
     //Test conditional operators
-
+    printStr("\nTesting Conditional Operators\n");
     n1=6,n2=6;
     printStr("n1=6,n2=6\n");
     if(n1==n2)
@@ -52,7 +51,7 @@ int main() {
         printStr("n1>=n2 Passed\n");
     
     printStr("\n");
-    
+
 
     return 0;
 }

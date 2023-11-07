@@ -5,11 +5,14 @@ int printInt(int n);
 
 int glob_var;
 int testInt(int num) {
-    return num;
+    int x=2*num;
+    return x;
 }
 
 int *testIntPtr(int *numPtr) {
-    return numPtr;
+    int *xPtr=numPtr;
+    *xPtr=2*(*xPtr);
+    return xPtr;
 }
 
 char testChar(char c) {
@@ -26,67 +29,51 @@ void setVar() {
 }
 
 int main() {
-    // printStr("\n#### TEST 3 (Function calls and returns) ####");
+    printStr("Test function calls and returns\n");
     int n = 6;
     int *nPtr = &n;
     
-    printStr("\nTesting integer value return: ");
-    int retInt = testInt(n);
-    if (retInt == n) {
-        printStr("Passed");
-    } else {
-        printStr("Failed");
-    }
+    int rInt=returnInt(n);
+    if(rInt==12)
+        printStr("Integer return works fine\n");
+    else
+        printStr("Integer return failed\n");
     
-    printStr("\nTesting integer pointer return: ");
-    int *retIntPtr = testIntPtr(nPtr);
-    if (retIntPtr == nPtr) {
-        printStr("Passed");
-    } else {
-        printStr("Failed");
-    }
+    int *rIntPtr=returnIntPtr(nPtr);
+    if(*rIntPtr==12)
+        printStr("Integer pointer return works fine\n");
+    else
+        printStr("Integer pointer return failed\n");
 
-    char c = 'm';
+    char c = 'b';
+    char rChar=testChar(c);
+    if(rChar==c)
+        printStr("Char return works fine\n");
+    else
+        printStr("Char return failed\n");
     char *cPtr = &c;
-
-    printStr("\nTesting character value return: ");
-    char retChar = testChar(c);
-    if (retChar == c) {
-        printStr("Passed");
-    } else {
-        printStr("Failed");
-    }
-
-    printStr("\nTesting character pointer return: ");
+    
     char *retCharPtr = testCharPtr(cPtr);
     if (retCharPtr == cPtr) {
-        printStr("Passed");
+        printStr("Char pointer return works fine\n");
     } else {
-        printStr("Failed");
+        printStr("Char pointer return failed\n");
     }
 
-    char *str = "Hello World, I am a string.";
-    printStr("\nTesting string return: ");
+    char *str = "Sample String";
     char *retStr = testCharPtr(str);
-    if (retStr == str) {
-        printStr("Passed");
-    } else {
-        printStr("Failed");
-    }
-    printStr(" [ Passed string: ");
-    printStr(str);
-    printStr(" ], ");
-    printStr("[ Returned string: ");
-    printStr(retStr);
-    printStr(" ]");
-
-    printStr("\nTesting void return: ");
+    if (retStr == str) 
+        printStr("String return works fine");
+    else
+        printStr("String return failed");
+    
+    
     setVar();
-    if (glob_var == 10) {
-        printStr("Passed");
-    } else {
-        printStr("Failed");
-    }
+    if (glob_var == 10) 
+        printStr("Global variable works fine");
+    else
+        printStr("Global variable failed");
+    
     printStr("\n\n");
     return 0;
 }
