@@ -184,7 +184,7 @@ main:  #main function starts
 	call	puts@PLT  #calls printf function to print the label LC3
 	leaq	.LC4(%rip), %rax  #loads the address of string of label LC4 into rax
 	movq	%rax, %rdi  #copies the value of rax to rdi(first argument to printf)
-	movl	$0, %eax  #sets the value of rax to 0(return value)
+	movl	$0, %eax  #sets the value of rax to 0
 	call	printf@PLT  #calls the printf function
 	leaq	-828(%rbp), %rax  #loads the value of Mem[rbp-828](storage allocated to n) to rax) 
 	movq	%rax, %rsi  #copies the value of rax to rsi(second argument to scanf)
